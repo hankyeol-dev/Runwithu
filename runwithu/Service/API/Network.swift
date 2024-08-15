@@ -30,15 +30,42 @@ final class NetworkService {
             
       do {
          return try await handleResponse(data: data, response: response)
-      } catch NetworkErrors.needToRefreshToken {
+      } catch NetworkErrors.needToRefreshAccessToken {
          let refreshResult = await tokenManager.refreshToken()
          if refreshResult {
             return try await self.request(by: endPoint, of: outputType)
          } else {
-            throw NetworkErrors.refreshTokenError
+            throw NetworkErrors.needToRefreshRefreshToken
          }
       } catch {
          return try await handleResponse(data: data, response: response)
+      }
+   }
+   
+   func upload<D: Decodable>(
+      by endPoint: EndPointProtocol,
+      of outputType: D.Type
+   ) async throws -> D {
+      do {
+         let request = try await endPoint.asUploadURLRequest()
+         
+         guard let uploadData = endPoint.body else {
+            throw NetworkErrors.noUploadData
+         }
+         
+         let (data, response) = try await session.upload(for: request, from: uploadData)
+         
+         return try await handleResponse(data: data, response: response)
+         
+      } catch NetworkErrors.needToRefreshAccessToken {
+         let refreshResult = await tokenManager.refreshToken()
+         if refreshResult {
+            return try await self.upload(by: endPoint, of: outputType)
+         } else {
+            throw NetworkErrors.needToRefreshRefreshToken
+         }
+      } catch {
+         throw NetworkErrors.invalidUpload
       }
    }
 }
@@ -48,7 +75,6 @@ extension NetworkService {
       guard let response = response as? HTTPURLResponse else {
          throw NetworkErrors.invalidResponse
       }
-      
       try await handleStatusCode(statusCode: response.statusCode)
             
       do {
@@ -69,9 +95,11 @@ extension NetworkService {
       case 409:
          throw NetworkErrors.invalidResponse
       case 418:
-         throw NetworkErrors.refreshTokenError
+         throw NetworkErrors.needToRefreshRefreshToken
       case 419:
-         throw NetworkErrors.needToRefreshToken
+         throw NetworkErrors.needToRefreshAccessToken
+      case 444:
+         throw NetworkErrors.invalidURL
       default:
          break
       }

@@ -36,7 +36,6 @@ extension EndPointProtocol {
       do {
          let url = try asURL()
          
-         
          var request = URLRequest(url: url)
          
          request.httpMethod = method.rawValue
@@ -60,5 +59,46 @@ extension EndPointProtocol {
       } catch {
          throw NetworkErrors.invalidRequest
       }
+   }
+   
+   func asUploadURLRequest() async throws -> URLRequest {
+      do {
+         let url = try asURL()
+         var request = URLRequest(url: url)
+         
+         request.httpMethod = method.rawValue
+         
+         if let headers {
+            for (key, value) in headers {
+               request.setValue(value, forHTTPHeaderField: key)
+            }
+            
+            if isNeedToken {
+               let accessToken = try await TokenManager.shared.readAccessToken()
+               request.setValue(accessToken, forHTTPHeaderField: AppEnvironment.headerAuthKey)
+            }
+         }
+                  
+         return request
+         
+      } catch {
+         throw NetworkErrors.invalidRequest
+      }
+   }
+   
+   func asMultipartFileData(for boundary: String, key: String, by value: Data, filename: String) -> Data {
+      let boundaryText = boundary
+      let crlf = "\r\n"
+      
+      var dataSet = Data()
+      
+      dataSet.append("--\(boundaryText)\(crlf)".data(using: .utf8)!)
+      dataSet.append("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(filename)\"\(crlf)".data(using: .utf8)!)
+      dataSet.append("Content-Type: image/png\(crlf)\(crlf)".data(using: .utf8)!)
+      dataSet.append(value)
+      dataSet.append("\(crlf)".data(using: .utf8)!)
+      dataSet.append("--\(boundaryText)--\(crlf)".data(using: .utf8)!)
+      
+      return dataSet
    }
 }

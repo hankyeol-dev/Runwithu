@@ -33,6 +33,7 @@
 		81E7FF592C6CB25900200CF2 /* AuthEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF582C6CB25900200CF2 /* AuthEndPoint.swift */; };
 		81E7FF5B2C6D7FF400200CF2 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF5A2C6D7FF400200CF2 /* TokenManager.swift */; };
 		81E7FF5D2C6D8F9B00200CF2 /* TokenErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF5C2C6D8F9B00200CF2 /* TokenErrors.swift */; };
+		81E7FF612C6DB8F000200CF2 /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF602C6DB8F000200CF2 /* ProfileDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		81E7FF582C6CB25900200CF2 /* AuthEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthEndPoint.swift; sourceTree = "<group>"; };
 		81E7FF5A2C6D7FF400200CF2 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		81E7FF5C2C6D8F9B00200CF2 /* TokenErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenErrors.swift; sourceTree = "<group>"; };
+		81E7FF602C6DB8F000200CF2 /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,12 +198,29 @@
 		81E7FF532C6CA7D800200CF2 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				81E7FF5F2C6DB8DC00200CF2 /* Auth */,
+				81E7FF5E2C6DB8D300200CF2 /* User */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		81E7FF5E2C6DB8D300200CF2 /* User */ = {
+			isa = PBXGroup;
+			children = (
 				81E7FF3C2C6C762F00200CF2 /* JoinDTO.swift */,
 				81E7FF3E2C6C769D00200CF2 /* LoginDTO.swift */,
 				81E7FF402C6C76E100200CF2 /* ValidEmailDTO.swift */,
+				81E7FF602C6DB8F000200CF2 /* ProfileDTO.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		81E7FF5F2C6DB8DC00200CF2 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
 				81E7FF542C6CAD0700200CF2 /* RefreshTokenDTO.swift */,
 			);
-			path = DTO;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +311,7 @@
 				81E7FF252C6C6C2700200CF2 /* ViewController.swift in Sources */,
 				81E7FF442C6C7B6D00200CF2 /* NetworkErrors.swift in Sources */,
 				81E7FF392C6C738B00200CF2 /* EndPoint.swift in Sources */,
+				81E7FF612C6DB8F000200CF2 /* ProfileDTO.swift in Sources */,
 				81E7FF2A2C6C6C2700200CF2 /* SceneDelegate.swift in Sources */,
 				81E7FF552C6CAD0700200CF2 /* RefreshTokenDTO.swift in Sources */,
 				81E7FF3D2C6C762F00200CF2 /* JoinDTO.swift in Sources */,

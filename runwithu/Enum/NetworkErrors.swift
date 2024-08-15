@@ -14,9 +14,11 @@ enum NetworkErrors: Error {
    case invalidAccessToken
    case invalidAccess
    case existEmail
-   case needToRefreshToken
-   case refreshTokenError
+   case needToRefreshAccessToken
+   case needToRefreshRefreshToken
    case dataNotFound
+   case noUploadData
+   case invalidUpload
    
    var byErrorMessage: String {
       switch self {
@@ -32,12 +34,16 @@ enum NetworkErrors: Error {
          return Text.ErrorMessage.INVALIDACCESS.rawValue
       case .existEmail:
          return Text.ErrorMessage.EXISTEMAIL.rawValue
-      case .needToRefreshToken:
-         return ""
-      case .refreshTokenError:
-         return "토큰 리프레시 과정에 문제가 있습니다."
+      case .needToRefreshAccessToken:
+         return Text.ErrorMessage.NEED_TO_REFRESH_ACCESSTOKEN.rawValue
+      case .needToRefreshRefreshToken:
+         return Text.ErrorMessage.NEED_TO_REFRESH_REFRESHTOKEN.rawValue
       case .dataNotFound:
          return Text.ErrorMessage.DATANOTFOUND.rawValue
+      case .noUploadData:
+         return Text.ErrorMessage.NEED_TO_CONFIGURE_UPLOAD_SOURCE.rawValue
+      case .invalidUpload:
+         return Text.ErrorMessage.INVALID_UPLOAD.rawValue
       }
    }
 }
