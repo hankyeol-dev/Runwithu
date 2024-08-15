@@ -15,6 +15,7 @@ enum NetworkErrors: Error {
    case invalidAccess
    case existEmail
    case needToRefreshToken
+   case refreshTokenError
    case dataNotFound
    
    var byErrorMessage: String {
@@ -33,6 +34,8 @@ enum NetworkErrors: Error {
          return Text.ErrorMessage.EXISTEMAIL.rawValue
       case .needToRefreshToken:
          return ""
+      case .refreshTokenError:
+         return "토큰 리프레시 과정에 문제가 있습니다."
       case .dataNotFound:
          return Text.ErrorMessage.DATANOTFOUND.rawValue
       }

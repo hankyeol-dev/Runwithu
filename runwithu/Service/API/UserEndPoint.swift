@@ -12,6 +12,13 @@ enum UserEndPoint: EndPointProtocol {
    case login(input: LoginInput)
    case validEmail(input: ValidEmailInput)
    
+   var isNeedToken: Bool {
+      switch self {
+      case .join, .login, .validEmail:
+         return false
+      }
+   }
+   
    var path: String {
       switch self {
       case .join, .login:

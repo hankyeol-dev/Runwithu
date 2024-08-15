@@ -8,6 +8,7 @@
 import Foundation
 
 protocol EndPointProtocol {
+   var isNeedToken: Bool { get }
    var path: String { get }
    var endPoint: String { get }
    var method: NetworkMethod { get }
@@ -31,9 +32,11 @@ extension EndPointProtocol {
       return url
    }
    
-   func asURLRequest() throws -> URLRequest {
+   func asURLRequest() async throws -> URLRequest {
       do {
          let url = try asURL()
+         
+         
          var request = URLRequest(url: url)
          
          request.httpMethod = method.rawValue
@@ -41,6 +44,11 @@ extension EndPointProtocol {
          if let headers {
             for (key, value) in headers {
                request.setValue(value, forHTTPHeaderField: key)
+            }
+            
+            if isNeedToken {
+               let accessToken = try await TokenManager.shared.readAccessToken()
+               request.setValue(accessToken, forHTTPHeaderField: AppEnvironment.headerAuthKey)
             }
          }
          

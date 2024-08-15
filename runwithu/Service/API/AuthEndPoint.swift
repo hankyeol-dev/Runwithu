@@ -11,6 +11,10 @@ enum AuthEndPoint: EndPointProtocol {
    
    case refreshToken(input: RefreshTokenInput)
    
+   var isNeedToken: Bool {
+      return false
+   }
+   
    var path: String {
       return "/auth"
    }

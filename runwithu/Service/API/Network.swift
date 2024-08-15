@@ -15,6 +15,7 @@ final class NetworkService {
       ]
       return URLSession(configuration: config)
    }()
+   private let tokenManager = TokenManager.shared
    
    static let shared = NetworkService()
    
@@ -24,14 +25,18 @@ final class NetworkService {
       by endPoint: EndPointProtocol,
       of outputType: D.Type
    ) async throws -> D {
-      let request = try endPoint.asURLRequest()
+      let request = try await endPoint.asURLRequest()
       let (data, response) = try await session.data(for: request)
             
       do {
          return try await handleResponse(data: data, response: response)
       } catch NetworkErrors.needToRefreshToken {
-         await self.handleRefreshToken()
-         return try await self.request(by: endPoint, of: outputType)
+         let refreshResult = await tokenManager.refreshToken()
+         if refreshResult {
+            return try await self.request(by: endPoint, of: outputType)
+         } else {
+            throw NetworkErrors.refreshTokenError
+         }
       } catch {
          return try await handleResponse(data: data, response: response)
       }
@@ -63,16 +68,12 @@ extension NetworkService {
          throw NetworkErrors.invalidAccess
       case 409:
          throw NetworkErrors.invalidResponse
+      case 418:
+         throw NetworkErrors.refreshTokenError
       case 419:
          throw NetworkErrors.needToRefreshToken
       default:
          break
       }
-   }
-   
-   private func handleRefreshToken() async {
-      // 1. token 값을 조회한다.
-      // 2. refresh token 값도 조회한다.
-      // 3. 이 로직에 들어왔다는 것은 refresh가 필요하다는 뜻!
    }
 }
