@@ -34,6 +34,14 @@
 		81E7FF5B2C6D7FF400200CF2 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF5A2C6D7FF400200CF2 /* TokenManager.swift */; };
 		81E7FF5D2C6D8F9B00200CF2 /* TokenErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF5C2C6D8F9B00200CF2 /* TokenErrors.swift */; };
 		81E7FF612C6DB8F000200CF2 /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF602C6DB8F000200CF2 /* ProfileDTO.swift */; };
+		81E7FF632C6EDF8800200CF2 /* PostEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF622C6EDF8800200CF2 /* PostEndPoint.swift */; };
+		81E7FF672C6EDFEB00200CF2 /* ImageUploadDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF662C6EDFEB00200CF2 /* ImageUploadDTO.swift */; };
+		81E7FF692C6EE78500200CF2 /* PostInputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF682C6EE78500200CF2 /* PostInputType.swift */; };
+		81E7FF6B2C6EE7AD00200CF2 /* PostsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF6A2C6EE7AD00200CF2 /* PostsDTO.swift */; };
+		81E7FF6F2C6EF55A00200CF2 /* PostIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF6E2C6EF55A00200CF2 /* PostIds.swift */; };
+		81E7FF712C6EF67300200CF2 /* PostsCommunityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF702C6EF67300200CF2 /* PostsCommunityType.swift */; };
+		81E7FF732C6EF74E00200CF2 /* RunningInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF722C6EF74E00200CF2 /* RunningInfo.swift */; };
+		81E7FF762C6EF86000200CF2 /* RunningHardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF752C6EF86000200CF2 /* RunningHardType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +71,14 @@
 		81E7FF5A2C6D7FF400200CF2 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		81E7FF5C2C6D8F9B00200CF2 /* TokenErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenErrors.swift; sourceTree = "<group>"; };
 		81E7FF602C6DB8F000200CF2 /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
+		81E7FF622C6EDF8800200CF2 /* PostEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEndPoint.swift; sourceTree = "<group>"; };
+		81E7FF662C6EDFEB00200CF2 /* ImageUploadDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadDTO.swift; sourceTree = "<group>"; };
+		81E7FF682C6EE78500200CF2 /* PostInputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInputType.swift; sourceTree = "<group>"; };
+		81E7FF6A2C6EE7AD00200CF2 /* PostsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsDTO.swift; sourceTree = "<group>"; };
+		81E7FF6E2C6EF55A00200CF2 /* PostIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostIds.swift; sourceTree = "<group>"; };
+		81E7FF702C6EF67300200CF2 /* PostsCommunityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCommunityType.swift; sourceTree = "<group>"; };
+		81E7FF722C6EF74E00200CF2 /* RunningInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningInfo.swift; sourceTree = "<group>"; };
+		81E7FF752C6EF86000200CF2 /* RunningHardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningHardType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				81E7FF382C6C738B00200CF2 /* EndPoint.swift */,
+				81E7FF682C6EE78500200CF2 /* PostInputType.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -161,6 +178,7 @@
 		81E7FF222C6C6C2700200CF2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				81E7FF6C2C6EF46A00200CF2 /* Posts */,
 				81E7FF532C6CA7D800200CF2 /* DTO */,
 			);
 			path = Model;
@@ -169,6 +187,7 @@
 		81E7FF322C6C722B00200CF2 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				81E7FF642C6EDF9800200CF2 /* Auth */,
 				81E7FF332C6C723700200CF2 /* API */,
 			);
 			path = Service;
@@ -178,9 +197,9 @@
 			isa = PBXGroup;
 			children = (
 				81E7FF582C6CB25900200CF2 /* AuthEndPoint.swift */,
+				81E7FF622C6EDF8800200CF2 /* PostEndPoint.swift */,
 				81E7FF342C6C723E00200CF2 /* UserEndPoint.swift */,
 				81E7FF362C6C736100200CF2 /* Network.swift */,
-				81E7FF5A2C6D7FF400200CF2 /* TokenManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -188,6 +207,7 @@
 		81E7FF422C6C7B4E00200CF2 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
+				81E7FF742C6EF85400200CF2 /* Posts */,
 				81E7FF3A2C6C743400200CF2 /* NetworkMethod.swift */,
 				81E7FF432C6C7B6D00200CF2 /* NetworkErrors.swift */,
 				81E7FF5C2C6D8F9B00200CF2 /* TokenErrors.swift */,
@@ -199,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				81E7FF5F2C6DB8DC00200CF2 /* Auth */,
+				81E7FF652C6EDFCF00200CF2 /* Post */,
 				81E7FF5E2C6DB8D300200CF2 /* User */,
 			);
 			path = DTO;
@@ -221,6 +242,41 @@
 				81E7FF542C6CAD0700200CF2 /* RefreshTokenDTO.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		81E7FF642C6EDF9800200CF2 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				81E7FF5A2C6D7FF400200CF2 /* TokenManager.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		81E7FF652C6EDFCF00200CF2 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				81E7FF662C6EDFEB00200CF2 /* ImageUploadDTO.swift */,
+				81E7FF6A2C6EE7AD00200CF2 /* PostsDTO.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		81E7FF6C2C6EF46A00200CF2 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				81E7FF722C6EF74E00200CF2 /* RunningInfo.swift */,
+			);
+			path = Posts;
+			sourceTree = "<group>";
+		};
+		81E7FF742C6EF85400200CF2 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				81E7FF6E2C6EF55A00200CF2 /* PostIds.swift */,
+				81E7FF702C6EF67300200CF2 /* PostsCommunityType.swift */,
+				81E7FF752C6EF86000200CF2 /* RunningHardType.swift */,
+			);
+			path = Posts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,24 +362,32 @@
 			files = (
 				81E7FF3B2C6C743400200CF2 /* NetworkMethod.swift in Sources */,
 				81E7FF5B2C6D7FF400200CF2 /* TokenManager.swift in Sources */,
+				81E7FF762C6EF86000200CF2 /* RunningHardType.swift in Sources */,
 				81E7FF312C6C6CA200200CF2 /* ENV.swift in Sources */,
 				81E7FF462C6C7C0100200CF2 /* Extension+Encodable.swift in Sources */,
+				81E7FF672C6EDFEB00200CF2 /* ImageUploadDTO.swift in Sources */,
 				81E7FF252C6C6C2700200CF2 /* ViewController.swift in Sources */,
 				81E7FF442C6C7B6D00200CF2 /* NetworkErrors.swift in Sources */,
 				81E7FF392C6C738B00200CF2 /* EndPoint.swift in Sources */,
 				81E7FF612C6DB8F000200CF2 /* ProfileDTO.swift in Sources */,
 				81E7FF2A2C6C6C2700200CF2 /* SceneDelegate.swift in Sources */,
 				81E7FF552C6CAD0700200CF2 /* RefreshTokenDTO.swift in Sources */,
+				81E7FF732C6EF74E00200CF2 /* RunningInfo.swift in Sources */,
 				81E7FF3D2C6C762F00200CF2 /* JoinDTO.swift in Sources */,
 				81E7FF412C6C76E100200CF2 /* ValidEmailDTO.swift in Sources */,
 				81E7FF5D2C6D8F9B00200CF2 /* TokenErrors.swift in Sources */,
 				81E7FF242C6C6C2700200CF2 /* Extension+UIView.swift in Sources */,
 				81E7FF262C6C6C2700200CF2 /* AppDelegate.swift in Sources */,
+				81E7FF632C6EDF8800200CF2 /* PostEndPoint.swift in Sources */,
+				81E7FF712C6EF67300200CF2 /* PostsCommunityType.swift in Sources */,
+				81E7FF6B2C6EE7AD00200CF2 /* PostsDTO.swift in Sources */,
 				81E7FF372C6C736100200CF2 /* Network.swift in Sources */,
 				81E7FF352C6C723E00200CF2 /* UserEndPoint.swift in Sources */,
 				81E7FF592C6CB25900200CF2 /* AuthEndPoint.swift in Sources */,
 				81E7FF3F2C6C769D00200CF2 /* LoginDTO.swift in Sources */,
 				81E7FF232C6C6C2700200CF2 /* Enum+Text.swift in Sources */,
+				81E7FF692C6EE78500200CF2 /* PostInputType.swift in Sources */,
+				81E7FF6F2C6EF55A00200CF2 /* PostIds.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

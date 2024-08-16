@@ -28,12 +28,12 @@ struct ProfileOutput: Decodable {
    let phoneNum: String?
    let birthDay: String?
    let profileImage: String?
-   let followers: [FollowFollowingOutput]
-   let following: [FollowFollowingOutput]
+   let followers: [BaseProfileType]
+   let following: [BaseProfileType]
    let posts: [String]
 }
 
-struct FollowFollowingOutput: Decodable {
+struct BaseProfileType: Decodable {
    let user_id: String
    let nick: String
    let profileImage: String
