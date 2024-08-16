@@ -10,6 +10,10 @@ import Foundation
 enum PostEndPoint: EndPointProtocol {
    case postImageUpload(input: ImageUploadInput)
    case posts(input: PostsInput)
+   case getPost(input: GetPostInput)
+   case getPosts(input: GetPostsInput)
+   case updatePost(input: UpdatePostInput)
+   case deletePost(input: GetPostInput)
    
    var isNeedToken: Bool {
       return true
@@ -17,7 +21,7 @@ enum PostEndPoint: EndPointProtocol {
    
    var path: String {
       switch self {
-      case .postImageUpload, .posts:
+      default:
          return "/posts"
       }
    }
@@ -26,8 +30,14 @@ enum PostEndPoint: EndPointProtocol {
       switch self {
       case .postImageUpload:
          return "/files"
-      case .posts:
+      case .posts, .getPosts:
          return ""
+      case let .getPost(input):
+         return "/\(input.post_id)"
+      case let .updatePost(input):
+         return "/\(input.post_id)"
+      case let .deletePost(input):
+         return "/\(input.post_id)"
       }
    }
    
@@ -35,6 +45,12 @@ enum PostEndPoint: EndPointProtocol {
       switch self {
       case .postImageUpload, .posts:
          return .post
+      case .getPost, .getPosts:
+         return .get
+      case .updatePost:
+         return .put
+      case .deletePost:
+         return .delete
       }
    }
    
@@ -52,6 +68,19 @@ enum PostEndPoint: EndPointProtocol {
    
    var parameters: [URLQueryItem]? {
       switch self {
+      case let .getPosts(input):
+         if let next = input.next {
+            return [
+               URLQueryItem(name: "product_id", value: input.product_id),
+               URLQueryItem(name: "limit", value: String(input.limit)),
+               URLQueryItem(name: "next", value: next)
+            ]
+         } else {
+            return [
+               URLQueryItem(name: "product_id", value: input.product_id),
+               URLQueryItem(name: "limit", value: String(input.limit)),
+            ]
+         }
       default:
          return nil
       }
@@ -63,6 +92,10 @@ enum PostEndPoint: EndPointProtocol {
          return asMultipartFileDatas(for: input.boundary, key: "files", values: input.files, filename: "postImage")
       case let .posts(input):
          return input.converToJSON()
+      case let .updatePost(input):
+         return input.updateInput.converToJSON()
+      default:
+         return nil
       }
    }
 }

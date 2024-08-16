@@ -42,6 +42,30 @@ final class NetworkService {
       }
    }
    
+   func request(by endPoint: EndPointProtocol) async throws {
+      let request = try await endPoint.asURLRequest()
+      let (_, response) = try await session.data(for: request)
+      
+      guard let response = response as? HTTPURLResponse else {
+         throw NetworkErrors.invalidResponse
+      }
+      
+      do {
+         if !(200..<300).contains(response.statusCode) {
+            try await handleStatusCode(statusCode: response.statusCode)
+         }
+      } catch NetworkErrors.needToRefreshAccessToken {
+         let refreshResult = await tokenManager.refreshToken()
+         if refreshResult {
+            return try await self.request(by: endPoint)
+         } else {
+            throw NetworkErrors.needToRefreshRefreshToken
+         }
+      } catch {
+         throw NetworkErrors.invalidRequest
+      }
+   }
+   
    func upload<D: Decodable>(
       by endPoint: EndPointProtocol,
       of outputType: D.Type
@@ -75,11 +99,15 @@ extension NetworkService {
       guard let response = response as? HTTPURLResponse else {
          throw NetworkErrors.invalidResponse
       }
-      try await handleStatusCode(statusCode: response.statusCode)
+      
+      if !(200..<300).contains(response.statusCode) {
+         try await handleStatusCode(statusCode: response.statusCode)
+      }
             
       do {
          return try JSONDecoder().decode(D.self, from: data)
       } catch {
+         dump(error)
          throw NetworkErrors.dataNotFound
       }
    }
@@ -94,12 +122,16 @@ extension NetworkService {
          throw NetworkErrors.invalidAccess
       case 409:
          throw NetworkErrors.invalidResponse
+      case 410:
+         throw NetworkErrors.dataNotFound
       case 418:
          throw NetworkErrors.needToRefreshRefreshToken
       case 419:
          throw NetworkErrors.needToRefreshAccessToken
       case 444:
          throw NetworkErrors.invalidURL
+      case 445:
+         throw NetworkErrors.invalidAccess
       default:
          break
       }

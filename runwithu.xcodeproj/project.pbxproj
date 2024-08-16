@@ -41,6 +41,9 @@
 		81E7FF712C6EF67300200CF2 /* PostsCommunityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF702C6EF67300200CF2 /* PostsCommunityType.swift */; };
 		81E7FF732C6EF74E00200CF2 /* RunningInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF722C6EF74E00200CF2 /* RunningInfo.swift */; };
 		81E7FF762C6EF86000200CF2 /* RunningHardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF752C6EF86000200CF2 /* RunningHardType.swift */; };
+		81E7FF782C6EFE2100200CF2 /* GetPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF772C6EFE2100200CF2 /* GetPostDTO.swift */; };
+		81E7FF7A2C6F07E600200CF2 /* UpdatePostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF792C6F07E600200CF2 /* UpdatePostDTO.swift */; };
+		81E7FF7C2C6F0AD000200CF2 /* DeletePostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF7B2C6F0AD000200CF2 /* DeletePostDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +80,9 @@
 		81E7FF702C6EF67300200CF2 /* PostsCommunityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCommunityType.swift; sourceTree = "<group>"; };
 		81E7FF722C6EF74E00200CF2 /* RunningInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningInfo.swift; sourceTree = "<group>"; };
 		81E7FF752C6EF86000200CF2 /* RunningHardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningHardType.swift; sourceTree = "<group>"; };
+		81E7FF772C6EFE2100200CF2 /* GetPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPostDTO.swift; sourceTree = "<group>"; };
+		81E7FF792C6F07E600200CF2 /* UpdatePostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostDTO.swift; sourceTree = "<group>"; };
+		81E7FF7B2C6F0AD000200CF2 /* DeletePostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePostDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +260,9 @@
 			children = (
 				81E7FF662C6EDFEB00200CF2 /* ImageUploadDTO.swift */,
 				81E7FF6A2C6EE7AD00200CF2 /* PostsDTO.swift */,
+				81E7FF772C6EFE2100200CF2 /* GetPostDTO.swift */,
+				81E7FF792C6F07E600200CF2 /* UpdatePostDTO.swift */,
+				81E7FF7B2C6F0AD000200CF2 /* DeletePostDTO.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -361,10 +370,12 @@
 				81E7FF5B2C6D7FF400200CF2 /* TokenManager.swift in Sources */,
 				81E7FF762C6EF86000200CF2 /* RunningHardType.swift in Sources */,
 				81E7FF312C6C6CA200200CF2 /* ENV.swift in Sources */,
+				81E7FF7C2C6F0AD000200CF2 /* DeletePostDTO.swift in Sources */,
 				81E7FF462C6C7C0100200CF2 /* Extension+Encodable.swift in Sources */,
 				81E7FF672C6EDFEB00200CF2 /* ImageUploadDTO.swift in Sources */,
 				81E7FF252C6C6C2700200CF2 /* ViewController.swift in Sources */,
 				81E7FF442C6C7B6D00200CF2 /* NetworkErrors.swift in Sources */,
+				81E7FF7A2C6F07E600200CF2 /* UpdatePostDTO.swift in Sources */,
 				81E7FF392C6C738B00200CF2 /* EndPoint.swift in Sources */,
 				81E7FF612C6DB8F000200CF2 /* ProfileDTO.swift in Sources */,
 				81E7FF2A2C6C6C2700200CF2 /* SceneDelegate.swift in Sources */,
@@ -381,6 +392,7 @@
 				81E7FF372C6C736100200CF2 /* Network.swift in Sources */,
 				81E7FF352C6C723E00200CF2 /* UserEndPoint.swift in Sources */,
 				81E7FF592C6CB25900200CF2 /* AuthEndPoint.swift in Sources */,
+				81E7FF782C6EFE2100200CF2 /* GetPostDTO.swift in Sources */,
 				81E7FF3F2C6C769D00200CF2 /* LoginDTO.swift in Sources */,
 				81E7FF232C6C6C2700200CF2 /* Enum+Text.swift in Sources */,
 				81E7FF6F2C6EF55A00200CF2 /* PostIds.swift in Sources */,

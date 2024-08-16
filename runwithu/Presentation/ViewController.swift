@@ -40,8 +40,9 @@ final class ViewController: UIViewController {
          .debug("button tapped")
          .subscribe(with: self) { owner, _ in
             Task {
-               // await owner.testLoginAPI()
-               await owner.testPostsInput()
+               //               await owner.testLoginAPI()
+               //               await owner.testPostsInput()
+               await owner.testGetPostsInput()
             }
          }
          .disposed(by: disposeBag)
@@ -110,5 +111,20 @@ extension ViewController {
          
       }
       
+   }
+   
+   private func testGetPostsInput() async {
+      do {
+         let results2 = try await NetworkService.shared.request(
+            by: PostEndPoint.getPosts(input: .init(
+               product_id: PostIds.runwithu_community_posts_public.rawValue, next: nil
+            )),
+            of: GetPostsOutput.self
+         )
+         
+         dump(results2)
+      } catch {
+         dump(error)
+      }
    }
 }
