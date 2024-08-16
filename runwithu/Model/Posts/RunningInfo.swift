@@ -14,5 +14,14 @@ struct RunningInfo: Codable {
    let hardType: String?
    let supplies: [String]?
    let reward: String?
+   
+   var byJsonString: String? {
+      if let json = self.converToJSON(),
+         let jsonString = String(data: json, encoding: .utf8) {
+         return jsonString
+      } else {
+         return nil
+      }
+   }
 }
 

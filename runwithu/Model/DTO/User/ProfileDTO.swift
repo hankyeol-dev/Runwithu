@@ -36,5 +36,5 @@ struct ProfileOutput: Decodable {
 struct BaseProfileType: Decodable {
    let user_id: String
    let nick: String
-   let profileImage: String
+   let profileImage: String?
 }
