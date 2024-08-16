@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -16,7 +17,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let scene = (scene as? UIWindowScene) else { return }
     window = UIWindow(windowScene: scene)
     
-    let vc = UINavigationController(rootViewController: ViewController())
+    let vc = LoginViewController(
+      bv: LoginView(),
+      vm: LoginViewModel(),
+      db: DisposeBag()
+    )
     
     window?.rootViewController = vc
     window?.makeKeyAndVisible()
