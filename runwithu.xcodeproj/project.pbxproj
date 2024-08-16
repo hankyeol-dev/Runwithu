@@ -37,10 +37,21 @@
 		81E7FF632C6EDF8800200CF2 /* PostEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF622C6EDF8800200CF2 /* PostEndPoint.swift */; };
 		81E7FF672C6EDFEB00200CF2 /* ImageUploadDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF662C6EDFEB00200CF2 /* ImageUploadDTO.swift */; };
 		81E7FF6B2C6EE7AD00200CF2 /* PostsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF6A2C6EE7AD00200CF2 /* PostsDTO.swift */; };
-		81E7FF6F2C6EF55A00200CF2 /* PostIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF6E2C6EF55A00200CF2 /* PostIds.swift */; };
+		81E7FF6F2C6EF55A00200CF2 /* ProductIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF6E2C6EF55A00200CF2 /* ProductIds.swift */; };
 		81E7FF712C6EF67300200CF2 /* PostsCommunityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF702C6EF67300200CF2 /* PostsCommunityType.swift */; };
 		81E7FF732C6EF74E00200CF2 /* RunningInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF722C6EF74E00200CF2 /* RunningInfo.swift */; };
 		81E7FF762C6EF86000200CF2 /* RunningHardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF752C6EF86000200CF2 /* RunningHardType.swift */; };
+		81E7FF782C6EFE2100200CF2 /* GetPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF772C6EFE2100200CF2 /* GetPostDTO.swift */; };
+		81E7FF7A2C6F07E600200CF2 /* UpdatePostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF792C6F07E600200CF2 /* UpdatePostDTO.swift */; };
+		81E7FF7E2C6F16F400200CF2 /* EpilogueInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF7D2C6F16F400200CF2 /* EpilogueInput.swift */; };
+		81E7FF802C6F183700200CF2 /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF7F2C6F183700200CF2 /* Extension+Date.swift */; };
+		81E7FF822C6F1C8700200CF2 /* ProductEpilogueInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF812C6F1C8700200CF2 /* ProductEpilogueInput.swift */; };
+		81E7FF842C6F1CBC00200CF2 /* RunningProductType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF832C6F1CBC00200CF2 /* RunningProductType.swift */; };
+		81E7FF862C6F215E00200CF2 /* PostInputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF852C6F215E00200CF2 /* PostInputType.swift */; };
+		81E7FF882C6F21AF00200CF2 /* QnaInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF872C6F21AF00200CF2 /* QnaInput.swift */; };
+		81E7FF8A2C6F21E100200CF2 /* OpenMarathonInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF892C6F21E100200CF2 /* OpenMarathonInput.swift */; };
+		81E7FF8C2C6F22BE00200CF2 /* CreateRunningGroupInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF8B2C6F22BE00200CF2 /* CreateRunningGroupInput.swift */; };
+		81E7FF8E2C6F249000200CF2 /* CreateInvitationInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF8D2C6F249000200CF2 /* CreateInvitationInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,10 +84,21 @@
 		81E7FF622C6EDF8800200CF2 /* PostEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEndPoint.swift; sourceTree = "<group>"; };
 		81E7FF662C6EDFEB00200CF2 /* ImageUploadDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadDTO.swift; sourceTree = "<group>"; };
 		81E7FF6A2C6EE7AD00200CF2 /* PostsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsDTO.swift; sourceTree = "<group>"; };
-		81E7FF6E2C6EF55A00200CF2 /* PostIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostIds.swift; sourceTree = "<group>"; };
+		81E7FF6E2C6EF55A00200CF2 /* ProductIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIds.swift; sourceTree = "<group>"; };
 		81E7FF702C6EF67300200CF2 /* PostsCommunityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCommunityType.swift; sourceTree = "<group>"; };
 		81E7FF722C6EF74E00200CF2 /* RunningInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningInfo.swift; sourceTree = "<group>"; };
 		81E7FF752C6EF86000200CF2 /* RunningHardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningHardType.swift; sourceTree = "<group>"; };
+		81E7FF772C6EFE2100200CF2 /* GetPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPostDTO.swift; sourceTree = "<group>"; };
+		81E7FF792C6F07E600200CF2 /* UpdatePostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostDTO.swift; sourceTree = "<group>"; };
+		81E7FF7D2C6F16F400200CF2 /* EpilogueInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpilogueInput.swift; sourceTree = "<group>"; };
+		81E7FF7F2C6F183700200CF2 /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
+		81E7FF812C6F1C8700200CF2 /* ProductEpilogueInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEpilogueInput.swift; sourceTree = "<group>"; };
+		81E7FF832C6F1CBC00200CF2 /* RunningProductType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningProductType.swift; sourceTree = "<group>"; };
+		81E7FF852C6F215E00200CF2 /* PostInputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInputType.swift; sourceTree = "<group>"; };
+		81E7FF872C6F21AF00200CF2 /* QnaInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaInput.swift; sourceTree = "<group>"; };
+		81E7FF892C6F21E100200CF2 /* OpenMarathonInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenMarathonInput.swift; sourceTree = "<group>"; };
+		81E7FF8B2C6F22BE00200CF2 /* CreateRunningGroupInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRunningGroupInput.swift; sourceTree = "<group>"; };
+		81E7FF8D2C6F249000200CF2 /* CreateInvitationInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInvitationInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +162,7 @@
 			children = (
 				81E7FF132C6C6C2700200CF2 /* Extension+UIView.swift */,
 				81E7FF452C6C7C0100200CF2 /* Extension+Encodable.swift */,
+				81E7FF7F2C6F183700200CF2 /* Extension+Date.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -168,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				81E7FF382C6C738B00200CF2 /* EndPoint.swift */,
+				81E7FF852C6F215E00200CF2 /* PostInputType.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -254,6 +278,8 @@
 			children = (
 				81E7FF662C6EDFEB00200CF2 /* ImageUploadDTO.swift */,
 				81E7FF6A2C6EE7AD00200CF2 /* PostsDTO.swift */,
+				81E7FF772C6EFE2100200CF2 /* GetPostDTO.swift */,
+				81E7FF792C6F07E600200CF2 /* UpdatePostDTO.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -262,6 +288,12 @@
 			isa = PBXGroup;
 			children = (
 				81E7FF722C6EF74E00200CF2 /* RunningInfo.swift */,
+				81E7FF7D2C6F16F400200CF2 /* EpilogueInput.swift */,
+				81E7FF812C6F1C8700200CF2 /* ProductEpilogueInput.swift */,
+				81E7FF872C6F21AF00200CF2 /* QnaInput.swift */,
+				81E7FF892C6F21E100200CF2 /* OpenMarathonInput.swift */,
+				81E7FF8B2C6F22BE00200CF2 /* CreateRunningGroupInput.swift */,
+				81E7FF8D2C6F249000200CF2 /* CreateInvitationInput.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -269,9 +301,10 @@
 		81E7FF742C6EF85400200CF2 /* Posts */ = {
 			isa = PBXGroup;
 			children = (
-				81E7FF6E2C6EF55A00200CF2 /* PostIds.swift */,
+				81E7FF6E2C6EF55A00200CF2 /* ProductIds.swift */,
 				81E7FF702C6EF67300200CF2 /* PostsCommunityType.swift */,
 				81E7FF752C6EF86000200CF2 /* RunningHardType.swift */,
+				81E7FF832C6F1CBC00200CF2 /* RunningProductType.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -357,14 +390,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81E7FF822C6F1C8700200CF2 /* ProductEpilogueInput.swift in Sources */,
 				81E7FF3B2C6C743400200CF2 /* NetworkMethod.swift in Sources */,
 				81E7FF5B2C6D7FF400200CF2 /* TokenManager.swift in Sources */,
 				81E7FF762C6EF86000200CF2 /* RunningHardType.swift in Sources */,
 				81E7FF312C6C6CA200200CF2 /* ENV.swift in Sources */,
+				81E7FF7E2C6F16F400200CF2 /* EpilogueInput.swift in Sources */,
 				81E7FF462C6C7C0100200CF2 /* Extension+Encodable.swift in Sources */,
 				81E7FF672C6EDFEB00200CF2 /* ImageUploadDTO.swift in Sources */,
 				81E7FF252C6C6C2700200CF2 /* ViewController.swift in Sources */,
+				81E7FF802C6F183700200CF2 /* Extension+Date.swift in Sources */,
 				81E7FF442C6C7B6D00200CF2 /* NetworkErrors.swift in Sources */,
+				81E7FF7A2C6F07E600200CF2 /* UpdatePostDTO.swift in Sources */,
 				81E7FF392C6C738B00200CF2 /* EndPoint.swift in Sources */,
 				81E7FF612C6DB8F000200CF2 /* ProfileDTO.swift in Sources */,
 				81E7FF2A2C6C6C2700200CF2 /* SceneDelegate.swift in Sources */,
@@ -372,6 +409,8 @@
 				81E7FF732C6EF74E00200CF2 /* RunningInfo.swift in Sources */,
 				81E7FF3D2C6C762F00200CF2 /* JoinDTO.swift in Sources */,
 				81E7FF412C6C76E100200CF2 /* ValidEmailDTO.swift in Sources */,
+				81E7FF8E2C6F249000200CF2 /* CreateInvitationInput.swift in Sources */,
+				81E7FF8C2C6F22BE00200CF2 /* CreateRunningGroupInput.swift in Sources */,
 				81E7FF5D2C6D8F9B00200CF2 /* TokenErrors.swift in Sources */,
 				81E7FF242C6C6C2700200CF2 /* Extension+UIView.swift in Sources */,
 				81E7FF262C6C6C2700200CF2 /* AppDelegate.swift in Sources */,
@@ -379,11 +418,16 @@
 				81E7FF712C6EF67300200CF2 /* PostsCommunityType.swift in Sources */,
 				81E7FF6B2C6EE7AD00200CF2 /* PostsDTO.swift in Sources */,
 				81E7FF372C6C736100200CF2 /* Network.swift in Sources */,
+				81E7FF882C6F21AF00200CF2 /* QnaInput.swift in Sources */,
 				81E7FF352C6C723E00200CF2 /* UserEndPoint.swift in Sources */,
 				81E7FF592C6CB25900200CF2 /* AuthEndPoint.swift in Sources */,
+				81E7FF862C6F215E00200CF2 /* PostInputType.swift in Sources */,
+				81E7FF8A2C6F21E100200CF2 /* OpenMarathonInput.swift in Sources */,
+				81E7FF782C6EFE2100200CF2 /* GetPostDTO.swift in Sources */,
 				81E7FF3F2C6C769D00200CF2 /* LoginDTO.swift in Sources */,
 				81E7FF232C6C6C2700200CF2 /* Enum+Text.swift in Sources */,
-				81E7FF6F2C6EF55A00200CF2 /* PostIds.swift in Sources */,
+				81E7FF6F2C6EF55A00200CF2 /* ProductIds.swift in Sources */,
+				81E7FF842C6F1CBC00200CF2 /* RunningProductType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
