@@ -14,16 +14,16 @@ final class LoginView: BaseView, BaseViewProtocol {
    private let rootFlexBox = UIView()
    private let loginWelcomeTitle = BaseLabel(for: "함께 달려볼까요! :)", font: .boldSystemFont(ofSize: 16))
    private let loginTitle = BaseLabel(for: "로그인", font: .boldSystemFont(ofSize: 20))
-   let loginEmailInput = InputWithTitleView(
+   let emailInput = InputWithTitleView(
       label: "이메일",
       placeHolder: "이메일을 입력해주세요.",
       keyboardType: .emailAddress
    )
-   let loginPasswordInput = InputWithTitleView(
+   let passwordInput = InputWithTitleView(
       label: "비밀번호",
       placeHolder: "비밀번호를 입력해주세요."
    )
-   let loginButton = RoundedButtonView("로그인", backColor: .darkGray, baseColor: .white)
+   let loginButton = RoundedButtonView("로그인", backColor: .systemBlue, baseColor: .white)
    let joinButton = {
       let button = UIButton()
       button.setTitle("런윗유 식구되기", for: .normal)
@@ -38,7 +38,7 @@ final class LoginView: BaseView, BaseViewProtocol {
       
       addSubview(rootFlexBox)
       
-      [loginWelcomeTitle, loginTitle, loginEmailInput, loginPasswordInput, loginButton, joinButton].forEach {
+      [loginWelcomeTitle, loginTitle, emailInput, passwordInput, loginButton, joinButton].forEach {
          rootFlexBox.addSubview($0)
       }
    }
@@ -59,8 +59,8 @@ final class LoginView: BaseView, BaseViewProtocol {
             flex.addItem(loginTitle)
                .margin(0, 16, 16, 0)
             
-            flex.addItem(loginEmailInput)
-            flex.addItem(loginPasswordInput)
+            flex.addItem(emailInput)
+            flex.addItem(passwordInput)
                .marginBottom(16)
             
             flex.addItem(loginButton)

@@ -70,5 +70,15 @@ extension BaseVC {
       navigationItem.setLeftBarButton(goBackButton, animated: true)
    }
    
+   func dismissStack(for vc: UIViewController) {
+      let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+      let sceneDelegate = scene?.delegate as? SceneDelegate
+      
+      let window = sceneDelegate?.window
+      
+      window?.rootViewController = UINavigationController(rootViewController: vc)
+      window?.makeKeyAndVisible()
+   }
+   
    func displayAlert() { }
 }

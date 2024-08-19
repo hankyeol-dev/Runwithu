@@ -12,7 +12,6 @@ import RxSwift
 final class JoinViewModel: BaseViewModelProtocol {
    private let disposeBag = DisposeBag()
    private let networkManager = NetworkService.shared
-   private let tokenManager = TokenManager.shared
    
    private var email = ""
    private var password = ""
@@ -85,9 +84,6 @@ final class JoinViewModel: BaseViewModelProtocol {
          .subscribe(with: self, onNext: { vm, input in
             Task {
                await vm.join(
-                  email: vm.email,
-                  password: vm.password,
-                  nickname: vm.nickname,
                   successEmitter: successMessage,
                   errorEmitter: errorMessage,
                   successJoinEmitter: successJoin
@@ -134,14 +130,17 @@ extension JoinViewModel {
    }
    
    private func join(
-      email: String,
-      password: String,
-      nickname: String,
       successEmitter: PublishSubject<String>,
       errorEmitter: PublishSubject<String>?,
       successJoinEmitter: PublishSubject<Bool>
    ) async {
-      let joinInput = JoinInput(email: email, password: password, nick: nickname, phoneNum: nil, birthDay: nil)
+      let joinInput = JoinInput(
+         email: email,
+         password: password,
+         nick: nickname,
+         phoneNum: nil,
+         birthDay: nil
+      )
       
       do {
          let result = try await networkManager.request(
