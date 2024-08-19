@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		811D37682C736C710017E17C /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37672C736C710017E17C /* BottomSheetView.swift */; };
+		811D376A2C736E550017E17C /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37692C736E550017E17C /* BottomSheetViewController.swift */; };
+		811D376F2C7379940017E17C /* BottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D376E2C7379940017E17C /* BottomSheetViewModel.swift */; };
+		811D37712C737DA70017E17C /* BottomSheetTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37702C737DA70017E17C /* BottomSheetTableCell.swift */; };
+		811D37732C737DCB0017E17C /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37722C737DCB0017E17C /* BaseTableViewCell.swift */; };
 		81E7FF232C6C6C2700200CF2 /* Enum+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */; };
 		81E7FF242C6C6C2700200CF2 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF132C6C6C2700200CF2 /* Extension+UIView.swift */; };
 		81E7FF252C6C6C2700200CF2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF152C6C6C2700200CF2 /* ViewController.swift */; };
@@ -71,6 +76,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		811D37672C736C710017E17C /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
+		811D37692C736E550017E17C /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		811D376E2C7379940017E17C /* BottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewModel.swift; sourceTree = "<group>"; };
+		811D37702C737DA70017E17C /* BottomSheetTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetTableCell.swift; sourceTree = "<group>"; };
+		811D37722C737DCB0017E17C /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		81E7FEFA2C6C6BBD00200CF2 /* runwithu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = runwithu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E7FF0B2C6C6BBE00200CF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+Text.swift"; sourceTree = "<group>"; };
@@ -147,6 +157,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		811D376B2C7379730017E17C /* BottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				811D376C2C73797E0017E17C /* View */,
+				811D376D2C7379890017E17C /* ViewModel */,
+			);
+			path = BottomSheet;
+			sourceTree = "<group>";
+		};
+		811D376C2C73797E0017E17C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				811D37672C736C710017E17C /* BottomSheetView.swift */,
+				811D37692C736E550017E17C /* BottomSheetViewController.swift */,
+				811D37702C737DA70017E17C /* BottomSheetTableCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		811D376D2C7379890017E17C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				811D376E2C7379940017E17C /* BottomSheetViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		81E7FEF12C6C6BBD00200CF2 = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				81E7FFA72C6F42AC00200CF2 /* BaseView */,
+				811D376B2C7379730017E17C /* BottomSheet */,
 				81E7FFA22C6F404500200CF2 /* CustomView */,
 				81E7FF9D2C6F30D500200CF2 /* Sign */,
 				81E7FF152C6C6C2700200CF2 /* ViewController.swift */,
@@ -390,6 +428,7 @@
 				81E7FFA82C6F42C200200CF2 /* BaseTextFieldWithLine.swift */,
 				81E7FFAA2C6F6EF400200CF2 /* BaseView.swift */,
 				81E7FFB32C70061200200CF2 /* BaseViewController.swift */,
+				811D37722C737DCB0017E17C /* BaseTableViewCell.swift */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -500,8 +539,11 @@
 				81E7FF7A2C6F07E600200CF2 /* UpdatePostDTO.swift in Sources */,
 				81E7FF392C6C738B00200CF2 /* EndPoint.swift in Sources */,
 				81E7FF612C6DB8F000200CF2 /* ProfileDTO.swift in Sources */,
+				811D37712C737DA70017E17C /* BottomSheetTableCell.swift in Sources */,
 				81E7FFA92C6F42C200200CF2 /* BaseTextFieldWithLine.swift in Sources */,
+				811D376A2C736E550017E17C /* BottomSheetViewController.swift in Sources */,
 				81E7FF2A2C6C6C2700200CF2 /* SceneDelegate.swift in Sources */,
+				811D37682C736C710017E17C /* BottomSheetView.swift in Sources */,
 				81E7FFBA2C700C2200200CF2 /* LoginViewModel.swift in Sources */,
 				81E7FF552C6CAD0700200CF2 /* RefreshTokenDTO.swift in Sources */,
 				81E7FF732C6EF74E00200CF2 /* RunningInfo.swift in Sources */,
@@ -510,6 +552,8 @@
 				81E7FF8E2C6F249000200CF2 /* CreateInvitationInput.swift in Sources */,
 				81E7FFBC2C700DCA00200CF2 /* JoinView.swift in Sources */,
 				81E7FF8C2C6F22BE00200CF2 /* CreateRunningGroupInput.swift in Sources */,
+				811D37732C737DCB0017E17C /* BaseTableViewCell.swift in Sources */,
+				811D376F2C7379940017E17C /* BottomSheetViewModel.swift in Sources */,
 				81E7FF5D2C6D8F9B00200CF2 /* TokenErrors.swift in Sources */,
 				81E7FF242C6C6C2700200CF2 /* Extension+UIView.swift in Sources */,
 				81E7FF262C6C6C2700200CF2 /* AppDelegate.swift in Sources */,
