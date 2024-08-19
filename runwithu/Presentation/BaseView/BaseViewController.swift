@@ -16,7 +16,7 @@ class BaseVC<BV, VM>: UIViewController {
    let baseView: BV
    let viewModel: VM
    let disposeBag: DisposeBag
-
+   
    init(
       bv: BV,
       vm: VM,
@@ -70,6 +70,5 @@ extension BaseVC {
       navigationItem.setLeftBarButton(goBackButton, animated: true)
    }
    
-   func displayToast() { }
    func displayAlert() { }
 }

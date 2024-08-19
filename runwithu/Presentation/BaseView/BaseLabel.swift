@@ -12,10 +12,11 @@ final class BaseLabel: UILabel {
       super.init(frame: frame)
    }
    
-   convenience init(for text: String, font: UIFont) {
+   convenience init(for text: String, font: UIFont, color: UIColor = .black) {
       self.init(frame: .zero)
       self.text = text
       self.font = font
+      self.textColor = color
    }
    
    required init?(coder: NSCoder) {

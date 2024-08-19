@@ -21,13 +21,18 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      
    }
    
    override func bindViewAtDidLoad() {
       super.bindViewAtDidLoad()
       
-      
+      baseView.joinButton.rx
+         .tap
+         .bind(with: self) { vc, _ in
+            let targetVC = JoinViewController(bv: JoinView(), vm: JoinViewModel(), db: DisposeBag())
+            vc.navigationController?.pushViewController(targetVC, animated: true)
+         }
+         .disposed(by: disposeBag)
    }
    
 }

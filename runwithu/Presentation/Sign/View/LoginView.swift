@@ -48,7 +48,7 @@ final class LoginView: BaseView, BaseViewProtocol {
       
       rootFlexBox.pin
          .horizontally(16)
-         .top(self.pin.safeArea + 56)
+         .top(self.pin.safeArea + 32)
       
       rootFlexBox.flex.direction(.column)
          .padding(0)
