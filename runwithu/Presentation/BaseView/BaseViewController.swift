@@ -54,10 +54,11 @@ class BaseVC<BV, VM>: UIViewController {
 
 extension BaseVC {
    func setGoBackButton(
-      by color: UIColor
+      by color: UIColor,
+      imageName: String
    ) {
       let goBackButton = UIBarButtonItem()
-      goBackButton.image = UIImage(systemName: "chevron.left")
+      goBackButton.image = UIImage(systemName: imageName)
       goBackButton.tintColor = color
       goBackButton.style = .plain
       

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum RunningHardType: String {
+enum RunningHardType: String, CaseIterable {
    case very_hard
    case hard
    case normal

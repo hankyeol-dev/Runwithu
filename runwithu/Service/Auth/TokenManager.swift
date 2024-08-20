@@ -67,7 +67,6 @@ actor TokenManager {
             kSecValueData: convertedToken
          ]
          
-         // 혹시 이미 해당 키로 등록된 token이 있을 가능성을 배제하기 위해 삭제 먼저 진행
          SecItemDelete(keychainQuery)
          
          let status = SecItemAdd(keychainQuery, .none)
