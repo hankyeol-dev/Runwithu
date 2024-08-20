@@ -12,7 +12,7 @@ import FlexLayout
 
 final class StepBar: BaseView {
    private let flexBox = UIView()
-   private let stepIamge = UIImageView(image: UIImage(systemName: "circle.fill", withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 24))))
+   private let stepIamge = UIImageView()
    private let stepLabel = BaseLabel(for: "", font: .systemFont(ofSize: 15))
    
    override func setSubviews() {
@@ -53,16 +53,28 @@ final class StepBar: BaseView {
       super.setUI()
       
       stepLabel.textColor = .white
-      stepIamge.tintColor = .white.withAlphaComponent(0.8)
+      stepIamge.forSymbolImageWithTintColor(
+         for: "circle.fill",
+         ofSize: 24,
+         tintColor: .white.withAlphaComponent(0.8)
+      )
    }
    
    func additionLabelText(by text: String) {
       if text.count != 0 {
-         stepIamge.tintColor = .white.withAlphaComponent(1.0)
+         stepIamge.forSymbolImageWithTintColor(
+            for: "circle.fill",
+            ofSize: 24,
+            tintColor: .white.withAlphaComponent(1.0)
+         )
          stepLabel.text = text
          stepLabel.font = .boldSystemFont(ofSize: 15)
       } else {
-         stepIamge.tintColor = .white.withAlphaComponent(0.8)
+         stepIamge.forSymbolImageWithTintColor(
+            for: "circle.fill",
+            ofSize: 24,
+            tintColor: .white.withAlphaComponent(0.8)
+         )
          stepLabel.text = text
          stepLabel.font = .systemFont(ofSize: 15)
       }

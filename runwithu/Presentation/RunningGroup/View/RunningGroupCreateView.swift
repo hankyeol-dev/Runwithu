@@ -17,23 +17,31 @@ final class RunningGroupCreateView: BaseView, BaseViewProtocol {
    private let contentsBox = UIView()
    private let hardTypePicker = UIPickerView()
    
+   private let headerView = UIView()
+   private let headerTitle = BaseLabel(for: "러닝 그룹 생성", font: .boldSystemFont(ofSize: 16))
+   let headerCloseButton = UIButton()
+   
    let previewView = RunningGroupPreviewView()
    let groupNameField = RoundedInputViewWithTitle(label: "그룹 이름", placeHolder: "")
    let groupEntryLimitField = RoundedInputViewWithTitle(label: "그룹 최대 인원", placeHolder: "", keyboardType: .numberPad)
    let groupDescriptionField = RoundedTextViewWithTitle(title: "그룹 소개")
    let groupSpotField = RoundedInputViewWithTitle(label: "그룹 러닝 지역", placeHolder: "")
    let groupHardType = RoundedInputViewWithTitle(label: "그룹 추천 러닝 난이도", placeHolder: "그룹이 필요로 하는 러닝 경험 정도를 선택해주세요.")
-   let createButton = RoundedButtonView("그룹 만들기", backColor: .darkGray, baseColor: .white)
+   let createButton = RoundedButtonView("그룹 만들기", backColor: .systemGreen, baseColor: .white)
    
    
    override func setSubviews() {
       super.setSubviews()
       
       addSubview(contentsFlexBox)
-      contentsFlexBox.addSubview(previewView)
-      contentsFlexBox.addSubview(scrollView)
-      scrollView.addSubview(contentsBox)
+      [headerView, previewView, scrollView].forEach {
+         contentsFlexBox.addSubview($0)
+      }
+      [headerCloseButton, headerTitle].forEach {
+         headerView.addSubview($0)
+      }
       
+      scrollView.addSubview(contentsBox)
       [groupNameField, groupEntryLimitField, groupDescriptionField, groupSpotField, groupHardType, createButton].forEach {
          contentsBox.addSubview($0)
       }
@@ -45,8 +53,23 @@ final class RunningGroupCreateView: BaseView, BaseViewProtocol {
       contentsFlexBox.pin
          .all(self.pin.safeArea)
       
-      previewView.pin
+      headerView.pin
          .top(contentsFlexBox.pin.safeArea)
+         .horizontally()
+         .height(44)
+      
+      headerCloseButton.pin
+         .left(headerView.pin.safeArea + 24)
+         .vCenter()
+         .size(12)
+      
+      headerTitle.pin
+         .hCenter()
+         .height(100%)
+         .sizeToFit(.height)
+      
+      previewView.pin
+         .below(of: headerView)
          .horizontally()
          .height(180)
       
@@ -91,6 +114,7 @@ final class RunningGroupCreateView: BaseView, BaseViewProtocol {
       scrollView.backgroundColor = .systemBackground
       setRightCountLabel()
       setGroupHardType()
+      setHeaderView()
    }
 }
 
@@ -124,6 +148,12 @@ extension RunningGroupCreateView {
       hardTypePicker.dataSource = self
       groupHardType.inputField.inputView = hardTypePicker
       groupHardType.tintColor = .clear
+   }
+   private func setHeaderView() {
+      headerCloseButton.configuration = .borderless()
+      headerCloseButton.configuration?.image = UIImage(systemName: "xmark")
+      headerCloseButton.configuration?.baseBackgroundColor = .none
+      headerCloseButton.configuration?.baseForegroundColor = .darkGray
    }
 }
 

@@ -20,6 +20,11 @@
 		811D37822C7404170017E17C /* RoundedTextViewWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37812C7404170017E17C /* RoundedTextViewWithTitle.swift */; };
 		81A3B8EB2C744972009AD659 /* RunningGroupPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */; };
 		81A3B8ED2C745054009AD659 /* StepBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EC2C745054009AD659 /* StepBar.swift */; };
+		81A3B8EF2C74AFB6009AD659 /* RunningGroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */; };
+		81A3B8F12C74AFCE009AD659 /* RunningGroupListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8F02C74AFCE009AD659 /* RunningGroupListViewModel.swift */; };
+		81A3B8F32C74B003009AD659 /* RunningGroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8F22C74B003009AD659 /* RunningGroupListView.swift */; };
+		81A3B8F52C74B18D009AD659 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8F42C74B18D009AD659 /* FloatingButton.swift */; };
+		81A3B8F72C74B77E009AD659 /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8F62C74B77E009AD659 /* Extension+UIImage.swift */; };
 		81E7FF232C6C6C2700200CF2 /* Enum+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */; };
 		81E7FF242C6C6C2700200CF2 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF132C6C6C2700200CF2 /* Extension+UIView.swift */; };
 		81E7FF252C6C6C2700200CF2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF152C6C6C2700200CF2 /* ViewController.swift */; };
@@ -97,6 +102,11 @@
 		811D37812C7404170017E17C /* RoundedTextViewWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextViewWithTitle.swift; sourceTree = "<group>"; };
 		81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupPreviewView.swift; sourceTree = "<group>"; };
 		81A3B8EC2C745054009AD659 /* StepBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepBar.swift; sourceTree = "<group>"; };
+		81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupListViewController.swift; sourceTree = "<group>"; };
+		81A3B8F02C74AFCE009AD659 /* RunningGroupListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupListViewModel.swift; sourceTree = "<group>"; };
+		81A3B8F22C74B003009AD659 /* RunningGroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupListView.swift; sourceTree = "<group>"; };
+		81A3B8F42C74B18D009AD659 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
+		81A3B8F62C74B77E009AD659 /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		81E7FEFA2C6C6BBD00200CF2 /* runwithu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = runwithu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E7FF0B2C6C6BBE00200CF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+Text.swift"; sourceTree = "<group>"; };
@@ -213,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				811D377B2C73825D0017E17C /* RunningGroupCreateViewModel.swift */,
+				81A3B8F02C74AFCE009AD659 /* RunningGroupListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -223,6 +234,8 @@
 				811D37792C73824D0017E17C /* RunningGroupCreateView.swift */,
 				811D37772C7382420017E17C /* RunningGroupCreateViewController.swift */,
 				81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */,
+				81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */,
+				81A3B8F22C74B003009AD659 /* RunningGroupListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -275,6 +288,7 @@
 				81E7FF132C6C6C2700200CF2 /* Extension+UIView.swift */,
 				81E7FF452C6C7C0100200CF2 /* Extension+Encodable.swift */,
 				81E7FF7F2C6F183700200CF2 /* Extension+Date.swift */,
+				81A3B8F62C74B77E009AD659 /* Extension+UIImage.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -464,6 +478,7 @@
 				811D377D2C7390C00017E17C /* RoundedInputViewWithTitle.swift */,
 				811D37812C7404170017E17C /* RoundedTextViewWithTitle.swift */,
 				81A3B8EC2C745054009AD659 /* StepBar.swift */,
+				81A3B8F42C74B18D009AD659 /* FloatingButton.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -581,6 +596,7 @@
 				811D377A2C73824D0017E17C /* RunningGroupCreateView.swift in Sources */,
 				81E7FF7E2C6F16F400200CF2 /* EpilogueInput.swift in Sources */,
 				81E7FFB02C6F72F300200CF2 /* RoundedButtonView.swift in Sources */,
+				81A3B8EF2C74AFB6009AD659 /* RunningGroupListViewController.swift in Sources */,
 				81E7FFB82C70073800200CF2 /* Protocol+BaseView.swift in Sources */,
 				81E7FF462C6C7C0100200CF2 /* Extension+Encodable.swift in Sources */,
 				81E7FF672C6EDFEB00200CF2 /* ImageUploadDTO.swift in Sources */,
@@ -589,6 +605,7 @@
 				81E7FF442C6C7B6D00200CF2 /* NetworkErrors.swift in Sources */,
 				81E7FF7A2C6F07E600200CF2 /* UpdatePostDTO.swift in Sources */,
 				81E7FF392C6C738B00200CF2 /* EndPoint.swift in Sources */,
+				81A3B8F32C74B003009AD659 /* RunningGroupListView.swift in Sources */,
 				81E7FF612C6DB8F000200CF2 /* ProfileDTO.swift in Sources */,
 				811D37712C737DA70017E17C /* BottomSheetTableCell.swift in Sources */,
 				81E7FFA92C6F42C200200CF2 /* BaseTextFieldWithLine.swift in Sources */,
@@ -599,7 +616,9 @@
 				81E7FFBA2C700C2200200CF2 /* LoginViewModel.swift in Sources */,
 				81E7FF552C6CAD0700200CF2 /* RefreshTokenDTO.swift in Sources */,
 				81E7FF732C6EF74E00200CF2 /* RunningInfo.swift in Sources */,
+				81A3B8F12C74AFCE009AD659 /* RunningGroupListViewModel.swift in Sources */,
 				811D377C2C73825D0017E17C /* RunningGroupCreateViewModel.swift in Sources */,
+				81A3B8F52C74B18D009AD659 /* FloatingButton.swift in Sources */,
 				81E7FF3D2C6C762F00200CF2 /* JoinDTO.swift in Sources */,
 				81E7FF412C6C76E100200CF2 /* ValidEmailDTO.swift in Sources */,
 				811D37822C7404170017E17C /* RoundedTextViewWithTitle.swift in Sources */,
@@ -615,6 +634,7 @@
 				81E7FF262C6C6C2700200CF2 /* AppDelegate.swift in Sources */,
 				81E7FFA12C6F311E00200CF2 /* LoginViewController.swift in Sources */,
 				81E7FF632C6EDF8800200CF2 /* PostEndPoint.swift in Sources */,
+				81A3B8F72C74B77E009AD659 /* Extension+UIImage.swift in Sources */,
 				81E7FF712C6EF67300200CF2 /* PostsCommunityType.swift in Sources */,
 				81E7FF6B2C6EE7AD00200CF2 /* PostsDTO.swift in Sources */,
 				81E7FF372C6C736100200CF2 /* Network.swift in Sources */,

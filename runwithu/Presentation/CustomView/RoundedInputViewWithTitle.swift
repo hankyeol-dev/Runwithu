@@ -92,8 +92,12 @@ final class RoundedInputViewWithTitle: BaseView {
       inputCountLabel.isHidden = true
    }
    
-   func additionToCountingLabel(for text: String) {
+   func bindToCountLabel(for text: String) {
       inputCountLabel.text = text
+   }
+   
+   func bindToIndicatingLabel(for text: String) {
+      inputIndicatingLabel.text = text
    }
 }
 

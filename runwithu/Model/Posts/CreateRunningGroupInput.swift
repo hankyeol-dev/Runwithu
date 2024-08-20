@@ -9,9 +9,9 @@ import Foundation
 
 struct CreateRunningGroupInput: PostInputTypeProtocol {
    let productId: ProductIds = .runwithu_running_group
-   let title: String
-   let content: String
-   let entryLimit: Int
-   let mainSpot: String
-   let runningHardType: [RunningHardType]
+   var title: String
+   var content: String
+   var entryLimit: String
+   var mainSpot: String
+   var runningHardType: String
 }

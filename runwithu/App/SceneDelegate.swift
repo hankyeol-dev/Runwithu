@@ -17,15 +17,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       guard let scene = (scene as? UIWindowScene) else { return }
       window = UIWindow(windowScene: scene)
       
-      let vc = UINavigationController(
-         rootViewController: RunningGroupCreateViewController(
-            bv: RunningGroupCreateView(),
-            vm: RunningGroupCreateViewModel(),
-            db: DisposeBag()
-         )
+//      let root = LoginViewController(
+//         bv: LoginView(),
+//         vm: LoginViewModel(),
+//         db: DisposeBag()
+//      )
+      let root = RunningGroupListViewController(
+         bv: RunningGroupListView(),
+         vm: RunningGroupListViewModel(),
+         db: DisposeBag()
       )
-      
       // let vc = UINavigationController(rootViewController: ViewController())
+      let vc = UINavigationController(
+         rootViewController: root
+      )
       
       window?.rootViewController = vc
       window?.makeKeyAndVisible()
