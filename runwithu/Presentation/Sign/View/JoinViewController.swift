@@ -27,7 +27,7 @@ final class JoinViewController: BaseViewController<JoinView, JoinViewModel> {
    override func bindViewAtWillAppear() {
       super.bindViewAtWillAppear()
       
-      setGoBackButton(by: .darkGray)
+      setGoBackButton(by: .darkGray, imageName: "chevron.left")
    }
    
    override func bindViewAtDidLoad() {
