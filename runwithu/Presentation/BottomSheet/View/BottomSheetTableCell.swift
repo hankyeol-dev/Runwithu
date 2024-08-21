@@ -11,33 +11,25 @@ import SnapKit
 
 final class BottomSheetTableCell: BaseTableViewCell {
    
-   private let emojiLabel = BaseLabel(for: "", font: .systemFont(ofSize: 16))
-   private let titleLabel = BaseLabel(for: "", font: .systemFont(ofSize: 16))
+   private let label = BaseLabel(for: "", font: .systemFont(ofSize: 16))
    
    override func setSubviews() {
       super.setSubviews()
       
-      contentView.addSubview(emojiLabel)
-      contentView.addSubview(titleLabel)
+      contentView.addSubview(label)
    }
    
    override func setLayout() {
       super.setLayout()
       
-      emojiLabel.snp.makeConstraints { make in
+      label.snp.makeConstraints { make in
          make.centerY.equalToSuperview()
          make.leading.equalTo(contentView.safeAreaLayoutGuide).inset(20)
-         make.size.equalTo(48)
-      }
-      titleLabel.snp.makeConstraints { make in
-         make.centerY.equalToSuperview()
-         make.leading.equalTo(emojiLabel.snp.trailing)
-         make.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(16)
+         make.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(20)
       }
    }
    
-   func bindView(emoji: String, title: String) {
-      emojiLabel.text = emoji
-      titleLabel.text = title
+   func bindView(title: String) {
+      label.text = title
    }
 }

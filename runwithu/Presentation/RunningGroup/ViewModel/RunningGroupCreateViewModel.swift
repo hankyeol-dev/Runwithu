@@ -174,26 +174,12 @@ extension RunningGroupCreateViewModel {
          
       } catch NetworkErrors.dataNotFound {
          errorEmitter.onNext("\(NetworkErrors.dataNotFound.byErrorMessage)")
-      } catch NetworkErrors.needToRefreshAccessToken {
+      } catch NetworkErrors.needToRefreshRefreshToken {
          await tempLoginAPI()
+         await createGroup(successEmitter: successEmitter, errorEmitter: errorEmitter)
       } catch {
          dump(error)
       }
    }
    
-   private func tempLoginAPI() async {
-      do {
-         let result = try await networkManager.request(
-            by: UserEndPoint.login(input: .init(email: "7@runwithu.com", password: "777777")),
-            of: LoginOutput.self
-         )
-         
-         let accessTokenResult = await tokenManager.registerAccessToken(by: result.accessToken)
-         let refreshTokenResult = await tokenManager.registerRefreshToken(by: result.refreshToken)
-         print(accessTokenResult, refreshTokenResult)
-         
-      } catch {
-         print("로그인 에러임")
-      }
-   }
 }

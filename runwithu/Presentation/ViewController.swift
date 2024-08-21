@@ -41,10 +41,11 @@ final class ViewController: UIViewController {
       floatButton.rx.tap
          .bind(with: self) { vc, _ in
             let bottomSheet = BottomSheetViewController(
-               bv: BottomSheetView(),
-               vm: BottomSheetViewModel(),
+               bv: BottomSheetView(), 
+               vm: BottomSheetViewModel(mode: .userList),
                db: DisposeBag()
             )
+            bottomSheet.mode = .multiSelect
             bottomSheet.modalPresentationStyle = .overFullScreen
             vc.present(bottomSheet, animated: true, completion: nil)
          }

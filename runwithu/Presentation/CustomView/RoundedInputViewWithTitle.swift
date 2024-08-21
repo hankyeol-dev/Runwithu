@@ -9,23 +9,27 @@ import UIKit
 
 import PinLayout
 import FlexLayout
+import SnapKit
 
 final class RoundedInputViewWithTitle: BaseView {
    private let flexBox = UIView()
-   private let inputTitle = BaseLabel(for: "", font: .systemFont(ofSize: 15))
+   private let inputTitle = BaseLabel(for: "", font: .systemFont(ofSize: 18))
    let inputField = BaseTextFieldRounded("")
    let inputIndicatingLabel = BaseLabel(for: "", font: .systemFont(ofSize: 12))
    let inputCountLabel = BaseLabel(for: "", font: .systemFont(ofSize: 12), color: .darkGray)
+   let picker = UIPickerView()
    
    convenience init(
       label: String,
       placeHolder: String,
-      keyboardType: UIKeyboardType = .default
+      keyboardType: UIKeyboardType = .default,
+      indicatingLabel: String = ""
    ) {
       self.init(frame: .zero)
       inputTitle.text = label
       inputField.placeholder = placeHolder
       inputField.keyboardType = keyboardType
+      inputIndicatingLabel.text = indicatingLabel
    }
    
    override func setSubviews() {
@@ -99,5 +103,46 @@ final class RoundedInputViewWithTitle: BaseView {
    func bindToIndicatingLabel(for text: String) {
       inputIndicatingLabel.text = text
    }
+   
+   func bindToTitleLabel(for text: String) {
+      inputTitle.text = text
+   }
+
 }
 
+extension RoundedInputViewWithTitle: UIPickerViewDelegate, UIPickerViewDataSource {
+   func bindToInputPickerView() {
+      let arrow = UIImageView()
+      arrow.image = UIImage(systemName: "chevron.down")
+      arrow.contentMode = .center
+      arrow.tintColor = .darkGray
+      inputField.addSubview(arrow)
+      arrow.snp.makeConstraints { make in
+         make.width.equalTo(24)
+         make.verticalEdges.equalTo(inputField.safeAreaLayoutGuide)
+         make.trailing.equalTo(inputField.safeAreaLayoutGuide).inset(4)
+      }
+      
+      picker.delegate = self
+      picker.dataSource = self
+      inputField.inputView = picker
+      inputField.tintColor = .clear
+   }
+   
+   func numberOfComponents(in pickerView: UIPickerView) -> Int {
+      return 1
+   }
+   
+   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+      return RunningHardType.allCases.count
+   }
+   
+   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+      return RunningHardType.allCases.map { $0.rawValue }[row]
+   }
+   
+   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+      inputField.text = RunningHardType.allCases.map { $0.rawValue }[row]
+   }
+   
+}

@@ -12,7 +12,7 @@ import FlexLayout
 
 final class RoundedTextViewWithTitle: BaseView {
    private let flexBox = UIView()
-   private let inputTitle = BaseLabel(for: "", font: .systemFont(ofSize: 15))
+   private let inputTitle = BaseLabel(for: "", font: .systemFont(ofSize: 18))
    let inputTextView = UITextView()
    let inputCountLabel = BaseLabel(for: "", font: .systemFont(ofSize: 12))
    

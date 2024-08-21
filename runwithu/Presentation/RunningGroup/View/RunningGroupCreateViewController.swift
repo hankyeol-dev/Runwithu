@@ -40,6 +40,12 @@ final class RunningGroupCreateViewController: BaseViewController<RunningGroupCre
       )
       let output = viewModel.transform(for: input)
       
+      baseView.headerCloseButton.rx.tap
+         .bind(with: self) { vc, _ in
+            vc.dismiss(animated: true)
+         }
+         .disposed(by: disposeBag)
+      
       bindInputViewText(
          for: baseView.groupNameField.inputField,
          to: groupName

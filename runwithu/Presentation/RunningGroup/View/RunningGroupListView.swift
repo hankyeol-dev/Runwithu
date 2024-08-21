@@ -12,7 +12,7 @@ import FlexLayout
 
 final class RunningGroupListView: BaseView, BaseViewProtocol {
    private let contentsFlexBox = UIView()
-   let floatingButton = FloatingButton(backColor: .systemGreen, baseColor: .white)
+   let floatingButton = PlusButton(backColor: .systemGreen, baseColor: .white)
    
    override func setSubviews() {
       super.setSubviews()

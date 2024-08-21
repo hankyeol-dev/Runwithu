@@ -33,8 +33,13 @@ struct ProfileOutput: Decodable {
    let posts: [String]
 }
 
+struct FollowersOutput: Decodable {
+   let following: [BaseProfileType]
+}
+
 struct BaseProfileType: Decodable {
    let user_id: String
    let nick: String
    let profileImage: String?
 }
+

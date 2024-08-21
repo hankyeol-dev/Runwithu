@@ -12,7 +12,7 @@ struct RunningInfo: Codable {
    let course: [String]?
    let timeTaking: Int?
    let hardType: String?
-   let supplies: [String]?
+   let supplies: String?
    let reward: String?
    
    var byJsonString: String? {

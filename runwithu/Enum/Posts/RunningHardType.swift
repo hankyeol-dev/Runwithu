@@ -8,11 +8,11 @@
 import Foundation
 
 enum RunningHardType: String, CaseIterable {
-   case very_hard
-   case hard
-   case normal
-   case easy
-   case very_easy
+   case very_hard = "매우 힘들어요"
+   case hard = "힘들어요"
+   case normal = "적당히 힘들 수 있어요"
+   case easy = "가볍게 달릴 수 있어요"
+   case very_easy = "정말 쉽게 달릴 수 있어요"
    
    var byLevel: String {
       switch self {

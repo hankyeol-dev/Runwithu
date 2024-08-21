@@ -22,17 +22,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //         vm: LoginViewModel(),
 //         db: DisposeBag()
 //      )
-      let root = RunningGroupListViewController(
-         bv: RunningGroupListView(),
-         vm: RunningGroupListViewModel(),
-         db: DisposeBag()
-      )
-      // let vc = UINavigationController(rootViewController: ViewController())
-      let vc = UINavigationController(
-         rootViewController: root
-      )
+//      let root = RunningGroupListViewController(
+//         bv: RunningGroupListView(),
+//         vm: RunningGroupListViewModel(),
+//         db: DisposeBag()
+//      )
       
-      window?.rootViewController = vc
+      let root = RunningInvitationCreateViewController(
+         bv: RunningInvitationCreateView(),
+         vm: RunningInvitationCreateViewModel(),
+         db: DisposeBag())
+//      
+//       let root = UINavigationController(rootViewController: ViewController())
+//      let vc = UINavigationController(
+//         rootViewController: root
+//      )
+      
+      window?.rootViewController = root
       window?.makeKeyAndVisible()
    }
    

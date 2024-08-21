@@ -1,5 +1,5 @@
 //
-//  FloatingButton.swift
+//  PlusButton.swift
 //  runwithu
 //
 //  Created by 강한결 on 8/20/24.
@@ -9,7 +9,7 @@ import UIKit
 
 import RxSwift
 
-final class FloatingButton: UIButton {
+final class PlusButton: UIButton {
    override init(frame: CGRect) {
       super.init(frame: frame)
       

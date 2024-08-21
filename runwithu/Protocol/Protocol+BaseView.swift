@@ -62,4 +62,20 @@ extension BaseViewModelProtocol {
    func validateNickname(for nickname: String) -> Bool {
       return nickname.count >= 2
    }
+   
+   func tempLoginAPI() async {
+      do {
+         let result = try await NetworkService.shared.request(
+            by: UserEndPoint.login(input: .init(email: "7@runwithu.com", password: "777777")),
+            of: LoginOutput.self
+         )
+         
+         let accessTokenResult = await TokenManager.shared.registerAccessToken(by: result.accessToken)
+         let refreshTokenResult = await TokenManager.shared.registerRefreshToken(by: result.refreshToken)
+         print(accessTokenResult, refreshTokenResult)
+         
+      } catch {
+         print("로그인 에러임")
+      }
+   }
 }
