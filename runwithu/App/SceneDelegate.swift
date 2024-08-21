@@ -12,31 +12,37 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
    
    var window: UIWindow?
    
-   
    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
       guard let scene = (scene as? UIWindowScene) else { return }
       window = UIWindow(windowScene: scene)
       
-//      let root = LoginViewController(
-//         bv: LoginView(),
-//         vm: LoginViewModel(),
-//         db: DisposeBag()
-//      )
-//      let root = RunningGroupListViewController(
-//         bv: RunningGroupListView(),
-//         vm: RunningGroupListViewModel(),
-//         db: DisposeBag()
-//      )
+      //      let root = LoginViewController(
+      //         bv: LoginView(),
+      //         vm: LoginViewModel(),
+      //         db: DisposeBag()
+      //      )
+      //      let root = RunningGroupListViewController(
+      //         bv: RunningGroupListView(),
+      //         vm: RunningGroupListViewModel(),
+      //         db: DisposeBag()
+      //      )
       
-      let root = RunningInvitationCreateViewController(
-         bv: RunningInvitationCreateView(),
-         vm: RunningInvitationCreateViewModel(),
-         db: DisposeBag())
-//      
-//       let root = UINavigationController(rootViewController: ViewController())
-//      let vc = UINavigationController(
-//         rootViewController: root
-//      )
+      //      let root = RunningInvitationCreateViewController(
+      //         bv: RunningInvitationCreateView(),
+      //         vm: RunningInvitationCreateViewModel(),
+      //         db: DisposeBag())
+      
+      let root = ProfileViewController(
+         bv: ProfileView(), 
+         vm: ProfileViewModel(isUserProfile: false, userId: AppEnvironment.demoUserId),
+         db: DisposeBag()
+      )
+      
+      //       let root = UINavigationController(rootViewController: ViewController())
+      //
+      //      let vc = UINavigationController(
+      //         rootViewController: root
+      //      )
       
       window?.rootViewController = root
       window?.makeKeyAndVisible()

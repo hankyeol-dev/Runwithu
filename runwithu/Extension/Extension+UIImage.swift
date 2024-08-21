@@ -15,6 +15,7 @@ extension UIImageView {
    ) {
       let config = UIImage.SymbolConfiguration(font: .systemFont(ofSize: ofSize))
       self.image = UIImage(systemName: systemName, withConfiguration: config)
+      self.contentMode = .scaleAspectFit
       self.tintColor = tintColor
    }
 }

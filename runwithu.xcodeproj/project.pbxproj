@@ -36,6 +36,10 @@
 		81A3B93A2C75BC52009AD659 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9392C75BC52009AD659 /* BaseCollectionViewCell.swift */; };
 		81A3B93C2C75BC8D009AD659 /* RunningInvitedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B93B2C75BC8D009AD659 /* RunningInvitedUserCell.swift */; };
 		81A3B93E2C75CC2D009AD659 /* Extension+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B93D2C75CC2D009AD659 /* Extension+UITextField.swift */; };
+		81A3B9452C75E077009AD659 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9442C75E076009AD659 /* ProfileView.swift */; };
+		81A3B9482C75E080009AD659 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9472C75E080009AD659 /* ProfileViewModel.swift */; };
+		81A3B94A2C75E357009AD659 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9492C75E357009AD659 /* ProfileViewController.swift */; };
+		81A3B94C2C75EAD0009AD659 /* RoundedMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B94B2C75EAD0009AD659 /* RoundedMenuView.swift */; };
 		81E7FF232C6C6C2700200CF2 /* Enum+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */; };
 		81E7FF242C6C6C2700200CF2 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF132C6C6C2700200CF2 /* Extension+UIView.swift */; };
 		81E7FF252C6C6C2700200CF2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF152C6C6C2700200CF2 /* ViewController.swift */; };
@@ -128,6 +132,10 @@
 		81A3B9392C75BC52009AD659 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		81A3B93B2C75BC8D009AD659 /* RunningInvitedUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningInvitedUserCell.swift; sourceTree = "<group>"; };
 		81A3B93D2C75CC2D009AD659 /* Extension+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITextField.swift"; sourceTree = "<group>"; };
+		81A3B9442C75E076009AD659 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		81A3B9472C75E080009AD659 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		81A3B9492C75E357009AD659 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		81A3B94B2C75EAD0009AD659 /* RoundedMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedMenuView.swift; sourceTree = "<group>"; };
 		81E7FEFA2C6C6BBD00200CF2 /* runwithu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = runwithu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E7FF0B2C6C6BBE00200CF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+Text.swift"; sourceTree = "<group>"; };
@@ -287,6 +295,32 @@
 			path = ViewMoel;
 			sourceTree = "<group>";
 		};
+		81A3B9412C75E065009AD659 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				81A3B9432C75E070009AD659 /* View */,
+				81A3B9422C75E06D009AD659 /* ViewModel */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		81A3B9422C75E06D009AD659 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				81A3B9472C75E080009AD659 /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		81A3B9432C75E070009AD659 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				81A3B9442C75E076009AD659 /* ProfileView.swift */,
+				81A3B9492C75E357009AD659 /* ProfileViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		81E7FEF12C6C6BBD00200CF2 = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +382,7 @@
 				81E7FFA72C6F42AC00200CF2 /* BaseView */,
 				81E7FFA22C6F404500200CF2 /* CustomView */,
 				811D376B2C7379730017E17C /* BottomSheet */,
+				81A3B9412C75E065009AD659 /* Profile */,
 				811D37742C73821F0017E17C /* RunningGroup */,
 				81A3B90B2C74EB36009AD659 /* RunningInvitation */,
 				81E7FF9D2C6F30D500200CF2 /* Sign */,
@@ -532,6 +567,7 @@
 				81A3B8EC2C745054009AD659 /* StepBar.swift */,
 				81A3B8F42C74B18D009AD659 /* PlusButton.swift */,
 				81A3B9332C757F6A009AD659 /* RectangleView.swift */,
+				81A3B94B2C75EAD0009AD659 /* RoundedMenuView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -640,6 +676,7 @@
 				81E7FF822C6F1C8700200CF2 /* ProductEpilogueInput.swift in Sources */,
 				81A3B90A2C74E45D009AD659 /* ENV.swift in Sources */,
 				81E7FF3B2C6C743400200CF2 /* NetworkMethod.swift in Sources */,
+				81A3B9482C75E080009AD659 /* ProfileViewModel.swift in Sources */,
 				81E7FF5B2C6D7FF400200CF2 /* TokenManager.swift in Sources */,
 				81E7FFB42C70061200200CF2 /* BaseViewController.swift in Sources */,
 				811D377E2C7390C00017E17C /* RoundedInputViewWithTitle.swift in Sources */,
@@ -661,6 +698,7 @@
 				81E7FF802C6F183700200CF2 /* Extension+Date.swift in Sources */,
 				81E7FF442C6C7B6D00200CF2 /* NetworkErrors.swift in Sources */,
 				81E7FF7A2C6F07E600200CF2 /* UpdatePostDTO.swift in Sources */,
+				81A3B94C2C75EAD0009AD659 /* RoundedMenuView.swift in Sources */,
 				81A3B93E2C75CC2D009AD659 /* Extension+UITextField.swift in Sources */,
 				81E7FF392C6C738B00200CF2 /* EndPoint.swift in Sources */,
 				81A3B8F32C74B003009AD659 /* RunningGroupListView.swift in Sources */,
@@ -672,6 +710,7 @@
 				81A3B8ED2C745054009AD659 /* StepBar.swift in Sources */,
 				81E7FF2A2C6C6C2700200CF2 /* SceneDelegate.swift in Sources */,
 				811D37682C736C710017E17C /* BottomSheetView.swift in Sources */,
+				81A3B94A2C75E357009AD659 /* ProfileViewController.swift in Sources */,
 				81E7FFBA2C700C2200200CF2 /* LoginViewModel.swift in Sources */,
 				81E7FF552C6CAD0700200CF2 /* RefreshTokenDTO.swift in Sources */,
 				81E7FF732C6EF74E00200CF2 /* RunningInfo.swift in Sources */,
@@ -709,6 +748,7 @@
 				81E7FF592C6CB25900200CF2 /* AuthEndPoint.swift in Sources */,
 				81E7FFA62C6F413400200CF2 /* InputWithTitleView.swift in Sources */,
 				81E7FF862C6F215E00200CF2 /* PostInputType.swift in Sources */,
+				81A3B9452C75E077009AD659 /* ProfileView.swift in Sources */,
 				81E7FF8A2C6F21E100200CF2 /* OpenMarathonInput.swift in Sources */,
 				81E7FF782C6EFE2100200CF2 /* GetPostDTO.swift in Sources */,
 				81E7FF3F2C6C769D00200CF2 /* LoginDTO.swift in Sources */,

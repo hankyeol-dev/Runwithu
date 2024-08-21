@@ -53,7 +53,6 @@ final class BottomSheetViewModel: BaseViewModelProtocol {
             default:
                Task {
                   await vm.readFollowers()
-                  print(vm.following)
                   didLoadOutput.onNext(vm.following.map { $0.nick })
                }
                break

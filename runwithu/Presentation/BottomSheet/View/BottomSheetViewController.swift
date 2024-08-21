@@ -31,7 +31,6 @@ final class BottomSheetViewController: BaseViewController<BottomSheetView, Botto
    override func viewDidAppear(_ animated: Bool) {
       super.viewDidAppear(animated)
       
-      baseView.bindDisplayAnimation()
    }
    
    override func bindViewAtDidLoad() {
@@ -59,7 +58,6 @@ final class BottomSheetViewController: BaseViewController<BottomSheetView, Botto
             cellIdentifier: BottomSheetTableCell.id,
             cellType: BottomSheetTableCell.self)
          ) { row, item, cell in
-            print(item)
             cell.bindView(title: item)
          }
          .disposed(by: disposeBag)

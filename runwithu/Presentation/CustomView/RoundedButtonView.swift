@@ -17,30 +17,12 @@ final class RoundedButtonView: UIButton {
       fatalError("init(coder:) has not been implemented")
    }
    
-   convenience init(_ title: String, backColor: UIColor, baseColor: UIColor) {
+   convenience init(_ title: String, backColor: UIColor, baseColor: UIColor, radius: CGFloat = 16) {
       self.init(frame: .zero)
       
-      configuration = .filled()
-      configuration?.title = title
-      configuration?.baseBackgroundColor = backColor
-      configuration?.baseForegroundColor = baseColor
-   }
-   
-   func changeAttributes(
-      title: String? = nil,
-      backColor: UIColor? = nil,
-      baseColor: UIColor? = nil
-   ) {
-      if let title {
-         configuration?.title = title
-      }
-      
-      if let backColor {
-         configuration?.baseBackgroundColor = backColor
-      }
-      
-      if let baseColor {
-         configuration?.baseForegroundColor = baseColor
-      }
+      setTitle(title, for: .normal)
+      backgroundColor = backColor
+      titleLabel?.textColor = baseColor
+      layer.cornerRadius = radius
    }
 }

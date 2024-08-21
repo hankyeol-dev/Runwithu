@@ -66,7 +66,8 @@ extension BaseViewModelProtocol {
    func tempLoginAPI() async {
       do {
          let result = try await NetworkService.shared.request(
-            by: UserEndPoint.login(input: .init(email: "7@runwithu.com", password: "777777")),
+            by: UserEndPoint.login(input: .init(
+               email: AppEnvironment.demoEmail, password: AppEnvironment.demoPassword)),
             of: LoginOutput.self
          )
          

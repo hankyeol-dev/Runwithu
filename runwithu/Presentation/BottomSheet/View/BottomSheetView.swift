@@ -12,7 +12,7 @@ import SnapKit
 final class BottomSheetView: BaseView, BaseViewProtocol {
    let back = {
       let view = UIView()
-      view.backgroundColor = .black.withAlphaComponent(0.6)
+      view.backgroundColor = .black.withAlphaComponent(0.5)
       return view
    }()
    private let sheetView = {
@@ -35,7 +35,7 @@ final class BottomSheetView: BaseView, BaseViewProtocol {
       super.setSubviews()
       
       addSubview(back)
-      addSubview(sheetView)
+      back.addSubview(sheetView)
       sheetView.addSubview(sheetTableView)
    }
    
@@ -47,27 +47,10 @@ final class BottomSheetView: BaseView, BaseViewProtocol {
       }
       sheetView.snp.makeConstraints { make in
          make.horizontalEdges.bottom.equalToSuperview()
-         make.height.equalTo(280)
+         make.height.equalTo(300)
       }
       sheetTableView.snp.makeConstraints { make in
          make.edges.equalTo(sheetView.safeAreaLayoutGuide).inset(8)
-      }
-   }
-   
-   func bindDisplayAnimation() {
-      UIView.animate(
-         withDuration: 0.1,
-         delay: 0,
-         options: .curveEaseInOut
-      ) {
-         self.back.alpha = 0.7
-      }
-   }
-   
-   func bindUnDisplayAction() {
-      UIView.animate(withDuration: 0.1, delay: 0) {
-         self.back.alpha = 0.0
-         self.layoutIfNeeded()
       }
    }
 }
