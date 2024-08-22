@@ -17,6 +17,7 @@ final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
    
    private var invitedUserIds: [String] = []
    private var invitedUsers: [String] = []
+   private var followings: [BaseProfileType] = []
    private var title = ""
    private var content = ""
    private var runningInfo: RunningInfo = .init(
@@ -44,7 +45,7 @@ final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
    
    struct Output {
       let didLoadOutput: PublishSubject<[String]>
-      let inviteButtonTapped: PublishSubject<Void>
+      let followings: PublishSubject<[BaseProfileType]?>
       let titleText: PublishSubject<String>
       let contentText: PublishSubject<String>
       let courseText: PublishSubject<String>
@@ -55,7 +56,7 @@ final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
    
    func transform(for input: Input) -> Output {
       let didLoadOutput = PublishSubject<[String]>()
-      let inviteButtonTapped = PublishSubject<Void>()
+      let followings = PublishSubject<[BaseProfileType]?>()
       let titleText = PublishSubject<String>()
       let contentText = PublishSubject<String>()
       let courseText = PublishSubject<String>()
@@ -70,9 +71,17 @@ final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
          .disposed(by: disposeBag)
       
       input.inviteButtonTapped
-         .subscribe(with: self) { _, void in
-            inviteButtonTapped.onNext(void)
+         .withUnretained(self)
+         .subscribe(with: self) { vm, _ in
             // TODO: sender closure 여기
+            
+            if vm.followings.isEmpty {
+               Task {
+                  await vm.getFollowings(successEmitter: followings)
+               }
+            } else {
+               followings.onNext(vm.followings)
+            }
          }
          .disposed(by: disposeBag)
       
@@ -131,7 +140,7 @@ final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
       
       return Output(
          didLoadOutput: didLoadOutput,
-         inviteButtonTapped: inviteButtonTapped,
+         followings: followings,
          titleText: titleText,
          contentText: contentText,
          courseText: courseText,
@@ -211,6 +220,25 @@ extension RunningInvitationCreateViewModel {
       } catch {
          dump(error)
          successEmitter.onNext((nil, "초대장을 생성할 수 없습니다."))
+      }
+   }
+   
+   private func getFollowings(
+      successEmitter: PublishSubject<[BaseProfileType]?>
+   ) async {
+      do {
+         let results = try await networkManager.request(
+            by: UserEndPoint.readMyProfile,
+            of: FollowingsOutput.self
+         )
+         followings = results.following
+         successEmitter.onNext(results.following)
+      } catch NetworkErrors.needToRefreshRefreshToken {
+         await tempLoginAPI()
+         await getFollowings(successEmitter: successEmitter)
+      } catch {
+         dump(error)
+         successEmitter.onNext(nil)
       }
    }
 }

@@ -33,7 +33,7 @@ struct ProfileOutput: Decodable {
    let posts: [String]
 }
 
-struct FollowersOutput: Decodable {
+struct FollowingsOutput: Decodable {
    let following: [BaseProfileType]
 }
 

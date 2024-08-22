@@ -109,16 +109,22 @@ final class RunningInvitationCreateViewController: BaseViewController<RunningInv
                }
                .disposed(by: disposeBag)
       
-      output.inviteButtonTapped
-         .bind(with: self) { vc, _ in
-            let bottomSheet = BottomSheetViewController(
-               bv: BottomSheetView(),
-               vm: BottomSheetViewModel(mode: .userList),
-               db: DisposeBag()
-            )
-            bottomSheet.mode = .multiSelect
-            bottomSheet.modalPresentationStyle = .overFullScreen
-            vc.present(bottomSheet, animated: true)
+      output.followings
+         .bind(with: self) { vc, followings in
+            if let followings {
+               DispatchQueue.main.async {
+                  let bottomSheet = BottomeSheetViewController(
+                     titleText: "러닝 친구 목록",
+                     selectedItems: followings.map { $0.nick },
+                     isScrolled: true,
+                     isMultiSelected: true,
+                     disposeBag: DisposeBag()
+                  )
+                  bottomSheet.modalPresentationStyle = .overFullScreen
+                  bottomSheet.modalTransitionStyle = .coverVertical
+                  vc.present(bottomSheet, animated: true)
+               }
+            }
          }
          .disposed(by: disposeBag)
       

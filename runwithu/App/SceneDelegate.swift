@@ -21,11 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       //         vm: LoginViewModel(),
       //         db: DisposeBag()
       //      )
-      //      let root = RunningGroupListViewController(
-      //         bv: RunningGroupListView(),
-      //         vm: RunningGroupListViewModel(),
-      //         db: DisposeBag()
-      //      )
+//            let root = RunningGroupListViewController(
+//               bv: RunningGroupListView(),
+//               vm: RunningGroupListViewModel(),
+//               db: DisposeBag()
+//            )
       
       //      let root = RunningInvitationCreateViewController(
       //         bv: RunningInvitationCreateView(),
@@ -37,6 +37,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          vm: ProfileViewModel(isUserProfile: false, userId: AppEnvironment.demoUserId),
          db: DisposeBag()
       )
+//      let root = UINavigationController(
+//         rootViewController: BottomeSheetViewController(
+//            titleText: "커뮤니티 글 작성",
+//            selectedItems: PostsCommunityType.allCases.map { $0.byKoreanTitle },
+//            isScrolled: false,
+//            disposeBag: DisposeBag()
+//         )
+//      )
       
       //       let root = UINavigationController(rootViewController: ViewController())
       //

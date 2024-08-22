@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		811D37682C736C710017E17C /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37672C736C710017E17C /* BottomSheetView.swift */; };
-		811D376A2C736E550017E17C /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37692C736E550017E17C /* BottomSheetViewController.swift */; };
 		811D376F2C7379940017E17C /* BottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D376E2C7379940017E17C /* BottomSheetViewModel.swift */; };
 		811D37712C737DA70017E17C /* BottomSheetTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37702C737DA70017E17C /* BottomSheetTableCell.swift */; };
 		811D37732C737DCB0017E17C /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37722C737DCB0017E17C /* BaseTableViewCell.swift */; };
@@ -40,6 +38,10 @@
 		81A3B9482C75E080009AD659 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9472C75E080009AD659 /* ProfileViewModel.swift */; };
 		81A3B94A2C75E357009AD659 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9492C75E357009AD659 /* ProfileViewController.swift */; };
 		81A3B94C2C75EAD0009AD659 /* RoundedMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B94B2C75EAD0009AD659 /* RoundedMenuView.swift */; };
+		81A3B9552C773955009AD659 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9542C773955009AD659 /* TestViewController.swift */; };
+		81A3B9582C7745C6009AD659 /* BaseAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9572C7745C6009AD659 /* BaseAlertBuilder.swift */; };
+		81A3B95A2C774818009AD659 /* BaseAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9592C774818009AD659 /* BaseAlertViewController.swift */; };
+		81A3B95C2C7764B1009AD659 /* BottomeSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B95B2C7764B1009AD659 /* BottomeSheetViewController.swift */; };
 		81E7FF232C6C6C2700200CF2 /* Enum+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */; };
 		81E7FF242C6C6C2700200CF2 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF132C6C6C2700200CF2 /* Extension+UIView.swift */; };
 		81E7FF252C6C6C2700200CF2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF152C6C6C2700200CF2 /* ViewController.swift */; };
@@ -103,8 +105,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		811D37672C736C710017E17C /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
-		811D37692C736E550017E17C /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		811D376E2C7379940017E17C /* BottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewModel.swift; sourceTree = "<group>"; };
 		811D37702C737DA70017E17C /* BottomSheetTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetTableCell.swift; sourceTree = "<group>"; };
 		811D37722C737DCB0017E17C /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
@@ -136,6 +136,10 @@
 		81A3B9472C75E080009AD659 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		81A3B9492C75E357009AD659 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		81A3B94B2C75EAD0009AD659 /* RoundedMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedMenuView.swift; sourceTree = "<group>"; };
+		81A3B9542C773955009AD659 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		81A3B9572C7745C6009AD659 /* BaseAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAlertBuilder.swift; sourceTree = "<group>"; };
+		81A3B9592C774818009AD659 /* BaseAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAlertViewController.swift; sourceTree = "<group>"; };
+		81A3B95B2C7764B1009AD659 /* BottomeSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomeSheetViewController.swift; sourceTree = "<group>"; };
 		81E7FEFA2C6C6BBD00200CF2 /* runwithu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = runwithu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E7FF0B2C6C6BBE00200CF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+Text.swift"; sourceTree = "<group>"; };
@@ -223,9 +227,8 @@
 		811D376C2C73797E0017E17C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				811D37672C736C710017E17C /* BottomSheetView.swift */,
-				811D37692C736E550017E17C /* BottomSheetViewController.swift */,
 				811D37702C737DA70017E17C /* BottomSheetTableCell.swift */,
+				81A3B95B2C7764B1009AD659 /* BottomeSheetViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				81E7FF1B2C6C6C2700200CF2 /* LaunchScreen.storyboard */,
 				81E7FF1C2C6C6C2700200CF2 /* SceneDelegate.swift */,
 				81A3B9092C74E45D009AD659 /* ENV.swift */,
+				81A3B9542C773955009AD659 /* TestViewController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -582,6 +586,8 @@
 				811D37722C737DCB0017E17C /* BaseTableViewCell.swift */,
 				811D377F2C73912D0017E17C /* BaseTextFieldRounded.swift */,
 				81A3B9392C75BC52009AD659 /* BaseCollectionViewCell.swift */,
+				81A3B9572C7745C6009AD659 /* BaseAlertBuilder.swift */,
+				81A3B9592C774818009AD659 /* BaseAlertViewController.swift */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -680,10 +686,12 @@
 				81E7FF5B2C6D7FF400200CF2 /* TokenManager.swift in Sources */,
 				81E7FFB42C70061200200CF2 /* BaseViewController.swift in Sources */,
 				811D377E2C7390C00017E17C /* RoundedInputViewWithTitle.swift in Sources */,
+				81A3B95A2C774818009AD659 /* BaseAlertViewController.swift in Sources */,
 				81E7FFB22C7005EF00200CF2 /* LoginView.swift in Sources */,
 				81E7FFC02C7019D200200CF2 /* JoinViewModel.swift in Sources */,
 				81E7FF762C6EF86000200CF2 /* RunningHardType.swift in Sources */,
 				81A3B8EB2C744972009AD659 /* RunningGroupPreviewView.swift in Sources */,
+				81A3B9582C7745C6009AD659 /* BaseAlertBuilder.swift in Sources */,
 				811D377A2C73824D0017E17C /* RunningGroupCreateView.swift in Sources */,
 				81E7FF7E2C6F16F400200CF2 /* EpilogueInput.swift in Sources */,
 				81A3B93C2C75BC8D009AD659 /* RunningInvitedUserCell.swift in Sources */,
@@ -691,6 +699,7 @@
 				81A3B8EF2C74AFB6009AD659 /* RunningGroupListViewController.swift in Sources */,
 				81E7FFB82C70073800200CF2 /* Protocol+BaseView.swift in Sources */,
 				81A3B93A2C75BC52009AD659 /* BaseCollectionViewCell.swift in Sources */,
+				81A3B95C2C7764B1009AD659 /* BottomeSheetViewController.swift in Sources */,
 				81A3B9142C74EBEA009AD659 /* RunningInvitationCreateViewController.swift in Sources */,
 				81E7FF462C6C7C0100200CF2 /* Extension+Encodable.swift in Sources */,
 				81E7FF672C6EDFEB00200CF2 /* ImageUploadDTO.swift in Sources */,
@@ -706,10 +715,8 @@
 				81E7FF612C6DB8F000200CF2 /* ProfileDTO.swift in Sources */,
 				811D37712C737DA70017E17C /* BottomSheetTableCell.swift in Sources */,
 				81E7FFA92C6F42C200200CF2 /* BaseTextFieldWithLine.swift in Sources */,
-				811D376A2C736E550017E17C /* BottomSheetViewController.swift in Sources */,
 				81A3B8ED2C745054009AD659 /* StepBar.swift in Sources */,
 				81E7FF2A2C6C6C2700200CF2 /* SceneDelegate.swift in Sources */,
-				811D37682C736C710017E17C /* BottomSheetView.swift in Sources */,
 				81A3B94A2C75E357009AD659 /* ProfileViewController.swift in Sources */,
 				81E7FFBA2C700C2200200CF2 /* LoginViewModel.swift in Sources */,
 				81E7FF552C6CAD0700200CF2 /* RefreshTokenDTO.swift in Sources */,
@@ -742,6 +749,7 @@
 				81E7FFA42C6F405300200CF2 /* BaseLabel.swift in Sources */,
 				81E7FF882C6F21AF00200CF2 /* QnaInput.swift in Sources */,
 				81E7FFBE2C7019B300200CF2 /* JoinViewController.swift in Sources */,
+				81A3B9552C773955009AD659 /* TestViewController.swift in Sources */,
 				81E7FFAB2C6F6EF400200CF2 /* BaseView.swift in Sources */,
 				81E7FF352C6C723E00200CF2 /* UserEndPoint.swift in Sources */,
 				81A3B9182C7565D2009AD659 /* RoundedDatePickerView.swift in Sources */,

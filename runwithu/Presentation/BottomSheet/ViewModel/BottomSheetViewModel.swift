@@ -90,7 +90,7 @@ extension BottomSheetViewModel {
       do {
          let results = try await networkManager.request(
             by: UserEndPoint.readMyProfile,
-            of: FollowersOutput.self
+            of: FollowingsOutput.self
          )
          
          following = results.following

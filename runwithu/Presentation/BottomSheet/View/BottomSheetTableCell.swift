@@ -29,6 +29,11 @@ final class BottomSheetTableCell: BaseTableViewCell {
       }
    }
    
+   override func setUI() {
+      super.setUI()
+      selectionStyle = .none
+   }
+   
    func bindView(title: String) {
       label.text = title
    }
