@@ -8,12 +8,12 @@
 import Foundation
 
 struct RunningInfo: Codable {
-   let date: String
-   let course: [String]?
-   let timeTaking: Int?
-   let hardType: String?
-   let supplies: String?
-   let reward: String?
+   var date: String
+   var course: String?
+   var timeTaking: Int?
+   var hardType: String?
+   var supplies: String?
+   var reward: String?
    
    var byJsonString: String? {
       if let json = self.converToJSON(),

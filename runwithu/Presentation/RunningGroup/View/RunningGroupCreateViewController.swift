@@ -140,15 +140,3 @@ final class RunningGroupCreateViewController: BaseViewController<RunningGroupCre
          .disposed(by: disposeBag)
    }
 }
-
-extension RunningGroupCreateViewController {
-   private func bindInputViewText(for field: BaseTextFieldRounded, to emitter: PublishSubject<String>) {
-      field.rx.text.orEmpty
-         .bind(with: self) { vc, text in
-            if !text.isEmpty {
-               emitter.onNext(text)
-            }
-         }
-         .disposed(by: disposeBag)
-   }
-}

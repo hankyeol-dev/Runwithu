@@ -63,6 +63,23 @@ extension BaseViewModelProtocol {
       return nickname.count >= 2
    }
    
+   func trimmingText(for text: String, index: Int) -> String {
+      if text.count >= index {
+         let index = text.index(text.startIndex, offsetBy: index)
+         return String(text[..<index])
+      } else {
+         return text
+      }
+   }
+   
+   func countingText(for text: String, limit: Int) -> String {
+      if let count = Int(text), count >= limit {
+         return "\(limit - 1)"
+      } else {
+         return text
+      }
+   }
+   
    func tempLoginAPI() async {
       do {
          let result = try await NetworkService.shared.request(

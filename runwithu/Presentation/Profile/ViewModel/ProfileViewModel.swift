@@ -22,7 +22,7 @@ final class ProfileViewModel: BaseViewModelProtocol {
       let createInvitationButtonTapped: PublishSubject<Void>
    }
    struct Output {
-      let createButtonTapped: PublishSubject<String>
+      let createButtonTapped: PublishSubject<(String, String)>
       let getProfileEmitter: PublishSubject<(ProfileOutput?, String?)>
    }
    
@@ -32,7 +32,7 @@ final class ProfileViewModel: BaseViewModelProtocol {
    }
    
    func transform(for input: Input) -> Output {
-      let createButtonTapped = PublishSubject<String>()
+      let createButtonTapped = PublishSubject<(String, String)>()
       let getProfileEmitter = PublishSubject<(ProfileOutput?, String?)>()
       
       input.didLoad
@@ -45,7 +45,7 @@ final class ProfileViewModel: BaseViewModelProtocol {
       
       input.createInvitationButtonTapped
          .subscribe(with: self) { vm, void in
-            createButtonTapped.onNext(vm.username)
+            createButtonTapped.onNext((vm.userId, vm.username))
          }
          .disposed(by: disposeBag)
       

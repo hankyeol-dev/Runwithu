@@ -81,5 +81,16 @@ extension BaseVC {
       window?.makeKeyAndVisible()
    }
    
+   func bindInputViewText(
+      for field: BaseTextFieldRounded,
+      to emitter: PublishSubject<String>
+   ) {
+      field.rx.text.orEmpty
+         .bind(with: self) { vc, text in
+            emitter.onNext(text)
+         }
+         .disposed(by: disposeBag)
+   }
+   
    func displayAlert() { }
 }

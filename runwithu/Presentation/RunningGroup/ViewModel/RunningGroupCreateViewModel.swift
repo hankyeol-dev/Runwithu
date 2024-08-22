@@ -118,23 +118,6 @@ final class RunningGroupCreateViewModel: BaseViewModelProtocol {
 }
 
 extension RunningGroupCreateViewModel {
-   private func trimmingText(for text: String, index: Int) -> String {
-      if text.count >= index {
-         let index = text.index(text.startIndex, offsetBy: index)
-         return String(text[..<index])
-      } else {
-         return text
-      }
-   }
-   
-   private func countingText(for text: String, limit: Int) -> String {
-      if let count = Int(text), count >= limit {
-         return "\(limit - 1)"
-      } else {
-         return text
-      }
-   }
-   
    private func validateForCreate() -> Bool {
       if postGroupInput.title.isEmpty ||
             postGroupInput.content.isEmpty ||

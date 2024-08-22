@@ -59,13 +59,16 @@ final class ProfileViewController: BaseViewController<ProfileView, ProfileViewMo
          .disposed(by: disposeBag)
       
       output.createButtonTapped
-         .bind(with: self) { vc, username in
+         .bind(with: self) { vc, userInfo in
             let createInvitationVC = RunningInvitationCreateViewController(
                bv: RunningInvitationCreateView(),
                vm: RunningInvitationCreateViewModel(),
                db: DisposeBag()
             )
-            createInvitationVC.viewModel.appendOrRemoveFromInvitedUsers(by: username)
+            createInvitationVC.viewModel.appendOrRemoveFromInvitedUsers(
+               userId: userInfo.0,
+               username: userInfo.1
+            )
             createInvitationVC.modalPresentationStyle = .fullScreen
             vc.present(createInvitationVC, animated: true)
          }
