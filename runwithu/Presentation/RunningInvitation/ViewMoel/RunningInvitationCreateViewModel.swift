@@ -9,11 +9,9 @@ import Foundation
 
 import RxSwift
 
-// -[] TODO: 팔로잉 러너 선택 closure pattern으로 bottomsheet viewmodel이랑 데이터 통신 필요
-
 final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
-   private let disposeBag = DisposeBag()
-   private let networkManager = NetworkService.shared
+   let disposeBag: DisposeBag
+   let networkManager: NetworkService
    
    private var invitedUsers:[String] = []
    private let publishedInvitedUsers = PublishSubject<[String]>()
@@ -28,6 +26,14 @@ final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
       supplies: nil,
       reward: nil
    )
+   
+   init(
+      disposeBag: DisposeBag,
+      networkManager: NetworkService
+   ) {
+      self.disposeBag = disposeBag
+      self.networkManager = networkManager
+   }
    
    struct Input {
       let didLoadInput: PublishSubject<Void>

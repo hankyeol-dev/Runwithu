@@ -10,8 +10,16 @@ import Foundation
 import RxSwift
 
 final class JoinViewModel: BaseViewModelProtocol {
-   private let disposeBag = DisposeBag()
-   private let networkManager = NetworkService.shared
+   let disposeBag: DisposeBag
+   let networkManager: NetworkService
+   
+   init(
+      disposeBag: DisposeBag,
+      networkManager: NetworkService
+   ) {
+      self.disposeBag = disposeBag
+      self.networkManager = networkManager
+   }
    
    private var email = ""
    private var password = ""

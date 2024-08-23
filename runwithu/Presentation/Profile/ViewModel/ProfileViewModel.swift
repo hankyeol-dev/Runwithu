@@ -10,11 +10,10 @@ import Foundation
 import RxSwift
 
 final class ProfileViewModel: BaseViewModelProtocol {
-   private let disposeBag = DisposeBag()
-   private let networkManager = NetworkService.shared
-   
+   let disposeBag: DisposeBag
+   let networkManager: NetworkService
    private let isUserProfile: Bool
-   private let userId: String
+   private var userId: String?
    private var username = "" // 성공했다면, 무조건 있으니까.
    
    struct Input {
@@ -26,7 +25,14 @@ final class ProfileViewModel: BaseViewModelProtocol {
       let getProfileEmitter: PublishSubject<(ProfileOutput?, String?)>
    }
    
-   init(isUserProfile: Bool, userId: String) {
+   init(
+      disposeBag: DisposeBag,
+      networkManager: NetworkService,
+      isUserProfile: Bool,
+      userId: String? = nil
+   ) {
+      self.disposeBag = disposeBag
+      self.networkManager = networkManager
       self.isUserProfile = isUserProfile
       self.userId = userId
    }
@@ -63,13 +69,23 @@ final class ProfileViewModel: BaseViewModelProtocol {
       getProfileEmitter: PublishSubject<(ProfileOutput?, String?)>
    ) async {
       do {
-         let results = try await networkManager.request(
-            by: UserEndPoint.readAnotherProfile(input: .init(user_id: userId)),
-            of: ProfileOutput.self
-         )
+         var results: ProfileOutput
+         if isUserProfile {
+            results = try await networkManager.request(
+               by: UserEndPoint.readMyProfile,
+               of: ProfileOutput.self
+            )
+         } else {
+            guard let userId else { return }
+            results = try await networkManager.request(
+               by: UserEndPoint.readAnotherProfile(input: .init(user_id: userId)),
+               of: ProfileOutput.self
+            )
+         }
+         userId = results.user_id
          username = results.nick
          getProfileEmitter.onNext((results, nil))
-         
+        
       } catch NetworkErrors.needToRefreshRefreshToken {
          await tempLoginAPI()
          await getUserProfile(getProfileEmitter: getProfileEmitter)

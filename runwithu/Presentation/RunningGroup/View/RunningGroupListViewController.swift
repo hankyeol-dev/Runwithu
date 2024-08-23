@@ -46,7 +46,9 @@ final class RunningGroupListViewController: BaseViewController<RunningGroupListV
          .bind(with: self) { vc, _ in
             let targetVC = RunningGroupCreateViewController(
                bv: RunningGroupCreateView(),
-               vm: RunningGroupCreateViewModel(),
+               vm: RunningGroupCreateViewModel(
+                  disposeBag: DisposeBag(), networkManager: NetworkService.shared
+               ),
                db: DisposeBag()
             )
             targetVC.modalPresentationStyle = .fullScreen

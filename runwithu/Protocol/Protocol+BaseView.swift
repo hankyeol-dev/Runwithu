@@ -7,11 +7,16 @@
 
 import UIKit
 
+import RxSwift
+
 protocol BaseViewProtocol: UIView {}
 
 protocol BaseViewModelProtocol: AnyObject {
    associatedtype Input
    associatedtype Output
+   
+   var disposeBag: DisposeBag { get }
+   var networkManager: NetworkService { get }
    
    func transform(for input: Input) -> Output
 }

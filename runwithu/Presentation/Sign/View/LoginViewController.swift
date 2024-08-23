@@ -48,7 +48,9 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
          .bind(with: self) { vc, _ in
             let targetVC = JoinViewController(
                bv: JoinView(),
-               vm: JoinViewModel(),
+               vm: JoinViewModel(
+                  disposeBag: DisposeBag(), networkManager: NetworkService.shared
+               ),
                db: DisposeBag()
             )
             vc.navigationController?.pushViewController(targetVC, animated: true)

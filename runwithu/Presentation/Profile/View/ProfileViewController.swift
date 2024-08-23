@@ -64,7 +64,9 @@ final class ProfileViewController: BaseViewController<ProfileView, ProfileViewMo
          .bind(with: self) { vc, username in
             let createInvitationVC = RunningInvitationCreateViewController(
                bv: RunningInvitationCreateView(),
-               vm: RunningInvitationCreateViewModel(),
+               vm: RunningInvitationCreateViewModel(
+                  disposeBag: DisposeBag(), networkManager: NetworkService.shared
+               ),
                db: DisposeBag()
             )
             createInvitationVC.viewModel.appendOrRemoveFromInvitedUsers(

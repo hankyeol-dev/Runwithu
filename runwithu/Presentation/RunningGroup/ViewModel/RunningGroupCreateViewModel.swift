@@ -10,9 +10,8 @@ import Foundation
 import RxSwift
 
 final class RunningGroupCreateViewModel: BaseViewModelProtocol {
-   private let disposeBag = DisposeBag()
-   private let tokenManager = TokenManager.shared
-   private let networkManager = NetworkService.shared
+   let disposeBag: DisposeBag
+   let networkManager: NetworkService
    
    private var postGroupInput = CreateRunningGroupInput(
       title: "",
@@ -21,6 +20,14 @@ final class RunningGroupCreateViewModel: BaseViewModelProtocol {
       mainSpot: "",
       runningHardType: ""
    )
+   
+   init(
+      disposeBag: DisposeBag,
+      networkManager: NetworkService
+   ) {
+      self.disposeBag = disposeBag
+      self.networkManager = networkManager
+   }
    
    struct Input {
       let groupName: PublishSubject<String>

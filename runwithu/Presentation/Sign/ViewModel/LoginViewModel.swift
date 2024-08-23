@@ -10,11 +10,22 @@ import Foundation
 import RxSwift
 
 final class LoginViewModel: BaseViewModelProtocol {
-   private let disposeBag = DisposeBag()
-   private let networkManager = NetworkService.shared
-   private let tokenManager = TokenManager.shared
+   let disposeBag: DisposeBag
+   let networkManager: NetworkService
+   let tokenManager: TokenManager
+   
    private var email = ""
    private var password = ""
+   
+   init(
+      disposeBag: DisposeBag,
+      networkManager: NetworkService,
+      tokenManager: TokenManager
+   ) {
+      self.disposeBag = disposeBag
+      self.networkManager = networkManager
+      self.tokenManager = tokenManager
+   }
    
    struct Input {
       let email: PublishSubject<String>

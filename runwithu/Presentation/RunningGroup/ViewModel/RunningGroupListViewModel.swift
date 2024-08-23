@@ -10,6 +10,17 @@ import Foundation
 import RxSwift
 
 final class RunningGroupListViewModel: BaseViewModelProtocol {
+   let disposeBag: DisposeBag
+   let networkManager: NetworkService
+   
+   init(
+      disposeBag: DisposeBag,
+      networkManager: NetworkService
+   ) {
+      self.disposeBag = disposeBag
+      self.networkManager = networkManager
+   }
+   
    struct Input {
       let floatingButtonTapped: PublishSubject<Void>
    }
