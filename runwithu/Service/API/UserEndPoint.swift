@@ -13,6 +13,7 @@ enum UserEndPoint: EndPointProtocol {
    case validEmail(input: ValidEmailInput)
    case readMyProfile
    case readAnotherProfile(input: ProfileInput)
+   case searchUserByNick(input: SearchUserByNickInput)
    case updateProfile(input: ProfileUpdateInput)
    case updateProfileImage(input: ProfileImageUpdateInput)
    
@@ -20,14 +21,14 @@ enum UserEndPoint: EndPointProtocol {
       switch self {
       case .join, .login, .validEmail:
          return false
-      case .readMyProfile, .readAnotherProfile, .updateProfile, .updateProfileImage:
+      case .readMyProfile, .readAnotherProfile, .updateProfile, .updateProfileImage, .searchUserByNick:
          return true
       }
    }
    
    var path: String {
       switch self {
-      case .join, .login, .readMyProfile, .readAnotherProfile, .updateProfile, .updateProfileImage:
+      case .join, .login, .readMyProfile, .readAnotherProfile, .updateProfile, .updateProfileImage, .searchUserByNick:
          return "/users"
       case .validEmail:
          return "/validation"
@@ -44,6 +45,8 @@ enum UserEndPoint: EndPointProtocol {
          return "/email"
       case .readMyProfile, .updateProfile, .updateProfileImage:
          return "/me/profile"
+      case .searchUserByNick:
+         return "/search"
       case let .readAnotherProfile(input):
          return "/\(input.user_id)/profile"
       }
@@ -53,7 +56,7 @@ enum UserEndPoint: EndPointProtocol {
       switch self {
       case .join, .login, .validEmail:
          return .post
-      case .readMyProfile, .readAnotherProfile:
+      case .readMyProfile, .readAnotherProfile, .searchUserByNick:
          return .get
       case .updateProfile, .updateProfileImage:
          return .put
@@ -70,7 +73,14 @@ enum UserEndPoint: EndPointProtocol {
    }
    
    var parameters: [URLQueryItem]? {
-      return nil
+      switch self {
+      case let .searchUserByNick(input):
+         return [
+            URLQueryItem(name: "nick", value: input.nick)
+         ]
+      default:
+         return nil
+      }
    }
    
    var body: Data? {

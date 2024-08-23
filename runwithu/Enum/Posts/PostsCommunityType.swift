@@ -5,7 +5,7 @@
 //  Created by 강한결 on 8/16/24.
 //
 
-import Foundation
+import UIKit
 
 enum PostsCommunityType: String, CaseIterable {
    case epilogue
@@ -23,6 +23,19 @@ enum PostsCommunityType: String, CaseIterable {
          return "러닝 질문 올리기"
       case .open_self_marathon:
          return "나만의 마라톤 개최하기"
+      }
+   }
+   
+   var byTitleImage: UIImage {
+      switch self {
+      case .epilogue:
+         return .runner
+      case .product_epilogue:
+         return .runningshoe
+      case .qna:
+         return UIImage.qna
+      case .open_self_marathon:
+         return .marathon
       }
    }
 }
