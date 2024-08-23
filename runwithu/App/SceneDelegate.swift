@@ -32,11 +32,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       //         vm: RunningInvitationCreateViewModel(),
       //         db: DisposeBag())
       
-      let root = ProfileViewController(
-         bv: ProfileView(), 
-         vm: ProfileViewModel(isUserProfile: false, userId: AppEnvironment.demoUserId),
-         db: DisposeBag()
-      )
+//      let root = ProfileViewController(
+//         bv: ProfileView(), 
+//         vm: ProfileViewModel(
+//            disposeBag: DisposeBag(),
+//            networkManager: NetworkService.shared,
+//            isUserProfile: true
+//         ),
+//         db: DisposeBag()
+//      )
+      let root = MainTabbarController()
 //      let root = UINavigationController(
 //         rootViewController: BottomeSheetViewController(
 //            titleText: "커뮤니티 글 작성",

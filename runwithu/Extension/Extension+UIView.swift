@@ -8,7 +8,13 @@
 import UIKit
 
 extension UIView {
-  static var id: String {
-    return String(describing: self)
-  }
+   static var id: String {
+      return String(describing: self)
+   }
+   
+   func addSubviews(_ views: UIView...) {
+      views.forEach {
+         self.addSubview($0)
+      }
+   }
 }

@@ -29,14 +29,12 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
       contentsFlexBox.pin.all(self.pin.safeArea)
       
       floatingButton.pin
-         .right(28)
-         .bottom(84)
-         .size(40)
+         .right(20)
+         .bottom(110)
+         .size(48)
    }
    
    override func setUI() {
       super.setUI()
-      
-      contentsFlexBox.backgroundColor = .brown
    }
 }
