@@ -1,5 +1,5 @@
 //
-//  BottomeSheetViewController.swift
+//  BottomSheetViewController.swift
 //  runwithu
 //
 //  Created by 강한결 on 8/22/24.
@@ -11,15 +11,18 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-final class BottomeSheetViewController: UIViewController {
+final class BottomSheetViewController: UIViewController {
    private let titleText: String
-   private let selectedItems: [String]
    private let isScrolled: Bool
    private let isMultiSelected: Bool
    private let disposeBag: DisposeBag
    
+   private var selectedItems: [BottomSheetSelectedItem]
+   private let behaviorSelectedItems = BehaviorSubject<[BottomSheetSelectedItem]>(value: [])
+   
    var didDisappearHandler: (() -> Void)?
    
+   private let bottomSheetBackView = UIView()
    private let bottomSheetBox = UIView()
    private let bottomSheetHeaderView = UIView()
    private let bottomSheetTitle = BaseLabel(for: "", font: .boldSystemFont(ofSize: 16))
@@ -29,7 +32,7 @@ final class BottomeSheetViewController: UIViewController {
    
    init(
       titleText: String,
-      selectedItems: [String],
+      selectedItems: [BottomSheetSelectedItem],
       isScrolled: Bool,
       isMultiSelected: Bool,
       disposeBag: DisposeBag
@@ -62,8 +65,8 @@ final class BottomeSheetViewController: UIViewController {
    }
    
    private func setSubviews() {
-      view.addSubview(bottomSheetBox)
-      
+      view.addSubview(bottomSheetBackView)
+      bottomSheetBackView.addSubview(bottomSheetBox)
       bottomSheetBox.addSubview(bottomSheetHeaderView)
       bottomSheetHeaderView.addSubview(bottomSheetTitle)
       bottomSheetHeaderView.addSubview(bottomSheetHeaderButton)
@@ -71,6 +74,9 @@ final class BottomeSheetViewController: UIViewController {
       bottomSheetBox.addSubview(bottomSheetCommunitySelectionTable)
    }
    private func setLayout() {
+      bottomSheetBackView.snp.makeConstraints { make in
+         make.edges.equalToSuperview()
+      }
       bottomSheetBox.snp.makeConstraints { make in
          make.horizontalEdges.bottom.equalToSuperview()
       }
@@ -100,7 +106,11 @@ final class BottomeSheetViewController: UIViewController {
       }
    }
    private func setUI() {
-      view.backgroundColor = .black.withAlphaComponent(0.6)
+      view.backgroundColor = .clear
+      bottomSheetBackView.backgroundColor = .black.withAlphaComponent(0.6)
+      bottomSheetBackView.layer.zPosition = 1
+      
+      bottomSheetBox.layer.zPosition = 3
       bottomSheetBox.backgroundColor = .white
       bottomSheetBox.layer.cornerRadius = 16
       bottomSheetBox.clipsToBounds = true
@@ -119,16 +129,8 @@ final class BottomeSheetViewController: UIViewController {
    }
    
    private func bindView() {
-      let tapGesture = UITapGestureRecognizer()
-      view.addGestureRecognizer(tapGesture)
-      
-      tapGesture.rx.event
-         .asDriver()
-         .drive { [weak self] _ in
-            guard let self else { return }
-            self.dismiss(animated: true)
-         }
-         .disposed(by: disposeBag)
+      behaviorSelectedItems
+         .onNext(selectedItems)
       
       bottomSheetHeaderButton.rx.tap
          .asDriver()
@@ -136,8 +138,8 @@ final class BottomeSheetViewController: UIViewController {
             vc.dismiss(animated: true)
          }
          .disposed(by: disposeBag)
-      
    }
+   
    private func bindTable() {
       bottomSheetCommunitySelectionTable.register(
          BottomSheetTableCell.self,
@@ -147,12 +149,33 @@ final class BottomeSheetViewController: UIViewController {
       bottomSheetCommunitySelectionTable.isScrollEnabled = isScrolled
       bottomSheetCommunitySelectionTable.separatorInset = .init(top: 0, left: 0, bottom: 0, right: 0)
       
-      Observable.just(selectedItems)
+      behaviorSelectedItems
          .bind(to: bottomSheetCommunitySelectionTable.rx.items(
             cellIdentifier: BottomSheetTableCell.id,
-            cellType: BottomSheetTableCell.self)) { row, item, cell in
-               cell.bindView(title: item)
+            cellType: BottomSheetTableCell.self)) { [weak self] row, item, cell in
+               guard let self else { return }
+               cell.bindView(for: item)
+               if self.isMultiSelected {
+                  cell.bindButton(isChecked: item.isSelected)
+               }
             }
             .disposed(by: disposeBag)
+      
+      bottomSheetCommunitySelectionTable.rx.itemSelected
+         .bind(with: self) { vc, indexPath in
+            let index = indexPath.row
+            var target = vc.selectedItems[index]
+            target.isSelected.toggle()
+            vc.selectedItems[index] = target
+            vc.behaviorSelectedItems.onNext(vc.selectedItems)
+            if !vc.isMultiSelected {
+               vc.dismiss(animated: true)
+            }
+         }
+         .disposed(by: disposeBag)
+   }
+   
+   func getSelectedItems() -> [BottomSheetSelectedItem] {
+      return selectedItems
    }
 }

@@ -46,10 +46,12 @@ final class ProfileViewController: BaseViewController<ProfileView, ProfileViewMo
       
       /// bind output
       output.getProfileEmitter
-         .bind(with: self) { vc, results in
+         .asDriver(onErrorJustReturn: (nil, nil))
+         .drive(with: self) { vc, results in
             if let output = results.0 {
-//               dump(output)
-               print("조회 성공!")
+               vc.baseView.profileNickname.text = output.nick
+               vc.baseView.profileFollower.text = "팔로워 - \(output.followers.count)명"
+               vc.baseView.profileFollowing.text = "팔로잉 - \(output.following.count)명"
             }
             
             if let errorMessage = results.1 {
@@ -58,16 +60,15 @@ final class ProfileViewController: BaseViewController<ProfileView, ProfileViewMo
          }
          .disposed(by: disposeBag)
       
-      output.createButtonTapped
-         .bind(with: self) { vc, userInfo in
+      output.createInvitationButtonTapped
+         .bind(with: self) { vc, username in
             let createInvitationVC = RunningInvitationCreateViewController(
                bv: RunningInvitationCreateView(),
                vm: RunningInvitationCreateViewModel(),
                db: DisposeBag()
             )
             createInvitationVC.viewModel.appendOrRemoveFromInvitedUsers(
-               userId: userInfo.0,
-               username: userInfo.1
+               username: username
             )
             createInvitationVC.modalPresentationStyle = .fullScreen
             vc.present(createInvitationVC, animated: true)

@@ -99,7 +99,8 @@ final class RunningInvitationCreateViewController: BaseViewController<RunningInv
          .disposed(by: disposeBag)
       
       /// bind output
-      output.didLoadOutput
+      output.publishedInvitedUsers
+         .distinctUntilChanged()
          .bind(to: baseView
             .runningInviteUserPicker
             .inviteCollection.rx.items(
@@ -110,20 +111,30 @@ final class RunningInvitationCreateViewController: BaseViewController<RunningInv
                .disposed(by: disposeBag)
       
       output.followings
-         .bind(with: self) { vc, followings in
+         .asDriver(onErrorJustReturn: nil)
+         .drive(with: self) { vc, followings in
             if let followings {
-               DispatchQueue.main.async {
-                  let bottomSheet = BottomeSheetViewController(
-                     titleText: "러닝 친구 목록",
-                     selectedItems: followings.map { $0.nick },
-                     isScrolled: true,
-                     isMultiSelected: true,
-                     disposeBag: DisposeBag()
-                  )
-                  bottomSheet.modalPresentationStyle = .overFullScreen
-                  bottomSheet.modalTransitionStyle = .coverVertical
-                  vc.present(bottomSheet, animated: true)
+               let bottomSheet = BottomSheetViewController(
+                  titleText: "러닝 친구 목록",
+                  selectedItems: followings.map {
+                     return .init(
+                        image: .runnerEmpty, title: $0.nick, isSelected: false)
+                  },
+                  isScrolled: true,
+                  isMultiSelected: true,
+                  disposeBag: DisposeBag()
+               )
+               bottomSheet.didDisappearHandler = {
+                  let items = bottomSheet.getSelectedItems()
+                  let target = items.filter { $0.isSelected }
+                  target.forEach {
+                     vc.viewModel.appendOrRemoveFromInvitedUsers(
+                        username: $0.title)
+                  }
                }
+               bottomSheet.modalPresentationStyle = .overFullScreen
+               bottomSheet.modalTransitionStyle = .coverVertical
+               vc.present(bottomSheet, animated: true)
             }
          }
          .disposed(by: disposeBag)

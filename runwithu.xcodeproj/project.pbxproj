@@ -41,7 +41,8 @@
 		81A3B9552C773955009AD659 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9542C773955009AD659 /* TestViewController.swift */; };
 		81A3B9582C7745C6009AD659 /* BaseAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9572C7745C6009AD659 /* BaseAlertBuilder.swift */; };
 		81A3B95A2C774818009AD659 /* BaseAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9592C774818009AD659 /* BaseAlertViewController.swift */; };
-		81A3B95C2C7764B1009AD659 /* BottomeSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B95B2C7764B1009AD659 /* BottomeSheetViewController.swift */; };
+		81A3B95C2C7764B1009AD659 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B95B2C7764B1009AD659 /* BottomSheetViewController.swift */; };
+		81A3B95E2C7824A9009AD659 /* SearchUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B95D2C7824A9009AD659 /* SearchUserDTO.swift */; };
 		81E7FF232C6C6C2700200CF2 /* Enum+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */; };
 		81E7FF242C6C6C2700200CF2 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF132C6C6C2700200CF2 /* Extension+UIView.swift */; };
 		81E7FF252C6C6C2700200CF2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF152C6C6C2700200CF2 /* ViewController.swift */; };
@@ -139,7 +140,8 @@
 		81A3B9542C773955009AD659 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		81A3B9572C7745C6009AD659 /* BaseAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAlertBuilder.swift; sourceTree = "<group>"; };
 		81A3B9592C774818009AD659 /* BaseAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAlertViewController.swift; sourceTree = "<group>"; };
-		81A3B95B2C7764B1009AD659 /* BottomeSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomeSheetViewController.swift; sourceTree = "<group>"; };
+		81A3B95B2C7764B1009AD659 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		81A3B95D2C7824A9009AD659 /* SearchUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserDTO.swift; sourceTree = "<group>"; };
 		81E7FEFA2C6C6BBD00200CF2 /* runwithu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = runwithu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E7FF0B2C6C6BBE00200CF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+Text.swift"; sourceTree = "<group>"; };
@@ -228,7 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				811D37702C737DA70017E17C /* BottomSheetTableCell.swift */,
-				81A3B95B2C7764B1009AD659 /* BottomeSheetViewController.swift */,
+				81A3B95B2C7764B1009AD659 /* BottomSheetViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -474,6 +476,7 @@
 				81E7FF3E2C6C769D00200CF2 /* LoginDTO.swift */,
 				81E7FF402C6C76E100200CF2 /* ValidEmailDTO.swift */,
 				81E7FF602C6DB8F000200CF2 /* ProfileDTO.swift */,
+				81A3B95D2C7824A9009AD659 /* SearchUserDTO.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -699,7 +702,7 @@
 				81A3B8EF2C74AFB6009AD659 /* RunningGroupListViewController.swift in Sources */,
 				81E7FFB82C70073800200CF2 /* Protocol+BaseView.swift in Sources */,
 				81A3B93A2C75BC52009AD659 /* BaseCollectionViewCell.swift in Sources */,
-				81A3B95C2C7764B1009AD659 /* BottomeSheetViewController.swift in Sources */,
+				81A3B95C2C7764B1009AD659 /* BottomSheetViewController.swift in Sources */,
 				81A3B9142C74EBEA009AD659 /* RunningInvitationCreateViewController.swift in Sources */,
 				81E7FF462C6C7C0100200CF2 /* Extension+Encodable.swift in Sources */,
 				81E7FF672C6EDFEB00200CF2 /* ImageUploadDTO.swift in Sources */,
@@ -753,6 +756,7 @@
 				81E7FFAB2C6F6EF400200CF2 /* BaseView.swift in Sources */,
 				81E7FF352C6C723E00200CF2 /* UserEndPoint.swift in Sources */,
 				81A3B9182C7565D2009AD659 /* RoundedDatePickerView.swift in Sources */,
+				81A3B95E2C7824A9009AD659 /* SearchUserDTO.swift in Sources */,
 				81E7FF592C6CB25900200CF2 /* AuthEndPoint.swift in Sources */,
 				81E7FFA62C6F413400200CF2 /* InputWithTitleView.swift in Sources */,
 				81E7FF862C6F215E00200CF2 /* PostInputType.swift in Sources */,

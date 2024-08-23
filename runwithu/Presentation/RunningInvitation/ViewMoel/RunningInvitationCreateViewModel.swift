@@ -15,8 +15,8 @@ final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
    private let disposeBag = DisposeBag()
    private let networkManager = NetworkService.shared
    
-   private var invitedUserIds: [String] = []
-   private var invitedUsers: [String] = []
+   private var invitedUsers:[String] = []
+   private let publishedInvitedUsers = PublishSubject<[String]>()
    private var followings: [BaseProfileType] = []
    private var title = ""
    private var content = ""
@@ -44,7 +44,6 @@ final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
    }
    
    struct Output {
-      let didLoadOutput: PublishSubject<[String]>
       let followings: PublishSubject<[BaseProfileType]?>
       let titleText: PublishSubject<String>
       let contentText: PublishSubject<String>
@@ -52,10 +51,10 @@ final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
       let supplyText: PublishSubject<String>
       let rewardsText: PublishSubject<String>
       let createResult: PublishSubject<(String?, String?)>
+      let publishedInvitedUsers: PublishSubject<[String]>
    }
    
    func transform(for input: Input) -> Output {
-      let didLoadOutput = PublishSubject<[String]>()
       let followings = PublishSubject<[BaseProfileType]?>()
       let titleText = PublishSubject<String>()
       let contentText = PublishSubject<String>()
@@ -66,7 +65,7 @@ final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
       
       input.didLoadInput
          .subscribe(with: self) { vm, _ in
-            didLoadOutput.onNext(vm.invitedUsers)
+            vm.publishedInvitedUsers.onNext(vm.invitedUsers)
          }
          .disposed(by: disposeBag)
       
@@ -139,14 +138,14 @@ final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
          .disposed(by: disposeBag)
       
       return Output(
-         didLoadOutput: didLoadOutput,
          followings: followings,
          titleText: titleText,
          contentText: contentText,
          courseText: courseText,
          supplyText: supplyText,
          rewardsText: rewardsText,
-         createResult: createResult
+         createResult: createResult,
+         publishedInvitedUsers: publishedInvitedUsers
       )
    }
 }
@@ -154,19 +153,13 @@ final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
 extension RunningInvitationCreateViewModel {
    typealias runningInfoHandler = (String) -> Void
    
-   func appendOrRemoveFromInvitedUsers(
-      userId: String,
-      username: String
-   ) {
-      if let userIdIndex = invitedUserIds.firstIndex(of: userId),
-         let userIndex = invitedUsers.firstIndex(of: username)
-      {
-         invitedUserIds.remove(at: userIdIndex)
+   func appendOrRemoveFromInvitedUsers(username: String) {
+      if let userIndex = invitedUsers.firstIndex(of: username) {
          invitedUsers.remove(at: userIndex)
       } else {
-         invitedUserIds.append(userId)
          invitedUsers.append(username)
       }
+      publishedInvitedUsers.onNext(invitedUsers)
    }
    
    private func subscribingTrimmedText(
@@ -193,7 +186,7 @@ extension RunningInvitationCreateViewModel {
    private func validateForCreate() -> Bool {
       if title.isEmpty { return false }
       if content.isEmpty { return false }
-      if invitedUserIds.count == 0 { return false }
+      if invitedUsers.count == 0 { return false }
       if runningInfo.date.isEmpty { return false }
       return true
    }
@@ -204,7 +197,7 @@ extension RunningInvitationCreateViewModel {
       let createInvitationInput: CreateInvitationInput = .init(
          title: title,
          content: content,
-         invited: invitedUserIds,
+         invited: invitedUsers,
          runningInfo: runningInfo
       )
       
