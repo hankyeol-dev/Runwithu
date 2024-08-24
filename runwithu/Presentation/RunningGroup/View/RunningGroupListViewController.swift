@@ -37,9 +37,7 @@ final class RunningGroupListViewController: BaseViewController<RunningGroupListV
       let output = viewModel.transform(for: input)
       
       baseView.floatingButton.rx.tap
-         .bind(with: self) { _, void in
-            floatingButtonTapped.onNext(void)
-         }
+         .bind(to: floatingButtonTapped)
          .disposed(by: disposeBag)
       
       output.floatingButtonTapped

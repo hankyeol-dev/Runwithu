@@ -71,6 +71,23 @@ extension BaseVC {
       navigationItem.setLeftBarButton(goBackButton, animated: true)
    }
    
+   func setDismissButton(
+      by color: UIColor,
+      imageName: String
+   ) {
+      let closeButton = UIBarButtonItem()
+      closeButton.image = UIImage(systemName: imageName)
+      closeButton.tintColor = color
+      closeButton.style = .plain
+      
+      closeButton.rx.tap
+         .bind(with: self) { vc, _ in
+            vc.dismiss(animated: true)
+         }
+         .disposed(by: disposeBag)
+      navigationItem.setLeftBarButton(closeButton, animated: true)
+   }
+   
    func dismissStack(for vc: UIViewController) {
       let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
       let sceneDelegate = scene?.delegate as? SceneDelegate
@@ -91,6 +108,4 @@ extension BaseVC {
          }
          .disposed(by: disposeBag)
    }
-   
-   func displayAlert() { }
 }

@@ -41,7 +41,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //         ),
 //         db: DisposeBag()
 //      )
-      let root = MainTabbarController()
+//      let root = UINavigationController(rootViewController: MainTabbarController())
+      let root = RunningEpiloguePostViewController(
+         bv: RunningEpiloguePostView(),
+         vm: RunningEpiloguePostViewModel(
+            disposeBag: DisposeBag(), networkManager: NetworkService.shared
+         ),
+         db: DisposeBag()
+      )
 //      let root = UINavigationController(
 //         rootViewController: BottomeSheetViewController(
 //            titleText: "커뮤니티 글 작성",

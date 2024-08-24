@@ -18,3 +18,10 @@ extension UIView {
       }
    }
 }
+
+extension UIViewController {
+   func displayViewAsFullScreen(as style: UIModalTransitionStyle) {
+      self.modalPresentationStyle = .overFullScreen
+      self.modalTransitionStyle = style
+   }
+}

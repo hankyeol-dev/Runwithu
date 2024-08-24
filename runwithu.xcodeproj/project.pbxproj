@@ -50,6 +50,14 @@
 		81A3B96F2C784B69009AD659 /* RunningCommunityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B96E2C784B69009AD659 /* RunningCommunityViewModel.swift */; };
 		81A3B9712C784F1F009AD659 /* RunningCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9702C784F1F009AD659 /* RunningCommunityViewController.swift */; };
 		81A3B9742C7855CB009AD659 /* MainTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9732C7855CB009AD659 /* MainTabbarController.swift */; };
+		81A3B9772C7865D7009AD659 /* RunningEpiloguePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9762C7865D7009AD659 /* RunningEpiloguePostView.swift */; };
+		81A3B97A2C7865E8009AD659 /* RunningEpiloguePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9792C7865E8009AD659 /* RunningEpiloguePostViewModel.swift */; };
+		81A3B97C2C78660A009AD659 /* RunningEpiloguePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B97B2C78660A009AD659 /* RunningEpiloguePostViewController.swift */; };
+		81A3B97E2C786668009AD659 /* ProductEpiloguePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B97D2C786668009AD659 /* ProductEpiloguePostViewModel.swift */; };
+		81A3B9802C78668D009AD659 /* QnaPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B97F2C78668D009AD659 /* QnaPostViewModel.swift */; };
+		81A3B9822C7866B2009AD659 /* SelfMarathonPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9812C7866B2009AD659 /* SelfMarathonPostViewModel.swift */; };
+		81A3B9842C786E56009AD659 /* BaseScrollViewWithCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9832C786E56009AD659 /* BaseScrollViewWithCloseButton.swift */; };
+		81A3B98A2C798E18009AD659 /* BaseWithImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9892C798E18009AD659 /* BaseWithImageCollectionViewCell.swift */; };
 		81E7FF232C6C6C2700200CF2 /* Enum+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */; };
 		81E7FF242C6C6C2700200CF2 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF132C6C6C2700200CF2 /* Extension+UIView.swift */; };
 		81E7FF252C6C6C2700200CF2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF152C6C6C2700200CF2 /* ViewController.swift */; };
@@ -155,6 +163,14 @@
 		81A3B96E2C784B69009AD659 /* RunningCommunityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCommunityViewModel.swift; sourceTree = "<group>"; };
 		81A3B9702C784F1F009AD659 /* RunningCommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCommunityViewController.swift; sourceTree = "<group>"; };
 		81A3B9732C7855CB009AD659 /* MainTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarController.swift; sourceTree = "<group>"; };
+		81A3B9762C7865D7009AD659 /* RunningEpiloguePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningEpiloguePostView.swift; sourceTree = "<group>"; };
+		81A3B9792C7865E8009AD659 /* RunningEpiloguePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningEpiloguePostViewModel.swift; sourceTree = "<group>"; };
+		81A3B97B2C78660A009AD659 /* RunningEpiloguePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningEpiloguePostViewController.swift; sourceTree = "<group>"; };
+		81A3B97D2C786668009AD659 /* ProductEpiloguePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEpiloguePostViewModel.swift; sourceTree = "<group>"; };
+		81A3B97F2C78668D009AD659 /* QnaPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaPostViewModel.swift; sourceTree = "<group>"; };
+		81A3B9812C7866B2009AD659 /* SelfMarathonPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfMarathonPostViewModel.swift; sourceTree = "<group>"; };
+		81A3B9832C786E56009AD659 /* BaseScrollViewWithCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollViewWithCloseButton.swift; sourceTree = "<group>"; };
+		81A3B9892C798E18009AD659 /* BaseWithImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWithImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		81E7FEFA2C6C6BBD00200CF2 /* runwithu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = runwithu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E7FF0B2C6C6BBE00200CF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+Text.swift"; sourceTree = "<group>"; };
@@ -343,6 +359,10 @@
 		81A3B96A2C784B3D009AD659 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				81A3B9882C798DE1009AD659 /* SelfMarathon */,
+				81A3B9872C798DD8009AD659 /* Qna */,
+				81A3B9862C798DC9009AD659 /* ProductEpilogue */,
+				81A3B9782C7865DA009AD659 /* RunningEpilogue */,
 				81A3B96E2C784B69009AD659 /* RunningCommunityViewModel.swift */,
 			);
 			path = ViewModel;
@@ -351,6 +371,7 @@
 		81A3B96B2C784B40009AD659 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				81A3B9752C7865BC009AD659 /* RunningEpilogue */,
 				81A3B96C2C784B4D009AD659 /* RunningCommunityView.swift */,
 				81A3B9702C784F1F009AD659 /* RunningCommunityViewController.swift */,
 			);
@@ -363,6 +384,47 @@
 				81A3B9732C7855CB009AD659 /* MainTabbarController.swift */,
 			);
 			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		81A3B9752C7865BC009AD659 /* RunningEpilogue */ = {
+			isa = PBXGroup;
+			children = (
+				81A3B9762C7865D7009AD659 /* RunningEpiloguePostView.swift */,
+				81A3B97B2C78660A009AD659 /* RunningEpiloguePostViewController.swift */,
+			);
+			path = RunningEpilogue;
+			sourceTree = "<group>";
+		};
+		81A3B9782C7865DA009AD659 /* RunningEpilogue */ = {
+			isa = PBXGroup;
+			children = (
+				81A3B9792C7865E8009AD659 /* RunningEpiloguePostViewModel.swift */,
+			);
+			path = RunningEpilogue;
+			sourceTree = "<group>";
+		};
+		81A3B9862C798DC9009AD659 /* ProductEpilogue */ = {
+			isa = PBXGroup;
+			children = (
+				81A3B97D2C786668009AD659 /* ProductEpiloguePostViewModel.swift */,
+			);
+			path = ProductEpilogue;
+			sourceTree = "<group>";
+		};
+		81A3B9872C798DD8009AD659 /* Qna */ = {
+			isa = PBXGroup;
+			children = (
+				81A3B97F2C78668D009AD659 /* QnaPostViewModel.swift */,
+			);
+			path = Qna;
+			sourceTree = "<group>";
+		};
+		81A3B9882C798DE1009AD659 /* SelfMarathon */ = {
+			isa = PBXGroup;
+			children = (
+				81A3B9812C7866B2009AD659 /* SelfMarathonPostViewModel.swift */,
+			);
+			path = SelfMarathon;
 			sourceTree = "<group>";
 		};
 		81E7FEF12C6C6BBD00200CF2 = {
@@ -635,6 +697,8 @@
 				81A3B9592C774818009AD659 /* BaseAlertViewController.swift */,
 				81A3B95F2C7836B4009AD659 /* BaseTabItem.swift */,
 				81A3B9642C784772009AD659 /* BaseTabBar.swift */,
+				81A3B9832C786E56009AD659 /* BaseScrollViewWithCloseButton.swift */,
+				81A3B9892C798E18009AD659 /* BaseWithImageCollectionViewCell.swift */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -728,12 +792,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81A3B97A2C7865E8009AD659 /* RunningEpiloguePostViewModel.swift in Sources */,
 				81E7FF822C6F1C8700200CF2 /* ProductEpilogueInput.swift in Sources */,
 				81A3B90A2C74E45D009AD659 /* ENV.swift in Sources */,
 				81E7FF3B2C6C743400200CF2 /* NetworkMethod.swift in Sources */,
 				81A3B9482C75E080009AD659 /* ProfileViewModel.swift in Sources */,
 				81E7FF5B2C6D7FF400200CF2 /* TokenManager.swift in Sources */,
 				81E7FFB42C70061200200CF2 /* BaseViewController.swift in Sources */,
+				81A3B9802C78668D009AD659 /* QnaPostViewModel.swift in Sources */,
 				811D377E2C7390C00017E17C /* RoundedInputViewWithTitle.swift in Sources */,
 				81A3B95A2C774818009AD659 /* BaseAlertViewController.swift in Sources */,
 				81E7FFB22C7005EF00200CF2 /* LoginView.swift in Sources */,
@@ -741,6 +807,7 @@
 				81E7FF762C6EF86000200CF2 /* RunningHardType.swift in Sources */,
 				81A3B8EB2C744972009AD659 /* RunningGroupPreviewView.swift in Sources */,
 				81A3B9582C7745C6009AD659 /* BaseAlertBuilder.swift in Sources */,
+				81A3B9842C786E56009AD659 /* BaseScrollViewWithCloseButton.swift in Sources */,
 				811D377A2C73824D0017E17C /* RunningGroupCreateView.swift in Sources */,
 				81E7FF7E2C6F16F400200CF2 /* EpilogueInput.swift in Sources */,
 				81A3B9602C7836B4009AD659 /* BaseTabItem.swift in Sources */,
@@ -775,7 +842,9 @@
 				81A3B8F12C74AFCE009AD659 /* RunningGroupListViewModel.swift in Sources */,
 				811D377C2C73825D0017E17C /* RunningGroupCreateViewModel.swift in Sources */,
 				81A3B8F52C74B18D009AD659 /* PlusButton.swift in Sources */,
+				81A3B9772C7865D7009AD659 /* RunningEpiloguePostView.swift in Sources */,
 				81E7FF3D2C6C762F00200CF2 /* JoinDTO.swift in Sources */,
+				81A3B97E2C786668009AD659 /* ProductEpiloguePostViewModel.swift in Sources */,
 				81E7FF412C6C76E100200CF2 /* ValidEmailDTO.swift in Sources */,
 				811D37822C7404170017E17C /* RoundedTextViewWithTitle.swift in Sources */,
 				81E7FF8E2C6F249000200CF2 /* CreateInvitationInput.swift in Sources */,
@@ -783,6 +852,7 @@
 				81E7FFBC2C700DCA00200CF2 /* JoinView.swift in Sources */,
 				81E7FF8C2C6F22BE00200CF2 /* CreateRunningGroupInput.swift in Sources */,
 				81A3B9342C757F6A009AD659 /* RectangleView.swift in Sources */,
+				81A3B97C2C78660A009AD659 /* RunningEpiloguePostViewController.swift in Sources */,
 				81A3B9112C74EBBA009AD659 /* RunningInvitationCreateViewModel.swift in Sources */,
 				811D37802C73912D0017E17C /* BaseTextFieldRounded.swift in Sources */,
 				811D37782C7382420017E17C /* RunningGroupCreateViewController.swift in Sources */,
@@ -801,6 +871,7 @@
 				81E7FF6B2C6EE7AD00200CF2 /* PostsDTO.swift in Sources */,
 				81E7FF372C6C736100200CF2 /* Network.swift in Sources */,
 				81E7FFA42C6F405300200CF2 /* BaseLabel.swift in Sources */,
+				81A3B9822C7866B2009AD659 /* SelfMarathonPostViewModel.swift in Sources */,
 				81E7FF882C6F21AF00200CF2 /* QnaInput.swift in Sources */,
 				81E7FFBE2C7019B300200CF2 /* JoinViewController.swift in Sources */,
 				81A3B9552C773955009AD659 /* TestViewController.swift in Sources */,
@@ -809,6 +880,7 @@
 				81A3B9182C7565D2009AD659 /* RoundedDatePickerView.swift in Sources */,
 				81A3B95E2C7824A9009AD659 /* SearchUserDTO.swift in Sources */,
 				81E7FF592C6CB25900200CF2 /* AuthEndPoint.swift in Sources */,
+				81A3B98A2C798E18009AD659 /* BaseWithImageCollectionViewCell.swift in Sources */,
 				81E7FFA62C6F413400200CF2 /* InputWithTitleView.swift in Sources */,
 				81E7FF862C6F215E00200CF2 /* PostInputType.swift in Sources */,
 				81A3B9452C75E077009AD659 /* ProfileView.swift in Sources */,

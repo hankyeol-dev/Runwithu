@@ -26,6 +26,11 @@ final class MainTabbarController: UITabBarController {
       navigationController?.isNavigationBarHidden = true
    }
    
+   override func viewWillDisappear(_ animated: Bool) {
+      super.viewWillDisappear(animated)
+      print("없어진건가?")
+   }
+   
    private func setView() {
       view.addSubview(mainTabbar)
       mainTabbar.snp.makeConstraints { make in
