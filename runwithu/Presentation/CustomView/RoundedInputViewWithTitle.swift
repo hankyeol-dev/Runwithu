@@ -12,6 +12,8 @@ import FlexLayout
 import SnapKit
 
 final class RoundedInputViewWithTitle: BaseView {
+   private var pickerData: [String] = []
+   
    private let flexBox = UIView()
    private let inputTitle = BaseLabel(for: "", font: .systemFont(ofSize: 18))
    let inputField = BaseTextFieldRounded("")
@@ -23,10 +25,12 @@ final class RoundedInputViewWithTitle: BaseView {
       label: String,
       placeHolder: String,
       keyboardType: UIKeyboardType = .default,
-      indicatingLabel: String = ""
+      indicatingLabel: String = "",
+      labelSize: CGFloat = 18.0
    ) {
       self.init(frame: .zero)
       inputTitle.text = label
+      inputTitle.font = .systemFont(ofSize: labelSize)
       inputField.placeholder = placeHolder
       inputField.keyboardType = keyboardType
       inputIndicatingLabel.text = indicatingLabel
@@ -90,6 +94,9 @@ final class RoundedInputViewWithTitle: BaseView {
       inputIndicatingLabel.font = .systemFont(ofSize: 12, weight: .semibold)
       inputField.layer.borderColor = UIColor.systemRed.cgColor
    }
+   func bindToTitleSize(_ fontSize: CGFloat) {
+      inputTitle.font = .systemFont(ofSize: fontSize)
+   }
    
    func hideStateLabel() {
       inputIndicatingLabel.isHidden = true
@@ -111,7 +118,8 @@ final class RoundedInputViewWithTitle: BaseView {
 }
 
 extension RoundedInputViewWithTitle: UIPickerViewDelegate, UIPickerViewDataSource {
-   func bindToInputPickerView() {
+   func bindToInputPickerView(for pickerData: [String]) {
+      self.pickerData = pickerData
       let arrow = UIImageView()
       arrow.image = UIImage(systemName: "chevron.down")
       arrow.contentMode = .center
@@ -134,15 +142,15 @@ extension RoundedInputViewWithTitle: UIPickerViewDelegate, UIPickerViewDataSourc
    }
    
    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-      return RunningHardType.allCases.count
+      return pickerData.count
    }
    
    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-      return RunningHardType.allCases.map { $0.rawValue }[row]
+      return pickerData[row]
    }
    
    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-      inputField.text = RunningHardType.allCases.map { $0.rawValue }[row]
+      inputField.text = pickerData[row]
    }
    
 }

@@ -11,6 +11,8 @@ import PinLayout
 import FlexLayout
 
 final class BaseScrollViewWithCloseButton: BaseView {
+   private let isAdditionButton: Bool
+   
    private let contentsFlexBox = UIView()
    private let scrollView = UIScrollView()
    private let contentsBox = UIView()
@@ -18,19 +20,28 @@ final class BaseScrollViewWithCloseButton: BaseView {
    private let headerView = UIView()
    private let headerTitle = BaseLabel(for: "", font: .boldSystemFont(ofSize: 16))
    let headerCloseButton = UIButton()
+   let headerAdditionButton = UIButton()
+   private let spacer = RectangleView(backColor: .clear, radius: 0)
    
    var flexHandler: ((Flex) -> Void)?
    
-   init(with title: String) {
-      super.init(frame: .zero)
+   init(with title: String,
+        isAdditionButton: Bool = false,
+        additionButtonTitle: String? = nil) {
       headerTitle.text = title
+      self.isAdditionButton = isAdditionButton
+      if let additionButtonTitle, isAdditionButton {
+         headerAdditionButton.setTitle(additionButtonTitle, for: .normal)
+         headerAdditionButton.setTitleColor(.black, for: .normal)
+      }
+      super.init(frame: .zero)
    }
    
    override func setSubviews() {
       super.setSubviews()
       addSubviews(contentsFlexBox)
       contentsFlexBox.addSubviews(headerView, scrollView)
-      headerView.addSubviews(headerTitle, headerCloseButton)
+      headerView.addSubviews(headerTitle, headerCloseButton, headerAdditionButton)
       scrollView.addSubview(contentsBox)
    }
    
@@ -52,6 +63,13 @@ final class BaseScrollViewWithCloseButton: BaseView {
          .hCenter()
          .height(100%)
          .sizeToFit(.height)
+      if isAdditionButton {
+         headerAdditionButton.pin
+            .right(headerView.pin.safeArea + 16)
+            .vCenter()
+            .height(100%)
+            .width(52)
+      }
       
       scrollView.pin
          .below(of: headerView)
@@ -69,6 +87,9 @@ final class BaseScrollViewWithCloseButton: BaseView {
          .define { [weak self] flex in
             guard let self else { return }
             self.flexHandler?(flex)
+            flex.addItem(self.spacer)
+               .height(20)
+               .marginVertical(20)
          }.layout(mode: .adjustHeight)
       
       scrollView.contentSize = contentsBox.frame.size

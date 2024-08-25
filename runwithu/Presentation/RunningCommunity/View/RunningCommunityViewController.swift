@@ -78,7 +78,9 @@ extension RunningCommunityViewController {
          let vc = RunningEpiloguePostViewController(
             bv: RunningEpiloguePostView(),
             vm: RunningEpiloguePostViewModel(
-               disposeBag: DisposeBag(), networkManager: NetworkService.shared
+               disposeBag: DisposeBag(), 
+               networkManager: NetworkService.shared,
+               isInGroupSide: false
             ),
             db: DisposeBag()
          )

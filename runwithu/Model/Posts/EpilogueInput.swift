@@ -9,9 +9,9 @@ import Foundation
 
 struct EpilogueInput: PostInputTypeProtocol {
    let productId: ProductIds
-   let title: String
-   let content: String
+   var title: String
+   var content: String
    let communityType: PostsCommunityType = .epilogue
-   let runningInfo: RunningInfo
-   let invitationId: String?
+   var runningInfo: RunningInfo?
+   var invitationId: String?
 }

@@ -203,7 +203,7 @@ extension RunningInvitationCreateViewModel {
       let createInvitationInput: CreateInvitationInput = .init(
          title: title,
          content: content,
-         invited: invitedUsers,
+         invited: followings.filter { invitedUsers.contains($0.nick) }.map { $0.user_id },
          runningInfo: runningInfo
       )
       

@@ -16,3 +16,14 @@ extension Encodable {
     }
   }
 }
+
+extension Decodable {
+   func convertToData<D: Decodable>(for property: String, of: D.Type) -> D? {
+      do {
+        let data = Data(property.utf8)
+         return try JSONDecoder().decode(of, from: data)
+      } catch {
+         return nil
+      }
+   }
+}

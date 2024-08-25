@@ -129,6 +129,8 @@ final class RunningInvitationCreateView: BaseView, BaseViewProtocol {
       super.setUI()
       headerCloseButton.closeButton()
       runningTimeTaking.inputField.setRightLabelView(with: "분", by: 40, background: .clear)
-      runningHardType.bindToInputPickerView()
+      runningHardType.bindToInputPickerView(
+         for: RunningHardType.allCases.map { $0.rawValue }
+      )
    }
 }

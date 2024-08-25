@@ -112,6 +112,8 @@ final class RunningGroupCreateView: BaseView, BaseViewProtocol {
       scrollView.backgroundColor = .systemBackground
       groupEntryLimitField.inputField.setRightLabelView(with: "명", by: 40, background: .white)
       headerCloseButton.closeButton()
-      groupHardType.bindToInputPickerView()
+      groupHardType.bindToInputPickerView(
+         for: RunningHardType.allCases.map { $0.byLevel }
+      )
    }
 }
