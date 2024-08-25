@@ -65,14 +65,14 @@ final class RunningCommunityViewController: BaseViewController<RunningCommunityV
       
       output.selectedCommunityType
          .bind(with: self) { vc, type in
-            vc.pushToPostsViewByCommunityType(by: type)
+            vc.presentToSelectedPostView(by: type)
          }
          .disposed(by: disposeBag)
    }
 }
 
 extension RunningCommunityViewController {
-   private func pushToPostsViewByCommunityType(by type: PostsCommunityType) {
+   private func presentToSelectedPostView(by type: PostsCommunityType) {
       switch type {
       case .epilogue:
          let vc = RunningEpiloguePostViewController(
@@ -85,14 +85,35 @@ extension RunningCommunityViewController {
             db: DisposeBag()
          )
          vc.displayViewAsFullScreen(as: .coverVertical)
-//         UINavigationController(rootViewController: vc)
          present(vc, animated: true)
       case .product_epilogue:
-         break
+         let vc = ProductEpiloguePostViewController(
+            bv: ProductEpiloguePostView(),
+            vm: ProductEpiloguePostViewModel(
+               disposeBag: DisposeBag(), 
+               networkManager: NetworkService.shared,
+               isInGroupSide: false),
+            db: DisposeBag())
+         
+         vc.displayViewAsFullScreen(as: .coverVertical)
+         present(vc, animated: true)
       case .qna:
-         break
+         let vc = QnaPostViewController(
+            bv: QnaPostView(),
+            vm: QnaPostViewModel(
+               disposeBag: DisposeBag(),
+               networkManager: NetworkService.shared,
+               isInGroupSide: false
+            ),
+            db: DisposeBag())
+         vc.displayViewAsFullScreen(as: .coverVertical)
+         present(vc, animated: true)
       case .open_self_marathon:
-         break
+         BaseAlertBuilder(viewController: self)
+            .setTitle(for: "🚧 준비중이에요 🚧")
+            .setMessage(for: "셀프 마라톤 개최는 곧 오픈 예정이에요 :D")
+            .setActions(by: .darkGray, for: "확인")
+            .displayAlert()
       }
    }
 }

@@ -1,8 +1,8 @@
 //
-//  RunningEpiloguePostViewController.swift
+//  ProductEpiloguePostViewController.swift
 //  runwithu
 //
-//  Created by 강한결 on 8/23/24.
+//  Created by 강한결 on 8/25/24.
 //
 
 import UIKit
@@ -12,10 +12,9 @@ import PhotosUI
 import RxSwift
 import RxCocoa
 
-final class RunningEpiloguePostViewController: BaseViewController<RunningEpiloguePostView, RunningEpiloguePostViewModel> {
+final class ProductEpiloguePostViewController: BaseViewController<ProductEpiloguePostView, ProductEpiloguePostViewModel> {
    private var selectedImages: [UIImage] = []
    private let selectedImagesForCollection = BehaviorSubject<[UIImage]>(value: [])
-   private let didLoadInput = PublishSubject<Void>()
    
    override func loadView() {
       view = baseView
@@ -23,83 +22,72 @@ final class RunningEpiloguePostViewController: BaseViewController<RunningEpilogu
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      didLoadInput.onNext(())
    }
    
    override func bindViewAtDidLoad() {
       super.bindViewAtDidLoad()
       
-      baseView.scrollView.headerCloseButton
-         .rx.tap
+      baseView.scrollView.headerCloseButton.rx.tap
          .bind(with: self) { vc, _ in
             vc.dismiss(animated: true)
          }
          .disposed(by: disposeBag)
       
       baseView.addPhotoButton.rx.tap
-         .asDriver()
-         .drive(with: self) { vc, _ in
+         .bind(with: self) { vc, _ in
             vc.getPhotoLibraryAuthStatus {
-               vc.displayPhotoLibrary(for: 5)
+               vc.displayPhotoLibrary(for: 3)
             }
          }
          .disposed(by: disposeBag)
       
+      let brandPickerInput = PublishSubject<String>()
+      let productTypePickerInput = PublishSubject<String>()
       let titleInput = PublishSubject<String>()
       let contentInput = PublishSubject<String>()
-      let dateInput = PublishSubject<String>()
-      let selectedInvitation = PublishSubject<String>()
-      let courseInput = PublishSubject<String>()
-      let hardTypeInput = PublishSubject<String>()
+      let ratingInput = PublishSubject<String>()
+      let purchaseLinkInput = PublishSubject<String>()
       let createButtonTapped = PublishSubject<Void>()
       
-      let input = RunningEpiloguePostViewModel.Input(
-         didLoadInput: didLoadInput,
+      let input = ProductEpiloguePostViewModel.Input(
+         brandPickerInput: brandPickerInput,
+         productTypeInput: productTypePickerInput,
          titleInput: titleInput,
          contentInput: contentInput,
-         dateInput: dateInput,
-         selectedInvitation: selectedInvitation,
-         courseInput: courseInput,
-         hardTypeInput: hardTypeInput,
+         ratingInput: ratingInput,
+         purchaseLinkInput: purchaseLinkInput,
          createButtonTapped: createButtonTapped
       )
       let output = viewModel.transform(for: input)
       
-      baseView.addInvitationPicker
-         .inputField.rx.text.orEmpty
-         .distinctUntilChanged()
-         .bind(with: self) { vc, text in
-            if text != "연결할 초대장이 없습니다." && !text.isEmpty {
-               selectedInvitation.onNext(text)
-            }
-         }
-         .disposed(by: disposeBag)
+      bindingTextToEmitter(
+         for: baseView.brandPicker.inputField.rx.text.orEmpty,
+         emitter: brandPickerInput)
+      bindingTextToEmitter(
+         for: baseView.productTypePicker.inputField.rx.text.orEmpty,
+         emitter: productTypePickerInput)
+      bindingTextToEmitter(
+         for: baseView.titleInput.rx.text.orEmpty,
+         emitter: titleInput)
+      bindingTextToEmitter(
+         for: baseView.contentInput.rx.text.orEmpty,
+         emitter: contentInput)
+      bindingTextToEmitter(
+         for: baseView.ratingPicker.inputField.rx.text.orEmpty,
+         emitter: ratingInput)
+      bindingTextToEmitter(
+         for: baseView.purchaseLinkInput.inputField.rx.text.orEmpty,
+         emitter: purchaseLinkInput)
       
-      
-      bindingTextToEmitter(for: baseView.titleInput.rx.text.orEmpty, emitter: titleInput)
-      bindingTextToEmitter(for: baseView.contentInput.rx.text.orEmpty, emitter: contentInput)
-      bindingTextToEmitter(for: baseView.runningCourse.inputField.rx.text.orEmpty, emitter: courseInput)
-      bindingTextToEmitter(for: baseView.runningHardType.inputField.rx.text.orEmpty, emitter: hardTypeInput)
-      
-      baseView.datePicker.rx.date
-         .bind(with: self) { vc, date in
-            dateInput.onNext(date.formattedRunningDate())
-         }
-         .disposed(by: disposeBag)
-      
-      baseView.scrollView.headerAdditionButton.rx.tap
+      baseView.scrollView.headerAdditionButton
+         .rx.tap
          .bind(to: createButtonTapped)
          .disposed(by: disposeBag)
       
-      
-      output.didLoadInvitations
-         .asDriver(onErrorJustReturn: [])
-         .drive(with: self) { vc, invitations in
-            if invitations.isEmpty {
-               vc.baseView.addInvitationPicker.inputField.text = "연결할 초대장이 없습니다."
-            } else {
-               vc.baseView.addInvitationPicker.bindToInputPickerView(for: invitations)
-            }
+      /// binding output
+      output.successEmitter
+         .bind(with: self) { vc, successMessage in
+            print(successMessage)
          }
          .disposed(by: disposeBag)
       
@@ -107,25 +95,16 @@ final class RunningEpiloguePostViewController: BaseViewController<RunningEpilogu
          .asDriver(onErrorJustReturn: "")
          .drive(with: self) { vc, errorMessage in
             BaseAlertBuilder(viewController: vc)
-               .setTitle(for: "일지 작성에 문제가 있습니다.")
+               .setTitle(for: "포스트 작성에 문제가 있어요.")
                .setMessage(for: errorMessage)
                .setActions(by: .black, for: "확인")
                .displayAlert()
          }
          .disposed(by: disposeBag)
-      
-      output.successEmitter
-         .asDriver(onErrorJustReturn: "")
-         .drive(with: self) { vc, successMessage in
-            vc.baseView.displayToast(for: "성공적으로 일지를 작성했습니다.", isError: false, duration: 1)
-            vc.dismiss(animated: true)
-         }
-         .disposed(by: disposeBag)
    }
 }
 
-// MARK: 이미지 다루기
-extension RunningEpiloguePostViewController: PHPickerViewControllerDelegate {
+extension ProductEpiloguePostViewController: PHPickerViewControllerDelegate {
    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
       dismiss(animated: true)
       
@@ -149,10 +128,6 @@ extension RunningEpiloguePostViewController: PHPickerViewControllerDelegate {
                         vc.selectedImages.remove(at: index)
                         vc.viewModel.selectedImages.remove(at: index)
                         vc.selectedImagesForCollection.onNext(vc.selectedImages)
-                        if vc.selectedImages.count == 0 {
-                           vc.baseView.isThereImages = false
-                           vc.baseView.updateCollectionLayout()
-                        }
                      }
                   }
                   .disposed(by: self.disposeBag)
@@ -194,8 +169,6 @@ extension RunningEpiloguePostViewController: PHPickerViewControllerDelegate {
                self.viewModel.selectedImages.append(data)
             }
          }
-         self.baseView.isThereImages = true
-         self.baseView.updateCollectionLayout()
          self.selectedImagesForCollection.onNext(self.selectedImages)
       }
    }

@@ -28,7 +28,6 @@ final class MainTabbarController: UITabBarController {
    
    override func viewWillDisappear(_ animated: Bool) {
       super.viewWillDisappear(animated)
-      print("없어진건가?")
    }
    
    private func setView() {

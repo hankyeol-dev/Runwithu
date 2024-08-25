@@ -58,6 +58,11 @@
 		81A3B9822C7866B2009AD659 /* SelfMarathonPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9812C7866B2009AD659 /* SelfMarathonPostViewModel.swift */; };
 		81A3B9842C786E56009AD659 /* BaseScrollViewWithCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9832C786E56009AD659 /* BaseScrollViewWithCloseButton.swift */; };
 		81A3B98A2C798E18009AD659 /* BaseWithImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9892C798E18009AD659 /* BaseWithImageCollectionViewCell.swift */; };
+		81A3B98D2C7B209C009AD659 /* ProductEpiloguePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B98C2C7B209C009AD659 /* ProductEpiloguePostView.swift */; };
+		81A3B98F2C7B20B5009AD659 /* ProductEpiloguePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B98E2C7B20B5009AD659 /* ProductEpiloguePostViewController.swift */; };
+		81A3B9922C7B2C43009AD659 /* QnaPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9912C7B2C43009AD659 /* QnaPostView.swift */; };
+		81A3B9942C7B2C69009AD659 /* QnaPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9932C7B2C69009AD659 /* QnaPostViewController.swift */; };
+		81A3B9962C7B4EE5009AD659 /* RunningQnaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9952C7B4EE5009AD659 /* RunningQnaType.swift */; };
 		81E7FF232C6C6C2700200CF2 /* Enum+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */; };
 		81E7FF242C6C6C2700200CF2 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF132C6C6C2700200CF2 /* Extension+UIView.swift */; };
 		81E7FF252C6C6C2700200CF2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF152C6C6C2700200CF2 /* ViewController.swift */; };
@@ -171,6 +176,11 @@
 		81A3B9812C7866B2009AD659 /* SelfMarathonPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfMarathonPostViewModel.swift; sourceTree = "<group>"; };
 		81A3B9832C786E56009AD659 /* BaseScrollViewWithCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollViewWithCloseButton.swift; sourceTree = "<group>"; };
 		81A3B9892C798E18009AD659 /* BaseWithImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWithImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		81A3B98C2C7B209C009AD659 /* ProductEpiloguePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEpiloguePostView.swift; sourceTree = "<group>"; };
+		81A3B98E2C7B20B5009AD659 /* ProductEpiloguePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEpiloguePostViewController.swift; sourceTree = "<group>"; };
+		81A3B9912C7B2C43009AD659 /* QnaPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaPostView.swift; sourceTree = "<group>"; };
+		81A3B9932C7B2C69009AD659 /* QnaPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaPostViewController.swift; sourceTree = "<group>"; };
+		81A3B9952C7B4EE5009AD659 /* RunningQnaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningQnaType.swift; sourceTree = "<group>"; };
 		81E7FEFA2C6C6BBD00200CF2 /* runwithu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = runwithu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E7FF0B2C6C6BBE00200CF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+Text.swift"; sourceTree = "<group>"; };
@@ -371,6 +381,8 @@
 		81A3B96B2C784B40009AD659 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				81A3B9902C7B2C39009AD659 /* Qna */,
+				81A3B98B2C7B2080009AD659 /* ProductEpilogue */,
 				81A3B9752C7865BC009AD659 /* RunningEpilogue */,
 				81A3B96C2C784B4D009AD659 /* RunningCommunityView.swift */,
 				81A3B9702C784F1F009AD659 /* RunningCommunityViewController.swift */,
@@ -425,6 +437,24 @@
 				81A3B9812C7866B2009AD659 /* SelfMarathonPostViewModel.swift */,
 			);
 			path = SelfMarathon;
+			sourceTree = "<group>";
+		};
+		81A3B98B2C7B2080009AD659 /* ProductEpilogue */ = {
+			isa = PBXGroup;
+			children = (
+				81A3B98C2C7B209C009AD659 /* ProductEpiloguePostView.swift */,
+				81A3B98E2C7B20B5009AD659 /* ProductEpiloguePostViewController.swift */,
+			);
+			path = ProductEpilogue;
+			sourceTree = "<group>";
+		};
+		81A3B9902C7B2C39009AD659 /* Qna */ = {
+			isa = PBXGroup;
+			children = (
+				81A3B9912C7B2C43009AD659 /* QnaPostView.swift */,
+				81A3B9932C7B2C69009AD659 /* QnaPostViewController.swift */,
+			);
+			path = Qna;
 			sourceTree = "<group>";
 		};
 		81E7FEF12C6C6BBD00200CF2 = {
@@ -633,6 +663,7 @@
 				81E7FF702C6EF67300200CF2 /* PostsCommunityType.swift */,
 				81E7FF752C6EF86000200CF2 /* RunningHardType.swift */,
 				81E7FF832C6F1CBC00200CF2 /* RunningProductType.swift */,
+				81A3B9952C7B4EE5009AD659 /* RunningQnaType.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -801,6 +832,8 @@
 				81E7FFB42C70061200200CF2 /* BaseViewController.swift in Sources */,
 				81A3B9802C78668D009AD659 /* QnaPostViewModel.swift in Sources */,
 				811D377E2C7390C00017E17C /* RoundedInputViewWithTitle.swift in Sources */,
+				81A3B9962C7B4EE5009AD659 /* RunningQnaType.swift in Sources */,
+				81A3B9922C7B2C43009AD659 /* QnaPostView.swift in Sources */,
 				81A3B95A2C774818009AD659 /* BaseAlertViewController.swift in Sources */,
 				81E7FFB22C7005EF00200CF2 /* LoginView.swift in Sources */,
 				81E7FFC02C7019D200200CF2 /* JoinViewModel.swift in Sources */,
@@ -854,8 +887,11 @@
 				81A3B9342C757F6A009AD659 /* RectangleView.swift in Sources */,
 				81A3B97C2C78660A009AD659 /* RunningEpiloguePostViewController.swift in Sources */,
 				81A3B9112C74EBBA009AD659 /* RunningInvitationCreateViewModel.swift in Sources */,
+				81A3B98F2C7B20B5009AD659 /* ProductEpiloguePostViewController.swift in Sources */,
 				811D37802C73912D0017E17C /* BaseTextFieldRounded.swift in Sources */,
+				81A3B98D2C7B209C009AD659 /* ProductEpiloguePostView.swift in Sources */,
 				811D37782C7382420017E17C /* RunningGroupCreateViewController.swift in Sources */,
+				81A3B9942C7B2C69009AD659 /* QnaPostViewController.swift in Sources */,
 				81A3B9162C74EE19009AD659 /* Extension+UIButton.swift in Sources */,
 				81A3B96F2C784B69009AD659 /* RunningCommunityViewModel.swift in Sources */,
 				811D37732C737DCB0017E17C /* BaseTableViewCell.swift in Sources */,

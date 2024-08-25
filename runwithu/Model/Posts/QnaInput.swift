@@ -8,8 +8,9 @@
 import Foundation
 
 struct QnaInput: PostInputTypeProtocol {
-   let productId: ProductIds
-   let title: String
-   let content: String
-   let communityType: PostsCommunityType = .qna
+   var productId: ProductIds
+   var title: String
+   var content: String
+   var communityType: PostsCommunityType = .qna
+   var qnaType: String
 }

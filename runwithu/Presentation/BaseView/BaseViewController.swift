@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Photos
+import PhotosUI
 
 import RxSwift
+import RxCocoa
 
 typealias BaseViewController<BV, VM> = BaseVC<BV, VM> where BV: BaseViewProtocol, VM: BaseViewModelProtocol
 
@@ -107,5 +110,64 @@ extension BaseVC {
             emitter.onNext(text)
          }
          .disposed(by: disposeBag)
+   }
+   
+   func bindingTextToEmitter(
+      for event: ControlProperty<String>, 
+      emitter: PublishSubject<String>
+   ) {
+         event
+            .distinctUntilChanged()
+            .bind(to: emitter)
+            .disposed(by: disposeBag)
+   }
+}
+
+extension BaseViewController {
+   
+   // MARK: 이미지 다루기
+   func getPhotoLibraryAuthStatus(_ permissionHandler: @escaping () -> Void) {
+      PHPhotoLibrary.requestAuthorization(for: .addOnly) { [weak self] status in
+         guard let self else { return }
+         switch status {
+         case .notDetermined, .denied:
+            self.displayPermissionAlert()
+         case .authorized, .restricted, .limited:
+            permissionHandler()
+         @unknown default:
+            self.displayPermissionAlert()
+         }
+      }
+   }
+   
+   func displayPermissionAlert() {
+      DispatchQueue.main.async {
+         BaseAlertBuilder(viewController: self)
+            .setTitle(for: "이미지 접근 허용")
+            .setMessage(for: "러너님의 이미지 접근 허용이 필요해요.\n설정으로 이동하시겠어요?")
+            .setActions(by: .systemRed, for: "취소")
+            .setActions(by: .systemBlue, for: "네 이동할래요") {
+               guard
+                  let url = URL(string: UIApplication.openSettingsURLString),
+                  UIApplication.shared.canOpenURL(url)
+               else { return }
+               
+               UIApplication.shared.open(url)
+            }
+            .displayAlert()
+      }
+   }
+   
+   
+   func loadImage(for result: PHPickerResult) async -> UIImage? {
+      return await withCheckedContinuation { continuation in
+         if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
+            result.itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+               if let image = image as? UIImage {
+                  continuation.resume(returning: image)
+               }
+            }
+         }
+      }
    }
 }

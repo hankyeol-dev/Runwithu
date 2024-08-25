@@ -8,12 +8,12 @@
 import Foundation
 
 struct ProductEpilogueInput: PostInputTypeProtocol {
-   let productId: ProductIds
-   let title: String
-   let content: String
+   var productId: ProductIds
+   var title: String
+   var content: String
    let communityType: PostsCommunityType = .epilogue
-   let productType: RunningProductType
-   let productBrandType: RunningProductBrandType
-   let rating: Int
-   let purchasedLink: String?
+   var productType: String
+   var productBrandType: String
+   var rating: String?
+   var purchasedLink: String?
 }
