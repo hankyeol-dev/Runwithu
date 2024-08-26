@@ -21,3 +21,7 @@ struct GetPostsOutput: Decodable {
    let data: [PostsOutput]
    let next_cursor: String
 }
+
+struct GetPostImageInput {
+   let imageURL: String
+}

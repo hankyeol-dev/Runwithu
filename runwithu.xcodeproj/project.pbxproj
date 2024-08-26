@@ -15,6 +15,8 @@
 		811D377E2C7390C00017E17C /* RoundedInputViewWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D377D2C7390C00017E17C /* RoundedInputViewWithTitle.swift */; };
 		811D37802C73912D0017E17C /* BaseTextFieldRounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D377F2C73912D0017E17C /* BaseTextFieldRounded.swift */; };
 		811D37822C7404170017E17C /* RoundedTextViewWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37812C7404170017E17C /* RoundedTextViewWithTitle.swift */; };
+		8157F1672C7C3A3E00661BB6 /* BaseCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1662C7C3A3E00661BB6 /* BaseCommentsView.swift */; };
+		8157F1692C7C516D00661BB6 /* CommentsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1682C7C516D00661BB6 /* CommentsDTO.swift */; };
 		81A3B8EB2C744972009AD659 /* RunningGroupPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */; };
 		81A3B8ED2C745054009AD659 /* StepBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EC2C745054009AD659 /* StepBar.swift */; };
 		81A3B8EF2C74AFB6009AD659 /* RunningGroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */; };
@@ -63,6 +65,12 @@
 		81A3B9922C7B2C43009AD659 /* QnaPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9912C7B2C43009AD659 /* QnaPostView.swift */; };
 		81A3B9942C7B2C69009AD659 /* QnaPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9932C7B2C69009AD659 /* QnaPostViewController.swift */; };
 		81A3B9962C7B4EE5009AD659 /* RunningQnaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9952C7B4EE5009AD659 /* RunningQnaType.swift */; };
+		81A3B99A2C7B78B1009AD659 /* QnaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9992C7B78B1009AD659 /* QnaDetailView.swift */; };
+		81A3B99C2C7B7A55009AD659 /* BaseCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B99B2C7B7A55009AD659 /* BaseCreatorView.swift */; };
+		81A3B99F2C7B7A9D009AD659 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 81A3B99E2C7B7A9D009AD659 /* Kingfisher */; };
+		81A3B9A12C7B7B9B009AD659 /* QnaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9A02C7B7B9B009AD659 /* QnaDetailViewController.swift */; };
+		81A3B9A42C7B7C00009AD659 /* QnaDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9A32C7B7C00009AD659 /* QnaDetailViewModel.swift */; };
+		81A3B9A62C7C00A8009AD659 /* BaseScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B9A52C7C00A8009AD659 /* BaseScrollView.swift */; };
 		81E7FF232C6C6C2700200CF2 /* Enum+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */; };
 		81E7FF242C6C6C2700200CF2 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF132C6C6C2700200CF2 /* Extension+UIView.swift */; };
 		81E7FF252C6C6C2700200CF2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7FF152C6C6C2700200CF2 /* ViewController.swift */; };
@@ -134,6 +142,8 @@
 		811D377D2C7390C00017E17C /* RoundedInputViewWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInputViewWithTitle.swift; sourceTree = "<group>"; };
 		811D377F2C73912D0017E17C /* BaseTextFieldRounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldRounded.swift; sourceTree = "<group>"; };
 		811D37812C7404170017E17C /* RoundedTextViewWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextViewWithTitle.swift; sourceTree = "<group>"; };
+		8157F1662C7C3A3E00661BB6 /* BaseCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCommentsView.swift; sourceTree = "<group>"; };
+		8157F1682C7C516D00661BB6 /* CommentsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsDTO.swift; sourceTree = "<group>"; };
 		81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupPreviewView.swift; sourceTree = "<group>"; };
 		81A3B8EC2C745054009AD659 /* StepBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepBar.swift; sourceTree = "<group>"; };
 		81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupListViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +191,11 @@
 		81A3B9912C7B2C43009AD659 /* QnaPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaPostView.swift; sourceTree = "<group>"; };
 		81A3B9932C7B2C69009AD659 /* QnaPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaPostViewController.swift; sourceTree = "<group>"; };
 		81A3B9952C7B4EE5009AD659 /* RunningQnaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningQnaType.swift; sourceTree = "<group>"; };
+		81A3B9992C7B78B1009AD659 /* QnaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaDetailView.swift; sourceTree = "<group>"; };
+		81A3B99B2C7B7A55009AD659 /* BaseCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCreatorView.swift; sourceTree = "<group>"; };
+		81A3B9A02C7B7B9B009AD659 /* QnaDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaDetailViewController.swift; sourceTree = "<group>"; };
+		81A3B9A32C7B7C00009AD659 /* QnaDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaDetailViewModel.swift; sourceTree = "<group>"; };
+		81A3B9A52C7C00A8009AD659 /* BaseScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollView.swift; sourceTree = "<group>"; };
 		81E7FEFA2C6C6BBD00200CF2 /* runwithu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = runwithu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E7FF0B2C6C6BBE00200CF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81E7FF112C6C6C2700200CF2 /* Enum+Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+Text.swift"; sourceTree = "<group>"; };
@@ -248,6 +263,7 @@
 				81E7FF942C6F2B6200200CF2 /* RxCocoa in Frameworks */,
 				81E7FF9C2C6F308600200CF2 /* FlexLayout in Frameworks */,
 				81E7FF992C6F304500200CF2 /* PinLayout in Frameworks */,
+				81A3B99F2C7B7A9D009AD659 /* Kingfisher in Frameworks */,
 				81E7FF912C6F2B5300200CF2 /* SnapKit in Frameworks */,
 				81E7FFAE2C6F701400200CF2 /* IQKeyboardManagerSwift in Frameworks */,
 				81A3B9682C7847E3009AD659 /* RxGesture in Frameworks */,
@@ -457,6 +473,24 @@
 			path = Qna;
 			sourceTree = "<group>";
 		};
+		81A3B9972C7B7889009AD659 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				81A3B9982C7B789C009AD659 /* Qna */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		81A3B9982C7B789C009AD659 /* Qna */ = {
+			isa = PBXGroup;
+			children = (
+				81A3B9992C7B78B1009AD659 /* QnaDetailView.swift */,
+				81A3B9A02C7B7B9B009AD659 /* QnaDetailViewController.swift */,
+				81A3B9A32C7B7C00009AD659 /* QnaDetailViewModel.swift */,
+			);
+			path = Qna;
+			sourceTree = "<group>";
+		};
 		81E7FEF12C6C6BBD00200CF2 = {
 			isa = PBXGroup;
 			children = (
@@ -516,8 +550,9 @@
 			isa = PBXGroup;
 			children = (
 				81E7FFA72C6F42AC00200CF2 /* BaseView */,
-				81E7FFA22C6F404500200CF2 /* CustomView */,
 				811D376B2C7379730017E17C /* BottomSheet */,
+				81E7FFA22C6F404500200CF2 /* CustomView */,
+				81A3B9972C7B7889009AD659 /* Detail */,
 				81A3B9412C75E065009AD659 /* Profile */,
 				81A3B9692C784B35009AD659 /* RunningCommunity */,
 				811D37742C73821F0017E17C /* RunningGroup */,
@@ -638,6 +673,7 @@
 				81E7FF6A2C6EE7AD00200CF2 /* PostsDTO.swift */,
 				81E7FF772C6EFE2100200CF2 /* GetPostDTO.swift */,
 				81E7FF792C6F07E600200CF2 /* UpdatePostDTO.swift */,
+				8157F1682C7C516D00661BB6 /* CommentsDTO.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -730,6 +766,9 @@
 				81A3B9642C784772009AD659 /* BaseTabBar.swift */,
 				81A3B9832C786E56009AD659 /* BaseScrollViewWithCloseButton.swift */,
 				81A3B9892C798E18009AD659 /* BaseWithImageCollectionViewCell.swift */,
+				81A3B99B2C7B7A55009AD659 /* BaseCreatorView.swift */,
+				81A3B9A52C7C00A8009AD659 /* BaseScrollView.swift */,
+				8157F1662C7C3A3E00661BB6 /* BaseCommentsView.swift */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -758,6 +797,7 @@
 				81E7FF9B2C6F308600200CF2 /* FlexLayout */,
 				81E7FFAD2C6F701400200CF2 /* IQKeyboardManagerSwift */,
 				81A3B9672C7847E3009AD659 /* RxGesture */,
+				81A3B99E2C7B7A9D009AD659 /* Kingfisher */,
 			);
 			productName = runwithu;
 			productReference = 81E7FEFA2C6C6BBD00200CF2 /* runwithu.app */;
@@ -794,6 +834,7 @@
 				81E7FF9A2C6F308600200CF2 /* XCRemoteSwiftPackageReference "FlexLayout" */,
 				81E7FFAC2C6F701400200CF2 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				81A3B9662C7847E3009AD659 /* XCRemoteSwiftPackageReference "RxGesture" */,
+				81A3B99D2C7B7A9D009AD659 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 81E7FEFB2C6C6BBD00200CF2 /* Products */;
 			projectDirPath = "";
@@ -848,6 +889,7 @@
 				81E7FFB02C6F72F300200CF2 /* RoundedButtonView.swift in Sources */,
 				81A3B8EF2C74AFB6009AD659 /* RunningGroupListViewController.swift in Sources */,
 				81E7FFB82C70073800200CF2 /* Protocol+BaseView.swift in Sources */,
+				8157F1692C7C516D00661BB6 /* CommentsDTO.swift in Sources */,
 				81A3B93A2C75BC52009AD659 /* BaseCollectionViewCell.swift in Sources */,
 				81A3B95C2C7764B1009AD659 /* BottomSheetViewController.swift in Sources */,
 				81A3B9142C74EBEA009AD659 /* RunningInvitationCreateViewController.swift in Sources */,
@@ -881,12 +923,14 @@
 				81E7FF412C6C76E100200CF2 /* ValidEmailDTO.swift in Sources */,
 				811D37822C7404170017E17C /* RoundedTextViewWithTitle.swift in Sources */,
 				81E7FF8E2C6F249000200CF2 /* CreateInvitationInput.swift in Sources */,
+				81A3B9A12C7B7B9B009AD659 /* QnaDetailViewController.swift in Sources */,
 				81A3B9632C783F69009AD659 /* TabItems.swift in Sources */,
 				81E7FFBC2C700DCA00200CF2 /* JoinView.swift in Sources */,
 				81E7FF8C2C6F22BE00200CF2 /* CreateRunningGroupInput.swift in Sources */,
 				81A3B9342C757F6A009AD659 /* RectangleView.swift in Sources */,
 				81A3B97C2C78660A009AD659 /* RunningEpiloguePostViewController.swift in Sources */,
 				81A3B9112C74EBBA009AD659 /* RunningInvitationCreateViewModel.swift in Sources */,
+				81A3B99A2C7B78B1009AD659 /* QnaDetailView.swift in Sources */,
 				81A3B98F2C7B20B5009AD659 /* ProductEpiloguePostViewController.swift in Sources */,
 				811D37802C73912D0017E17C /* BaseTextFieldRounded.swift in Sources */,
 				81A3B98D2C7B209C009AD659 /* ProductEpiloguePostView.swift in Sources */,
@@ -898,6 +942,7 @@
 				81E7FF5D2C6D8F9B00200CF2 /* TokenErrors.swift in Sources */,
 				81E7FF242C6C6C2700200CF2 /* Extension+UIView.swift in Sources */,
 				81A3B9652C784772009AD659 /* BaseTabBar.swift in Sources */,
+				8157F1672C7C3A3E00661BB6 /* BaseCommentsView.swift in Sources */,
 				81E7FF262C6C6C2700200CF2 /* AppDelegate.swift in Sources */,
 				81E7FFA12C6F311E00200CF2 /* LoginViewController.swift in Sources */,
 				81E7FF632C6EDF8800200CF2 /* PostEndPoint.swift in Sources */,
@@ -906,12 +951,14 @@
 				81E7FF712C6EF67300200CF2 /* PostsCommunityType.swift in Sources */,
 				81E7FF6B2C6EE7AD00200CF2 /* PostsDTO.swift in Sources */,
 				81E7FF372C6C736100200CF2 /* Network.swift in Sources */,
+				81A3B99C2C7B7A55009AD659 /* BaseCreatorView.swift in Sources */,
 				81E7FFA42C6F405300200CF2 /* BaseLabel.swift in Sources */,
 				81A3B9822C7866B2009AD659 /* SelfMarathonPostViewModel.swift in Sources */,
 				81E7FF882C6F21AF00200CF2 /* QnaInput.swift in Sources */,
 				81E7FFBE2C7019B300200CF2 /* JoinViewController.swift in Sources */,
 				81A3B9552C773955009AD659 /* TestViewController.swift in Sources */,
 				81E7FFAB2C6F6EF400200CF2 /* BaseView.swift in Sources */,
+				81A3B9A62C7C00A8009AD659 /* BaseScrollView.swift in Sources */,
 				81E7FF352C6C723E00200CF2 /* UserEndPoint.swift in Sources */,
 				81A3B9182C7565D2009AD659 /* RoundedDatePickerView.swift in Sources */,
 				81A3B95E2C7824A9009AD659 /* SearchUserDTO.swift in Sources */,
@@ -927,6 +974,7 @@
 				81E7FF6F2C6EF55A00200CF2 /* ProductIds.swift in Sources */,
 				81E7FF842C6F1CBC00200CF2 /* RunningProductType.swift in Sources */,
 				81A3B9742C7855CB009AD659 /* MainTabbarController.swift in Sources */,
+				81A3B9A42C7B7C00009AD659 /* QnaDetailViewModel.swift in Sources */,
 				81A3B9382C759B4C009AD659 /* RoundedAddUserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1162,6 +1210,14 @@
 				minimumVersion = 4.0.4;
 			};
 		};
+		81A3B99D2C7B7A9D009AD659 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 		81E7FF8F2C6F2B5300200CF2 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1209,6 +1265,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 81A3B9662C7847E3009AD659 /* XCRemoteSwiftPackageReference "RxGesture" */;
 			productName = RxGesture;
+		};
+		81A3B99E2C7B7A9D009AD659 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81A3B99D2C7B7A9D009AD659 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 		81E7FF902C6F2B5300200CF2 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

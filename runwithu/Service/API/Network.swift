@@ -66,6 +66,31 @@ final class NetworkService {
       }
    }
    
+   func requestImage(by imageURL: String, imageHandler: @escaping (Data?) -> Void) async throws {
+      let request = try await PostEndPoint.getPostImage(input: .init(imageURL: imageURL)).asURLRequest()
+      let (data, response) = try await session.data(for: request)
+      
+      guard let response = response as? HTTPURLResponse else {
+         throw NetworkErrors.invalidResponse
+      }
+      
+      do {
+         if !(200..<300).contains(response.statusCode) {
+            try await handleStatusCode(statusCode: response.statusCode)
+         }
+         imageHandler(data)
+      } catch NetworkErrors.needToRefreshAccessToken {
+         let refreshResult = await tokenManager.refreshToken()
+         if refreshResult {
+            return try await self.requestImage(by: imageURL, imageHandler: imageHandler)
+         } else {
+            throw NetworkErrors.needToRefreshRefreshToken
+         }
+      } catch {
+         throw NetworkErrors.invalidRequest
+      }
+   }
+   
    func upload<D: Decodable>(
       by endPoint: EndPointProtocol,
       of outputType: D.Type

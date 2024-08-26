@@ -14,7 +14,7 @@ final class QnaPostViewModel: BaseViewModelProtocol {
    let networkManager: NetworkService
    private let isInGroupSide: Bool
    private lazy var qnaInput: QnaInput = .init(
-      productId: isInGroupSide ? .runwithu_community_posts_public : .runwithu_community_posts_group,
+      productId: isInGroupSide ? .runwithu_community_posts_group: .runwithu_community_posts_public,
       title: "",
       content: "",
       qnaType: "")

@@ -35,5 +35,5 @@ struct PostsOutput: Decodable {
    let likes: [String]
    let likes2: [String]
    let hashTags: [String]
-   let comments: [String]
+   let comments: [CommentsOutput]
 }

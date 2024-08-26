@@ -12,8 +12,10 @@ enum PostEndPoint: EndPointProtocol {
    case posts(input: PostsInput)
    case getPost(input: GetPostInput)
    case getPosts(input: GetPostsInput)
+   case getPostImage(input: GetPostImageInput)
    case updatePost(input: UpdatePostInput)
    case deletePost(input: GetPostInput)
+   case postComment(input: CommentsInput)
    
    var isNeedToken: Bool {
       return true
@@ -21,6 +23,8 @@ enum PostEndPoint: EndPointProtocol {
    
    var path: String {
       switch self {
+      case let .getPostImage(input):
+         return "/\(input.imageURL)"
       default:
          return "/posts"
       }
@@ -30,7 +34,7 @@ enum PostEndPoint: EndPointProtocol {
       switch self {
       case .postImageUpload:
          return "/files"
-      case .posts, .getPosts:
+      case .posts, .getPosts, .getPostImage:
          return ""
       case let .getPost(input):
          return "/\(input.post_id)"
@@ -38,14 +42,16 @@ enum PostEndPoint: EndPointProtocol {
          return "/\(input.post_id)"
       case let .deletePost(input):
          return "/\(input.post_id)"
+      case let .postComment(input):
+         return "/\(input.post_id)/comments"
       }
    }
    
    var method: NetworkMethod {
       switch self {
-      case .postImageUpload, .posts:
+      case .postImageUpload, .posts, .postComment:
          return .post
-      case .getPost, .getPosts:
+      case .getPost, .getPosts, .getPostImage:
          return .get
       case .updatePost:
          return .put
@@ -94,6 +100,8 @@ enum PostEndPoint: EndPointProtocol {
          return input.converToJSON()
       case let .updatePost(input):
          return input.updateInput.converToJSON()
+      case let .postComment(input):
+         return input.comment.converToJSON()
       default:
          return nil
       }

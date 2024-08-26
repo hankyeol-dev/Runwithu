@@ -43,7 +43,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //         ),
 //         db: DisposeBag()
 //      )
-      let root = UINavigationController(rootViewController: MainTabbarController())
+//      let root = UINavigationController(rootViewController: MainTabbarController())
+      let root = QnaDetailViewController(
+         bv: QnaDetailView(),
+         vm: QnaDetailViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared, qnaId: AppEnvironment.demoQnaId),
+         db: DisposeBag())
 //      let root = RunningEpiloguePostViewController(
 //         bv: RunningEpiloguePostView(),
 //         vm: RunningEpiloguePostViewModel(
