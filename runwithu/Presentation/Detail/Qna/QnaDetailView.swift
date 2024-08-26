@@ -57,7 +57,8 @@ final class QnaDetailView: BaseView, BaseViewProtocol {
          make.height.equalTo(0.5)
       }
       commentsInputBackView.snp.makeConstraints { make in
-         make.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide)
+         make.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
+         make.bottom.equalTo(self.safeAreaLayoutGuide).inset(56)
          make.height.equalTo(80)
       }
       commentsInput.snp.makeConstraints { make in

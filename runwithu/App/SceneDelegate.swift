@@ -16,61 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       guard let scene = (scene as? UIWindowScene) else { return }
       window = UIWindow(windowScene: scene)
       
-      //      let root = LoginViewController(
-      //         bv: LoginView(),
-      //         vm: LoginViewModel(),
-      //         db: DisposeBag()
-      //      )
-//            let root = RunningGroupListViewController(
-//               bv: RunningGroupListView(),
-//               vm: RunningGroupListViewModel(),
-//               db: DisposeBag()
-//            )
-      
-//            let root = RunningInvitationCreateViewController(
-//               bv: RunningInvitationCreateView(),
-//               vm: RunningInvitationCreateViewModel(
-//                  disposeBag: DisposeBag(), networkManager: NetworkService.shared
-//               ),
-//               db: DisposeBag())
-      
-//      let root = ProfileViewController(
-//         bv: ProfileView(), 
-//         vm: ProfileViewModel(
-//            disposeBag: DisposeBag(),
-//            networkManager: NetworkService.shared,
-//            isUserProfile: true
-//         ),
-//         db: DisposeBag()
-//      )
+      let root = UINavigationController(
+         rootViewController: RunningGroupDetailViewController(
+            bv: RunningGroupDetailView(),
+            vm: RunningGroupDetailViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared, groupId: "66c4a902fb4075f9214129c5"),
+            db: DisposeBag())
+      )
 //      let root = UINavigationController(rootViewController: MainTabbarController())
-      let root = QnaDetailViewController(
-         bv: QnaDetailView(),
-         vm: QnaDetailViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared, qnaId: AppEnvironment.demoQnaId),
-         db: DisposeBag())
-//      let root = RunningEpiloguePostViewController(
-//         bv: RunningEpiloguePostView(),
-//         vm: RunningEpiloguePostViewModel(
-//            disposeBag: DisposeBag(), 
-//            networkManager: NetworkService.shared,
-//            isInGroupSide: false
-//         ),
-//         db: DisposeBag()
-//      )
-//      let root = UINavigationController(
-//         rootViewController: BottomeSheetViewController(
-//            titleText: "커뮤니티 글 작성",
-//            selectedItems: PostsCommunityType.allCases.map { $0.byKoreanTitle },
-//            isScrolled: false,
-//            disposeBag: DisposeBag()
-//         )
-//      )
-      
-      //       let root = UINavigationController(rootViewController: ViewController())
-      //
-      //      let vc = UINavigationController(
-      //         rootViewController: root
-      //      )
       
       window?.rootViewController = root
       window?.makeKeyAndVisible()

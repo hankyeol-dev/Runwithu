@@ -12,7 +12,6 @@ import RxSwift
 
 final class MainTabbarController: UITabBarController {
    private let disposeBag = DisposeBag()
-   
    private let mainTabbar = BaseTabBar()
    
    override func viewDidLoad() {
@@ -33,13 +32,14 @@ final class MainTabbarController: UITabBarController {
    private func setView() {
       view.addSubview(mainTabbar)
       mainTabbar.snp.makeConstraints { make in
-         make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide).inset(8)
-         make.height.equalTo(80)
+         make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+         make.height.equalTo(56)
       }
       
       tabBar.isHidden = true
-      selectedIndex = 0
       mainTabbar.translatesAutoresizingMaskIntoConstraints = false
+      selectedIndex = 0
       setViewControllers(TabItems.allCases.map { $0.viewController }, animated: true)
    }
    

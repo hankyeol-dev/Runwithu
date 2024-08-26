@@ -107,6 +107,16 @@ extension RunningCommunityViewController {
             ),
             db: DisposeBag())
          vc.displayViewAsFullScreen(as: .coverVertical)
+         vc.willDisappearHanlder = { [weak self] postId in
+            guard let self else { return }
+            let qnaDetailVC = QnaDetailViewController(
+               bv: QnaDetailView(),
+               vm: QnaDetailViewModel(disposeBag: DisposeBag(),
+                                      networkManager: NetworkService.shared,
+                                      qnaId: postId), db: DisposeBag())
+            
+            self.navigationController?.pushViewController(qnaDetailVC, animated: true)
+         }
          present(vc, animated: true)
       case .open_self_marathon:
          BaseAlertBuilder(viewController: self)

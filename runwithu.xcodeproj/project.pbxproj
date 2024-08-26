@@ -17,6 +17,13 @@
 		811D37822C7404170017E17C /* RoundedTextViewWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37812C7404170017E17C /* RoundedTextViewWithTitle.swift */; };
 		8157F1672C7C3A3E00661BB6 /* BaseCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1662C7C3A3E00661BB6 /* BaseCommentsView.swift */; };
 		8157F1692C7C516D00661BB6 /* CommentsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1682C7C516D00661BB6 /* CommentsDTO.swift */; };
+		8157F16C2C7C78F200661BB6 /* RunningGroupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F16B2C7C78F200661BB6 /* RunningGroupDetailView.swift */; };
+		8157F16E2C7C791100661BB6 /* RunningGroupDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F16D2C7C791100661BB6 /* RunningGroupDetailViewModel.swift */; };
+		8157F1702C7C796800661BB6 /* RunningGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F16F2C7C796800661BB6 /* RunningGroupDetailViewController.swift */; };
+		8157F1722C7CA4EF00661BB6 /* RunningGroupDetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1712C7CA4EF00661BB6 /* RunningGroupDetailInfoViewController.swift */; };
+		8157F1742C7CA8D700661BB6 /* RunningGroupDetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1732C7CA8D700661BB6 /* RunningGroupDetailInfoView.swift */; };
+		8157F1762C7CA8E500661BB6 /* RunnigGroupDetailInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1752C7CA8E500661BB6 /* RunnigGroupDetailInfoViewModel.swift */; };
+		8157F1782C7CC10900661BB6 /* RunningGroupEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1772C7CC10900661BB6 /* RunningGroupEntryCell.swift */; };
 		81A3B8EB2C744972009AD659 /* RunningGroupPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */; };
 		81A3B8ED2C745054009AD659 /* StepBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EC2C745054009AD659 /* StepBar.swift */; };
 		81A3B8EF2C74AFB6009AD659 /* RunningGroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */; };
@@ -144,6 +151,13 @@
 		811D37812C7404170017E17C /* RoundedTextViewWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextViewWithTitle.swift; sourceTree = "<group>"; };
 		8157F1662C7C3A3E00661BB6 /* BaseCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCommentsView.swift; sourceTree = "<group>"; };
 		8157F1682C7C516D00661BB6 /* CommentsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsDTO.swift; sourceTree = "<group>"; };
+		8157F16B2C7C78F200661BB6 /* RunningGroupDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupDetailView.swift; sourceTree = "<group>"; };
+		8157F16D2C7C791100661BB6 /* RunningGroupDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupDetailViewModel.swift; sourceTree = "<group>"; };
+		8157F16F2C7C796800661BB6 /* RunningGroupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupDetailViewController.swift; sourceTree = "<group>"; };
+		8157F1712C7CA4EF00661BB6 /* RunningGroupDetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupDetailInfoViewController.swift; sourceTree = "<group>"; };
+		8157F1732C7CA8D700661BB6 /* RunningGroupDetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupDetailInfoView.swift; sourceTree = "<group>"; };
+		8157F1752C7CA8E500661BB6 /* RunnigGroupDetailInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnigGroupDetailInfoViewModel.swift; sourceTree = "<group>"; };
+		8157F1772C7CC10900661BB6 /* RunningGroupEntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupEntryCell.swift; sourceTree = "<group>"; };
 		81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupPreviewView.swift; sourceTree = "<group>"; };
 		81A3B8EC2C745054009AD659 /* StepBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepBar.swift; sourceTree = "<group>"; };
 		81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupListViewController.swift; sourceTree = "<group>"; };
@@ -320,6 +334,20 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		8157F16A2C7C78E700661BB6 /* RunningGroup */ = {
+			isa = PBXGroup;
+			children = (
+				8157F16B2C7C78F200661BB6 /* RunningGroupDetailView.swift */,
+				8157F16D2C7C791100661BB6 /* RunningGroupDetailViewModel.swift */,
+				8157F16F2C7C796800661BB6 /* RunningGroupDetailViewController.swift */,
+				8157F1732C7CA8D700661BB6 /* RunningGroupDetailInfoView.swift */,
+				8157F1752C7CA8E500661BB6 /* RunnigGroupDetailInfoViewModel.swift */,
+				8157F1712C7CA4EF00661BB6 /* RunningGroupDetailInfoViewController.swift */,
+				8157F1772C7CC10900661BB6 /* RunningGroupEntryCell.swift */,
+			);
+			path = RunningGroup;
+			sourceTree = "<group>";
+		};
 		81A3B90B2C74EB36009AD659 /* RunningInvitation */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,6 +504,7 @@
 		81A3B9972C7B7889009AD659 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				8157F16A2C7C78E700661BB6 /* RunningGroup */,
 				81A3B9982C7B789C009AD659 /* Qna */,
 			);
 			path = Detail;
@@ -864,6 +893,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8157F1782C7CC10900661BB6 /* RunningGroupEntryCell.swift in Sources */,
 				81A3B97A2C7865E8009AD659 /* RunningEpiloguePostViewModel.swift in Sources */,
 				81E7FF822C6F1C8700200CF2 /* ProductEpilogueInput.swift in Sources */,
 				81A3B90A2C74E45D009AD659 /* ENV.swift in Sources */,
@@ -897,6 +927,7 @@
 				81E7FF672C6EDFEB00200CF2 /* ImageUploadDTO.swift in Sources */,
 				81E7FF252C6C6C2700200CF2 /* ViewController.swift in Sources */,
 				81E7FF802C6F183700200CF2 /* Extension+Date.swift in Sources */,
+				8157F1742C7CA8D700661BB6 /* RunningGroupDetailInfoView.swift in Sources */,
 				81E7FF442C6C7B6D00200CF2 /* NetworkErrors.swift in Sources */,
 				81E7FF7A2C6F07E600200CF2 /* UpdatePostDTO.swift in Sources */,
 				81A3B94C2C75EAD0009AD659 /* RoundedMenuView.swift in Sources */,
@@ -945,6 +976,7 @@
 				8157F1672C7C3A3E00661BB6 /* BaseCommentsView.swift in Sources */,
 				81E7FF262C6C6C2700200CF2 /* AppDelegate.swift in Sources */,
 				81E7FFA12C6F311E00200CF2 /* LoginViewController.swift in Sources */,
+				8157F1722C7CA4EF00661BB6 /* RunningGroupDetailInfoViewController.swift in Sources */,
 				81E7FF632C6EDF8800200CF2 /* PostEndPoint.swift in Sources */,
 				81A3B96D2C784B4D009AD659 /* RunningCommunityView.swift in Sources */,
 				81A3B8F72C74B77E009AD659 /* Extension+UIImage.swift in Sources */,
@@ -957,8 +989,10 @@
 				81E7FF882C6F21AF00200CF2 /* QnaInput.swift in Sources */,
 				81E7FFBE2C7019B300200CF2 /* JoinViewController.swift in Sources */,
 				81A3B9552C773955009AD659 /* TestViewController.swift in Sources */,
+				8157F1702C7C796800661BB6 /* RunningGroupDetailViewController.swift in Sources */,
 				81E7FFAB2C6F6EF400200CF2 /* BaseView.swift in Sources */,
 				81A3B9A62C7C00A8009AD659 /* BaseScrollView.swift in Sources */,
+				8157F16E2C7C791100661BB6 /* RunningGroupDetailViewModel.swift in Sources */,
 				81E7FF352C6C723E00200CF2 /* UserEndPoint.swift in Sources */,
 				81A3B9182C7565D2009AD659 /* RoundedDatePickerView.swift in Sources */,
 				81A3B95E2C7824A9009AD659 /* SearchUserDTO.swift in Sources */,
@@ -966,11 +1000,13 @@
 				81A3B98A2C798E18009AD659 /* BaseWithImageCollectionViewCell.swift in Sources */,
 				81E7FFA62C6F413400200CF2 /* InputWithTitleView.swift in Sources */,
 				81E7FF862C6F215E00200CF2 /* PostInputType.swift in Sources */,
+				8157F16C2C7C78F200661BB6 /* RunningGroupDetailView.swift in Sources */,
 				81A3B9452C75E077009AD659 /* ProfileView.swift in Sources */,
 				81E7FF8A2C6F21E100200CF2 /* OpenMarathonInput.swift in Sources */,
 				81E7FF782C6EFE2100200CF2 /* GetPostDTO.swift in Sources */,
 				81E7FF3F2C6C769D00200CF2 /* LoginDTO.swift in Sources */,
 				81E7FF232C6C6C2700200CF2 /* Enum+Text.swift in Sources */,
+				8157F1762C7CA8E500661BB6 /* RunnigGroupDetailInfoViewModel.swift in Sources */,
 				81E7FF6F2C6EF55A00200CF2 /* ProductIds.swift in Sources */,
 				81E7FF842C6F1CBC00200CF2 /* RunningProductType.swift in Sources */,
 				81A3B9742C7855CB009AD659 /* MainTabbarController.swift in Sources */,

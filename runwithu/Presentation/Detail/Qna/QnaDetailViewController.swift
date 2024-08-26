@@ -13,6 +13,7 @@ import RxCocoa
 final class QnaDetailViewController: BaseViewController<QnaDetailView, QnaDetailViewModel> {
    private let didLoadInput = PublishSubject<Void>()
    
+   
    override func loadView() {
       view = baseView
    }
@@ -21,6 +22,13 @@ final class QnaDetailViewController: BaseViewController<QnaDetailView, QnaDetail
       super.viewDidLoad()
       
       didLoadInput.onNext(())
+   }
+   
+   override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      
+      title = "런윗유 QnA"
+      setGoBackButton(by: .darkGray, imageName: "chevron.left")
    }
    
    override func bindViewAtDidLoad() {

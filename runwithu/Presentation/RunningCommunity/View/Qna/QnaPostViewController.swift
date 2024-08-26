@@ -12,6 +12,8 @@ import RxCocoa
 
 final class QnaPostViewController: BaseViewController<QnaPostView, QnaPostViewModel> {
    
+   var willDisappearHanlder: ((String) -> Void)?
+   
    override func loadView() {
       view = baseView
    }
@@ -19,6 +21,15 @@ final class QnaPostViewController: BaseViewController<QnaPostView, QnaPostViewMo
    override func viewDidLoad() {
       super.viewDidLoad()
    }
+   
+   override func viewDidDisappear(_ animated: Bool) {
+      super.viewDidDisappear(animated)
+      print("여기가 안들어오나?")
+      let qnaPostId = viewModel.getGeneratedQnaPostId()
+      willDisappearHanlder?(qnaPostId)
+   }
+   
+   
    
    override func bindViewAtDidLoad() {
       super.bindViewAtDidLoad()
@@ -58,8 +69,9 @@ final class QnaPostViewController: BaseViewController<QnaPostView, QnaPostViewMo
          .disposed(by: disposeBag)
       
       output.successEmitter
-         .bind(with: self) { vc, successMessage in
-            print(successMessage)
+         .asDriver(onErrorJustReturn: ())
+         .drive(with: self) { vc, _ in
+            vc.dismiss(animated: true)
          }
          .disposed(by: disposeBag)
       

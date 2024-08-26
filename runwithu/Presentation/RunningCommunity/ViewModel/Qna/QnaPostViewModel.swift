@@ -18,6 +18,7 @@ final class QnaPostViewModel: BaseViewModelProtocol {
       title: "",
       content: "",
       qnaType: "")
+   private var qnaPostId = ""
    
    init(
       disposeBag: DisposeBag,
@@ -36,12 +37,12 @@ final class QnaPostViewModel: BaseViewModelProtocol {
       let createButtonTapped: PublishSubject<Void>
    }
    struct Output {
-      let successEmitter: PublishSubject<String>
+      let successEmitter: PublishSubject<Void>
       let errorEmitter: PublishSubject<String>
    }
    
    func transform(for input: Input) -> Output {
-      let successEmitter = PublishSubject<String>()
+      let successEmitter = PublishSubject<Void>()
       let errorEmitter = PublishSubject<String>()
       
       bindingQnaInput(for: input.qnaTypePickerInput) { vm, type in
@@ -96,7 +97,7 @@ extension QnaPostViewModel {
    }
    
    private func createPost(
-      successEmitter: PublishSubject<String>,
+      successEmitter: PublishSubject<Void>,
       errorEmitter: PublishSubject<String>
    ) async {
       if !validPost() {
@@ -119,13 +120,17 @@ extension QnaPostViewModel {
          let postResult = try await networkManager.request(
             by: PostEndPoint.posts(input: postInput),
             of: PostsOutput.self)
-         successEmitter.onNext(postResult.post_id)
-         
+         qnaPostId = postResult.post_id
+         successEmitter.onNext(())
       } catch NetworkErrors.needToRefreshRefreshToken {
          await tempLoginAPI()
          await createPost(successEmitter: successEmitter, errorEmitter: errorEmitter)
       } catch {
          errorEmitter.onNext("러닝 일지 작성에 뭔가 문제가 생겼어요.")
       }
+   }
+   
+   func getGeneratedQnaPostId() -> String {
+      return qnaPostId
    }
 }

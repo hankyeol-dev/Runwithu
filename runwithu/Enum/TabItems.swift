@@ -19,29 +19,35 @@ extension TabItems {
    var viewController: UINavigationController {
       switch self {
       case .community:
-         return UINavigationController(
+         let vc = UINavigationController(
             rootViewController: RunningCommunityViewController(
                bv: RunningCommunityView(),
                vm: RunningCommunityViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared),
                db: DisposeBag()
             )
          )
+         vc.hidesBottomBarWhenPushed = true
+         return vc
       case .runningGroup:
-         return UINavigationController(
+         let vc = UINavigationController(
             rootViewController: RunningGroupListViewController(
                bv: RunningGroupListView(),
                vm: RunningGroupListViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared),
                db: DisposeBag()
             )
          )
+         vc.hidesBottomBarWhenPushed = true
+         return vc
       case .mypage:
-         return UINavigationController(
+         let vc = UINavigationController(
             rootViewController: ProfileViewController(
                bv: ProfileView(),
                vm: ProfileViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared, isUserProfile: true),
                db: DisposeBag()
             )
          )
+         vc.hidesBottomBarWhenPushed = true
+         return vc
       }
    }
    
@@ -77,4 +83,5 @@ extension TabItems {
          return "나의"
       }
    }
+   
 }

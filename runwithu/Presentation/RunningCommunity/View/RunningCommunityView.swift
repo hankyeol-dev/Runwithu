@@ -28,7 +28,7 @@ final class RunningCommunityView: BaseView, BaseViewProtocol {
       
       communityWriteButton.pin
          .right(20)
-         .bottom(110)
+         .bottom(80)
          .size(48)
    }
    
