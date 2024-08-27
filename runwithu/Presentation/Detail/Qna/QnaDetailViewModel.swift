@@ -27,13 +27,13 @@ final class QnaDetailViewModel: BaseViewModelProtocol {
    }
    struct Output {
       let didLoadOutput: PublishSubject<PostsOutput>
-      let commentsEmitter: PublishSubject<[CommentsOutput]>
+      let commentsEmitter: BehaviorSubject<[CommentsOutput]>
       let errorEmitter: PublishSubject<String>
    }
    
    func transform(for input: Input) -> Output {
       let didLoadOutput = PublishSubject<PostsOutput>()
-      let commentsEmitter = PublishSubject<[CommentsOutput]>()
+      let commentsEmitter = BehaviorSubject<[CommentsOutput]>(value: comments)
       let errorEmitter = PublishSubject<String>()
       
       input.didLoadInput
@@ -71,7 +71,7 @@ final class QnaDetailViewModel: BaseViewModelProtocol {
 extension QnaDetailViewModel {
    private func getPost(
       successEmitter: PublishSubject<PostsOutput>,
-      commentsEmitter: PublishSubject<[CommentsOutput]>,
+      commentsEmitter: BehaviorSubject<[CommentsOutput]>,
       errorEmitter: PublishSubject<String>
    ) async {
       do {
@@ -95,7 +95,7 @@ extension QnaDetailViewModel {
    
    private func createComment(
       for comment: String,
-      successEmitter: PublishSubject<[CommentsOutput]>,
+      successEmitter: BehaviorSubject<[CommentsOutput]>,
       errorEmitter: PublishSubject<String>
    ) async {
       let commentInput: CommentsInput = .init(

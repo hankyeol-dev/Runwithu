@@ -16,26 +16,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       guard let scene = (scene as? UIWindowScene) else { return }
       window = UIWindow(windowScene: scene)
       
+      //      let root = UINavigationController(
+      //         rootViewController: InvitationDetailViewController(
+      //            bv: InvitationDetailView(),
+      //            vm: InvitationDetailViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared, invitationId: AppEnvironment.demoInvitationId),
+      //            db: DisposeBag())
+      //      )
+//            let root = UINavigationController(rootViewController: MainTabbarController())
+      //            let root = UINavigationController(
+      //               rootViewController: LoginViewController(
+      //                  bv: LoginView(),
+      //                  vm: LoginViewModel(disposeBag: DisposeBag(),
+      //                                     networkManager: NetworkService.shared,
+      //                                     tokenManager: TokenManager.shared),
+      //                  db: DisposeBag()))
       let root = UINavigationController(
-         rootViewController: InvitationDetailViewController(
-            bv: InvitationDetailView(),
-            vm: InvitationDetailViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared, invitationId: AppEnvironment.demoInvitationId),
+         rootViewController: RunningEpilogueDetailViewController(
+            bv: RunningEpilogueDetailView(),
+            vm: RunningEpilogueDetailViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared, epilogueId: AppEnvironment.demoEpilogueId),
             db: DisposeBag())
       )
-//            let root = UINavigationController(rootViewController: MainTabbarController())
-//            let root = UINavigationController(
-//               rootViewController: LoginViewController(
-//                  bv: LoginView(),
-//                  vm: LoginViewModel(disposeBag: DisposeBag(),
-//                                     networkManager: NetworkService.shared,
-//                                     tokenManager: TokenManager.shared),
-//                  db: DisposeBag()))
-//      let root = UINavigationController(
-//         rootViewController: QnaDetailViewController(
-//            bv: QnaDetailView(), 
-//            vm: QnaDetailViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared, qnaId: AppEnvironment.demoQnaId),
-//            db: DisposeBag())
-//      )
       
       
       window?.rootViewController = root

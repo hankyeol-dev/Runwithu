@@ -20,7 +20,7 @@ extension String {
    func calcBetweenDayAndHour() -> DateComponents? {
       let formatter = DateFormatter()
       formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-      formatter.locale = Locale(identifier: "ko_kr")
+      formatter.locale = Locale(identifier: "ko_KR")
       
       if let date = formatter.date(from: self.formattedCreatedAt()) {
          return Calendar.current.dateComponents([.day, .hour], from: date, to: .now)
@@ -30,7 +30,7 @@ extension String {
    }
    
    func formattedCreatedAt() -> String {
-      return self.split(separator: "T").joined(separator: " ").split(separator: ".247Z").joined()
+      return String(self.split(separator: "T").joined(separator: " ").split(separator: ".").joined().prefix(19))
    }
    
    func formattedRunningDateString() -> String? {

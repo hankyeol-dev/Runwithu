@@ -74,7 +74,6 @@ final class InvitationDetailViewController: BaseViewController<InvitationDetailV
          .disposed(by: disposeBag)
       
       output.joinedOutput
-         .debug("joinedOutput")
          .bind(with: self) { vc, isJoined in
             vc.baseView.bindView(isJoined: isJoined)
          }

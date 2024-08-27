@@ -15,6 +15,7 @@
 		811D377E2C7390C00017E17C /* RoundedInputViewWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D377D2C7390C00017E17C /* RoundedInputViewWithTitle.swift */; };
 		811D37802C73912D0017E17C /* BaseTextFieldRounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D377F2C73912D0017E17C /* BaseTextFieldRounded.swift */; };
 		811D37822C7404170017E17C /* RoundedTextViewWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37812C7404170017E17C /* RoundedTextViewWithTitle.swift */; };
+		813FC4DA2C7DE7A0003E23B3 /* EpilogueImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813FC4D92C7DE7A0003E23B3 /* EpilogueImageCollectionCell.swift */; };
 		8157F1672C7C3A3E00661BB6 /* BaseCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1662C7C3A3E00661BB6 /* BaseCommentsView.swift */; };
 		8157F1692C7C516D00661BB6 /* CommentsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1682C7C516D00661BB6 /* CommentsDTO.swift */; };
 		8157F16C2C7C78F200661BB6 /* RunningGroupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F16B2C7C78F200661BB6 /* RunningGroupDetailView.swift */; };
@@ -30,6 +31,9 @@
 		8157F1812C7D35C200661BB6 /* BaseUserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1802C7D35C200661BB6 /* BaseUserImage.swift */; };
 		8157F18D2C7D9EFB00661BB6 /* iamport-ios in Frameworks */ = {isa = PBXBuildFile; productRef = 8157F18C2C7D9EFB00661BB6 /* iamport-ios */; };
 		8157F1912C7DB84300661BB6 /* PostLikeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1902C7DB84300661BB6 /* PostLikeDTO.swift */; };
+		8157F1942C7DC82200661BB6 /* RunningEpilogueDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1932C7DC82200661BB6 /* RunningEpilogueDetailView.swift */; };
+		8157F1962C7DC84000661BB6 /* RunningEpilogueDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1952C7DC84000661BB6 /* RunningEpilogueDetailViewModel.swift */; };
+		8157F1982C7DC88000661BB6 /* RunningEpilogueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1972C7DC88000661BB6 /* RunningEpilogueDetailViewController.swift */; };
 		81A3B8EB2C744972009AD659 /* RunningGroupPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */; };
 		81A3B8ED2C745054009AD659 /* StepBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EC2C745054009AD659 /* StepBar.swift */; };
 		81A3B8EF2C74AFB6009AD659 /* RunningGroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */; };
@@ -155,6 +159,7 @@
 		811D377D2C7390C00017E17C /* RoundedInputViewWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInputViewWithTitle.swift; sourceTree = "<group>"; };
 		811D377F2C73912D0017E17C /* BaseTextFieldRounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldRounded.swift; sourceTree = "<group>"; };
 		811D37812C7404170017E17C /* RoundedTextViewWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextViewWithTitle.swift; sourceTree = "<group>"; };
+		813FC4D92C7DE7A0003E23B3 /* EpilogueImageCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpilogueImageCollectionCell.swift; sourceTree = "<group>"; };
 		8157F1662C7C3A3E00661BB6 /* BaseCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCommentsView.swift; sourceTree = "<group>"; };
 		8157F1682C7C516D00661BB6 /* CommentsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsDTO.swift; sourceTree = "<group>"; };
 		8157F16B2C7C78F200661BB6 /* RunningGroupDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupDetailView.swift; sourceTree = "<group>"; };
@@ -169,6 +174,9 @@
 		8157F17E2C7CC6C300661BB6 /* InvitationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationDetailViewController.swift; sourceTree = "<group>"; };
 		8157F1802C7D35C200661BB6 /* BaseUserImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUserImage.swift; sourceTree = "<group>"; };
 		8157F1902C7DB84300661BB6 /* PostLikeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeDTO.swift; sourceTree = "<group>"; };
+		8157F1932C7DC82200661BB6 /* RunningEpilogueDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningEpilogueDetailView.swift; sourceTree = "<group>"; };
+		8157F1952C7DC84000661BB6 /* RunningEpilogueDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningEpilogueDetailViewModel.swift; sourceTree = "<group>"; };
+		8157F1972C7DC88000661BB6 /* RunningEpilogueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningEpilogueDetailViewController.swift; sourceTree = "<group>"; };
 		81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupPreviewView.swift; sourceTree = "<group>"; };
 		81A3B8EC2C745054009AD659 /* StepBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepBar.swift; sourceTree = "<group>"; };
 		81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupListViewController.swift; sourceTree = "<group>"; };
@@ -370,6 +378,17 @@
 			path = Invitation;
 			sourceTree = "<group>";
 		};
+		8157F1922C7DC81000661BB6 /* Epilogue */ = {
+			isa = PBXGroup;
+			children = (
+				8157F1932C7DC82200661BB6 /* RunningEpilogueDetailView.swift */,
+				8157F1952C7DC84000661BB6 /* RunningEpilogueDetailViewModel.swift */,
+				8157F1972C7DC88000661BB6 /* RunningEpilogueDetailViewController.swift */,
+				813FC4D92C7DE7A0003E23B3 /* EpilogueImageCollectionCell.swift */,
+			);
+			path = Epilogue;
+			sourceTree = "<group>";
+		};
 		81A3B90B2C74EB36009AD659 /* RunningInvitation */ = {
 			isa = PBXGroup;
 			children = (
@@ -526,6 +545,7 @@
 		81A3B9972C7B7889009AD659 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				8157F1922C7DC81000661BB6 /* Epilogue */,
 				8157F1792C7CC69D00661BB6 /* Invitation */,
 				8157F16A2C7C78E700661BB6 /* RunningGroup */,
 				81A3B9982C7B789C009AD659 /* Qna */,
@@ -971,7 +991,9 @@
 				81E7FF2A2C6C6C2700200CF2 /* SceneDelegate.swift in Sources */,
 				81A3B94A2C75E357009AD659 /* ProfileViewController.swift in Sources */,
 				81E7FFBA2C700C2200200CF2 /* LoginViewModel.swift in Sources */,
+				8157F1942C7DC82200661BB6 /* RunningEpilogueDetailView.swift in Sources */,
 				81E7FF552C6CAD0700200CF2 /* RefreshTokenDTO.swift in Sources */,
+				8157F1962C7DC84000661BB6 /* RunningEpilogueDetailViewModel.swift in Sources */,
 				81E7FF732C6EF74E00200CF2 /* RunningInfo.swift in Sources */,
 				81A3B8F12C74AFCE009AD659 /* RunningGroupListViewModel.swift in Sources */,
 				811D377C2C73825D0017E17C /* RunningGroupCreateViewModel.swift in Sources */,
@@ -1010,6 +1032,7 @@
 				8157F1722C7CA4EF00661BB6 /* RunningGroupDetailInfoViewController.swift in Sources */,
 				81E7FF632C6EDF8800200CF2 /* PostEndPoint.swift in Sources */,
 				81A3B96D2C784B4D009AD659 /* RunningCommunityView.swift in Sources */,
+				8157F1982C7DC88000661BB6 /* RunningEpilogueDetailViewController.swift in Sources */,
 				81A3B8F72C74B77E009AD659 /* Extension+UIImage.swift in Sources */,
 				81E7FF712C6EF67300200CF2 /* PostsCommunityType.swift in Sources */,
 				81E7FF6B2C6EE7AD00200CF2 /* PostsDTO.swift in Sources */,
@@ -1028,6 +1051,7 @@
 				81A3B9182C7565D2009AD659 /* RoundedDatePickerView.swift in Sources */,
 				81A3B95E2C7824A9009AD659 /* SearchUserDTO.swift in Sources */,
 				81E7FF592C6CB25900200CF2 /* AuthEndPoint.swift in Sources */,
+				813FC4DA2C7DE7A0003E23B3 /* EpilogueImageCollectionCell.swift in Sources */,
 				81A3B98A2C798E18009AD659 /* BaseWithImageCollectionViewCell.swift in Sources */,
 				81E7FFA62C6F413400200CF2 /* InputWithTitleView.swift in Sources */,
 				81E7FF862C6F215E00200CF2 /* PostInputType.swift in Sources */,

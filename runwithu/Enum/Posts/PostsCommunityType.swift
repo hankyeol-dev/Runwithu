@@ -38,4 +38,17 @@ enum PostsCommunityType: String, CaseIterable {
          return .marathon
       }
    }
+   
+   var byDetailLabel: String {
+      switch self {
+      case .epilogue:
+         return "러닝 일지"
+      case .product_epilogue:
+         return "러닝 용품 후기"
+      case .qna:
+         return "러닝 질문"
+      case .open_self_marathon:
+         return "셀프 마라톤"
+      }
+   }
 }

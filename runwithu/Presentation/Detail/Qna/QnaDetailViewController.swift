@@ -13,7 +13,6 @@ import RxCocoa
 final class QnaDetailViewController: BaseViewController<QnaDetailView, QnaDetailViewModel> {
    private let didLoadInput = PublishSubject<Void>()
    
-   
    override func loadView() {
       view = baseView
    }
@@ -62,12 +61,11 @@ final class QnaDetailViewController: BaseViewController<QnaDetailView, QnaDetail
          .disposed(by: disposeBag)
       
       output.commentsEmitter
+         .debug("왜 구독이 안되는거지?")
          .bind(to: baseView.contentCommentsTable.rx.items(
             cellIdentifier: BaseCommentsView.id,
             cellType: BaseCommentsView.self)) { row, item, cell in
-               DispatchQueue.main.async {
-                  cell.bindView(for: item)
-               }
+               cell.bindView(for: item)
             }
             .disposed(by: disposeBag)
    }
