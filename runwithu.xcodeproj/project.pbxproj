@@ -24,6 +24,12 @@
 		8157F1742C7CA8D700661BB6 /* RunningGroupDetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1732C7CA8D700661BB6 /* RunningGroupDetailInfoView.swift */; };
 		8157F1762C7CA8E500661BB6 /* RunnigGroupDetailInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1752C7CA8E500661BB6 /* RunnigGroupDetailInfoViewModel.swift */; };
 		8157F1782C7CC10900661BB6 /* RunningGroupEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1772C7CC10900661BB6 /* RunningGroupEntryCell.swift */; };
+		8157F17B2C7CC6B100661BB6 /* InvitationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F17A2C7CC6B100661BB6 /* InvitationDetailView.swift */; };
+		8157F17D2C7CC6B900661BB6 /* InvitationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F17C2C7CC6B900661BB6 /* InvitationDetailViewModel.swift */; };
+		8157F17F2C7CC6C300661BB6 /* InvitationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F17E2C7CC6C300661BB6 /* InvitationDetailViewController.swift */; };
+		8157F1812C7D35C200661BB6 /* BaseUserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1802C7D35C200661BB6 /* BaseUserImage.swift */; };
+		8157F18D2C7D9EFB00661BB6 /* iamport-ios in Frameworks */ = {isa = PBXBuildFile; productRef = 8157F18C2C7D9EFB00661BB6 /* iamport-ios */; };
+		8157F1912C7DB84300661BB6 /* PostLikeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1902C7DB84300661BB6 /* PostLikeDTO.swift */; };
 		81A3B8EB2C744972009AD659 /* RunningGroupPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */; };
 		81A3B8ED2C745054009AD659 /* StepBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EC2C745054009AD659 /* StepBar.swift */; };
 		81A3B8EF2C74AFB6009AD659 /* RunningGroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */; };
@@ -158,6 +164,11 @@
 		8157F1732C7CA8D700661BB6 /* RunningGroupDetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupDetailInfoView.swift; sourceTree = "<group>"; };
 		8157F1752C7CA8E500661BB6 /* RunnigGroupDetailInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnigGroupDetailInfoViewModel.swift; sourceTree = "<group>"; };
 		8157F1772C7CC10900661BB6 /* RunningGroupEntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupEntryCell.swift; sourceTree = "<group>"; };
+		8157F17A2C7CC6B100661BB6 /* InvitationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationDetailView.swift; sourceTree = "<group>"; };
+		8157F17C2C7CC6B900661BB6 /* InvitationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationDetailViewModel.swift; sourceTree = "<group>"; };
+		8157F17E2C7CC6C300661BB6 /* InvitationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationDetailViewController.swift; sourceTree = "<group>"; };
+		8157F1802C7D35C200661BB6 /* BaseUserImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUserImage.swift; sourceTree = "<group>"; };
+		8157F1902C7DB84300661BB6 /* PostLikeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeDTO.swift; sourceTree = "<group>"; };
 		81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupPreviewView.swift; sourceTree = "<group>"; };
 		81A3B8EC2C745054009AD659 /* StepBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepBar.swift; sourceTree = "<group>"; };
 		81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupListViewController.swift; sourceTree = "<group>"; };
@@ -273,6 +284,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8157F18D2C7D9EFB00661BB6 /* iamport-ios in Frameworks */,
 				81E7FF962C6F2B6200200CF2 /* RxSwift in Frameworks */,
 				81E7FF942C6F2B6200200CF2 /* RxCocoa in Frameworks */,
 				81E7FF9C2C6F308600200CF2 /* FlexLayout in Frameworks */,
@@ -346,6 +358,16 @@
 				8157F1772C7CC10900661BB6 /* RunningGroupEntryCell.swift */,
 			);
 			path = RunningGroup;
+			sourceTree = "<group>";
+		};
+		8157F1792C7CC69D00661BB6 /* Invitation */ = {
+			isa = PBXGroup;
+			children = (
+				8157F17A2C7CC6B100661BB6 /* InvitationDetailView.swift */,
+				8157F17C2C7CC6B900661BB6 /* InvitationDetailViewModel.swift */,
+				8157F17E2C7CC6C300661BB6 /* InvitationDetailViewController.swift */,
+			);
+			path = Invitation;
 			sourceTree = "<group>";
 		};
 		81A3B90B2C74EB36009AD659 /* RunningInvitation */ = {
@@ -504,6 +526,7 @@
 		81A3B9972C7B7889009AD659 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				8157F1792C7CC69D00661BB6 /* Invitation */,
 				8157F16A2C7C78E700661BB6 /* RunningGroup */,
 				81A3B9982C7B789C009AD659 /* Qna */,
 			);
@@ -703,6 +726,7 @@
 				81E7FF772C6EFE2100200CF2 /* GetPostDTO.swift */,
 				81E7FF792C6F07E600200CF2 /* UpdatePostDTO.swift */,
 				8157F1682C7C516D00661BB6 /* CommentsDTO.swift */,
+				8157F1902C7DB84300661BB6 /* PostLikeDTO.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -798,6 +822,7 @@
 				81A3B99B2C7B7A55009AD659 /* BaseCreatorView.swift */,
 				81A3B9A52C7C00A8009AD659 /* BaseScrollView.swift */,
 				8157F1662C7C3A3E00661BB6 /* BaseCommentsView.swift */,
+				8157F1802C7D35C200661BB6 /* BaseUserImage.swift */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -827,6 +852,7 @@
 				81E7FFAD2C6F701400200CF2 /* IQKeyboardManagerSwift */,
 				81A3B9672C7847E3009AD659 /* RxGesture */,
 				81A3B99E2C7B7A9D009AD659 /* Kingfisher */,
+				8157F18C2C7D9EFB00661BB6 /* iamport-ios */,
 			);
 			productName = runwithu;
 			productReference = 81E7FEFA2C6C6BBD00200CF2 /* runwithu.app */;
@@ -864,6 +890,7 @@
 				81E7FFAC2C6F701400200CF2 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				81A3B9662C7847E3009AD659 /* XCRemoteSwiftPackageReference "RxGesture" */,
 				81A3B99D2C7B7A9D009AD659 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				8157F18B2C7D9EFB00661BB6 /* XCRemoteSwiftPackageReference "iamport-ios" */,
 			);
 			productRefGroup = 81E7FEFB2C6C6BBD00200CF2 /* Products */;
 			projectDirPath = "";
@@ -926,6 +953,7 @@
 				81E7FF462C6C7C0100200CF2 /* Extension+Encodable.swift in Sources */,
 				81E7FF672C6EDFEB00200CF2 /* ImageUploadDTO.swift in Sources */,
 				81E7FF252C6C6C2700200CF2 /* ViewController.swift in Sources */,
+				8157F1812C7D35C200661BB6 /* BaseUserImage.swift in Sources */,
 				81E7FF802C6F183700200CF2 /* Extension+Date.swift in Sources */,
 				8157F1742C7CA8D700661BB6 /* RunningGroupDetailInfoView.swift in Sources */,
 				81E7FF442C6C7B6D00200CF2 /* NetworkErrors.swift in Sources */,
@@ -950,6 +978,7 @@
 				81A3B8F52C74B18D009AD659 /* PlusButton.swift in Sources */,
 				81A3B9772C7865D7009AD659 /* RunningEpiloguePostView.swift in Sources */,
 				81E7FF3D2C6C762F00200CF2 /* JoinDTO.swift in Sources */,
+				8157F17D2C7CC6B900661BB6 /* InvitationDetailViewModel.swift in Sources */,
 				81A3B97E2C786668009AD659 /* ProductEpiloguePostViewModel.swift in Sources */,
 				81E7FF412C6C76E100200CF2 /* ValidEmailDTO.swift in Sources */,
 				811D37822C7404170017E17C /* RoundedTextViewWithTitle.swift in Sources */,
@@ -957,6 +986,7 @@
 				81A3B9A12C7B7B9B009AD659 /* QnaDetailViewController.swift in Sources */,
 				81A3B9632C783F69009AD659 /* TabItems.swift in Sources */,
 				81E7FFBC2C700DCA00200CF2 /* JoinView.swift in Sources */,
+				8157F17B2C7CC6B100661BB6 /* InvitationDetailView.swift in Sources */,
 				81E7FF8C2C6F22BE00200CF2 /* CreateRunningGroupInput.swift in Sources */,
 				81A3B9342C757F6A009AD659 /* RectangleView.swift in Sources */,
 				81A3B97C2C78660A009AD659 /* RunningEpiloguePostViewController.swift in Sources */,
@@ -969,6 +999,7 @@
 				81A3B9942C7B2C69009AD659 /* QnaPostViewController.swift in Sources */,
 				81A3B9162C74EE19009AD659 /* Extension+UIButton.swift in Sources */,
 				81A3B96F2C784B69009AD659 /* RunningCommunityViewModel.swift in Sources */,
+				8157F17F2C7CC6C300661BB6 /* InvitationDetailViewController.swift in Sources */,
 				811D37732C737DCB0017E17C /* BaseTableViewCell.swift in Sources */,
 				81E7FF5D2C6D8F9B00200CF2 /* TokenErrors.swift in Sources */,
 				81E7FF242C6C6C2700200CF2 /* Extension+UIView.swift in Sources */,
@@ -1011,6 +1042,7 @@
 				81E7FF842C6F1CBC00200CF2 /* RunningProductType.swift in Sources */,
 				81A3B9742C7855CB009AD659 /* MainTabbarController.swift in Sources */,
 				81A3B9A42C7B7C00009AD659 /* QnaDetailViewModel.swift in Sources */,
+				8157F1912C7DB84300661BB6 /* PostLikeDTO.swift in Sources */,
 				81A3B9382C759B4C009AD659 /* RoundedAddUserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1159,6 +1191,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = runwithu/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "런윗유 - 함께 달려요";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "러너님의 소중한 러닝 일지, 러닝 용품 후기, 마라톤 개최, 러닝 그룹 생성을 위해 사진 앨범 사용 권한이 필요해요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1192,6 +1225,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = runwithu/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "런윗유 - 함께 달려요";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "러너님의 소중한 러닝 일지, 러닝 용품 후기, 마라톤 개최, 러닝 그룹 생성을 위해 사진 앨범 사용 권한이 필요해요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1238,6 +1272,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8157F18B2C7D9EFB00661BB6 /* XCRemoteSwiftPackageReference "iamport-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/iamport/iamport-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 		81A3B9662C7847E3009AD659 /* XCRemoteSwiftPackageReference "RxGesture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxGesture.git";
@@ -1297,6 +1339,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8157F18C2C7D9EFB00661BB6 /* iamport-ios */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8157F18B2C7D9EFB00661BB6 /* XCRemoteSwiftPackageReference "iamport-ios" */;
+			productName = "iamport-ios";
+		};
 		81A3B9672C7847E3009AD659 /* RxGesture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 81A3B9662C7847E3009AD659 /* XCRemoteSwiftPackageReference "RxGesture" */;

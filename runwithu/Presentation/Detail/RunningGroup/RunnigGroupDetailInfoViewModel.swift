@@ -36,7 +36,7 @@ final class RunnigGroupDetailInfoViewModel: BaseViewModelProtocol {
       input.didLoadInput
          .subscribe(with: self) { vm, _ in
             Task {
-               await vm.getEntries()
+               await vm.getEntry()
                didLoadEntrys.onNext(vm.entries)
             }
          }
@@ -69,44 +69,10 @@ final class RunnigGroupDetailInfoViewModel: BaseViewModelProtocol {
       }
    }
    
-   private func getEntries() async {
-      if !groupPost.likes.isEmpty {
-         await withTaskGroup(of: BaseProfileType?.self) { [weak self] taskGroup in
-            guard let self else { return }
-            for like in self.groupPost.likes {
-               taskGroup.addTask {
-                  if let entry = await self.getEntry(for: like) {
-                     return entry
-                  } else {
-                     return nil
-                  }
-               }
-            }
-            
-            for await entry in taskGroup {
-               if let entry {
-                  self.entries.append(entry)
-               }
-            }
-         }
-      }
-   }
-   
-   private func getEntry(for userId: String) async -> BaseProfileType? {
-      return await withCheckedContinuation { continuation in
-         Task {
-            do {
-               let result = try await networkManager.request(
-                  by: UserEndPoint.readAnotherProfile(input: .init(user_id: userId)),
-                  of: BaseProfileType.self)
-               continuation.resume(returning: result)
-            } catch NetworkErrors.needToRefreshRefreshToken {
-               await self.tempLoginAPI()
-               continuation.resume(returning: await self.getEntry(for: userId))
-            } catch {
-               continuation.resume(returning: nil)
-            }
-         }
+   private func getEntry() async {
+      await getEntries(from: groupPost.likes) { [weak self] profile in
+         guard let self else { return }
+         self.entries.append(profile)
       }
    }
 }

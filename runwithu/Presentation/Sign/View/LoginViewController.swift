@@ -91,7 +91,7 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
             vc.baseView.displayToast(for: "로그인 성공 :D", isError: false, duration: 1)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-               vc.dismissStack(for: ViewController())
+               vc.dismissStack(for: MainTabbarController())
             }
          }
          .disposed(by: disposeBag)

@@ -101,4 +101,48 @@ extension BaseViewModelProtocol {
          print("로그인 에러임")
       }
    }
+   
+   func getEntries(
+      from userIds: [String],
+      completion: @escaping (BaseProfileType) -> Void
+   ) async {
+      if !userIds.isEmpty {
+         await withTaskGroup(of: BaseProfileType?.self) { [weak self] taskGroup in
+            guard let self else { return }
+            for userId in userIds {
+               taskGroup.addTask {
+                  if let entry = await self.getEntry(for: userId) {
+                     return entry
+                  } else {
+                     return nil
+                  }
+               }
+            }
+            
+            for await entry in taskGroup {
+               if let entry {
+                  completion(entry)
+               }
+            }
+         }
+      }
+   }
+   
+   private func getEntry(for userId: String) async -> BaseProfileType? {
+      return await withCheckedContinuation { continuation in
+         Task {
+            do {
+               let result = try await networkManager.request(
+                  by: UserEndPoint.readAnotherProfile(input: .init(user_id: userId)),
+                  of: BaseProfileType.self)
+               continuation.resume(returning: result)
+            } catch NetworkErrors.needToRefreshRefreshToken {
+               await self.tempLoginAPI()
+               continuation.resume(returning: await self.getEntry(for: userId))
+            } catch {
+               continuation.resume(returning: nil)
+            }
+         }
+      }
+   }
 }

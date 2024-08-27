@@ -22,4 +22,8 @@ final class BaseLabel: UILabel {
    required init?(coder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
    }
+   
+   func bindText(_ text: String) {
+      self.text = text
+   }
 }

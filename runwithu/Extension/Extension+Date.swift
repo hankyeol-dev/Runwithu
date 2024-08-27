@@ -32,4 +32,12 @@ extension String {
    func formattedCreatedAt() -> String {
       return self.split(separator: "T").joined(separator: " ").split(separator: ".247Z").joined()
    }
+   
+   func formattedRunningDateString() -> String? {
+      if let date = self.split(separator: " ").map({ String($0) }).first {
+         return date
+      } else {
+         return nil
+      }
+   }
 }

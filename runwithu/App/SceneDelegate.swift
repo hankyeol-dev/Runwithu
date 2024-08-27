@@ -17,12 +17,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       window = UIWindow(windowScene: scene)
       
       let root = UINavigationController(
-         rootViewController: RunningGroupDetailViewController(
-            bv: RunningGroupDetailView(),
-            vm: RunningGroupDetailViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared, groupId: "66c4a902fb4075f9214129c5"),
+         rootViewController: InvitationDetailViewController(
+            bv: InvitationDetailView(),
+            vm: InvitationDetailViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared, invitationId: AppEnvironment.demoInvitationId),
             db: DisposeBag())
       )
-//      let root = UINavigationController(rootViewController: MainTabbarController())
+//            let root = UINavigationController(rootViewController: MainTabbarController())
+//            let root = UINavigationController(
+//               rootViewController: LoginViewController(
+//                  bv: LoginView(),
+//                  vm: LoginViewModel(disposeBag: DisposeBag(),
+//                                     networkManager: NetworkService.shared,
+//                                     tokenManager: TokenManager.shared),
+//                  db: DisposeBag()))
+//      let root = UINavigationController(
+//         rootViewController: QnaDetailViewController(
+//            bv: QnaDetailView(), 
+//            vm: QnaDetailViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared, qnaId: AppEnvironment.demoQnaId),
+//            db: DisposeBag())
+//      )
+      
       
       window?.rootViewController = root
       window?.makeKeyAndVisible()

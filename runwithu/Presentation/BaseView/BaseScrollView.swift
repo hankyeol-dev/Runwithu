@@ -16,7 +16,7 @@ final class BaseScrollView: BaseView {
    override func setSubviews() {
       super.setSubviews()
       
-      addSubviews(scrollView)
+      addSubview(scrollView)
       scrollView.addSubview(contentsView)
    }
    
@@ -27,7 +27,7 @@ final class BaseScrollView: BaseView {
       }
       contentsView.snp.makeConstraints { make in
          make.width.equalToSuperview()
-         make.verticalEdges.equalTo(scrollView.safeAreaLayoutGuide)
+         make.verticalEdges.equalTo(scrollView)
       }
    }
 }

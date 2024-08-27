@@ -16,6 +16,7 @@ enum PostEndPoint: EndPointProtocol {
    case updatePost(input: UpdatePostInput)
    case deletePost(input: GetPostInput)
    case postComment(input: CommentsInput)
+   case postLike(input: PostLikeInput)
    
    var isNeedToken: Bool {
       return true
@@ -44,12 +45,14 @@ enum PostEndPoint: EndPointProtocol {
          return "/\(input.post_id)"
       case let .postComment(input):
          return "/\(input.post_id)/comments"
+      case let .postLike(input):
+         return "/\(input.postId)/like"
       }
    }
    
    var method: NetworkMethod {
       switch self {
-      case .postImageUpload, .posts, .postComment:
+      case .postImageUpload, .posts, .postComment, .postLike:
          return .post
       case .getPost, .getPosts, .getPostImage:
          return .get
@@ -102,6 +105,8 @@ enum PostEndPoint: EndPointProtocol {
          return input.updateInput.converToJSON()
       case let .postComment(input):
          return input.comment.converToJSON()
+      case let .postLike(input):
+         return input.isLike.converToJSON()
       default:
          return nil
       }
