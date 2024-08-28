@@ -27,7 +27,6 @@ final class NetworkService {
    ) async throws -> D {
       let request = try await endPoint.asURLRequest()
       let (data, response) = try await session.data(for: request)
-            
       do {
          return try await handleResponse(data: data, response: response)
       } catch NetworkErrors.needToRefreshAccessToken {

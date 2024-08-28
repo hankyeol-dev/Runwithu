@@ -21,8 +21,8 @@ final class RoundedButtonView: UIButton {
       self.init(frame: .zero)
       
       setTitle(title, for: .normal)
+      setTitleColor(baseColor, for: .normal)
       backgroundColor = backColor
-      titleLabel?.textColor = baseColor
       layer.cornerRadius = radius
    }
 }

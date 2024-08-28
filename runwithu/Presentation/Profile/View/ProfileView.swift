@@ -14,16 +14,23 @@ final class ProfileView: BaseView, BaseViewProtocol {
    private var isUserProfile = false
    private let contentsFlexBox = UIView()
    
-   private let profileHeaderRectangle = RectangleView(backColor: .systemIndigo, radius: 32)
-   let profileImage = UIImageView()
-   let profileNickname = BaseLabel(for: "", font: .boldSystemFont(ofSize: 24), color: .white)
-   let profileFollower = BaseLabel(for: "", font: .systemFont(ofSize: 13), color: .white)
-   let profileFollowing = BaseLabel(for: "", font: .systemFont(ofSize: 13), color: .white)
+   private let profileHeaderRectangle = RectangleView(backColor: .white, radius: 16)
+   let profileImage = BaseUserImage(size: 44)
+   let profileNickname = BaseLabel(for: "", font: .boldSystemFont(ofSize: 18), color: .black)
+   let profileFollower = BaseLabel(for: "", font: .systemFont(ofSize: 12, weight: .light), color: .black)
+   let profileFollowing = BaseLabel(for: "", font: .systemFont(ofSize: 12, weight: .light), color: .black)
+   let followButton = RoundedButtonView("팔로우", backColor: .clear, baseColor: .white, radius: 4)
    
-   let sendRunningInvitationButton = RoundedButtonView("함께 달리기 초대 보내기", backColor: .systemIndigo, baseColor: .white)
+   let sendRunningInvitationButton = RoundedButtonView(
+      "✉️  함께 달리기 초대하기", backColor: .black, baseColor: .white, radius: 12)
    
-   private let profileInfoRectangle = RectangleView(backColor: .systemGray4, radius: 24)
-   private let postCountView = RoundedMenuView()
+   private let profileInfoRectangle = RectangleView(backColor: .white, radius: 0)
+   let runningEpilogueMenu = RoundedMenuView(title: "러닝 일지")
+   let runningProductEpilogueMenu = RoundedMenuView(title: "용품 후기")
+   let runningQnaMenu = RoundedMenuView(title: "러닝 QnA")
+   let selfMarathonMenu = RoundedMenuView(title: "셀프 마라톤", count: 0)
+   let runningInvitationMenu = RoundedMenuView(title: "함께 달리기")
+   let runningGroupMenu = RoundedMenuView(title: "러닝 그룹")
    
    
    override func setSubviews() {
@@ -47,28 +54,41 @@ final class ProfileView: BaseView, BaseViewProtocol {
          .direction(.column)
          .rowGap(16)
          .define { flex in
+            
             flex.addItem(profileHeaderRectangle)
-               .direction(.column)
-               .padding(24)
-               .alignItems(.start)
+               .width(100%)
+               .padding(16, 24)
+               .direction(.row)
                .define { flex in
                   flex.addItem(profileImage)
-                     .size(60)
-                     .marginBottom(20)
-                  flex.addItem(profileNickname)
-                     .width(100%)
-                     .marginBottom(8)
+                     .width(44)
+                     .height(44)
+                     .marginRight(16)
                   flex.addItem()
-                     .direction(.row)
-                     .alignItems(.center)
-                     .justifyContent(.spaceAround)
-                     .columnGap(16)
+                     .direction(.column)
+                     .rowGap(4)
                      .define { flex in
-                        flex.addItem(profileFollower)
+                        flex.addItem(profileNickname)
                            .height(20)
-                        flex.addItem(profileFollowing)
-                           .height(20)
+                           .grow(1)
+                        flex.addItem().direction(.row)
+                           .define { flex in
+                              flex.addItem(profileFollower)
+                                 .height(20)
+                                 .grow(1)
+                                 .marginRight(8)
+                              flex.addItem(profileFollowing)
+                                 .height(20)
+                                 .grow(1)
+                           }
+                           .marginBottom(4)
+                        if !isUserProfile {
+                           flex.addItem(followButton)
+                              .height(24)
+                              .width(64)
+                        }
                      }
+                  
                }
             
             if !isUserProfile {
@@ -78,12 +98,26 @@ final class ProfileView: BaseView, BaseViewProtocol {
             
             flex.addItem(profileInfoRectangle)
                .direction(.row)
-               .padding(16)
-               .justifyContent(.spaceEvenly)
+               .justifyContent(.spaceBetween)
                .wrap(.wrap)
-               .gap(12)
+               .gap(16)
                .define { flex in
-                  flex.addItem(postCountView)
+                  flex.addItem(runningEpilogueMenu)
+                     .width(30%)
+                     .height(80)
+                  flex.addItem(runningProductEpilogueMenu)
+                     .width(30%)
+                     .height(80)
+                  flex.addItem(runningQnaMenu)
+                     .width(30%)
+                     .height(80)
+                  flex.addItem(runningInvitationMenu)
+                     .width(30%)
+                     .height(80)
+                  flex.addItem(runningGroupMenu)
+                     .width(30%)
+                     .height(80)
+                  flex.addItem(selfMarathonMenu)
                      .width(30%)
                      .height(80)
                }
@@ -95,13 +129,59 @@ final class ProfileView: BaseView, BaseViewProtocol {
    override func setUI() {
       super.setUI()
       
-      profileImage.forSymbolImageWithTintColor(for: "person.circle", ofSize: 40, tintColor: .white)
-      profileNickname.text = "닉네임입니다."
+      profileHeaderRectangle.layer.borderColor = UIColor.darkGray.cgColor
+      profileHeaderRectangle.layer.borderWidth = 1
+      followButton.titleLabel?.font = .systemFont(ofSize: 10)
+      followButton.layer.borderColor = UIColor.black.cgColor
+      followButton.layer.borderWidth = 1
+   }
+   
+   func bindView(for profile: ProfileOutput) {
+      profileNickname.bindText(profile.nick)
+      profileFollower.bindText("팔로워 - \(profile.followers.count)명")
+      profileFollowing.bindText("팔로잉 - \(profile.following.count)명")
       
-      profileFollower.text = "팔로워 - 0명"
-      profileFollowing.text = "팔로잉 - 0명"
+      if let profileImageURL = profile.profileImage {
+         Task {
+            await getImageFromServer(for: profileImage, by: profileImageURL)
+         }
+      } else {
+         profileImage.image = .userSelected
+         profileImage.backgroundColor = .white
+      }
+      setNeedsLayout()
+   }
+   
+   func bindView(for isFollowingUser: Bool) {
+      if !isUserProfile {
+         followButton.setTitle(isFollowingUser ? "팔로우 취소" : "팔로우", for: .normal)
+         followButton.setTitleColor(isFollowingUser ? .black : .white, for: .normal)
+         followButton.backgroundColor = isFollowingUser ? .white : .black
+      }
+   }
+   
+   func bindView(for postsList: [String: [PostsOutput]]) {
+      if let key = postsList[PostsCommunityType.epilogue.rawValue] {
+         runningEpilogueMenu.bindView(count: key.count)
+      }
       
-      postCountView.bindView(title: "커뮤니티", count: "5")
+      if let key = postsList[PostsCommunityType.product_epilogue.rawValue] {
+         runningProductEpilogueMenu.bindView(count: key.count)
+      }
+      
+      if let key = postsList[PostsCommunityType.qna.rawValue] {
+         runningQnaMenu.bindView(count: key.count)
+      }
+      
+      if let key = postsList[ProductIds.runwithu_running_inviation.rawValue] {
+         runningInvitationMenu.bindView(count: key.count)
+      }
+      
+      if let key = postsList[ProductIds.runwithu_running_group.rawValue] {
+         runningGroupMenu.bindView(count: key.count)
+      }
+      
+      setNeedsLayout()
    }
    
    func bindViewState(for state: Bool) {

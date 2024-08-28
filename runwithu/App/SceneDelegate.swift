@@ -16,29 +16,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       guard let scene = (scene as? UIWindowScene) else { return }
       window = UIWindow(windowScene: scene)
       
-      //      let root = UINavigationController(
-      //         rootViewController: InvitationDetailViewController(
-      //            bv: InvitationDetailView(),
-      //            vm: InvitationDetailViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared, invitationId: AppEnvironment.demoInvitationId),
-      //            db: DisposeBag())
-      //      )
-//            let root = UINavigationController(rootViewController: MainTabbarController())
-      //            let root = UINavigationController(
-      //               rootViewController: LoginViewController(
-      //                  bv: LoginView(),
-      //                  vm: LoginViewModel(disposeBag: DisposeBag(),
-      //                                     networkManager: NetworkService.shared,
-      //                                     tokenManager: TokenManager.shared),
-      //                  db: DisposeBag()))
-      let root = UINavigationController(
-         rootViewController: RunningEpilogueDetailViewController(
-            bv: RunningEpilogueDetailView(),
-            vm: RunningEpilogueDetailViewModel(disposeBag: DisposeBag(), networkManager: NetworkService.shared, epilogueId: AppEnvironment.demoEpilogueId),
+      // MARK: MainTabBar
+      let root0 = UINavigationController(rootViewController: MainTabbarController())
+      
+      
+      // MARK: ProfileView
+      let root1 = UINavigationController(
+         rootViewController: ProfileViewController(
+            bv: ProfileView(),
+            vm: ProfileViewModel(
+               disposeBag: DisposeBag(),
+               networkManager: NetworkService.shared,
+               isUserProfile: false, userId: AppEnvironment.demoUserId),
             db: DisposeBag())
       )
       
+      // MARK: LoginView
+      let root2 = UINavigationController(
+         rootViewController: LoginViewController(
+            bv: LoginView(),
+            vm: LoginViewModel(
+               disposeBag: DisposeBag(),
+               networkManager: NetworkService.shared,
+               tokenManager: TokenManager.shared),
+            db: DisposeBag()
+         )
+      )
       
-      window?.rootViewController = root
+      window?.rootViewController = root1
       window?.makeKeyAndVisible()
    }
    

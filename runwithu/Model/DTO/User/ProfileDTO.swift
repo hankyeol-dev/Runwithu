@@ -37,6 +37,15 @@ struct ProfileUserIdOutput: Decodable {
    let user_id: String
 }
 
+struct FollowInput {
+   let user_id: String
+   let isFollowing: Bool
+}
+
+struct FollowOutput: Decodable {
+   let following_status: Bool
+}
+
 struct FollowingsOutput: Decodable {
    let following: [BaseProfileType]
 }

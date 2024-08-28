@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 final class RunningInvitationCreateViewController: BaseViewController<RunningInvitationCreateView, RunningInvitationCreateViewModel> {
+   var willDisappearHanlder: ((String) -> Void)?
    private let didLoadInput = PublishSubject<Void>()
    
    override func loadView() {
@@ -21,9 +22,11 @@ final class RunningInvitationCreateViewController: BaseViewController<RunningInv
       super.viewDidLoad()
       didLoadInput.onNext(())
    }
-   
-   override func bindViewAtWillAppear() {
-      super.bindViewAtWillAppear()
+
+   override func viewDidDisappear(_ animated: Bool) {
+      super.viewDidDisappear(animated)
+      let invitationId = viewModel.getInvitationId()
+      willDisappearHanlder?(invitationId)
    }
    
    override func bindViewAtDidLoad() {
@@ -165,8 +168,17 @@ final class RunningInvitationCreateViewController: BaseViewController<RunningInv
          for: baseView.runningRewards)
       
       output.createResult
+         .subscribe(on: MainScheduler.instance)
          .bind(with: self) { vc, result in
-            dump(result)
+            if let error = result.1 {
+               vc.baseView.displayToast(for: error, isError: true, duration: 2)
+            }
+            
+            if let success = result.0 {
+               DispatchQueue.main.async {
+                  vc.dismiss(animated: true)
+               }
+            }
          }
          .disposed(by: disposeBag)
    }

@@ -24,12 +24,9 @@ final class QnaPostViewController: BaseViewController<QnaPostView, QnaPostViewMo
    
    override func viewDidDisappear(_ animated: Bool) {
       super.viewDidDisappear(animated)
-      print("여기가 안들어오나?")
       let qnaPostId = viewModel.getGeneratedQnaPostId()
       willDisappearHanlder?(qnaPostId)
    }
-   
-   
    
    override func bindViewAtDidLoad() {
       super.bindViewAtDidLoad()

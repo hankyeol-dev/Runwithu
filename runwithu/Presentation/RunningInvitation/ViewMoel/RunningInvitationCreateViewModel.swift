@@ -13,7 +13,9 @@ final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
    let disposeBag: DisposeBag
    let networkManager: NetworkService
    
-   private var invitedUsers:[String] = []
+   private var invitationId = ""
+   private var mainInvitedUserId: [String] = []
+   private var invitedUsers: [String] = []
    private let publishedInvitedUsers = PublishSubject<[String]>()
    private var followings: [BaseProfileType] = []
    private var title = ""
@@ -154,10 +156,22 @@ final class RunningInvitationCreateViewModel: BaseViewModelProtocol {
          publishedInvitedUsers: publishedInvitedUsers
       )
    }
+   
+   func getInvitationId() -> String { return invitationId }
 }
 
 extension RunningInvitationCreateViewModel {
    typealias runningInfoHandler = (String) -> Void
+   
+   func appendOrRemoveFromInvitedUsers(userId: String, username: String) {
+      if let userIndex = invitedUsers.firstIndex(of: username) {
+         invitedUsers.remove(at: userIndex)
+      } else {
+         mainInvitedUserId.append(userId)
+         invitedUsers.append(username)
+      }
+      publishedInvitedUsers.onNext(invitedUsers)
+   }
    
    func appendOrRemoveFromInvitedUsers(username: String) {
       if let userIndex = invitedUsers.firstIndex(of: username) {
@@ -165,6 +179,7 @@ extension RunningInvitationCreateViewModel {
       } else {
          invitedUsers.append(username)
       }
+      
       publishedInvitedUsers.onNext(invitedUsers)
    }
    
@@ -203,7 +218,7 @@ extension RunningInvitationCreateViewModel {
       let createInvitationInput: CreateInvitationInput = .init(
          title: title,
          content: content,
-         invited: followings.filter { invitedUsers.contains($0.nick) }.map { $0.user_id },
+         invited: mainInvitedUserId + followings.filter { invitedUsers.contains($0.nick) }.map { $0.user_id },
          runningInfo: runningInfo
       )
       
@@ -212,6 +227,7 @@ extension RunningInvitationCreateViewModel {
             by: PostEndPoint.posts(input: createInvitationInput.formatToPostsInput),
             of: PostsOutput.self
          )
+         invitationId = results.post_id
          successEmitter.onNext((results.post_id, nil))
       } catch NetworkErrors.needToRefreshRefreshToken {
          await tempLoginAPI()

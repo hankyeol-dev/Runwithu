@@ -10,42 +10,44 @@ import UIKit
 import SnapKit
 
 final class RoundedMenuView: BaseView {
-   private let titleLabel = BaseLabel(for: "", font: .systemFont(ofSize: 14, weight: .semibold), color: .darkGray)
-   private let countLabel = BaseLabel(for: "", font: .boldSystemFont(ofSize: 20), color: .black)
+   private let menuTitle = BaseLabel(for: "", font: .systemFont(ofSize: 14, weight: .semibold), color: .darkGray)
+   private let menuCount = BaseLabel(for: "", font: .boldSystemFont(ofSize: 18), color: .black)
+   
+   convenience init(title: String, count: Int = 0) {
+      self.init(frame: .zero)
+      menuTitle.bindText(title)
+      menuCount.bindText(String(count))
+   }
    
    override func setSubviews() {
       super.setSubviews()
-      
-      [titleLabel, countLabel].forEach {
-         addSubview($0)
-      }
+      addSubviews(menuTitle, menuCount)
    }
    
    override func setLayout() {
       super.setLayout()
-      titleLabel.snp.makeConstraints { make in
+      menuTitle.snp.makeConstraints { make in
+         make.top.equalTo(safeAreaLayoutGuide).offset(16)
          make.centerX.equalToSuperview()
-         make.top.equalTo(safeAreaLayoutGuide).inset(16)
-         make.height.equalTo(20)
       }
-      countLabel.snp.makeConstraints { make in
+      menuCount.snp.makeConstraints { make in
          make.centerX.equalToSuperview()
-         make.top.equalTo(titleLabel.snp.bottom).offset(8)
-         make.height.equalTo(24)
+         make.top.equalTo(menuTitle.snp.bottom).offset(8)
+         make.bottom.equalTo(safeAreaLayoutGuide).inset(16)
       }
    }
+   
    
    override func setUI() {
       super.setUI()
       
       backgroundColor = .systemGray6
       layer.cornerRadius = 12
-      titleLabel.textAlignment = .center
-      countLabel.textAlignment = .center
+      menuTitle.textAlignment = .center
+      menuCount.textAlignment = .center
    }
    
-   func bindView(title: String, count: String) {
-      titleLabel.text = title
-      countLabel.text = count
+   func bindView(count: Int) {
+      menuCount.text = String(count)
    }
 }

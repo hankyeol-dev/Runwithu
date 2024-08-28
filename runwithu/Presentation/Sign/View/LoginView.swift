@@ -75,4 +75,10 @@ final class LoginView: BaseView, BaseViewProtocol {
       
       rootFlexBox.flex.layout(mode: .adjustHeight)
    }
+   
+   override func setUI() {
+      super.setUI()
+      
+      passwordInput.inputField.isSecureTextEntry = true
+   }
 }

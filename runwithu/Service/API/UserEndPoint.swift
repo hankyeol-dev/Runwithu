@@ -16,12 +16,13 @@ enum UserEndPoint: EndPointProtocol {
    case searchUserByNick(input: SearchUserByNickInput)
    case updateProfile(input: ProfileUpdateInput)
    case updateProfileImage(input: ProfileImageUpdateInput)
+   case follow(input: FollowInput)
    
    var isNeedToken: Bool {
       switch self {
       case .join, .login, .validEmail:
          return false
-      case .readMyProfile, .readAnotherProfile, .updateProfile, .updateProfileImage, .searchUserByNick:
+      default:
          return true
       }
    }
@@ -32,6 +33,8 @@ enum UserEndPoint: EndPointProtocol {
          return "/users"
       case .validEmail:
          return "/validation"
+      case .follow:
+         return "/follow"
       }
    }
    
@@ -49,6 +52,8 @@ enum UserEndPoint: EndPointProtocol {
          return "/search"
       case let .readAnotherProfile(input):
          return "/\(input.user_id)/profile"
+      case let .follow(input):
+         return "/\(input.user_id)"
       }
    }
    
@@ -60,6 +65,8 @@ enum UserEndPoint: EndPointProtocol {
          return .get
       case .updateProfile, .updateProfileImage:
          return .put
+      case let .follow(input):
+         return input.isFollowing ? .delete : .post
       }
    }
    

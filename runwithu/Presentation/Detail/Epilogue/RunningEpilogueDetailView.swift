@@ -44,7 +44,7 @@ final class RunningEpilogueDetailView: BaseView, BaseViewProtocol {
       let guide = scrollView.contentsView.safeAreaLayoutGuide
       creatorView.snp.makeConstraints { make in
          make.top.equalTo(guide).inset(8)
-         make.horizontalEdges.equalTo(24)
+         make.horizontalEdges.equalTo(16)
          make.height.equalTo(64)
       }
       
@@ -206,7 +206,7 @@ extension RunningEpilogueDetailView {
       let item = NSCollectionLayoutItem(layoutSize: itemSize)
       
       let groupSize = NSCollectionLayoutSize(
-         widthDimension: .fractionalWidth(0.85), heightDimension: .fractionalHeight(1.0))
+         widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(1.0))
       let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
       
       let section = NSCollectionLayoutSection(group: group)
