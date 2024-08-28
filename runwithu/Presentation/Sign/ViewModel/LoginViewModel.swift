@@ -13,24 +13,30 @@ final class LoginViewModel: BaseViewModelProtocol {
    let disposeBag: DisposeBag
    let networkManager: NetworkService
    let tokenManager: TokenManager
+   let userDefaultsManager: UserDefaultsManager
    
    private var email = ""
    private var password = ""
+   private var isAutoLogin = false
    
    init(
       disposeBag: DisposeBag,
       networkManager: NetworkService,
-      tokenManager: TokenManager
+      tokenManager: TokenManager,
+      userDefaultsManager: UserDefaultsManager
    ) {
       self.disposeBag = disposeBag
       self.networkManager = networkManager
       self.tokenManager = tokenManager
+      self.userDefaultsManager = userDefaultsManager
    }
    
    struct Input {
+      let willAppearInput: PublishSubject<Void>
       let email: PublishSubject<String>
       let password: PublishSubject<String>
       let loginButtonTapped: PublishSubject<Void>
+      let autoLoginCheckButtonTapped: PublishSubject<Void>
    }
    
    struct Output {
@@ -39,12 +45,14 @@ final class LoginViewModel: BaseViewModelProtocol {
       let isAbleToLogin: BehaviorSubject<Bool>
       let isLoginSuccess: PublishSubject<Bool>
       let isLoginError: PublishSubject<String>?
+      let isAutoLogin: PublishSubject<Bool>
    }
    
    func transform(for input: Input) -> Output {
       let isAbleToLogin = BehaviorSubject<Bool>(value: false)
       let isLoginSuccess = PublishSubject<Bool>()
       let isLoginError = PublishSubject<String>()
+      let isAutoLogin = PublishSubject<Bool>()
       
       input.email.subscribe(with: self) { vm, email in
          vm.email = email
@@ -55,6 +63,19 @@ final class LoginViewModel: BaseViewModelProtocol {
          vm.password = password
       }
       .disposed(by: disposeBag)
+      
+      input.willAppearInput
+         .subscribe(with: self) { vm, _ in
+            isAutoLogin.onNext(vm.isAutoLogin)
+         }
+         .disposed(by: disposeBag)
+      
+      input.autoLoginCheckButtonTapped
+         .subscribe(with: self) { vm, _ in
+            vm.isAutoLogin.toggle()
+            isAutoLogin.onNext(vm.isAutoLogin)
+         }
+         .disposed(by: disposeBag)
       
       let emailValidation = input.email
          .map { self.validateEmail(for: $0) }
@@ -87,10 +108,13 @@ final class LoginViewModel: BaseViewModelProtocol {
          passwordValidation: passwordValidation,
          isAbleToLogin: isAbleToLogin,
          isLoginSuccess: isLoginSuccess,
-         isLoginError: isLoginError
+         isLoginError: isLoginError,
+         isAutoLogin: isAutoLogin
       )
    }
-   
+}
+
+extension LoginViewModel {
    private func login(
       successEmitter: PublishSubject<Bool>,
       errorEmitter: PublishSubject<String>?
@@ -108,8 +132,18 @@ final class LoginViewModel: BaseViewModelProtocol {
          
          let accessTokenResult = await tokenManager.registerAccessToken(by: result.accessToken)
          let refreshTokenResult = await tokenManager.registerRefreshToken(by: result.refreshToken)
-         
+
          if accessTokenResult && refreshTokenResult {
+            await userDefaultsManager.registerUserId(by: result.user_id)
+            
+            if isAutoLogin {
+               await userDefaultsManager.registerAutoLogin(by: true)
+               await userDefaultsManager.registerUserEmail(by: result.email)
+               await userDefaultsManager.registerUserPassword(by: password)
+            } else {
+               await userDefaultsManager.registerAutoLogin(by: false)
+            }
+            
             successEmitter.onNext(true)
          } else {
             successEmitter.onNext(false)

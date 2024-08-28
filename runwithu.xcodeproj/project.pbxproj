@@ -34,6 +34,7 @@
 		8157F1942C7DC82200661BB6 /* RunningEpilogueDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1932C7DC82200661BB6 /* RunningEpilogueDetailView.swift */; };
 		8157F1962C7DC84000661BB6 /* RunningEpilogueDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1952C7DC84000661BB6 /* RunningEpilogueDetailViewModel.swift */; };
 		8157F1982C7DC88000661BB6 /* RunningEpilogueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1972C7DC88000661BB6 /* RunningEpilogueDetailViewController.swift */; };
+		818533A02C7EF88A00647F97 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8185339F2C7EF88A00647F97 /* UserDefaultsManager.swift */; };
 		81A3B8EB2C744972009AD659 /* RunningGroupPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */; };
 		81A3B8ED2C745054009AD659 /* StepBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EC2C745054009AD659 /* StepBar.swift */; };
 		81A3B8EF2C74AFB6009AD659 /* RunningGroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */; };
@@ -177,6 +178,7 @@
 		8157F1932C7DC82200661BB6 /* RunningEpilogueDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningEpilogueDetailView.swift; sourceTree = "<group>"; };
 		8157F1952C7DC84000661BB6 /* RunningEpilogueDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningEpilogueDetailViewModel.swift; sourceTree = "<group>"; };
 		8157F1972C7DC88000661BB6 /* RunningEpilogueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningEpilogueDetailViewController.swift; sourceTree = "<group>"; };
+		8185339F2C7EF88A00647F97 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupPreviewView.swift; sourceTree = "<group>"; };
 		81A3B8EC2C745054009AD659 /* StepBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepBar.swift; sourceTree = "<group>"; };
 		81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupListViewController.swift; sourceTree = "<group>"; };
@@ -734,6 +736,7 @@
 			isa = PBXGroup;
 			children = (
 				81E7FF5A2C6D7FF400200CF2 /* TokenManager.swift */,
+				8185339F2C7EF88A00647F97 /* UserDefaultsManager.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1008,6 +1011,7 @@
 				81A3B9A12C7B7B9B009AD659 /* QnaDetailViewController.swift in Sources */,
 				81A3B9632C783F69009AD659 /* TabItems.swift in Sources */,
 				81E7FFBC2C700DCA00200CF2 /* JoinView.swift in Sources */,
+				818533A02C7EF88A00647F97 /* UserDefaultsManager.swift in Sources */,
 				8157F17B2C7CC6B100661BB6 /* InvitationDetailView.swift in Sources */,
 				81E7FF8C2C6F22BE00200CF2 /* CreateRunningGroupInput.swift in Sources */,
 				81A3B9342C757F6A009AD659 /* RectangleView.swift in Sources */,

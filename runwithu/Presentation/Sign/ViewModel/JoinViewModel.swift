@@ -160,6 +160,9 @@ extension JoinViewModel {
       } catch NetworkErrors.invalidResponse {
          errorEmitter?.onNext("이미 사용중인 계정이에요.")
          successJoinEmitter.onNext(false)
+      } catch NetworkErrors.overlapUsername {
+         errorEmitter?.onNext("이미 사용중인 러너이름이에요.")
+         successJoinEmitter.onNext(false)
       } catch {
          errorEmitter?.onNext("알 수 없는 에러가 발생했어요.")
          successJoinEmitter.onNext(false)

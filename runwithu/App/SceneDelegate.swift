@@ -38,12 +38,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             vm: LoginViewModel(
                disposeBag: DisposeBag(),
                networkManager: NetworkService.shared,
-               tokenManager: TokenManager.shared),
+               tokenManager: TokenManager.shared,
+               userDefaultsManager: UserDefaultsManager.shared
+            ),
             db: DisposeBag()
          )
       )
       
-      window?.rootViewController = root1
+      window?.rootViewController = root2
       window?.makeKeyAndVisible()
    }
    

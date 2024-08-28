@@ -19,6 +19,7 @@ enum NetworkErrors: Error {
    case dataNotFound
    case noUploadData
    case invalidUpload
+   case overlapUsername
    
    var byErrorMessage: String {
       switch self {
@@ -44,6 +45,8 @@ enum NetworkErrors: Error {
          return Text.ErrorMessage.NEED_TO_CONFIGURE_UPLOAD_SOURCE.rawValue
       case .invalidUpload:
          return Text.ErrorMessage.INVALID_UPLOAD.rawValue
+      default:
+         return ""
       }
    }
 }

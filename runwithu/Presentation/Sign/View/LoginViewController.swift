@@ -15,6 +15,8 @@ import RxCocoa
 
 final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
    
+   private let willAppearInput = PublishSubject<Void>()
+   
    override func loadView() {
       view = baseView
    }
@@ -22,8 +24,11 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      baseView.emailInput.inputField.text = "7@runwithu.com"
-      baseView.passwordInput.inputField.text = "777777"
+   }
+   
+   override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      willAppearInput.onNext(())
    }
    
    override func bindViewAtDidLoad() {
@@ -32,11 +37,14 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
       let emailInputText = PublishSubject<String>()
       let passwordInputText = PublishSubject<String>()
       let loginButtonTapped = PublishSubject<Void>()
+      let autoLoginCheckButtonTapped = PublishSubject<Void>()
       
       let input = LoginViewModel.Input(
+         willAppearInput: willAppearInput,
          email: emailInputText,
          password: passwordInputText,
-         loginButtonTapped: loginButtonTapped
+         loginButtonTapped: loginButtonTapped,
+         autoLoginCheckButtonTapped: autoLoginCheckButtonTapped
       )
       let output = viewModel.transform(for: input)
       
@@ -64,6 +72,11 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
          }
          .disposed(by: disposeBag)
       
+      baseView.autoLoginCheckButton
+         .rx.tap
+         .bind(to: autoLoginCheckButtonTapped)
+         .disposed(by: disposeBag)
+      
       output.emailValidation
          .bind(with: self) { vc, valid in
             vc.baseView.emailInput.inputIndicatingLabel.isHidden = valid
@@ -82,6 +95,12 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
          }
          .disposed(by: disposeBag)
       
+      output.isAutoLogin
+         .bind(with: self) { vc, isAutoLogin in
+            vc.baseView.bindAutoLoginView(for: isAutoLogin)
+         }
+         .disposed(by: disposeBag)
+      
       output.isAbleToLogin
          .bind(to: baseView.loginButton.rx.isEnabled)
          .disposed(by: disposeBag)
@@ -95,6 +114,7 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
             }
          }
          .disposed(by: disposeBag)
+      
       
       if let errorState = output.isLoginError {
          errorState.bind(with: self) { vc, errorMessage in

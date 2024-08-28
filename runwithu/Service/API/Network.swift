@@ -142,6 +142,8 @@ extension NetworkService {
          throw NetworkErrors.invalidRequest
       case 401:
          throw NetworkErrors.invalidAccessToken
+      case 402:
+         throw NetworkErrors.overlapUsername
       case 403:
          throw NetworkErrors.invalidAccess
       case 409:

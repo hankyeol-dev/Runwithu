@@ -32,15 +32,15 @@ final class LoginView: BaseView, BaseViewProtocol {
       button.titleLabel?.font = .systemFont(ofSize: 13, weight: .semibold)
       return button
    }()
+   let autoLoginCheckButton = UIButton()
+   private let autoLoginCheckImage = UIImageView()
+   private let autoLoginCheck = BaseLabel(for: "자동 로그인", font: .systemFont(ofSize: 12))
    
    override func setSubviews() {
       super.setSubviews()
       
       addSubview(rootFlexBox)
-      
-      [loginWelcomeTitle, loginTitle, emailInput, passwordInput, loginButton, joinButton].forEach {
-         rootFlexBox.addSubview($0)
-      }
+      rootFlexBox.addSubviews(loginWelcomeTitle, loginTitle, emailInput, passwordInput, loginButton, joinButton)
    }
    
    override func layoutSubviews() {
@@ -61,7 +61,21 @@ final class LoginView: BaseView, BaseViewProtocol {
             
             flex.addItem(emailInput)
             flex.addItem(passwordInput)
-               .marginBottom(16)
+         
+            flex.addItem(autoLoginCheckButton)
+               .width(100%)
+               .height(44)
+               .padding(8)
+               .direction(.row)
+               .alignItems(.center)
+               .columnGap(8)
+               .define { flex in
+                  flex.addItem(autoLoginCheckImage)
+                     .size(16)
+                  flex.addItem(autoLoginCheck)
+                     .height(16)
+               }
+               .margin(0, 8, 8, 8)
             
             flex.addItem(loginButton)
                .height(48)
@@ -80,5 +94,11 @@ final class LoginView: BaseView, BaseViewProtocol {
       super.setUI()
       
       passwordInput.inputField.isSecureTextEntry = true
+   }
+   
+   func bindAutoLoginView(for isAutoLogin: Bool) {
+      autoLoginCheckImage.image = isAutoLogin ? .checked : .unchecked
+      autoLoginCheck.bindText(isAutoLogin ? "자동 로그인 할게요!" : "자동 로그인을 설정하실 수 있어요 :D")
+      autoLoginCheck.textColor = isAutoLogin ? .systemBlue : .black
    }
 }

@@ -40,7 +40,7 @@ final class InputWithTitleView: BaseView {
       
       flexBox.flex
          .direction(.column)
-         .padding(16)
+         .padding(8, 16)
          .define { flex in
             flex.addItem(inputTitle)
             flex.addItem(inputField)
