@@ -142,6 +142,8 @@ extension LoginViewModel {
                await userDefaultsManager.registerUserPassword(by: password)
             } else {
                await userDefaultsManager.registerAutoLogin(by: false)
+               await userDefaultsManager.registerUserEmail(by: "")
+               await userDefaultsManager.registerUserPassword(by: "")
             }
             
             successEmitter.onNext(true)

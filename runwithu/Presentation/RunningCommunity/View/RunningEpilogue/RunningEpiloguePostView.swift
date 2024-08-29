@@ -63,17 +63,11 @@ final class RunningEpiloguePostView: BaseView, BaseViewProtocol {
                flex.addItem(self.contentInput)
                   .width(100%)
                   .height(200)
-               flex.addItem()
-                  .direction(.row)
-                  .paddingHorizontal(4)
-                  .alignItems(.center)
-                  .justifyContent(.spaceBetween)
-                  .define { flex in
-                     flex.addItem(self.datePickerTitle)
-                     flex.addItem(self.datePicker)
-                        .height(44)
-                        .width(200)
-                  }
+               flex.addItem(self.datePickerTitle)
+               flex.addItem(self.datePicker)
+                  .height(44)
+                  .width(200)
+                  .marginRight(16)
             }
             .marginBottom(20)
          

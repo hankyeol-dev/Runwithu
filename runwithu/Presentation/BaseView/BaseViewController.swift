@@ -113,13 +113,24 @@ extension BaseVC {
    }
    
    func bindingTextToEmitter(
-      for event: ControlProperty<String>, 
+      for event: ControlProperty<String>,
       emitter: PublishSubject<String>
    ) {
-         event
-            .distinctUntilChanged()
-            .bind(to: emitter)
-            .disposed(by: disposeBag)
+      event
+         .distinctUntilChanged()
+         .bind(to: emitter)
+         .disposed(by: disposeBag)
+   }
+   
+   func setLogo() {
+      //CGRectMake(-40, 0, 150, 25)
+      let logoImageView = UIImageView.init(image: UIImage.logo)
+      logoImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 28)
+      logoImageView.contentMode = .scaleAspectFit
+      let imageItem = UIBarButtonItem.init(customView: logoImageView)
+//      let negativeSpacer = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+//      negativeSpacer.width = 10
+      navigationItem.leftBarButtonItems = [imageItem]
    }
 }
 

@@ -31,6 +31,8 @@ final class ProfileViewController: BaseViewController<ProfileView, ProfileViewMo
       let isUserProfile = viewModel.getUserProfileState()
       if !isUserProfile {
          setGoBackButton(by: .darkGray, imageName: "chevron.left")
+      } else {
+         setLogo()
       }
    }
    

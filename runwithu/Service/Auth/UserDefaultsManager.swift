@@ -46,6 +46,8 @@ struct UserDefaultSetting {
 actor UserDefaultsManager {
    static let shared = UserDefaultsManager()
    
+   private let networkManager = NetworkService.shared
+   private let tokenManager = TokenManager.shared
    private var userSetting = UserDefaultSetting()
    
    private init() {}
@@ -80,5 +82,27 @@ actor UserDefaultsManager {
    
    func getUserPassword() -> String {
       return userSetting.userPassword
+   }
+   
+   func autoLogin() async -> Bool {
+      do {
+         let result = try await networkManager.request(
+            by: UserEndPoint.login(input: .init(
+               email: userSetting.userEmail,
+               password: userSetting.userPassword)
+            ),
+            of: LoginOutput.self)
+         
+         let access = await tokenManager.registerAccessToken(by: result.accessToken)
+         let refresh = await tokenManager.registerRefreshToken(by: result.refreshToken)
+         
+         if access && refresh {
+            return true
+         } else {
+            return false
+         }
+      } catch {
+         return false
+      }
    }
 }

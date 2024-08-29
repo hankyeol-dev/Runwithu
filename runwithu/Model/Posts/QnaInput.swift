@@ -11,6 +11,6 @@ struct QnaInput: PostInputTypeProtocol {
    var productId: ProductIds
    var title: String
    var content: String
-   var communityType: PostsCommunityType = .qna
+   var communityType: PostsCommunityType = .qnas
    var qnaType: String
 }

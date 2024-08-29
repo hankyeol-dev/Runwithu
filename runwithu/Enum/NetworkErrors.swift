@@ -20,6 +20,7 @@ enum NetworkErrors: Error {
    case noUploadData
    case invalidUpload
    case overlapUsername
+   case needToLogin
    
    var byErrorMessage: String {
       switch self {

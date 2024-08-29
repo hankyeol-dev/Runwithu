@@ -47,14 +47,9 @@ final class BaseTabBar: BaseView {
    
    override func setUI() {
       super.setUI()
-      layer.shadowColor = UIColor.black.cgColor
-      layer.shadowOffset = .init(width: 0, height: 2)
-      layer.shadowOpacity = 0.1
-      layer.shadowRadius = 2
-      
       tabItemStack.distribution = .fillEqually
       tabItemStack.alignment = .center
-      tabItemStack.backgroundColor = .systemGray6.withAlphaComponent(0.5)
+      tabItemStack.backgroundColor = .systemGray5
       tabItemStack.layer.cornerRadius = 16
       tabItemStack.clipsToBounds = true
       tabItems.forEach {

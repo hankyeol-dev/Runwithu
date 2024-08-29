@@ -16,36 +16,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       guard let scene = (scene as? UIWindowScene) else { return }
       window = UIWindow(windowScene: scene)
       
-      // MARK: MainTabBar
-      let root0 = UINavigationController(rootViewController: MainTabbarController())
-      
-      
-      // MARK: ProfileView
-      let root1 = UINavigationController(
-         rootViewController: ProfileViewController(
-            bv: ProfileView(),
-            vm: ProfileViewModel(
-               disposeBag: DisposeBag(),
-               networkManager: NetworkService.shared,
-               isUserProfile: false, userId: AppEnvironment.demoUserId),
-            db: DisposeBag())
-      )
-      
-      // MARK: LoginView
-      let root2 = UINavigationController(
-         rootViewController: LoginViewController(
-            bv: LoginView(),
-            vm: LoginViewModel(
-               disposeBag: DisposeBag(),
-               networkManager: NetworkService.shared,
-               tokenManager: TokenManager.shared,
-               userDefaultsManager: UserDefaultsManager.shared
-            ),
-            db: DisposeBag()
+      Task {
+         let checkLoginState = await checkLoginState()
+         
+         // MARK: MainTabBar
+         let root0 = UINavigationController(rootViewController: MainTabbarController())
+         
+         // MARK: LoginView
+         let root2 = UINavigationController(
+            rootViewController: LoginViewController(
+               bv: LoginView(),
+               vm: LoginViewModel(
+                  disposeBag: DisposeBag(),
+                  networkManager: NetworkService.shared,
+                  tokenManager: TokenManager.shared,
+                  userDefaultsManager: UserDefaultsManager.shared
+               ),
+               db: DisposeBag()
+            )
          )
-      )
+         
+         window?.rootViewController = checkLoginState ? root0 : root2
+         window?.makeKeyAndVisible()
+      }
       
-      window?.rootViewController = root2
+//      window?.rootViewController = UINavigationController(rootViewController: TestViewController())  /*checkLoginState ? root0 : root2*/
       window?.makeKeyAndVisible()
    }
    
@@ -62,6 +57,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
    func sceneDidEnterBackground(_ scene: UIScene) {
    }
    
-   
+   func checkLoginState() async -> Bool {
+      do {
+         let result = try await NetworkService.shared.request(
+            by: UserEndPoint.readMyProfile,
+            of: ProfileUserIdOutput.self
+         )
+         if !result.user_id.isEmpty {
+            return true
+         } else {
+            return false
+         }
+      } catch NetworkErrors.needToRefreshRefreshToken {
+         let isAutoLogin = await UserDefaultsManager.shared.getAutoLoginState()
+         
+         if isAutoLogin {
+            return await UserDefaultsManager.shared.autoLogin()
+         } else {
+            return false
+         }
+      } catch {
+         return false
+      }
+   }
 }
 

@@ -161,15 +161,15 @@ final class ProfileView: BaseView, BaseViewProtocol {
    }
    
    func bindView(for postsList: [String: [PostsOutput]]) {
-      if let key = postsList[PostsCommunityType.epilogue.rawValue] {
+      if let key = postsList[PostsCommunityType.epilogues.rawValue] {
          runningEpilogueMenu.bindView(count: key.count)
       }
       
-      if let key = postsList[PostsCommunityType.product_epilogue.rawValue] {
+      if let key = postsList[PostsCommunityType.product_epilogues.rawValue] {
          runningProductEpilogueMenu.bindView(count: key.count)
       }
       
-      if let key = postsList[PostsCommunityType.qna.rawValue] {
+      if let key = postsList[PostsCommunityType.qnas.rawValue] {
          runningQnaMenu.bindView(count: key.count)
       }
       

@@ -107,6 +107,7 @@ extension ProductEpiloguePostViewModel {
       
       if postValid {
          let imageFiles = await uploadImages(errorEmitter: errorEmitter)
+         
          let postInput: PostsInput = .init(
             product_id: productEpilogueInput.productId.rawValue,
             title: productEpilogueInput.title,

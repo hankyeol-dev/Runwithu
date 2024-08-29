@@ -11,7 +11,7 @@ struct ProductEpilogueInput: PostInputTypeProtocol {
    var productId: ProductIds
    var title: String
    var content: String
-   let communityType: PostsCommunityType = .product_epilogue
+   let communityType: PostsCommunityType = .product_epilogues
    var productType: String
    var productBrandType: String
    var rating: String?

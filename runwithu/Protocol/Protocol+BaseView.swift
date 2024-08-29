@@ -11,16 +11,6 @@ import RxSwift
 
 protocol BaseViewProtocol: UIView {}
 
-protocol BaseViewModelProtocol: AnyObject {
-   associatedtype Input
-   associatedtype Output
-   
-   var disposeBag: DisposeBag { get }
-   var networkManager: NetworkService { get }
-   
-   func transform(for input: Input) -> Output
-}
-
 extension BaseViewProtocol {
    func displayToast(for message : String, isError: Bool, duration: TimeInterval) {
       DispatchQueue.main.async {
@@ -52,6 +42,16 @@ extension BaseViewProtocol {
          
       }
    }
+}
+
+protocol BaseViewModelProtocol: AnyObject {
+   associatedtype Input
+   associatedtype Output
+   
+   var disposeBag: DisposeBag { get }
+   var networkManager: NetworkService { get }
+   
+   func transform(for input: Input) -> Output
 }
 
 extension BaseViewModelProtocol {
@@ -99,6 +99,20 @@ extension BaseViewModelProtocol {
          
       } catch {
          print("로그인 에러임")
+      }
+   }
+   
+   func autoLoginCheck(
+      autoLoginSuccessHandler: @escaping (Bool) -> Void,
+      autoLoginErrorHandler: @escaping () -> Void
+   ) async {
+      let isAutoLogin = await UserDefaultsManager.shared.getAutoLoginState()
+      
+      if isAutoLogin {
+         let autoLoginResult = await UserDefaultsManager.shared.autoLogin()
+         autoLoginSuccessHandler(autoLoginResult)
+      } else {
+         autoLoginErrorHandler()
       }
    }
    

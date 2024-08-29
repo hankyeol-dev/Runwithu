@@ -22,8 +22,7 @@ final class RunningGroupListViewController: BaseViewController<RunningGroupListV
    
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
-      
-      title = "러닝 그룹"
+      setLogo()
    }
    
    override func bindViewAtDidLoad() {

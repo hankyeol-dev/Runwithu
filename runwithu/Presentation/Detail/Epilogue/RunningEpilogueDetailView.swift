@@ -107,10 +107,10 @@ final class RunningEpilogueDetailView: BaseView, BaseViewProtocol {
          guard let self else { return }
          if let content1 = epilogue.content1 {
             switch content1 {
-            case PostsCommunityType.epilogue.rawValue:
-               self.contentType.bindText(PostsCommunityType.epilogue.byDetailLabel)
-            case PostsCommunityType.product_epilogue.rawValue:
-               self.contentType.bindText(PostsCommunityType.product_epilogue.byDetailLabel)
+            case PostsCommunityType.epilogues.rawValue:
+               self.contentType.bindText(PostsCommunityType.epilogues.byDetailLabel)
+            case PostsCommunityType.product_epilogues.rawValue:
+               self.contentType.bindText(PostsCommunityType.product_epilogues.byDetailLabel)
             default:
                break
             }

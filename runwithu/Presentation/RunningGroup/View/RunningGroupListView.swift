@@ -11,30 +11,36 @@ import PinLayout
 import FlexLayout
 
 final class RunningGroupListView: BaseView, BaseViewProtocol {
-   private let contentsFlexBox = UIView()
+   private let scrollView = BaseScrollView()
    let floatingButton = PlusButton(backColor: .systemGreen, baseColor: .white)
    
    override func setSubviews() {
       super.setSubviews()
       
-      addSubview(contentsFlexBox)
-      [floatingButton].forEach {
-         contentsFlexBox.addSubview($0)
-      }
+      addSubviews(scrollView, floatingButton)
+   }
+   
+   override func setLayout() {
+      super.setLayout()
+      
    }
    
    override func layoutSubviews() {
       super.layoutSubviews()
-      
-      contentsFlexBox.pin.all(self.pin.safeArea)
-      
-      floatingButton.pin
-         .right(20)
-         .bottom(110)
-         .size(48)
+    
+      scrollView.snp.makeConstraints { make in
+         make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
+         make.bottom.equalTo(safeAreaLayoutGuide).inset(64)
+      }
+      floatingButton.snp.makeConstraints { make in
+         make.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+         make.bottom.equalTo(safeAreaLayoutGuide).inset(76)
+      }
    }
    
    override func setUI() {
       super.setUI()
+      
+      scrollView.backgroundColor = .black
    }
 }
