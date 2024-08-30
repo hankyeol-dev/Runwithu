@@ -18,6 +18,7 @@
 		813548FD2C8033E800F975FB /* ProductPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813548FC2C8033E800F975FB /* ProductPostCell.swift */; };
 		813548FF2C80348D00F975FB /* CapsuledLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813548FE2C80348D00F975FB /* CapsuledLabel.swift */; };
 		813549022C8062D300F975FB /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 813549012C8062D300F975FB /* MCEmojiPicker */; };
+		813549052C80BDBE00F975FB /* ImageTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813549042C80BDBE00F975FB /* ImageTestVC.swift */; };
 		813FC4DA2C7DE7A0003E23B3 /* EpilogueImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813FC4D92C7DE7A0003E23B3 /* EpilogueImageCollectionCell.swift */; };
 		8157F1672C7C3A3E00661BB6 /* BaseCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1662C7C3A3E00661BB6 /* BaseCommentsView.swift */; };
 		8157F1692C7C516D00661BB6 /* CommentsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157F1682C7C516D00661BB6 /* CommentsDTO.swift */; };
@@ -41,6 +42,9 @@
 		818533A22C7F3C5200647F97 /* CommunityMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818533A12C7F3C5200647F97 /* CommunityMenuCell.swift */; };
 		818533A52C7F5B8B00647F97 /* QnaPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818533A42C7F5B8B00647F97 /* QnaPostCell.swift */; };
 		818533A72C7F7AAD00647F97 /* EpiloguePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818533A62C7F7AAD00647F97 /* EpiloguePostCell.swift */; };
+		81876E592C80C84B00381427 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 81876E582C80C84B00381427 /* RxDataSources */; };
+		81876E5C2C81872E00381427 /* GroupListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81876E5B2C81872E00381427 /* GroupListCollectionCell.swift */; };
+		81876E5E2C818F6600381427 /* GroupListTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81876E5D2C818F6600381427 /* GroupListTableCell.swift */; };
 		81A3B8EB2C744972009AD659 /* RunningGroupPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */; };
 		81A3B8ED2C745054009AD659 /* StepBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EC2C745054009AD659 /* StepBar.swift */; };
 		81A3B8EF2C74AFB6009AD659 /* RunningGroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */; };
@@ -167,6 +171,7 @@
 		811D37812C7404170017E17C /* RoundedTextViewWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextViewWithTitle.swift; sourceTree = "<group>"; };
 		813548FC2C8033E800F975FB /* ProductPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPostCell.swift; sourceTree = "<group>"; };
 		813548FE2C80348D00F975FB /* CapsuledLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuledLabel.swift; sourceTree = "<group>"; };
+		813549042C80BDBE00F975FB /* ImageTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTestVC.swift; sourceTree = "<group>"; };
 		813FC4D92C7DE7A0003E23B3 /* EpilogueImageCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpilogueImageCollectionCell.swift; sourceTree = "<group>"; };
 		8157F1662C7C3A3E00661BB6 /* BaseCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCommentsView.swift; sourceTree = "<group>"; };
 		8157F1682C7C516D00661BB6 /* CommentsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsDTO.swift; sourceTree = "<group>"; };
@@ -189,6 +194,9 @@
 		818533A12C7F3C5200647F97 /* CommunityMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityMenuCell.swift; sourceTree = "<group>"; };
 		818533A42C7F5B8B00647F97 /* QnaPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaPostCell.swift; sourceTree = "<group>"; };
 		818533A62C7F7AAD00647F97 /* EpiloguePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpiloguePostCell.swift; sourceTree = "<group>"; };
+		81876E562C80C25200381427 /* runwithu.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = runwithu.entitlements; sourceTree = "<group>"; };
+		81876E5B2C81872E00381427 /* GroupListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListCollectionCell.swift; sourceTree = "<group>"; };
+		81876E5D2C818F6600381427 /* GroupListTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListTableCell.swift; sourceTree = "<group>"; };
 		81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupPreviewView.swift; sourceTree = "<group>"; };
 		81A3B8EC2C745054009AD659 /* StepBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepBar.swift; sourceTree = "<group>"; };
 		81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupListViewController.swift; sourceTree = "<group>"; };
@@ -308,6 +316,7 @@
 				81E7FF962C6F2B6200200CF2 /* RxSwift in Frameworks */,
 				81E7FF942C6F2B6200200CF2 /* RxCocoa in Frameworks */,
 				81E7FF9C2C6F308600200CF2 /* FlexLayout in Frameworks */,
+				81876E592C80C84B00381427 /* RxDataSources in Frameworks */,
 				81E7FF992C6F304500200CF2 /* PinLayout in Frameworks */,
 				81A3B99F2C7B7A9D009AD659 /* Kingfisher in Frameworks */,
 				81E7FF912C6F2B5300200CF2 /* SnapKit in Frameworks */,
@@ -357,6 +366,7 @@
 		811D37762C73822F0017E17C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				81876E5A2C81871400381427 /* Cell */,
 				811D37792C73824D0017E17C /* RunningGroupCreateView.swift */,
 				811D37772C7382420017E17C /* RunningGroupCreateViewController.swift */,
 				81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */,
@@ -408,6 +418,15 @@
 				818533A42C7F5B8B00647F97 /* QnaPostCell.swift */,
 				818533A62C7F7AAD00647F97 /* EpiloguePostCell.swift */,
 				813548FC2C8033E800F975FB /* ProductPostCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		81876E5A2C81871400381427 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				81876E5B2C81872E00381427 /* GroupListCollectionCell.swift */,
+				81876E5D2C818F6600381427 /* GroupListTableCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -616,7 +635,6 @@
 				81E7FF162C6C6C2700200CF2 /* Presentation */,
 				81E7FF1F2C6C6C2700200CF2 /* Protocol */,
 				81E7FF322C6C722B00200CF2 /* Service */,
-				81E7FF0B2C6C6BBE00200CF2 /* Info.plist */,
 			);
 			path = runwithu;
 			sourceTree = "<group>";
@@ -662,12 +680,15 @@
 		81E7FF1D2C6C6C2700200CF2 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				81876E562C80C25200381427 /* runwithu.entitlements */,
+				81E7FF0B2C6C6BBE00200CF2 /* Info.plist */,
 				81E7FF172C6C6C2700200CF2 /* AppDelegate.swift */,
 				81E7FF182C6C6C2700200CF2 /* Assets.xcassets */,
 				81E7FF1B2C6C6C2700200CF2 /* LaunchScreen.storyboard */,
 				81E7FF1C2C6C6C2700200CF2 /* SceneDelegate.swift */,
 				81A3B9092C74E45D009AD659 /* ENV.swift */,
 				81A3B9542C773955009AD659 /* TestViewController.swift */,
+				813549042C80BDBE00F975FB /* ImageTestVC.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -899,6 +920,7 @@
 				81A3B99E2C7B7A9D009AD659 /* Kingfisher */,
 				8157F18C2C7D9EFB00661BB6 /* iamport-ios */,
 				813549012C8062D300F975FB /* MCEmojiPicker */,
+				81876E582C80C84B00381427 /* RxDataSources */,
 			);
 			productName = runwithu;
 			productReference = 81E7FEFA2C6C6BBD00200CF2 /* runwithu.app */;
@@ -938,6 +960,7 @@
 				81A3B99D2C7B7A9D009AD659 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				8157F18B2C7D9EFB00661BB6 /* XCRemoteSwiftPackageReference "iamport-ios" */,
 				813549002C8062D300F975FB /* XCRemoteSwiftPackageReference "MCEmojiPicker" */,
+				81876E572C80C84B00381427 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 81E7FEFB2C6C6BBD00200CF2 /* Products */;
 			projectDirPath = "";
@@ -980,6 +1003,7 @@
 				81A3B9962C7B4EE5009AD659 /* RunningQnaType.swift in Sources */,
 				81A3B9922C7B2C43009AD659 /* QnaPostView.swift in Sources */,
 				81A3B95A2C774818009AD659 /* BaseAlertViewController.swift in Sources */,
+				81876E5C2C81872E00381427 /* GroupListCollectionCell.swift in Sources */,
 				81E7FFB22C7005EF00200CF2 /* LoginView.swift in Sources */,
 				81E7FFC02C7019D200200CF2 /* JoinViewModel.swift in Sources */,
 				81E7FF762C6EF86000200CF2 /* RunningHardType.swift in Sources */,
@@ -1002,6 +1026,7 @@
 				8157F1812C7D35C200661BB6 /* BaseUserImage.swift in Sources */,
 				81E7FF802C6F183700200CF2 /* Extension+Date.swift in Sources */,
 				8157F1742C7CA8D700661BB6 /* RunningGroupDetailInfoView.swift in Sources */,
+				81876E5E2C818F6600381427 /* GroupListTableCell.swift in Sources */,
 				81E7FF442C6C7B6D00200CF2 /* NetworkErrors.swift in Sources */,
 				81E7FF7A2C6F07E600200CF2 /* UpdatePostDTO.swift in Sources */,
 				81A3B94C2C75EAD0009AD659 /* RoundedMenuView.swift in Sources */,
@@ -1049,6 +1074,7 @@
 				811D37802C73912D0017E17C /* BaseTextFieldRounded.swift in Sources */,
 				81A3B98D2C7B209C009AD659 /* ProductEpiloguePostView.swift in Sources */,
 				811D37782C7382420017E17C /* RunningGroupCreateViewController.swift in Sources */,
+				813549052C80BDBE00F975FB /* ImageTestVC.swift in Sources */,
 				81A3B9942C7B2C69009AD659 /* QnaPostViewController.swift in Sources */,
 				81A3B9162C74EE19009AD659 /* Extension+UIButton.swift in Sources */,
 				81A3B96F2C784B69009AD659 /* RunningCommunityViewModel.swift in Sources */,
@@ -1241,11 +1267,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = runwithu/App/runwithu.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YM49LMS87D;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = runwithu/Info.plist;
+				INFOPLIST_FILE = runwithu/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "런윗유 - 함께 달려요";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "러너님의 소중한 러닝 일지, 러닝 용품 후기, 마라톤 개최, 러닝 그룹 생성을 위해 사진 앨범 사용 권한이 필요해요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1275,11 +1302,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = runwithu/App/runwithu.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YM49LMS87D;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = runwithu/Info.plist;
+				INFOPLIST_FILE = runwithu/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "런윗유 - 함께 달려요";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "러너님의 소중한 러닝 일지, 러닝 용품 후기, 마라톤 개최, 러닝 그룹 생성을 위해 사진 앨범 사용 권한이 필요해요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1342,6 +1370,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.1.0;
+			};
+		};
+		81876E572C80C84B00381427 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
 			};
 		};
 		81A3B9662C7847E3009AD659 /* XCRemoteSwiftPackageReference "RxGesture" */ = {
@@ -1412,6 +1448,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8157F18B2C7D9EFB00661BB6 /* XCRemoteSwiftPackageReference "iamport-ios" */;
 			productName = "iamport-ios";
+		};
+		81876E582C80C84B00381427 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81876E572C80C84B00381427 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 		81A3B9672C7847E3009AD659 /* RxGesture */ = {
 			isa = XCSwiftPackageProductDependency;

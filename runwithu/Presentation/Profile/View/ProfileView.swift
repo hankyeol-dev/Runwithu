@@ -14,11 +14,11 @@ final class ProfileView: BaseView, BaseViewProtocol {
    private var isUserProfile = false
    private let contentsFlexBox = UIView()
    
-   private let profileHeaderRectangle = RectangleView(backColor: .white, radius: 16)
+   private let profileHeaderRectangle = RectangleView(backColor: .black, radius: 16)
    let profileImage = BaseUserImage(size: 44)
-   let profileNickname = BaseLabel(for: "", font: .boldSystemFont(ofSize: 18), color: .black)
-   let profileFollower = BaseLabel(for: "", font: .systemFont(ofSize: 12, weight: .light), color: .black)
-   let profileFollowing = BaseLabel(for: "", font: .systemFont(ofSize: 12, weight: .light), color: .black)
+   let profileNickname = BaseLabel(for: "", font: .boldSystemFont(ofSize: 18), color: .white)
+   let profileFollower = BaseLabel(for: "", font: .systemFont(ofSize: 14, weight: .light), color: .white)
+   let profileFollowing = BaseLabel(for: "", font: .systemFont(ofSize: 14, weight: .light), color: .white)
    let followButton = RoundedButtonView("팔로우", backColor: .clear, baseColor: .white, radius: 4)
    
    let sendRunningInvitationButton = RoundedButtonView(

@@ -158,10 +158,9 @@ final class RunningEpilogueDetailView: BaseView, BaseViewProtocol {
          commentsTable.snp.makeConstraints { make in
             make.top.equalTo(bodyDivider.snp.bottom).offset(24)
             make.horizontalEdges.equalTo(guide).inset(12)
-            make.height.equalTo(400)
+            make.bottom.equalTo(commentsInputBackView.snp.top).offset(-8)
          }
          commentsInputBackView.snp.makeConstraints { make in
-            make.top.equalTo(commentsTable.snp.bottom).offset(12)
             make.horizontalEdges.equalTo(guide)
             make.height.equalTo(100)
             make.bottom.equalTo(guide).inset(8)
@@ -185,7 +184,7 @@ final class RunningEpilogueDetailView: BaseView, BaseViewProtocol {
       commentsInput.snp.makeConstraints { make in
          make.centerY.equalToSuperview()
          make.leading.equalTo(commentsInputBackView.safeAreaLayoutGuide).inset(16)
-         make.width.equalTo(300)
+         make.width.equalTo(220)
          make.height.equalTo(56)
       }
       commentsSendButton.snp.makeConstraints { make in

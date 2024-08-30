@@ -11,7 +11,7 @@ import SnapKit
 import Kingfisher
 
 final class BaseCreatorView: BaseView {
-   private let creatorImage = BaseUserImage(size: 44, borderW: 2, borderColor: .systemGray6)
+   let creatorImage = BaseUserImage(size: 44, borderW: 2, borderColor: .systemGray6)
    private let creatorInfoStack = UIStackView()
    private let creatorName = BaseLabel(for: "", font: .systemFont(ofSize: 14), color: .darkGray)
    private let createdDate = BaseLabel(for: "", font: .systemFont(ofSize: 14), color: .systemGray2)

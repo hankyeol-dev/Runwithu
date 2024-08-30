@@ -57,14 +57,14 @@ final class QnaDetailView: BaseView, BaseViewProtocol {
          make.height.equalTo(0.5)
       }
       commentsInputBackView.snp.makeConstraints { make in
-         make.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
-         make.bottom.equalTo(self.safeAreaLayoutGuide).inset(56)
+         make.horizontalEdges.equalTo(safeAreaLayoutGuide)
+         make.bottom.equalTo(safeAreaLayoutGuide).inset(88)
          make.height.equalTo(80)
       }
       commentsInput.snp.makeConstraints { make in
          make.centerY.equalToSuperview()
          make.leading.equalTo(commentsInputBackView.safeAreaLayoutGuide).inset(16)
-         make.width.equalTo(300)
+         make.width.equalTo(220)
          make.height.equalTo(56)
       }
       commentsSendButton.snp.makeConstraints { make in
@@ -109,16 +109,18 @@ final class QnaDetailView: BaseView, BaseViewProtocol {
    }
    
    private func bindEmptyView() {
-      addSubviews(contentCommentsEmptyView)
+      addSubview(contentCommentsEmptyView)
+      contentCommentsTable.removeFromSuperview()
       contentCommentsEmptyView.snp.makeConstraints { make in
          make.top.equalTo(contentBodyDivider.snp.bottom).offset(16)
          make.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
-         make.height.equalTo(150)
+         make.bottom.equalTo(commentsInputBackView.snp.top).offset(-8)
       }
    }
    
    private func bindCommentsTableView() {
       addSubviews(contentCommentsTable)
+      contentCommentsEmptyView.removeFromSuperview()
       contentCommentsTable.snp.makeConstraints { make in
          make.top.equalTo(contentBodyDivider.snp.bottom).offset(16)
          make.horizontalEdges.equalTo(self.safeAreaLayoutGuide)

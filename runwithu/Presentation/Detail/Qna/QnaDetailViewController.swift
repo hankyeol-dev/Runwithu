@@ -61,7 +61,6 @@ final class QnaDetailViewController: BaseViewController<QnaDetailView, QnaDetail
          .disposed(by: disposeBag)
       
       output.commentsEmitter
-         .debug("왜 구독이 안되는거지?")
          .bind(to: baseView.contentCommentsTable.rx.items(
             cellIdentifier: BaseCommentsView.id,
             cellType: BaseCommentsView.self)) { row, item, cell in

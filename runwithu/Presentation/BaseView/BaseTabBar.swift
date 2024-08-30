@@ -49,7 +49,7 @@ final class BaseTabBar: BaseView {
       super.setUI()
       tabItemStack.distribution = .fillEqually
       tabItemStack.alignment = .center
-      tabItemStack.backgroundColor = .systemGray5
+      tabItemStack.backgroundColor = .systemGray6
       tabItemStack.layer.cornerRadius = 16
       tabItemStack.clipsToBounds = true
       tabItems.forEach {

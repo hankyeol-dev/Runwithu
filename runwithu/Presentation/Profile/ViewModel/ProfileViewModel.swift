@@ -15,7 +15,7 @@ final class ProfileViewModel: BaseViewModelProtocol {
    private let isUserProfile: Bool
    private var isFollowing = false
    private var userId: String?
-   private var username = "" // 성공했다면, 무조건 있으니까.
+   private var username = ""
    
    struct Input {
       let didLoad: PublishSubject<Void>

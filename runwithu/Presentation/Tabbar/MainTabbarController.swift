@@ -33,7 +33,7 @@ final class MainTabbarController: UITabBarController {
       view.addSubview(mainTabbar)
       mainTabbar.snp.makeConstraints { make in
          make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
-         make.height.equalTo(90)
+         make.height.equalTo(80)
       }
       
       tabBar.isHidden = true

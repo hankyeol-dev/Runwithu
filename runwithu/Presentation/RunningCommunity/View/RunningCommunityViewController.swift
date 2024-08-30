@@ -9,6 +9,7 @@ import UIKit
 
 import RxSwift
 import RxCocoa
+import RxGesture
 
 final class RunningCommunityViewController: BaseViewController<RunningCommunityView, RunningCommunityViewModel> {
    private let didLoadInput = PublishSubject<Void>()
@@ -139,7 +140,7 @@ final class RunningCommunityViewController: BaseViewController<RunningCommunityV
                   .bind(to: vc.baseView.epiloguePostsTable.rx.items(
                      cellIdentifier: EpiloguePostCell.id, cellType: EpiloguePostCell.self)
                   ) { row, post, cell in
-                     cell.bindView(for: post)
+                     cell.bindView(for: post)                     
                   }
                   .disposed(by: vc.disposeBag)
             }

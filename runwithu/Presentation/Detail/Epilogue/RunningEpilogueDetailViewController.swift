@@ -48,6 +48,12 @@ final class RunningEpilogueDetailViewController: BaseViewController<RunningEpilo
          }
          .disposed(by: disposeBag)
       
+      baseView.creatorView.creatorImage.rx.tapGesture()
+         .bind(with: self) { vc, _ in
+            print("tapped")
+         }
+         .disposed(by: disposeBag)
+      
       output.didLoadOutput
          .bind(with: self) { vc, epilogue in
             vc.baseView.creatorView.bindViews(for: epilogue.creator, createdAt: epilogue.createdAt)

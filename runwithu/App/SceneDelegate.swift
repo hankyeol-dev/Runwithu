@@ -41,7 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       }
       
 //      window?.rootViewController = UINavigationController(rootViewController: TestViewController())  /*checkLoginState ? root0 : root2*/
-      window?.makeKeyAndVisible()
+//      window?.makeKeyAndVisible()
    }
    
    func sceneDidDisconnect(_ scene: UIScene) { }

@@ -8,15 +8,18 @@
 import UIKit
 
 import SnapKit
+import RxSwift
+import RxGesture
 
 final class EpiloguePostCell: BaseTableViewCell {
+   let disposeBag = DisposeBag()
    
    private let backView = RectangleView(backColor: .white, radius: 8)
    private let image = UIImageView()
    private let titleLabel = BaseLabel(for: "", font: .systemFont(ofSize: 18))
    private let contentLabel = BaseLabel(for: "", font: .systemFont(ofSize: 16))
    private let divider = RectangleView(backColor: .darkGray.withAlphaComponent(0.5), radius: 0)
-   private let user = BaseUserImage(size: 20, borderW: 2, borderColor: .darkGray)
+   let user = BaseUserImage(size: 20, borderW: 2, borderColor: .darkGray)
    private let username = BaseLabel(for: "", font: .systemFont(ofSize: 14))
    
    override func setSubviews() {
@@ -63,6 +66,7 @@ final class EpiloguePostCell: BaseTableViewCell {
          }
       }
       bindBasicLayout()
+      
    }
    
    private func bindBasicLayout() {

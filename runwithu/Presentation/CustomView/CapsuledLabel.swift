@@ -45,4 +45,8 @@ final class CapsuledLabel: BaseView {
          categoryLabel.text = "\(brand) - \(type)"
       }
    }
+   
+   func bindText(for type: String) {
+      categoryLabel.text = type
+   }
 }
