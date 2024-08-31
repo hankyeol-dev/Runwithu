@@ -16,32 +16,37 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       guard let scene = (scene as? UIWindowScene) else { return }
       window = UIWindow(windowScene: scene)
       
-      Task {
-         let checkLoginState = await checkLoginState()
-         
-         // MARK: MainTabBar
-         let root0 = UINavigationController(rootViewController: MainTabbarController())
-         
-         // MARK: LoginView
-         let root2 = UINavigationController(
-            rootViewController: LoginViewController(
-               bv: LoginView(),
-               vm: LoginViewModel(
-                  disposeBag: DisposeBag(),
-                  networkManager: NetworkService.shared,
-                  tokenManager: TokenManager.shared,
-                  userDefaultsManager: UserDefaultsManager.shared
-               ),
-               db: DisposeBag()
-            )
-         )
-         
-         window?.rootViewController = checkLoginState ? root0 : root2
-         window?.makeKeyAndVisible()
-      }
+//      Task {
+//         let checkLoginState = await checkLoginState()
+//         
+//         // MARK: MainTabBar
+//         let root0 = UINavigationController(rootViewController: MainTabbarController())
+//         
+//         // MARK: LoginView
+//         let root2 = UINavigationController(
+//            rootViewController: LoginViewController(
+//               bv: LoginView(),
+//               vm: LoginViewModel(
+//                  disposeBag: DisposeBag(),
+//                  networkManager: NetworkService.shared,
+//                  tokenManager: TokenManager.shared,
+//                  userDefaultsManager: UserDefaultsManager.shared
+//               ),
+//               db: DisposeBag()
+//            )
+//         )
+//         
+//         window?.rootViewController = checkLoginState ? root0 : root2
+//         window?.makeKeyAndVisible()
+//      }
       
-//      window?.rootViewController = UINavigationController(rootViewController: TestViewController())  /*checkLoginState ? root0 : root2*/
-//      window?.makeKeyAndVisible()
+      window?.rootViewController = UINavigationController(
+         rootViewController: ProfileViewController(
+            bv: .init(),
+            vm: .init(disposeBag: DisposeBag(), networkManager: NetworkService.shared, isUserProfile: true),
+            db: DisposeBag())
+      )
+      window?.makeKeyAndVisible()
    }
    
    func sceneDidDisconnect(_ scene: UIScene) { }

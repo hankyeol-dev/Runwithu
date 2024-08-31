@@ -23,5 +23,39 @@ struct RunningInfo: Codable {
          return nil
       }
    }
+   
+   var isRunningToday: Bool {
+      if let dateString = date.formattedRunningDateString() {
+         let dateFormatter = DateFormatter()
+         dateFormatter.locale = Locale(identifier: "ko_KR")
+         dateFormatter.dateFormat = "yyyy-MM-dd"
+         if let date = dateFormatter.date(from: dateString) {
+            let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
+            let today = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+            if let day = Calendar.current.dateComponents([.day], from: today, to: components).day, day == 0 {
+               return true
+            }
+         }
+      }
+      
+      return false
+   }
+   
+   var isRunningInFuture: Bool {
+      if let dateString = date.formattedRunningDateString() {
+         let dateFormatter = DateFormatter()
+         dateFormatter.locale = Locale(identifier: "ko_KR")
+         dateFormatter.dateFormat = "yyyy-MM-dd"
+         if let date = dateFormatter.date(from: dateString) {
+            let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
+            let today = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+            if let day = Calendar.current.dateComponents([.day], from: today, to: components).day, day > 0 {
+               return true
+            }
+         }
+      }
+      
+      return false
+   }
 }
 

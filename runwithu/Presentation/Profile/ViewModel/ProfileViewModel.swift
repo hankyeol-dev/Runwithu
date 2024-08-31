@@ -29,8 +29,10 @@ final class ProfileViewModel: BaseViewModelProtocol {
       let followStateOutput: PublishSubject<Bool>
       let filteredPostsOutput: PublishSubject<[String: [PostsOutput]]>
       let getProfileEmitter: PublishSubject<(ProfileOutput?, String?)>
-      let errorEmitter: PublishSubject<String>
+      let errorEmitter: PublishSubject<NetworkErrors>
       let logoutOutput: PublishSubject<Bool>
+      let notConsentInvitationOutput: PublishSubject<[PostsOutput]>
+      let consentInvitationOutput: PublishSubject<[PostsOutput]>
    }
    
    init(
@@ -50,8 +52,10 @@ final class ProfileViewModel: BaseViewModelProtocol {
       let followStateOutput = PublishSubject<Bool>()
       let filteredPostsOutput = PublishSubject<[String: [PostsOutput]]>()
       let getProfileEmitter = PublishSubject<(ProfileOutput?, String?)>()
-      let errorEmitter = PublishSubject<String>()
+      let errorEmitter = PublishSubject<NetworkErrors>()
       let logoutOutput = PublishSubject<Bool>()
+      let notConsentInvitationOutput = PublishSubject<[PostsOutput]>()
+      let consentInvitationOutput = PublishSubject<[PostsOutput]>()
       
       input.didLoad
          .subscribe(with: self) { vm, _ in
@@ -61,6 +65,11 @@ final class ProfileViewModel: BaseViewModelProtocol {
                   followStateEmitter: followStateOutput,
                   filteredPostsEmitter: filteredPostsOutput
                )
+               
+               await vm.filterInvitation(
+                  notConsentInvitationEmitter: notConsentInvitationOutput,
+                  consentInvitationEmitter: consentInvitationOutput,
+                  errorEmitter: errorEmitter)
             }
          }
          .disposed(by: disposeBag)
@@ -70,15 +79,16 @@ final class ProfileViewModel: BaseViewModelProtocol {
             Task {
                await vm.followingUser(
                   followStateEmitter: followStateOutput,
-                  errorEmitter: errorEmitter) {
-                     Task {
-                        await vm.getUserProfile(
-                           getProfileEmitter: getProfileEmitter,
-                           followStateEmitter: followStateOutput,
-                           filteredPostsEmitter: filteredPostsOutput
-                        )
-                     }
+                  errorEmitter: errorEmitter
+               ) {
+                  Task {
+                     await vm.getUserProfile(
+                        getProfileEmitter: getProfileEmitter,
+                        followStateEmitter: followStateOutput,
+                        filteredPostsEmitter: filteredPostsOutput
+                     )
                   }
+               }
             }
          }
          .disposed(by: disposeBag)
@@ -105,7 +115,9 @@ final class ProfileViewModel: BaseViewModelProtocol {
          filteredPostsOutput: filteredPostsOutput,
          getProfileEmitter: getProfileEmitter,
          errorEmitter: errorEmitter,
-         logoutOutput: logoutOutput
+         logoutOutput: logoutOutput,
+         notConsentInvitationOutput: notConsentInvitationOutput,
+         consentInvitationOutput: consentInvitationOutput
       )
    }
    
@@ -130,7 +142,7 @@ extension ProfileViewModel {
    ) async {
       do {
          var results: ProfileOutput
-         let myId = try await networkManager.request(by: UserEndPoint.readMyProfile, of: ProfileUserIdOutput.self).user_id
+         let myId = await UserDefaultsManager.shared.getUserId()
          
          if isUserProfile {
             results = try await networkManager.request(
@@ -150,9 +162,9 @@ extension ProfileViewModel {
             isFollowing = results.followers.contains { profile in
                profile.user_id == myId
             }
-            print(isFollowing)
             followStateEmitter.onNext(isFollowing)
          }
+         
          await filterPosts(postIds: results.posts, filteredPostsEmitter: filteredPostsEmitter)
          getProfileEmitter.onNext((results, nil))
          
@@ -223,9 +235,78 @@ extension ProfileViewModel {
       }
    }
    
+   private func filterInvitation(
+      notConsentInvitationEmitter: PublishSubject<[PostsOutput]>,
+      consentInvitationEmitter: PublishSubject<[PostsOutput]>,
+      errorEmitter: PublishSubject<NetworkErrors>
+   ) async {
+      let myId = await UserDefaultsManager.shared.getUserId()
+      
+      do {
+         let invitations = try await networkManager.request(
+            by: PostEndPoint.getPosts(input: .init(
+               product_id: ProductIds.runwithu_running_inviation.rawValue,
+               limit: 100, next: nil)
+            ),
+            of: GetPostsOutput.self)
+         
+         let notConsentInvitations = invitations.data.filter {
+            if let content1 = $0.content1 {
+               return content1.contains(myId) && !$0.likes.contains(myId)
+            } else { return false }
+         }
+         
+         let filteredNotConsentInvitations = notConsentInvitations.filter {
+            if let content2 = $0.content2 {
+               if let data = content2.data(using: .utf8) {
+                  do {
+                     let runningInfo = try JSONDecoder().decode(RunningInfo.self, from: data)
+                     return runningInfo.isRunningToday || runningInfo.isRunningInFuture
+                  } catch {
+                     return false
+                  }
+               }
+            } else {
+               return false
+            }
+            return false
+         }
+         
+         
+         let consentInvitations = invitations.data.filter {
+            if let content1 = $0.content1 {
+               return content1.contains(myId) && $0.likes.contains(myId)
+            } else { return false }
+         }
+         let filteredConsentInvitations = consentInvitations.filter {
+            if let content2 = $0.content2 {
+               if let data = content2.data(using: .utf8) {
+                  do {
+                     let runningInfo = try JSONDecoder().decode(RunningInfo.self, from: data)
+                     return runningInfo.isRunningToday || runningInfo.isRunningInFuture
+                  } catch {
+                     return false
+                  }
+               }
+            } else {
+               return false
+            }
+            return false
+         }
+      
+         notConsentInvitationEmitter.onNext(filteredNotConsentInvitations)
+         consentInvitationEmitter.onNext(filteredConsentInvitations)
+         
+      } catch NetworkErrors.needToRefreshRefreshToken {
+         errorEmitter.onNext(.needToLogin)
+      } catch {
+         errorEmitter.onNext(.dataNotFound)
+      }
+   }
+   
    private func followingUser(
       followStateEmitter: PublishSubject<Bool>,
-      errorEmitter: PublishSubject<String>,
+      errorEmitter: PublishSubject<NetworkErrors>,
       successCompletionHandler: @escaping () -> Void
    ) async {
       if !isUserProfile, let userId {
@@ -239,14 +320,9 @@ extension ProfileViewModel {
             followStateEmitter.onNext(isFollowing)
             successCompletionHandler()
          } catch NetworkErrors.needToRefreshRefreshToken {
-            await tempLoginAPI()
-            await followingUser(
-               followStateEmitter: followStateEmitter,
-               errorEmitter: errorEmitter,
-               successCompletionHandler: successCompletionHandler
-            )
+            errorEmitter.onNext(.needToLogin)
          } catch {
-            errorEmitter.onNext("팔로잉 과정에서 문제가 발생했어요.")
+            errorEmitter.onNext(.invalidResponse)
          }
       }
    }

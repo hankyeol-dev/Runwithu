@@ -22,11 +22,11 @@ final class ProfileViewController: BaseViewController<ProfileView, ProfileViewMo
       super.viewDidLoad()
       
       baseView.bindViewState(for: viewModel.getUserProfileState())
-      didLoadInput.onNext(())
    }
    
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
+      didLoadInput.onNext(())
       
       let isUserProfile = viewModel.getUserProfileState()
       if !isUserProfile {
@@ -39,6 +39,34 @@ final class ProfileViewController: BaseViewController<ProfileView, ProfileViewMo
    override func bindViewAtDidLoad() {
       super.bindViewAtDidLoad()
       
+      baseView.consentCollection
+         .rx.modelSelected(PostsOutput.self)
+         .asDriver()
+         .drive(with: self) { vc, invitation in
+            let detail = InvitationDetailViewController(
+               bv: .init(),
+               vm: .init(disposeBag: DisposeBag(), networkManager: NetworkService.shared, invitationId: invitation.post_id),
+               db: DisposeBag())
+            vc.navigationController?.pushViewController(detail, animated: true)
+         }
+         .disposed(by: disposeBag)
+      
+      baseView.notConsentCollection
+         .rx.modelSelected(PostsOutput.self)
+         .asDriver()
+         .drive(with: self) { vc, invitation in
+            let detail = InvitationDetailViewController(
+               bv: .init(),
+               vm: .init(disposeBag: DisposeBag(), networkManager: NetworkService.shared, invitationId: invitation.post_id),
+               db: DisposeBag())
+            vc.navigationController?.pushViewController(detail, animated: true)
+         }
+         .disposed(by: disposeBag)
+   }
+   
+   override func bindViewAtWillAppear() {
+      super.bindViewAtWillAppear()
+
       let createInvitationButtonTapped = PublishSubject<Void>()
       let followButtonTapped = PublishSubject<Void>()
       let logoutButtonTapped = PublishSubject<Void>()
@@ -83,6 +111,7 @@ final class ProfileViewController: BaseViewController<ProfileView, ProfileViewMo
                .displayAlert()
          }
          .disposed(by: disposeBag)
+      
       
       /// bind output
       output.getProfileEmitter
@@ -142,10 +171,55 @@ final class ProfileViewController: BaseViewController<ProfileView, ProfileViewMo
          }
          .disposed(by: disposeBag)
       
+      output.notConsentInvitationOutput
+         .asDriver(onErrorJustReturn: [])
+         .drive(with: self) { vc, invitations in
+            vc.baseView.notConsentCollection.delegate = nil
+            vc.baseView.notConsentCollection.dataSource = nil
+            Observable.just(invitations)
+               .bind(to: vc.baseView.notConsentCollection.rx.items(
+                  cellIdentifier: ProfileInvitationCollectionCell.id,
+                  cellType: ProfileInvitationCollectionCell.self)) { row, invitation, cell in
+                     if invitations.isEmpty {
+                        cell.bindEmptyView()
+                     } else {
+                        cell.bindView(for: invitation, index: row, totalIndex: invitations.count)
+                     }
+                  }
+                  .disposed(by: vc.disposeBag)
+         }
+         .disposed(by: disposeBag)
+      
+      output.consentInvitationOutput
+         .asDriver(onErrorJustReturn: [])
+         .drive(with: self) { vc, invitations in
+            vc.baseView.consentCollection.delegate = nil
+            vc.baseView.consentCollection.dataSource = nil
+            Observable.just(invitations)
+               .bind(to: vc.baseView.consentCollection.rx.items(
+                  cellIdentifier: ProfileInvitationCollectionCell.id,
+                  cellType: ProfileInvitationCollectionCell.self)) { row, invitation, cell in
+                     if invitations.isEmpty {
+                        print("여기 들어오지 않니?")
+                        cell.bindEmptyView()
+                     } else {
+                        cell.bindView(for: invitation, index: row, totalIndex: invitations.count)
+                     }
+                  }
+                  .disposed(by: vc.disposeBag)
+         }
+         .disposed(by: disposeBag)
+      
       output.errorEmitter
-         .asDriver(onErrorJustReturn: "알 수 없는 에러가 발생했어요.")
-         .drive(with: self) { vc, errorMessage in
-            vc.baseView.displayToast(for: errorMessage, isError: true, duration: 2.0)
+         .asDriver(onErrorJustReturn: .invalidResponse)
+         .drive(with: self) { vc, errors in
+            if errors == .needToLogin {
+               vc.dismissToLoginVC()
+            }
+            
+            if errors == .invalidResponse {
+               vc.baseView.displayToast(for: "알 수 없는 문제가 발생했어요.", isError: true, duration: 1.5)
+            }
          }
          .disposed(by: disposeBag)
       
@@ -169,4 +243,5 @@ final class ProfileViewController: BaseViewController<ProfileView, ProfileViewMo
          }
          .disposed(by: disposeBag)
    }
+
 }
