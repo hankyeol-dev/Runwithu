@@ -41,19 +41,19 @@ final class ProfileViewController: BaseViewController<ProfileView, ProfileViewMo
       
       let createInvitationButtonTapped = PublishSubject<Void>()
       let followButtonTapped = PublishSubject<Void>()
+      let logoutButtonTapped = PublishSubject<Void>()
       
       let input = ProfileViewModel.Input(
          didLoad: didLoadInput,
          followButtonTapped: followButtonTapped,
-         createInvitationButtonTapped: createInvitationButtonTapped
+         createInvitationButtonTapped: createInvitationButtonTapped,
+         logoutButtonTapped: logoutButtonTapped
       )
       let output = viewModel.transform(for: input)
       
       /// bind input
       baseView.sendRunningInvitationButton.rx.tap
-         .bind(with: self) { _, void in
-            createInvitationButtonTapped.onNext(void)
-         }
+         .bind(to: createInvitationButtonTapped)
          .disposed(by: disposeBag)
       
       baseView.followButton.rx.tap
@@ -66,6 +66,19 @@ final class ProfileViewController: BaseViewController<ProfileView, ProfileViewMo
                .setActions(by: .systemRed, for: "취소")
                .setActions(by: .black, for: "확인") {
                   followButtonTapped.onNext(())
+               }
+               .displayAlert()
+         }
+         .disposed(by: disposeBag)
+      
+      baseView.logoutButton.rx.tap
+         .bind(with: self) { vc, void in
+            BaseAlertBuilder(viewController: vc)
+               .setTitle(for: "로그아웃")
+               .setMessage(for: "정말 로그아웃 하시나요?\n설정해두신 자동 로그인도 해제됩니다.\n우리 꼭 다시 함께 달려요 :D")
+               .setActions(by: .systemRed, for: "취소")
+               .setActions(by: .black, for: "확인") {
+                  logoutButtonTapped.onNext(void)
                }
                .displayAlert()
          }
@@ -133,6 +146,26 @@ final class ProfileViewController: BaseViewController<ProfileView, ProfileViewMo
          .asDriver(onErrorJustReturn: "알 수 없는 에러가 발생했어요.")
          .drive(with: self) { vc, errorMessage in
             vc.baseView.displayToast(for: errorMessage, isError: true, duration: 2.0)
+         }
+         .disposed(by: disposeBag)
+      
+      output.logoutOutput
+         .asDriver(onErrorJustReturn: false)
+         .drive(with: self) { vc, isLogoutSuccess in
+            if isLogoutSuccess {
+               vc.dismissStack(for: LoginViewController(
+                     bv: LoginView(),
+                     vm: LoginViewModel(
+                        disposeBag: DisposeBag(),
+                        networkManager: NetworkService.shared,
+                        tokenManager: TokenManager.shared,
+                        userDefaultsManager: UserDefaultsManager.shared
+                     ),
+                     db: DisposeBag()
+                  ))
+            } else {
+               vc.baseView.displayToast(for: "로그아웃에 뭔가 문제가 있어요.", isError: true, duration: 2.0)
+            }
          }
          .disposed(by: disposeBag)
    }

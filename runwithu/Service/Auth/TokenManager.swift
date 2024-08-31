@@ -53,6 +53,11 @@ actor TokenManager {
       }
    }
    
+   func resetTokens() -> Bool {
+      let accessReset = registerAccessToken(by: "")
+      let refreshReset = registerRefreshToken(by: "")
+      return accessReset && refreshReset
+   }
    
    // MARK: private methods
    // -

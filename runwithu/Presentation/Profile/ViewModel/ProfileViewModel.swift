@@ -12,6 +12,7 @@ import RxSwift
 final class ProfileViewModel: BaseViewModelProtocol {
    let disposeBag: DisposeBag
    let networkManager: NetworkService
+   
    private let isUserProfile: Bool
    private var isFollowing = false
    private var userId: String?
@@ -21,6 +22,7 @@ final class ProfileViewModel: BaseViewModelProtocol {
       let didLoad: PublishSubject<Void>
       let followButtonTapped: PublishSubject<Void>
       let createInvitationButtonTapped: PublishSubject<Void>
+      let logoutButtonTapped: PublishSubject<Void>
    }
    struct Output {
       let createInvitationButtonTapped: PublishSubject<(String, String)>
@@ -28,6 +30,7 @@ final class ProfileViewModel: BaseViewModelProtocol {
       let filteredPostsOutput: PublishSubject<[String: [PostsOutput]]>
       let getProfileEmitter: PublishSubject<(ProfileOutput?, String?)>
       let errorEmitter: PublishSubject<String>
+      let logoutOutput: PublishSubject<Bool>
    }
    
    init(
@@ -48,6 +51,7 @@ final class ProfileViewModel: BaseViewModelProtocol {
       let filteredPostsOutput = PublishSubject<[String: [PostsOutput]]>()
       let getProfileEmitter = PublishSubject<(ProfileOutput?, String?)>()
       let errorEmitter = PublishSubject<String>()
+      let logoutOutput = PublishSubject<Bool>()
       
       input.didLoad
          .subscribe(with: self) { vm, _ in
@@ -87,12 +91,21 @@ final class ProfileViewModel: BaseViewModelProtocol {
          }
          .disposed(by: disposeBag)
       
+      input.logoutButtonTapped
+         .subscribe(with: self) { vm, _ in
+            Task {
+               await vm.logout(logoutEmitter: logoutOutput)
+            }
+         }
+         .disposed(by: disposeBag)
+      
       return Output(
          createInvitationButtonTapped: createInvitationButtonTapped,
          followStateOutput: followStateOutput,
          filteredPostsOutput: filteredPostsOutput,
          getProfileEmitter: getProfileEmitter,
-         errorEmitter: errorEmitter
+         errorEmitter: errorEmitter,
+         logoutOutput: logoutOutput
       )
    }
    
@@ -236,5 +249,14 @@ extension ProfileViewModel {
             errorEmitter.onNext("팔로잉 과정에서 문제가 발생했어요.")
          }
       }
+   }
+   
+   private func logout(
+      logoutEmitter: PublishSubject<Bool>
+   ) async {
+      await UserDefaultsManager.shared.resetAutoLogin()
+      let resetTokensState = await TokenManager.shared.resetTokens()
+      
+      logoutEmitter.onNext(resetTokensState)
    }
 }

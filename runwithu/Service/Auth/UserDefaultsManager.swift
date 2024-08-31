@@ -105,4 +105,11 @@ actor UserDefaultsManager {
          return false
       }
    }
+   
+   func resetAutoLogin() {
+      registerAutoLogin(by: false)
+      registerUserId(by: "")
+      registerUserEmail(by: "")
+      registerUserPassword(by: "")
+   }
 }

@@ -20,6 +20,7 @@ final class ProfileView: BaseView, BaseViewProtocol {
    let profileFollower = BaseLabel(for: "", font: .systemFont(ofSize: 14, weight: .light), color: .white)
    let profileFollowing = BaseLabel(for: "", font: .systemFont(ofSize: 14, weight: .light), color: .white)
    let followButton = RoundedButtonView("팔로우", backColor: .clear, baseColor: .white, radius: 4)
+   let logoutButton = UIButton()
    
    let sendRunningInvitationButton = RoundedButtonView(
       "✉️  함께 달리기 초대하기", backColor: .black, baseColor: .white, radius: 12)
@@ -66,6 +67,7 @@ final class ProfileView: BaseView, BaseViewProtocol {
                      .marginRight(16)
                   flex.addItem()
                      .direction(.column)
+                     .alignItems(.start)
                      .rowGap(4)
                      .define { flex in
                         flex.addItem(profileNickname)
@@ -86,6 +88,10 @@ final class ProfileView: BaseView, BaseViewProtocol {
                            flex.addItem(followButton)
                               .height(24)
                               .width(64)
+                        }
+                        if isUserProfile {
+                           flex.addItem(logoutButton)
+                              .height(20)
                         }
                      }
                   
@@ -134,6 +140,9 @@ final class ProfileView: BaseView, BaseViewProtocol {
       followButton.titleLabel?.font = .systemFont(ofSize: 10)
       followButton.layer.borderColor = UIColor.black.cgColor
       followButton.layer.borderWidth = 1
+      logoutButton.setTitleColor(.systemRed, for: .normal)
+      logoutButton.setTitle("로그아웃", for: .normal)
+      logoutButton.titleLabel?.font = .systemFont(ofSize: 14)
    }
    
    func bindView(for profile: ProfileOutput) {
