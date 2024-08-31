@@ -28,13 +28,13 @@ final class QnaDetailViewModel: BaseViewModelProtocol {
    struct Output {
       let didLoadOutput: PublishSubject<PostsOutput>
       let commentsEmitter: BehaviorSubject<[CommentsOutput]>
-      let errorEmitter: PublishSubject<String>
+      let errorEmitter: PublishSubject<NetworkErrors>
    }
    
    func transform(for input: Input) -> Output {
       let didLoadOutput = PublishSubject<PostsOutput>()
       let commentsEmitter = BehaviorSubject<[CommentsOutput]>(value: comments)
-      let errorEmitter = PublishSubject<String>()
+      let errorEmitter = PublishSubject<NetworkErrors>()
       
       input.didLoadInput
          .subscribe(with: self) { vm, _ in
@@ -72,7 +72,7 @@ extension QnaDetailViewModel {
    private func getPost(
       successEmitter: PublishSubject<PostsOutput>,
       commentsEmitter: BehaviorSubject<[CommentsOutput]>,
-      errorEmitter: PublishSubject<String>
+      errorEmitter: PublishSubject<NetworkErrors>
    ) async {
       do {
          let results = try await networkManager.request(
@@ -83,20 +83,16 @@ extension QnaDetailViewModel {
          comments = results.comments
          commentsEmitter.onNext(comments)
       } catch NetworkErrors.needToRefreshRefreshToken {
-         await tempLoginAPI()
-         await getPost(
-            successEmitter: successEmitter,
-            commentsEmitter: commentsEmitter,
-            errorEmitter: errorEmitter)
+         errorEmitter.onNext(.needToLogin)
       } catch {
-         errorEmitter.onNext("QnA를 찾을 수 없습니다.")
+         errorEmitter.onNext(.dataNotFound)
       }
    }
    
    private func createComment(
       for comment: String,
       successEmitter: BehaviorSubject<[CommentsOutput]>,
-      errorEmitter: PublishSubject<String>
+      errorEmitter: PublishSubject<NetworkErrors>
    ) async {
       let commentInput: CommentsInput = .init(
          post_id: qnaId,
@@ -110,10 +106,9 @@ extension QnaDetailViewModel {
          comments.append(results)
          successEmitter.onNext(comments)
       } catch NetworkErrors.needToRefreshRefreshToken {
-         await tempLoginAPI()
-         await createComment(for: comment, successEmitter: successEmitter, errorEmitter: errorEmitter)
+         errorEmitter.onNext(.needToLogin)
       } catch {
-         errorEmitter.onNext("댓글 작성에 실패하였습니다.")
+         errorEmitter.onNext(.writeCommentError)
       }
    }
 }

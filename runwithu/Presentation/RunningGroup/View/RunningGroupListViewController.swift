@@ -47,6 +47,42 @@ final class RunningGroupListViewController: BaseViewController<RunningGroupListV
          .bind(to: floatingButtonTapped)
          .disposed(by: disposeBag)
       
+      baseView.userCreateSectionCollection
+         .rx.modelSelected(PostsOutput.self)
+         .asDriver()
+         .drive(with: self) { vc, group in
+            let detail = RunningGroupDetailViewController(
+               bv: .init(),
+               vm: .init(disposeBag: DisposeBag(), networkManager: NetworkService.shared, groupId: group.post_id),
+               db: DisposeBag())
+            vc.navigationController?.pushViewController(detail, animated: true)
+         }
+         .disposed(by: disposeBag)
+      
+      baseView.userJoinedCollection
+         .rx.modelSelected(PostsOutput.self)
+         .asDriver()
+         .drive(with: self) { vc, group in
+            let detail = RunningGroupDetailViewController(
+               bv: .init(),
+               vm: .init(disposeBag: DisposeBag(), networkManager: NetworkService.shared, groupId: group.post_id),
+               db: DisposeBag())
+            vc.navigationController?.pushViewController(detail, animated: true)
+         }
+         .disposed(by: disposeBag)
+      
+      baseView.runningGroupTable
+         .rx.modelSelected(PostsOutput.self)
+         .asDriver()
+         .drive(with: self) { vc, group in
+            let detail = RunningGroupDetailViewController(
+               bv: .init(),
+               vm: .init(disposeBag: DisposeBag(), networkManager: NetworkService.shared, groupId: group.post_id),
+               db: DisposeBag())
+            vc.navigationController?.pushViewController(detail, animated: true)
+         }
+         .disposed(by: disposeBag)
+      
       
       // MARK: bind output
       output.floatingButtonTapped

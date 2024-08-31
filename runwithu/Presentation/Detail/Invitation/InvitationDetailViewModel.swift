@@ -36,6 +36,7 @@ final class InvitationDetailViewModel: BaseViewModelProtocol {
       let runningInfoOutput: PublishSubject<RunningInfo?>
       let runningEntryOutput: PublishSubject<[BaseProfileType]>
       let joinedOutput: PublishSubject<Bool>
+      let errorOutput: PublishSubject<NetworkErrors>
    }
    
    func transform(for input: Input) -> Output {
@@ -43,15 +44,17 @@ final class InvitationDetailViewModel: BaseViewModelProtocol {
       let runningInfoOutput = PublishSubject<RunningInfo?>()
       let runningEntryOutput = PublishSubject<[BaseProfileType]>()
       let joinedOutput = PublishSubject<Bool>()
+      let errorOutput = PublishSubject<NetworkErrors>()
       
       input.didLoadInput
          .subscribe(with: self) { vm, _ in
             Task {
                await vm.getInvitation(
-                  invitationOutput: invitationOutput,
+                  invitationEmitter: invitationOutput,
                   runningInfoEmitter: runningInfoOutput,
                   runningEntryOutput: runningEntryOutput,
-                  joinedOutput: joinedOutput
+                  joinedOutput: joinedOutput,
+                  errorEmitter: errorOutput
                )
             }
          }
@@ -62,7 +65,8 @@ final class InvitationDetailViewModel: BaseViewModelProtocol {
             Task {
                await vm.joinOrDismissInvitation(
                   isJoined: false,
-                  isJoinedEmitter: joinedOutput
+                  isJoinedEmitter: joinedOutput,
+                  errorEmitter: errorOutput
                )
             }
          }
@@ -73,7 +77,8 @@ final class InvitationDetailViewModel: BaseViewModelProtocol {
             Task {
                await vm.joinOrDismissInvitation(
                   isJoined: true,
-                  isJoinedEmitter: joinedOutput
+                  isJoinedEmitter: joinedOutput,
+                  errorEmitter: errorOutput
                )
             }
          }
@@ -83,17 +88,19 @@ final class InvitationDetailViewModel: BaseViewModelProtocol {
          invitationOutput: invitationOutput,
          runningInfoOutput: runningInfoOutput,
          runningEntryOutput: runningEntryOutput,
-         joinedOutput: joinedOutput
+         joinedOutput: joinedOutput,
+         errorOutput: errorOutput
       )
    }
 }
 
 extension InvitationDetailViewModel {
    private func getInvitation(
-      invitationOutput: PublishSubject<PostsOutput>,
+      invitationEmitter: PublishSubject<PostsOutput>,
       runningInfoEmitter: PublishSubject<RunningInfo?>,
       runningEntryOutput: PublishSubject<[BaseProfileType]>,
-      joinedOutput: PublishSubject<Bool>
+      joinedOutput: PublishSubject<Bool>,
+      errorEmitter: PublishSubject<NetworkErrors>
    ) async {
       do {
          let invitation = try await networkManager.request(
@@ -106,21 +113,15 @@ extension InvitationDetailViewModel {
          await getInvitors(runningEntryOutput: runningEntryOutput)
          await validJoined(
             for: invitation.likes,
-            joinedOutputEmitter: joinedOutput
+            joinedOutputEmitter: joinedOutput,
+            errorEmitter: errorEmitter
          )
          
-         invitationOutput.onNext(invitation)
+         invitationEmitter.onNext(invitation)
       } catch NetworkErrors.needToRefreshRefreshToken {
-         await tempLoginAPI()
-         await getInvitation(
-            invitationOutput: invitationOutput,
-            runningInfoEmitter: runningInfoEmitter,
-            runningEntryOutput: runningEntryOutput,
-            joinedOutput: joinedOutput
-         )
+         errorEmitter.onNext(.needToLogin)
       } catch {
-         dump(error)
-         // TODO: handling Error hear
+         errorEmitter.onNext(.dataNotFound)
       }
    }
    
@@ -158,7 +159,8 @@ extension InvitationDetailViewModel {
    
    private func validJoined(
       for entries: [String],
-      joinedOutputEmitter: PublishSubject<Bool>
+      joinedOutputEmitter: PublishSubject<Bool>,
+      errorEmitter: PublishSubject<NetworkErrors>
    ) async {
       do {
          let userId = try await networkManager.request(
@@ -166,8 +168,7 @@ extension InvitationDetailViewModel {
             of: ProfileUserIdOutput.self)
          joinedOutputEmitter.onNext(entries.contains(userId.user_id))
       } catch NetworkErrors.needToRefreshRefreshToken {
-         await tempLoginAPI()
-         await validJoined(for: entries, joinedOutputEmitter: joinedOutputEmitter)
+         errorEmitter.onNext(.needToLogin)
       } catch {
          joinedOutputEmitter.onNext(false)
       }
@@ -175,7 +176,8 @@ extension InvitationDetailViewModel {
    
    private func joinOrDismissInvitation(
       isJoined: Bool,
-      isJoinedEmitter: PublishSubject<Bool>
+      isJoinedEmitter: PublishSubject<Bool>,
+      errorEmitter: PublishSubject<NetworkErrors>
    ) async {
       do {
          let results = try await networkManager.request(
@@ -186,9 +188,7 @@ extension InvitationDetailViewModel {
             of: PostLikeOutput.self)
          isJoinedEmitter.onNext(results.like_status)
       } catch NetworkErrors.needToRefreshRefreshToken {
-         await tempLoginAPI()
-         await joinOrDismissInvitation(
-            isJoined: isJoined, isJoinedEmitter: isJoinedEmitter)
+         errorEmitter.onNext(.needToLogin)
       } catch {
          isJoinedEmitter.onNext(false)
       }

@@ -57,7 +57,7 @@ final class BaseCreatorView: BaseView {
    }
    
    func bindCreatedDate(date: String) {
-      createdDate.text = date
+      createdDate.text = date.formattedCreatedAt()
    }
    
    func bindViews(for creator: BaseProfileType, createdAt: String) {
@@ -80,18 +80,8 @@ final class BaseCreatorView: BaseView {
    }
    
    private func calcCreatedAt(for createdAt: String) {
-      if let compare = createdAt.calcBetweenDayAndHour() {
-         var compareString = ""
-         if let day = compare.day, day != 0 {
-            compareString += "\(day)일 "
-         }
-         
-         if let hour = compare.hour {
-            compareString += "\(hour)시간 "
-         }
-         compareString += "전"
-         
-         createdDate.text = compareString
+      if let text = createdAt.split(separator: "T").first {
+         createdDate.bindText(String(text))
       }
    }
 }

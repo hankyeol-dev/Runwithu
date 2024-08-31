@@ -46,7 +46,9 @@ final class CapsuledLabel: BaseView {
       }
    }
    
-   func bindText(for type: String) {
-      categoryLabel.text = type
+   func bindText(for type: String?) {
+      if let type {
+         categoryLabel.text = type         
+      }
    }
 }

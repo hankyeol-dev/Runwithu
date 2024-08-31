@@ -67,25 +67,33 @@ final class QnaDetailViewController: BaseViewController<QnaDetailView, QnaDetail
                cell.bindView(for: item)
             }
             .disposed(by: disposeBag)
+      
+      output.errorEmitter
+         .asDriver(onErrorJustReturn: .dataNotFound)
+         .drive(with: self) { vc, errors in
+            if errors == .needToLogin {
+               vc.dismissToLoginVC()
+            }
+            
+            if errors == .dataNotFound {
+               vc.baseView.displayToast(for: "QnA를 불러오지 못했어요.", isError: true, duration: 1.0)
+               DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                  vc.navigationController?.popViewController(animated: true)
+               }
+            }
+            
+            if errors == .writeCommentError {
+               vc.baseView.displayToast(for: "댓글 작성에 문제가 발생했어요.", isError: true, duration: 1.5)
+            }
+         }
+         .disposed(by: disposeBag)
    }
 }
 
 extension QnaDetailViewController {
    private func bindCreatorView(_ output: PostsOutput) {
-      if let compare = output.createdAt.calcBetweenDayAndHour() {
-         var compareString = ""
-         if let day = compare.day, day != 0 {
-            compareString += "\(day)일 "
-         }
-         
-         if let hour = compare.hour {
-            compareString += "\(hour)시간 "
-         }
-         compareString += "전"
-         
-         baseView.creatorView.bindCreatedDate(date: compareString)
-      }
       
+      baseView.creatorView.bindCreatedDate(date: output.createdAt.formattedCreatedAt())
       
       if let profileURL = output.creator.profileImage {
          baseView.creatorView.bindView(imageURL: profileURL, name: output.creator.nick)

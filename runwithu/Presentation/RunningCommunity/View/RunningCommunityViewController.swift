@@ -25,7 +25,6 @@ final class RunningCommunityViewController: BaseViewController<RunningCommunityV
    
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
-      
       setLogo()
    }
    
@@ -78,6 +77,20 @@ final class RunningCommunityViewController: BaseViewController<RunningCommunityV
                   disposeBag: DisposeBag(), 
                   networkManager: NetworkService.shared,
                   epilogueId: post.post_id),
+               db: DisposeBag())
+            vc.navigationController?.pushViewController(detail, animated: true)
+         }
+         .disposed(by: disposeBag)
+      
+      baseView.productPostsTable
+         .rx.modelSelected(PostsOutput.self)
+         .bind(with: self) { vc, post in
+            let detail = ProducteDetailViewController(
+               bv: .init(),
+               vm: .init(
+                  disposeBag: DisposeBag(),
+                  networkManager: NetworkService.shared,
+                  detailPost: post),
                db: DisposeBag())
             vc.navigationController?.pushViewController(detail, animated: true)
          }
@@ -136,7 +149,7 @@ final class RunningCommunityViewController: BaseViewController<RunningCommunityV
             if output.0 == .epilogues {
                vc.baseView.bindEpilogueView()
                
-               Observable.just(output.1)
+               BehaviorSubject.just(output.1)
                   .bind(to: vc.baseView.epiloguePostsTable.rx.items(
                      cellIdentifier: EpiloguePostCell.id, cellType: EpiloguePostCell.self)
                   ) { row, post, cell in
@@ -148,7 +161,7 @@ final class RunningCommunityViewController: BaseViewController<RunningCommunityV
             if output.0 == .product_epilogues {
                vc.baseView.bindRunningProductView()
                
-               Observable.just(output.1)
+               BehaviorSubject.just(output.1)
                   .bind(to: vc.baseView.productPostsTable.rx.items(
                      cellIdentifier: ProductPostCell.id,
                      cellType: ProductPostCell.self)
@@ -192,6 +205,15 @@ extension RunningCommunityViewController {
             db: DisposeBag()
          )
          vc.displayViewAsFullScreen(as: .coverVertical)
+         vc.willDisappearHanlder = { epilogueId in
+            if !epilogueId.isEmpty {
+               let detail = RunningEpilogueDetailViewController(
+                  bv: .init(),
+                  vm: .init(disposeBag: DisposeBag(), networkManager: NetworkService.shared, epilogueId: epilogueId),
+                  db: DisposeBag())
+               vc.navigationController?.pushViewController(detail, animated: true)
+            }
+         }
          present(vc, animated: true)
       case .product_epilogues:
          let vc = ProductEpiloguePostViewController(
@@ -201,8 +223,16 @@ extension RunningCommunityViewController {
                networkManager: NetworkService.shared,
                isInGroupSide: false),
             db: DisposeBag())
-         
          vc.displayViewAsFullScreen(as: .coverVertical)
+         vc.willDisappearHanlder = { productEpilogue in
+            if let productEpilogue {
+               let detail = ProducteDetailViewController(
+                  bv: .init(),
+                  vm: .init(disposeBag: DisposeBag(), networkManager: NetworkService.shared, detailPost: productEpilogue),
+                  db: DisposeBag())
+               vc.navigationController?.pushViewController(detail, animated: true)
+            }
+         }
          present(vc, animated: true)
       case .qnas:
          let vc = QnaPostViewController(
@@ -216,13 +246,15 @@ extension RunningCommunityViewController {
          vc.displayViewAsFullScreen(as: .coverVertical)
          vc.willDisappearHanlder = { [weak self] postId in
             guard let self else { return }
-            let qnaDetailVC = QnaDetailViewController(
-               bv: QnaDetailView(),
-               vm: QnaDetailViewModel(disposeBag: DisposeBag(),
-                                      networkManager: NetworkService.shared,
-                                      qnaId: postId), db: DisposeBag())
-            
-            self.navigationController?.pushViewController(qnaDetailVC, animated: true)
+            if !postId.isEmpty {
+               let qnaDetailVC = QnaDetailViewController(
+                  bv: QnaDetailView(),
+                  vm: QnaDetailViewModel(disposeBag: DisposeBag(),
+                                         networkManager: NetworkService.shared,
+                                         qnaId: postId), db: DisposeBag())
+               
+               self.navigationController?.pushViewController(qnaDetailVC, animated: true)
+            }
          }
          present(vc, animated: true)
       case .open_self_marathons:

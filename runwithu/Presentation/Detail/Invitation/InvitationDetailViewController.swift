@@ -78,5 +78,18 @@ final class InvitationDetailViewController: BaseViewController<InvitationDetailV
             vc.baseView.bindView(isJoined: isJoined)
          }
          .disposed(by: disposeBag)
+      
+      output.errorOutput
+         .asDriver(onErrorJustReturn: .dataNotFound)
+         .drive(with: self) { vc, errors in
+            if errors == .needToLogin {
+               vc.dismissToLoginVC()
+            }
+            
+            if errors == .dataNotFound {
+               vc.baseView.displayToast(for: "러닝 초대장을 불러오지 못했어요.", isError: true, duration: 2.0)
+            }
+         }
+         .disposed(by: disposeBag)
    }
 }

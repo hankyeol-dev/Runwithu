@@ -67,5 +67,19 @@ final class RunningGroupDetailViewController: BaseViewController<RunningGroupDet
             vc.baseView.updateGroupJoined(by: isJoined)
          }
          .disposed(by: disposeBag)
+      
+      output.errorOutput
+         .asDriver(onErrorJustReturn: .dataNotFound)
+         .drive(with: self) { vc, errors in
+            if errors == .needToLogin {
+               vc.dismissToLoginVC()
+            }
+            
+            if errors == .dataNotFound {
+               vc.baseView.displayToast(for: "러닝 그룹을 찾을 수 없어요.", isError: true, duration: 2.0)
+               vc.navigationController?.popViewController(animated: true)
+            }
+         }
+         .disposed(by: disposeBag)
    }
 }

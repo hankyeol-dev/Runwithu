@@ -37,6 +37,7 @@ final class RunnigGroupDetailInfoViewModel: BaseViewModelProtocol {
          .subscribe(with: self) { vm, _ in
             Task {
                await vm.getEntry()
+               dump(vm.entries)
                didLoadEntrys.onNext(vm.entries)
             }
          }
@@ -55,18 +56,7 @@ final class RunnigGroupDetailInfoViewModel: BaseViewModelProtocol {
    }
    
    private func getUseRrofile() async {
-      do {
-         let userIdResult = try await networkManager.request(
-            by: UserEndPoint.readMyProfile,
-            of: ProfileUserIdOutput.self)
-         userId = userIdResult.user_id
-      } catch NetworkErrors.needToRefreshRefreshToken {
-         await tempLoginAPI()
-         await getUseRrofile()
-      } catch {
-         // TODO: 로그아웃 로직이 오는게 맞을 듯
-         dump(error)
-      }
+      userId = await UserDefaultsManager.shared.getUserId()
    }
    
    private func getEntry() async {

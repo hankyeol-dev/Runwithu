@@ -16,6 +16,7 @@ final class NetworkService {
       return URLSession(configuration: config)
    }()
    private let tokenManager = TokenManager.shared
+//   private let userDefaultsManager = UserDefaultsManager.shared
    
    static let shared = NetworkService()
    
@@ -30,14 +31,31 @@ final class NetworkService {
       do {
          return try await handleResponse(data: data, response: response)
       } catch NetworkErrors.needToRefreshAccessToken {
-         let refreshResult = await tokenManager.refreshToken()
-         if refreshResult {
-            return try await self.request(by: endPoint, of: outputType)
-         } else {
-            throw NetworkErrors.needToRefreshRefreshToken
+         return try await autoLoginChecker(of: outputType) {
+            return try await self.request(by:endPoint, of:outputType)
          }
       } catch {
          return try await handleResponse(data: data, response: response)
+      }
+   }
+   
+   private func autoLoginChecker<D: Decodable>(
+      of: D.Type,
+      successHandler: @escaping () async throws -> D
+   ) async throws -> D {
+      let autoLoginState = await UserDefaultsManager.shared.getAutoLoginState()
+      
+      if autoLoginState {
+         // 자동 로그인 동의한 유저
+         let isSuccess = await UserDefaultsManager.shared.autoLogin()
+         if isSuccess {
+            return try await successHandler()
+         } else {
+            throw NetworkErrors.needToRefreshRefreshToken
+         }
+      } else {
+         // 자동 로그인 동의하지 않은 유저
+         throw NetworkErrors.needToRefreshRefreshToken
       }
    }
    

@@ -69,13 +69,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return false
          }
       } catch NetworkErrors.needToRefreshRefreshToken {
-         let isAutoLogin = await UserDefaultsManager.shared.getAutoLoginState()
-         
-         if isAutoLogin {
-            return await UserDefaultsManager.shared.autoLogin()
-         } else {
-            return false
-         }
+         return false
       } catch {
          return false
       }

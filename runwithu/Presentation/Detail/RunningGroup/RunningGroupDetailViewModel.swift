@@ -32,11 +32,13 @@ final class RunningGroupDetailViewModel: BaseViewModelProtocol {
    struct Output{
       let didLoadOutput: PublishSubject<PostsOutput>
       let validGroupJoinEmitter: PublishSubject<Bool>
+      let errorOutput: PublishSubject<NetworkErrors>
    }
    
    func transform(for input: Input) -> Output {
       let didLoadOutput = PublishSubject<PostsOutput>()
       let validGroupJoinEmitter = PublishSubject<Bool>()
+      let errorOutput = PublishSubject<NetworkErrors>()
       
       input.didLoadInput
          .debug("invoked didLoadInput")
@@ -44,7 +46,8 @@ final class RunningGroupDetailViewModel: BaseViewModelProtocol {
             Task {
                await vm.getGroupPost(
                   successEmitter: didLoadOutput,
-                  validGroupJoinEmitter: validGroupJoinEmitter
+                  validGroupJoinEmitter: validGroupJoinEmitter,
+                  errorEmitter: errorOutput
                )
             }
          }
@@ -52,7 +55,8 @@ final class RunningGroupDetailViewModel: BaseViewModelProtocol {
       
       return Output(
          didLoadOutput: didLoadOutput,
-         validGroupJoinEmitter: validGroupJoinEmitter
+         validGroupJoinEmitter: validGroupJoinEmitter,
+         errorOutput: errorOutput
       )
    }
 }
@@ -60,27 +64,37 @@ final class RunningGroupDetailViewModel: BaseViewModelProtocol {
 extension RunningGroupDetailViewModel {
    private func getGroupPost(
       successEmitter: PublishSubject<PostsOutput>,
-      validGroupJoinEmitter: PublishSubject<Bool>
+      validGroupJoinEmitter: PublishSubject<Bool>,
+      errorEmitter: PublishSubject<NetworkErrors>
    ) async {
       do {
          let postResult = try await networkManager.request(
             by: PostEndPoint.getPost(input: .init(post_id: groupId)),
             of: PostsOutput.self)
+         
          groupPostsOutput = postResult
+         
          if let content1 = postResult.content1, let entryLimit = Int(content1) {
-            isJoined = await validIsJoinedGroup(for: postResult.likes, limit: entryLimit)
+            isJoined = await validIsJoinedGroup(
+               for: postResult.likes,
+               limit: entryLimit,
+               errorEmitter: errorEmitter
+            )
             validGroupJoinEmitter.onNext(isJoined)
             successEmitter.onNext(postResult)
          }
       } catch NetworkErrors.needToRefreshRefreshToken {
-         await tempLoginAPI()
-         await getGroupPost(successEmitter: successEmitter, validGroupJoinEmitter: validGroupJoinEmitter)
+         errorEmitter.onNext(.needToLogin)
       } catch {
-         dump(error)
+         errorEmitter.onNext(.dataNotFound)
       }
    }
    
-   private func validIsJoinedGroup(for likes: [String], limit: Int) async -> Bool {
+   private func validIsJoinedGroup(
+      for likes: [String],
+      limit: Int,
+      errorEmitter: PublishSubject<NetworkErrors>
+   ) async -> Bool {
       do {
          let userId = try await networkManager.request(
             by: UserEndPoint.readMyProfile, of: ProfileUserIdOutput.self)
@@ -88,15 +102,12 @@ extension RunningGroupDetailViewModel {
          return likes.contains(userId.user_id) && ( limit > likes.count )
          
       } catch NetworkErrors.needToRefreshRefreshToken {
-         await tempLoginAPI()
-         return await validIsJoinedGroup(for: likes, limit: limit)
+         errorEmitter.onNext(.needToLogin)
       } catch {
-         dump(error)
          return false
       }
+      return false
    }
    
-   func getGroupPost() -> PostsOutput {
-      return groupPostsOutput
-   }
+   func getGroupPost() -> PostsOutput { return groupPostsOutput }
 }

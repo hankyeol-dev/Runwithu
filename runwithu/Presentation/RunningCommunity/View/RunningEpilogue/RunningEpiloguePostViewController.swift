@@ -17,6 +17,8 @@ final class RunningEpiloguePostViewController: BaseViewController<RunningEpilogu
    private let selectedImagesForCollection = BehaviorSubject<[UIImage]>(value: [])
    private let didLoadInput = PublishSubject<Void>()
    
+   var willDisappearHanlder: ((String) -> Void)?
+   
    override func loadView() {
       view = baseView
    }
@@ -24,6 +26,12 @@ final class RunningEpiloguePostViewController: BaseViewController<RunningEpilogu
    override func viewDidLoad() {
       super.viewDidLoad()
       didLoadInput.onNext(())
+   }
+   
+   override func viewDidDisappear(_ animated: Bool) {
+      super.viewDidDisappear(animated)
+      let epilogueId = viewModel.getEpilogueId()
+      willDisappearHanlder?(epilogueId)
    }
    
    override func bindViewAtDidLoad() {
@@ -40,7 +48,7 @@ final class RunningEpiloguePostViewController: BaseViewController<RunningEpilogu
          .asDriver()
          .drive(with: self) { vc, _ in
             vc.getPhotoLibraryAuthStatus {
-               vc.displayPhotoLibrary(for: 5)
+               vc.displayPhotoLibrary(for: 3)
             }
          }
          .disposed(by: disposeBag)
@@ -189,7 +197,7 @@ extension RunningEpiloguePostViewController: PHPickerViewControllerDelegate {
          }
          
          for await image in taskGroup {
-            if let image, let data = image.pngData() {
+            if let image, let data = image.downscaleTOjpegData(maxBytes: 1_000_000) {
                self.selectedImages.append(image)
                self.viewModel.selectedImages.append(data)
             }

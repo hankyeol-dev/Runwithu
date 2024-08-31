@@ -21,6 +21,7 @@ enum NetworkErrors: Error {
    case invalidUpload
    case overlapUsername
    case needToLogin
+   case writeCommentError
    
    var byErrorMessage: String {
       switch self {

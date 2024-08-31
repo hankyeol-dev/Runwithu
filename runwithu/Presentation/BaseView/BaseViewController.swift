@@ -101,6 +101,18 @@ extension BaseVC {
       window?.makeKeyAndVisible()
    }
    
+   func dismissToLoginVC() {
+      dismissStack(for: LoginViewController(
+         bv: .init(),
+         vm: .init(
+            disposeBag: DisposeBag(),
+            networkManager: NetworkService.shared,
+            tokenManager: TokenManager.shared,
+            userDefaultsManager: UserDefaultsManager.shared),
+         db: DisposeBag())
+      )
+   }
+   
    func bindInputViewText(
       for field: BaseTextFieldRounded,
       to emitter: PublishSubject<String>
@@ -128,8 +140,8 @@ extension BaseVC {
       logoImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 28)
       logoImageView.contentMode = .scaleAspectFit
       let imageItem = UIBarButtonItem.init(customView: logoImageView)
-//      let negativeSpacer = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-//      negativeSpacer.width = 10
+      //      let negativeSpacer = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+      //      negativeSpacer.width = 10
       navigationItem.leftBarButtonItems = [imageItem]
    }
 }

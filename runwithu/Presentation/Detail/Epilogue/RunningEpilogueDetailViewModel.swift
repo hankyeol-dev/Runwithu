@@ -33,14 +33,14 @@ final class RunningEpilogueDetailViewModel: BaseViewModelProtocol {
       let didLoadOutput: PublishSubject<PostsOutput>
       let didLoadImageOutput: PublishSubject<[String]>
       let didLoadCommentsOutput: PublishSubject<[CommentsOutput]>
-      let errorOutput: PublishSubject<String>
+      let errorOutput: PublishSubject<NetworkErrors>
    }
    
    func transform(for input: Input) -> Output {
       let didLoadOutput = PublishSubject<PostsOutput>()
       let didLoadImageOutput = PublishSubject<[String]>()
       let didLoadCommentsOutput = PublishSubject<[CommentsOutput]>()
-      let errorOutput = PublishSubject<String>()
+      let errorOutput = PublishSubject<NetworkErrors>()
       
       input.didLoadInput
          .subscribe(with: self) { vm, _ in
@@ -82,7 +82,7 @@ extension RunningEpilogueDetailViewModel {
       successEmitter: PublishSubject<PostsOutput>,
       successImageEmitter: PublishSubject<[String]>,
       successCommentsEmitter: PublishSubject<[CommentsOutput]>,
-      errorEmitter: PublishSubject<String>
+      errorEmitter: PublishSubject<NetworkErrors>
    ) async {
       do {
          let epilogue = try await networkManager.request(
@@ -97,15 +97,9 @@ extension RunningEpilogueDetailViewModel {
             successCommentsEmitter.onNext(epilogueComments)
          }
       } catch NetworkErrors.needToRefreshRefreshToken {
-         await tempLoginAPI()
-         await getEpilogue(
-            successEmitter: successEmitter,
-            successImageEmitter: successImageEmitter,
-            successCommentsEmitter: successCommentsEmitter,
-            errorEmitter: errorEmitter
-         )
+         errorEmitter.onNext(.needToLogin)
       } catch {
-         errorEmitter.onNext("러닝 일지를 조회할 수 없어요 🥹")
+         errorEmitter.onNext(.dataNotFound)
       }
       
    }
@@ -113,7 +107,7 @@ extension RunningEpilogueDetailViewModel {
    private func sendComment(
       comment: String,
       successCommentsEmitter: PublishSubject<[CommentsOutput]>,
-      errorEmitter: PublishSubject<String>
+      errorEmitter: PublishSubject<NetworkErrors>
    ) async {
       do {
          let comments = try await networkManager.request(
@@ -123,14 +117,9 @@ extension RunningEpilogueDetailViewModel {
          epilogueComments.append(comments)
          successCommentsEmitter.onNext(epilogueComments)
       } catch NetworkErrors.needToRefreshRefreshToken {
-         await tempLoginAPI()
-         await sendComment(
-            comment: comment,
-            successCommentsEmitter: successCommentsEmitter,
-            errorEmitter: errorEmitter
-         )
+         errorEmitter.onNext(.needToLogin)
       } catch {
-         errorEmitter.onNext("러닝 일지를 조회할 수 없어요 🥹")
+         errorEmitter.onNext(.writeCommentError)
       }
    }
 }

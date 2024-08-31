@@ -20,7 +20,7 @@ final class BaseTabItem: BaseView {
    
    private let tabItemContainer = UIView()
    private let tabImage = UIImageView()
-   private let tabName = BaseLabel(for: "", font: .systemFont(ofSize: 12), color: .darkGray)
+   private let tabName = BaseLabel(for: "", font: .systemFont(ofSize: 12), color: .black)
    
    init(tabItem: TabItems, tabIndex: Int) {
       self.tabItem = tabItem

@@ -30,7 +30,7 @@ extension String {
    }
    
    func formattedCreatedAt() -> String {
-      return String(self.split(separator: "T").joined(separator: " ").split(separator: ".").joined().prefix(19))
+      return String(self.split(separator: "T").joined(separator: " ").split(separator: ".").joined().prefix(10))
    }
    
    func formattedRunningDateString() -> String? {

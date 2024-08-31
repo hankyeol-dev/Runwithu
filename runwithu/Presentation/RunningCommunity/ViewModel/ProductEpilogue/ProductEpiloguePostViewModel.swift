@@ -22,6 +22,7 @@ final class ProductEpiloguePostViewModel: BaseViewModelProtocol {
       productBrandType: "",
       rating: nil,
       purchasedLink: nil)
+   private var productEpilogue: PostsOutput? = nil
    
    init(
       disposeBag: DisposeBag,
@@ -86,6 +87,10 @@ final class ProductEpiloguePostViewModel: BaseViewModelProtocol {
          errorEmitter: errorEmitter
       )
    }
+   
+   func getProductEpilogue() -> PostsOutput? {
+      return productEpilogue
+   }
 }
 
 extension ProductEpiloguePostViewModel {
@@ -124,6 +129,7 @@ extension ProductEpiloguePostViewModel {
                by: PostEndPoint.posts(input: postInput),
                of: PostsOutput.self)
             successEmitter.onNext(postResults.post_id)
+            productEpilogue = postResults
          } catch NetworkErrors.needToRefreshRefreshToken {
             await tempLoginAPI()
             await createPost(successEmitter: successEmitter, errorEmitter: errorEmitter)

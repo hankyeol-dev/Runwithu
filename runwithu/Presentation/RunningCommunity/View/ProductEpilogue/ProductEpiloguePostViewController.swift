@@ -16,12 +16,20 @@ final class ProductEpiloguePostViewController: BaseViewController<ProductEpilogu
    private var selectedImages: [UIImage] = []
    private let selectedImagesForCollection = BehaviorSubject<[UIImage]>(value: [])
    
+   var willDisappearHanlder: ((PostsOutput?) -> Void)?
+   
    override func loadView() {
       view = baseView
    }
    
    override func viewDidLoad() {
       super.viewDidLoad()
+   }
+   
+   override func viewDidDisappear(_ animated: Bool) {
+      super.viewDidDisappear(animated)
+      let productEpilogue = viewModel.getProductEpilogue()
+      willDisappearHanlder?(productEpilogue)
    }
    
    override func bindViewAtDidLoad() {

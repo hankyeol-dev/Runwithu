@@ -13,6 +13,7 @@ final class RunningEpiloguePostViewModel: BaseViewModelProtocol {
    let disposeBag: DisposeBag
    let networkManager: NetworkService
    private let isInGroupSide: Bool
+   private var epilogueId: String = ""
    private var invitationList: [(String, String)] = []
    private var selectedInvitation: String = ""
    var selectedImages: [Data] = []
@@ -21,7 +22,7 @@ final class RunningEpiloguePostViewModel: BaseViewModelProtocol {
       title: "",
       content: "",
       runningInfo: .init(date: Date().formattedRunningDate()),
-      invitationId: nil // TODO: - 초대장 조회 만들어야 함
+      invitationId: nil
    )
    
    init(
@@ -117,6 +118,8 @@ final class RunningEpiloguePostViewModel: BaseViewModelProtocol {
          errorEmitter: errorEmitter
       )
    }
+   
+   func getEpilogueId() -> String { return epilogueId }
 }
 
 extension RunningEpiloguePostViewModel {
@@ -194,7 +197,7 @@ extension RunningEpiloguePostViewModel {
    
    private func uploadImages(
       errorEmitter: PublishSubject<String>
-   ) async -> [String] {
+   )  async throws -> [String] {
       if !selectedImages.isEmpty {
          do {
             let results = try await networkManager.upload(
@@ -206,7 +209,7 @@ extension RunningEpiloguePostViewModel {
             return []
          } catch NetworkErrors.needToRefreshRefreshToken {
             await tempLoginAPI()
-            return await uploadImages(errorEmitter: errorEmitter)
+            return try await uploadImages(errorEmitter: errorEmitter)
          } catch {
             errorEmitter.onNext("이미지 첨부에 실패했어요.")
             return []
@@ -226,25 +229,28 @@ extension RunningEpiloguePostViewModel {
          return
       }
       
-      let imageFiles = await uploadImages(errorEmitter: errorEmitter)
       let invitationId = validInvitation(for: selectedInvitation)
       
-      let postInput: PostsInput = .init(
-         product_id: runningEpilogueInput.productId.rawValue,
-         title: runningEpilogueInput.title,
-         content: runningEpilogueInput.content,
-         content1: runningEpilogueInput.communityType.rawValue,
-         content2: runningEpilogueInput.runningInfo?.byJsonString,
-         content3: invitationId,
-         content4: nil,
-         content5: nil,
-         files: !imageFiles.isEmpty ? imageFiles : nil
-      )
       
       do {
+         let imageFiles = try await uploadImages(errorEmitter: errorEmitter)
+         let postInput: PostsInput = .init(
+            product_id: runningEpilogueInput.productId.rawValue,
+            title: runningEpilogueInput.title,
+            content: runningEpilogueInput.content,
+            content1: runningEpilogueInput.communityType.rawValue,
+            content2: runningEpilogueInput.runningInfo?.byJsonString,
+            content3: invitationId,
+            content4: nil,
+            content5: nil,
+            files: !imageFiles.isEmpty ? imageFiles : nil
+         )
+         
+         
          let postResults = try await networkManager.request(
             by: PostEndPoint.posts(input: postInput),
             of: PostsOutput.self)
+         epilogueId = postResults.post_id
          successEmitter.onNext(postResults.post_id)
       } catch NetworkErrors.needToRefreshRefreshToken {
          await tempLoginAPI()

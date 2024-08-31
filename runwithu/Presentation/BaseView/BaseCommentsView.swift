@@ -10,31 +10,43 @@ import UIKit
 import SnapKit
 
 final class BaseCommentsView: BaseTableViewCell {
+   private let commentBox = RectangleView(backColor: .clear, radius: 0)
    private let creatorView = BaseCreatorView()
-   private let commentView = BaseLabel(for: "", font: .systemFont(ofSize: 13))
+   private let comment = BaseLabel(for: "", font: .systemFont(ofSize: 12))
+   private let bottom = BaseLabel()
    
    override func setSubviews() {
       super.setSubviews()
-      contentView.addSubviews(creatorView, commentView)
+      contentView.addSubview(commentBox)
+      commentBox.addSubviews(creatorView, comment, bottom)
    }
    
    override func setLayout() {
       super.setLayout()
-      creatorView.snp.makeConstraints { make in
-         make.top.horizontalEdges.equalTo(self.contentView.safeAreaLayoutGuide).inset(8)
-         make.height.equalTo(64)
-         make.bottom.equalTo(self.commentView.snp.top).offset(-4)
+      commentBox.snp.makeConstraints { make in
+         make.edges.equalTo(contentView.safeAreaLayoutGuide).inset(8)
       }
-      commentView.snp.makeConstraints { make in
-         make.leading.equalTo(self.contentView.safeAreaLayoutGuide).inset(24)
-         make.trailing.greaterThanOrEqualTo(self.contentView.safeAreaLayoutGuide).inset(12)
-         
+      creatorView.snp.makeConstraints { make in
+         make.top.equalTo(commentBox.safeAreaLayoutGuide).inset(12)
+         make.horizontalEdges.equalTo(commentBox.safeAreaLayoutGuide).inset(8)
+         make.height.equalTo(32)
+      }
+      comment.snp.makeConstraints { make in
+         make.top.equalTo(creatorView.snp.bottom).offset(12)
+         make.leading.equalTo(commentBox.safeAreaLayoutGuide).inset(24)
+         make.trailing.equalTo(commentBox.safeAreaLayoutGuide).inset(8)
+         make.height.equalTo(44)
+      }
+      bottom.snp.makeConstraints { make in
+         make.top.equalTo(comment.snp.bottom).offset(8)
+         make.horizontalEdges.equalTo(commentBox.safeAreaLayoutGuide).inset(8)
+         make.bottom.equalTo(commentBox.safeAreaLayoutGuide).inset(8)
       }
    }
    
    override func setUI() {
       super.setUI()
-      commentView.numberOfLines = 0
+      comment.numberOfLines = 0
    }
    
    func bindView(for output: CommentsOutput) {
@@ -42,8 +54,7 @@ final class BaseCommentsView: BaseTableViewCell {
          guard let self else { return }
          self.creatorView.bindViews(for: output.creator, createdAt: output.createdAt)
          self.creatorView.bindCreatedDate(date: output.createdAt)
-         self.commentView.text = output.content
-         
+         self.comment.text = output.content
       }
    }
 }

@@ -14,17 +14,17 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
    let floatingButton = PlusButton(backColor: .systemGreen, baseColor: .white)
    
    private let userCreateSection = RectangleView(backColor: .white, radius: 8)
-   private let userCreateSectionTitle = BaseLabel(for: "내가 운영하는 러닝 그룹", font: .boldSystemFont(ofSize: 18))
+   private let userCreateSectionTitle = BaseLabel(for: "내가 운영하는 러닝 그룹", font: .boldSystemFont(ofSize: 16))
    lazy var userCreateSectionCollection = UICollectionView(frame: .zero, collectionViewLayout: createUserCreateSectionCollectionLayout())
    let userCreateButton = RoundedButtonView("+ 러닝 그룹 생성", backColor: .systemPurple, baseColor: .white, radius: 8)
    
    private let userJoinedSection = RectangleView(backColor: .white, radius: 8)
-   private let userJoinedTitle = BaseLabel(for: "내가 가입한 러닝 그룹", font: .boldSystemFont(ofSize: 18))
+   private let userJoinedTitle = BaseLabel(for: "내가 가입한 러닝 그룹", font: .boldSystemFont(ofSize: 16))
    lazy var userJoinedCollection = UICollectionView(frame: .zero, collectionViewLayout: createUserJoinedSectionCollectionLayout())
    private let userJoinedGroupEmptyText = BaseLabel(for: "아직 가입한 러닝 그룹이 없어요.", font: .systemFont(ofSize: 15))
    
    private let runningGroupSection = RectangleView(backColor: .white, radius: 8)
-   private let runningGroupSectionTittle = BaseLabel(for: "이런 러닝 그룹은 어떤가요?", font: .boldSystemFont(ofSize: 18))
+   private let runningGroupSectionTittle = BaseLabel(for: "이런 러닝 그룹은 어떤가요?", font: .boldSystemFont(ofSize: 16))
    let runningGroupTable = UITableView()
    
    override func setSubviews() {
@@ -68,7 +68,6 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
          make.horizontalEdges.equalTo(userJoinedSection.safeAreaLayoutGuide).inset(24)
          make.height.equalTo(24)
       }
-      
       runningGroupSection.snp.makeConstraints { make in
          make.top.equalTo(userJoinedSection.snp.bottom).offset(12)
          make.horizontalEdges.bottom.equalTo(scrollGuide)
@@ -89,7 +88,7 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
    override func setUI() {
       super.setUI()
       scrollView.backgroundColor = .systemGray6
-      runningGroupTable.backgroundColor = .black
+      runningGroupTable.backgroundColor = .white
       runningGroupTable.register(GroupListTableCell.self, forCellReuseIdentifier: GroupListTableCell.id)
       runningGroupTable.separatorStyle = .none
       runningGroupTable.rowHeight = UITableView.automaticDimension
@@ -105,7 +104,7 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
          
          
          userCreateSectionCollection.snp.makeConstraints { make in
-            make.top.equalTo(userCreateSectionTitle.snp.bottom).offset(8)
+            make.top.equalTo(userCreateSectionTitle.snp.bottom)
             make.horizontalEdges.equalTo(userCreateSection.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(120)
             make.bottom.equalTo(userCreateSection.safeAreaLayoutGuide).inset(8)
@@ -131,7 +130,7 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
          userJoinedCollection.dataSource = nil
          
          userJoinedCollection.snp.makeConstraints { make in
-            make.top.equalTo(userJoinedTitle.snp.bottom).offset(8)
+            make.top.equalTo(userJoinedTitle.snp.bottom)
             make.horizontalEdges.equalTo(userJoinedSection.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(120)
             make.bottom.equalTo(userJoinedSection.safeAreaLayoutGuide).inset(8)
