@@ -110,6 +110,7 @@ final class RunningGroupDetailView: BaseView, BaseViewProtocol {
       let scrollGuide = scrollView.contentsView.safeAreaLayoutGuide
       if !isJoined {
          scrollView.contentsView.addSubview(groupJoinButton)
+         groupPostWriteButton.removeFromSuperview()
          groupJoinButton.snp.makeConstraints { make in
             make.top.equalTo(groupQna.snp.bottom).offset(12)
             make.horizontalEdges.equalTo(scrollGuide).inset(16)
@@ -121,6 +122,7 @@ final class RunningGroupDetailView: BaseView, BaseViewProtocol {
       
       if isJoined {
          addSubview(groupPostWriteButton)
+         groupJoinButton.removeFromSuperview()
          scrollView.contentsView.addSubview(emptyBox)
          groupPostWriteButton.snp.makeConstraints { make in
             make.bottom.equalTo(safeAreaLayoutGuide).inset(92)

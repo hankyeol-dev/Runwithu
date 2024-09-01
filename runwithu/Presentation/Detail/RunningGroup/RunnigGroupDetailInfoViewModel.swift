@@ -30,11 +30,15 @@ final class RunnigGroupDetailInfoViewModel: BaseViewModelProtocol {
    struct Output{
       let didLoadEntrys: PublishSubject<[BaseProfileType]>
       let isGroupOwnerOutput: PublishSubject<Bool>
+      let groupOutOutput: PublishSubject<Bool>
+      let errorOutput: PublishSubject<NetworkErrors>
    }
    
    func transform(for input: Input) -> Output {
       let didLoadEntrys = PublishSubject<[BaseProfileType]>()
       let isGroupOwnerOutput = PublishSubject<Bool>()
+      let groupOutOutput = PublishSubject<Bool>()
+      let errorOutput = PublishSubject<NetworkErrors>()
       
       input.didLoadInput
          .subscribe(with: self) { vm, _ in
@@ -45,9 +49,23 @@ final class RunnigGroupDetailInfoViewModel: BaseViewModelProtocol {
             }
          }
          .disposed(by: disposeBag)
+      
+      input.groupOutButtonTapped
+         .subscribe(with: self) { vm, _ in
+            Task {
+               await vm.groupOut(
+                  groupOutEmitter: groupOutOutput,
+                  errorEmitter: errorOutput
+               )
+            }
+         }
+         .disposed(by: disposeBag)
+      
       return Output(
          didLoadEntrys: didLoadEntrys,
-         isGroupOwnerOutput: isGroupOwnerOutput
+         isGroupOwnerOutput: isGroupOwnerOutput,
+         groupOutOutput: groupOutOutput,
+         errorOutput: errorOutput
       )
    }
    
@@ -59,6 +77,10 @@ final class RunnigGroupDetailInfoViewModel: BaseViewModelProtocol {
       return BehaviorSubject(value: groupPost)
    }
    
+   func getGroupName() -> String { return groupPost.title }
+}
+
+extension RunnigGroupDetailInfoViewModel {
    private func getEntry() async {
       await getEntries(from: groupPost.likes) { [weak self] profile in
          guard let self else { return }
@@ -84,5 +106,22 @@ final class RunnigGroupDetailInfoViewModel: BaseViewModelProtocol {
       }
       
       isGroupOwnerEmitter.onNext(false)
+   }
+   
+   private func groupOut(
+      groupOutEmitter: PublishSubject<Bool>,
+      errorEmitter: PublishSubject<NetworkErrors>
+   ) async {
+      let groupId = groupPost.post_id
+      do {
+         let outResult = try await networkManager.request(
+            by: PostEndPoint.postLike(input: .init(postId: groupId, isLike: .init(like_status: false))),
+            of: PostLikeOutput.self).like_status
+         groupOutEmitter.onNext(!outResult)
+      } catch NetworkErrors.needToRefreshRefreshToken {
+         errorEmitter.onNext(.needToLogin)
+      } catch {
+         errorEmitter.onNext(.invalidResponse)
+      }
    }
 }

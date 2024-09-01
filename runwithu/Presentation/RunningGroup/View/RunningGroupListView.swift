@@ -23,7 +23,7 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
    private let userJoinedGroupEmptyText = BaseLabel(for: "아직 가입한 러닝 그룹이 없어요.", font: .systemFont(ofSize: 15))
    
    private let runningGroupSection = RectangleView(backColor: .white, radius: 8)
-   private let runningGroupSectionTittle = BaseLabel(for: "이런 러닝 그룹은 어떤가요?", font: .boldSystemFont(ofSize: 16))
+   private let runningGroupSectionTitle = BaseLabel(for: "이런 러닝 그룹은 어떤가요?", font: .boldSystemFont(ofSize: 16))
    let runningGroupTable = UITableView()
    
    override func setSubviews() {
@@ -32,8 +32,8 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
       addSubviews(scrollView)
       scrollView.contentsView.addSubviews(userCreateSection, userJoinedSection, runningGroupSection)
       userCreateSection.addSubviews(userCreateSectionTitle, userCreateButton, userCreateSectionCollection)
-      userJoinedSection.addSubviews(userJoinedTitle, userJoinedCollection, userJoinedGroupEmptyText)
-      runningGroupSection.addSubviews(runningGroupSectionTittle, runningGroupTable)
+      userJoinedSection.addSubviews(userJoinedTitle)
+      runningGroupSection.addSubviews(runningGroupSectionTitle, runningGroupTable)
    }
    
    override func setLayout() {
@@ -67,13 +67,13 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
          make.top.equalTo(userJoinedSection.snp.bottom).offset(12)
          make.horizontalEdges.bottom.equalTo(scrollGuide)
       }
-      runningGroupSectionTittle.snp.makeConstraints { make in
+      runningGroupSectionTitle.snp.makeConstraints { make in
          make.top.equalTo(runningGroupSection.safeAreaLayoutGuide).inset(16)
          make.horizontalEdges.equalTo(runningGroupSection.safeAreaLayoutGuide).inset(24)
          make.height.equalTo(24)
       }
       runningGroupTable.snp.makeConstraints { make in
-         make.top.equalTo(runningGroupSectionTittle.snp.bottom)
+         make.top.equalTo(runningGroupSectionTitle.snp.bottom)
          make.horizontalEdges.equalTo(runningGroupSection.safeAreaLayoutGuide).inset(24)
          make.height.equalTo(1000)
          make.bottom.equalTo(runningGroupSection.safeAreaLayoutGuide).inset(12)
@@ -90,8 +90,6 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
    
    func bindUserCreateSection(isGroup: Bool) {
       if isGroup {
-         userCreateButton.removeFromSuperview()
-         
          userCreateSectionCollection.register(GroupListCollectionCell.self, forCellWithReuseIdentifier: GroupListCollectionCell.id)
          userCreateSectionCollection.delegate = nil
          userCreateSectionCollection.dataSource = nil
@@ -104,7 +102,6 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
             make.bottom.equalTo(userCreateSection.safeAreaLayoutGuide).inset(8)
          }
       } else {
-         userCreateSectionCollection.removeFromSuperview()
          userCreateButton.snp.makeConstraints { make in
             make.top.equalTo(userCreateSectionTitle.snp.bottom).offset(8)
             make.leading.equalTo(userCreateSection.safeAreaLayoutGuide).inset(24)
@@ -117,8 +114,8 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
    
    func bindUserJoinedSection(isGroup: Bool) {
       if isGroup {
+         userJoinedSection.addSubview(userJoinedCollection)
          userJoinedGroupEmptyText.removeFromSuperview()
-         
          userJoinedCollection.register(GroupListCollectionCell.self, forCellWithReuseIdentifier: GroupListCollectionCell.id)
          userJoinedCollection.delegate = nil
          userJoinedCollection.dataSource = nil
@@ -129,7 +126,9 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
             make.height.equalTo(120)
             make.bottom.equalTo(userJoinedSection.safeAreaLayoutGuide).inset(8)
          }
+         setNeedsLayout()
       } else {
+         userJoinedSection.addSubview(userJoinedGroupEmptyText)
          userJoinedCollection.removeFromSuperview()
          userJoinedGroupEmptyText.snp.makeConstraints { make in
             make.top.equalTo(userJoinedTitle.snp.bottom).offset(8)
@@ -137,6 +136,7 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
             make.height.equalTo(24)
             make.bottom.equalTo(userJoinedSection.safeAreaLayoutGuide).inset(24)
          }
+         setNeedsLayout()
       }
    }
 }

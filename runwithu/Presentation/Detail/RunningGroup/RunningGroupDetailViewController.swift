@@ -33,10 +33,20 @@ final class RunningGroupDetailViewController: BaseViewController<RunningGroupDet
    override func bindViewAtDidLoad() {
       super.bindViewAtDidLoad()
       
+      let groupJoinButtonTapped = PublishSubject<Void>()
+      
+      let input = RunningGroupDetailViewModel.Input(
+         didLoadInput: didLoadInput,
+         groupJoinButtonTapped: groupJoinButtonTapped
+      )
+      let output = viewModel.transform(for: input)
+
+      /// bind Input
+
       baseView.groupDetailButton.rx.tap
          .bind(with: self) { vc, _ in
             let targetVC = RunningGroupDetailInfoViewController(
-               bv: RunningGroupDetailInfoView(), 
+               bv: RunningGroupDetailInfoView(),
                vm: RunnigGroupDetailInfoViewModel(
                   disposeBag: DisposeBag(),
                   networkManager: NetworkService.shared),
@@ -48,10 +58,21 @@ final class RunningGroupDetailViewController: BaseViewController<RunningGroupDet
          }
          .disposed(by: disposeBag)
       
-      let input = RunningGroupDetailViewModel.Input(
-         didLoadInput: didLoadInput
-      )
-      let output = viewModel.transform(for: input)
+      baseView.groupJoinButton.rx.tap
+         .bind(with: self) { vc, void in
+            let group = vc.viewModel.getGroup()
+            BaseAlertBuilder(viewController: vc)
+               .setTitle(for: "그룹 가입")
+               .setMessage(for: "\(group.title) 그룹에 가입합니다.\n-그룹 러닝 난이도\n-러닝 지역\n같은 정보를 잘 확인하셨나요?")
+               .setActions(by: .systemRed, for: "취소")
+               .setActions(by: .systemGreen, for: "가입할게요") {
+                  groupJoinButtonTapped.onNext(void)
+               }
+               .displayAlert()
+         }
+         .disposed(by: disposeBag)
+      
+      /// bind Output
       
       output.didLoadOutput
          .asDriver(onErrorJustReturn: AppEnvironment.drivedPostObject)
@@ -98,6 +119,15 @@ final class RunningGroupDetailViewController: BaseViewController<RunningGroupDet
             if errors == .dataNotFound {
                vc.baseView.displayToast(for: "러닝 그룹(그룹 포스트를)을 찾을 수 없어요.", isError: true, duration: 2.0)
                vc.navigationController?.popViewController(animated: true)
+            }
+            
+            if errors == .invalidResponse {
+               let groupName = vc.viewModel.getGroup().title
+               BaseAlertBuilder(viewController: vc)
+                  .setTitle(for: "그룹에 참여합니다.")
+                  .setMessage(for: "\(groupName) 그룹에 참여하는데 문제가 발생했어요.\n잠시 후 다시 시도해주세요.")
+                  .setActions(by: .darkGray, for: "확인")
+                  .displayAlert()
             }
          }
          .disposed(by: disposeBag)

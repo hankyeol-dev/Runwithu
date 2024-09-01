@@ -58,12 +58,48 @@ final class RunningGroupDetailInfoViewController: BaseViewController<RunningGrou
          .asDriver(onErrorJustReturn: false)
          .drive(with: self) { vc, isGroupOwner in
             if !isGroupOwner {
-               vc.setGroupOutButton("그룹 나가기", color: .red)
+               vc.setGroupOutButton("그룹 나가기", color: .systemRed)
                if let rightButton = vc.navigationItem.rightBarButtonItem {
                   rightButton.rx.tap
-                     .bind(to: groupOutButtonTapped)
+                     .bind(with: self, onNext: { vc, void in
+                        let groupName = vc.viewModel.getGroupName()
+                        BaseAlertBuilder(viewController: vc)
+                           .setTitle(for: "그룹을 나갑니다.")
+                           .setMessage(for: "\(groupName) 그룹에서 나가는게 맞으신가요?\n작성하신 커뮤니티 포스트는 그룹에서 삭제되지 않습니다.")
+                           .setActions(by: .systemRed, for: "취소")
+                           .setActions(by: .systemGray, for: "나갈게요") {
+                              groupOutButtonTapped.onNext(void)
+                           }
+                           .displayAlert()
+                     })
                      .disposed(by: vc.disposeBag)
                }
+            }
+         }
+         .disposed(by: disposeBag)
+      
+      output.groupOutOutput
+         .asDriver(onErrorJustReturn: false)
+         .drive(with: self) { vc, isOut in
+            if isOut {
+               vc.navigationController?.popViewController(animated: true)
+            }
+         }
+         .disposed(by: disposeBag)
+      
+      output.errorOutput
+         .asDriver(onErrorJustReturn: .invalidResponse)
+         .drive(with: self) { vc, errors in
+            if errors == .needToLogin {
+               vc.dismissToLoginVC()
+            }
+            if errors == .invalidResponse {
+               let groupName = vc.viewModel.getGroupName()
+               BaseAlertBuilder(viewController: vc)
+                  .setTitle(for: "그룹 나갑니다.")
+                  .setMessage(for: "\(groupName) 그룹에서 나가는데 문제가 발생했어요.\n잠시 후 다시 시도해주세요.")
+                  .setActions(by: .darkGray, for: "확인")
+                  .displayAlert()
             }
          }
          .disposed(by: disposeBag)

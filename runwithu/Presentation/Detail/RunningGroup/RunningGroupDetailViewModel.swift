@@ -28,6 +28,7 @@ final class RunningGroupDetailViewModel: BaseViewModelProtocol {
    
    struct Input {
       let didLoadInput: PublishSubject<Void>
+      let groupJoinButtonTapped: PublishSubject<Void>
    }
    struct Output{
       let didLoadOutput: PublishSubject<PostsOutput>
@@ -64,6 +65,18 @@ final class RunningGroupDetailViewModel: BaseViewModelProtocol {
          }
          .disposed(by: disposeBag)
       
+      input.groupJoinButtonTapped
+         .subscribe(with: self) { vm, _ in
+            Task {
+               await vm.joinGroup(
+                  validJoinEmitter: validGroupJoinEmitter,
+                  errorEmitter: errorOutput
+               )
+            }
+         }
+         .disposed(by: disposeBag)
+      
+      
       return Output(
          didLoadOutput: didLoadOutput,
          validGroupJoinEmitter: validGroupJoinEmitter,
@@ -75,6 +88,7 @@ final class RunningGroupDetailViewModel: BaseViewModelProtocol {
    }
    
    func getGroup() -> PostsOutput { return groupPostsOutput }
+   func getIsJoined() -> Bool { return isJoined }
 }
 
 extension RunningGroupDetailViewModel {
@@ -172,5 +186,22 @@ extension RunningGroupDetailViewModel {
       return false
    }
    
-   
+   private func joinGroup(
+      validJoinEmitter: PublishSubject<Bool>,
+      errorEmitter: PublishSubject<NetworkErrors>
+   ) async {
+      do {
+         let joinOuput = try await networkManager.request(
+            by: PostEndPoint.postLike(input: .init(postId: groupId, isLike: .init(like_status: true))),
+            of: PostLikeOutput.self).like_status
+         
+         isJoined = joinOuput
+         validJoinEmitter.onNext(joinOuput)
+         
+      } catch NetworkErrors.needToRefreshRefreshToken {
+         errorEmitter.onNext(.needToLogin)
+      } catch {
+         errorEmitter.onNext(.invalidResponse)
+      }
+   }
 }

@@ -53,7 +53,7 @@ final class RunningGroupPostStack: BaseView {
       seeMorebutton.setTitleColor(.darkGray, for: .normal)
       seeMorebutton.titleLabel?.font = .systemFont(ofSize: 15)
       postTable.backgroundColor = .none
-      postTable.separatorInset = .init(top: 2, left: 4, bottom: 2, right: 4)
+      postTable.separatorInset = .init(top: 2, left: 0, bottom: 2, right: 0)
       postTable.separatorColor = .darkGray.withAlphaComponent(0.5)
       postTable.rowHeight = 80
       postTable.register(RunningGroupPostStackCell.self, forCellReuseIdentifier: RunningGroupPostStackCell.id)
