@@ -26,7 +26,6 @@ final class RunningGroupDetailViewController: BaseViewController<RunningGroupDet
    
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
-      title = ""
       setGoBackButton(by: .darkGray, imageName: "chevron.left")
       didLoadInput.onNext(())
    }
@@ -43,7 +42,7 @@ final class RunningGroupDetailViewController: BaseViewController<RunningGroupDet
                   networkManager: NetworkService.shared),
                db: DisposeBag()
             )
-            let groupPostOutput = vc.viewModel.getGroupPost()
+            let groupPostOutput = vc.viewModel.getGroup()
             targetVC.viewModel.setGroupPosts(by: groupPostOutput)
             vc.navigationController?.pushViewController(targetVC, animated: true)
          }
@@ -55,16 +54,37 @@ final class RunningGroupDetailViewController: BaseViewController<RunningGroupDet
       let output = viewModel.transform(for: input)
       
       output.didLoadOutput
-         .bind(with: self) { vc, output in
-            DispatchQueue.main.async {
-               vc.baseView.bindInfoHeader(by: output)               
-            }
+         .asDriver(onErrorJustReturn: AppEnvironment.drivedPostObject)
+         .drive(with: self) { vc, output in
+            vc.baseView.bindInfoHeader(by: output)
          }
          .disposed(by: disposeBag)
       
       output.validGroupJoinEmitter
-         .bind(with: self) { vc, isJoined in
+         .asDriver(onErrorJustReturn: false)
+         .drive(with: self) { vc, isJoined in
             vc.baseView.updateGroupJoined(by: isJoined)
+         }
+         .disposed(by: disposeBag)
+      
+      output.epiloguePostsOutput
+         .asDriver(onErrorJustReturn: [])
+         .drive(with: self) { vc, epilogues in
+            vc.baseView.groupEpilogue.bindPostTable(for: epilogues)
+         }
+         .disposed(by: disposeBag)
+      
+      output.productPostsOutput
+         .asDriver(onErrorJustReturn: [])
+         .drive(with: self) { vc, products in
+            vc.baseView.groupProductEpilogue.bindPostTable(for: products)
+         }
+         .disposed(by: disposeBag)
+      
+      output.qnaPostsOutput
+         .asDriver(onErrorJustReturn: [])
+         .drive(with: self) { vc, qnas in
+            vc.baseView.groupQna.bindPostTable(for: qnas)
          }
          .disposed(by: disposeBag)
       
@@ -76,7 +96,7 @@ final class RunningGroupDetailViewController: BaseViewController<RunningGroupDet
             }
             
             if errors == .dataNotFound {
-               vc.baseView.displayToast(for: "러닝 그룹을 찾을 수 없어요.", isError: true, duration: 2.0)
+               vc.baseView.displayToast(for: "러닝 그룹(그룹 포스트를)을 찾을 수 없어요.", isError: true, duration: 2.0)
                vc.navigationController?.popViewController(animated: true)
             }
          }

@@ -11,7 +11,6 @@ import SnapKit
 
 final class RunningGroupListView: BaseView, BaseViewProtocol {
    private let scrollView = BaseScrollView()
-   let floatingButton = PlusButton(backColor: .systemGreen, baseColor: .white)
    
    private let userCreateSection = RectangleView(backColor: .white, radius: 8)
    private let userCreateSectionTitle = BaseLabel(for: "내가 운영하는 러닝 그룹", font: .boldSystemFont(ofSize: 16))
@@ -30,7 +29,7 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
    override func setSubviews() {
       super.setSubviews()
       
-      addSubviews(scrollView, floatingButton)
+      addSubviews(scrollView)
       scrollView.contentsView.addSubviews(userCreateSection, userJoinedSection, runningGroupSection)
       userCreateSection.addSubviews(userCreateSectionTitle, userCreateButton, userCreateSectionCollection)
       userJoinedSection.addSubviews(userJoinedTitle, userJoinedCollection, userJoinedGroupEmptyText)
@@ -44,11 +43,7 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
          make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
          make.bottom.equalTo(safeAreaLayoutGuide).inset(84)
       }
-      floatingButton.snp.makeConstraints { make in
-         make.trailing.equalTo(safeAreaLayoutGuide).inset(24)
-         make.bottom.equalTo(safeAreaLayoutGuide).inset(120)
-         make.size.equalTo(56)
-      }
+      
       
       let scrollGuide = scrollView.contentsView.safeAreaLayoutGuide
       userCreateSection.snp.makeConstraints { make in
@@ -88,7 +83,6 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
    override func setUI() {
       super.setUI()
       scrollView.backgroundColor = .systemGray6
-      runningGroupTable.backgroundColor = .white
       runningGroupTable.register(GroupListTableCell.self, forCellReuseIdentifier: GroupListTableCell.id)
       runningGroupTable.separatorStyle = .none
       runningGroupTable.rowHeight = UITableView.automaticDimension

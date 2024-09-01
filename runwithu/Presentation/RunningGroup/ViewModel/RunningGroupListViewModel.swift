@@ -23,7 +23,7 @@ final class RunningGroupListViewModel: BaseViewModelProtocol {
    
    struct Input {
       let willLoadInput: PublishSubject<Void>
-      let floatingButtonTapped: PublishSubject<Void>
+      let groupCreateButtonTapped: PublishSubject<Void>
    }
    struct Output {
       let floatingButtonTapped: PublishSubject<Void>
@@ -52,7 +52,7 @@ final class RunningGroupListViewModel: BaseViewModelProtocol {
          .disposed(by: disposeBag)
       
       return Output(
-         floatingButtonTapped: input.floatingButtonTapped,
+         floatingButtonTapped: input.groupCreateButtonTapped,
          userCreatedGroupOutput: userCreatedGroupOutput,
          userJoinedGroupOutput: userJoinedGroupOutput,
          runningGroupOutput: runningGroupOutput

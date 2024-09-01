@@ -30,21 +30,18 @@ final class RunningGroupListViewController: BaseViewController<RunningGroupListV
    override func bindViewAtDidLoad() {
       super.bindViewAtDidLoad()
       
-      let floatingButtonTapped = PublishSubject<Void>()
+      let groupCreateButtonTapped = PublishSubject<Void>()
       
       let input = RunningGroupListViewModel.Input(
          willLoadInput: willLoadInput,
-         floatingButtonTapped: floatingButtonTapped
+         groupCreateButtonTapped: groupCreateButtonTapped
       )
       let output = viewModel.transform(for: input)
       
       // MARK: bind input
-      baseView.floatingButton.rx.tap
-         .bind(to: floatingButtonTapped)
-         .disposed(by: disposeBag)
       
       baseView.userCreateButton.rx.tap
-         .bind(to: floatingButtonTapped)
+         .bind(to: groupCreateButtonTapped)
          .disposed(by: disposeBag)
       
       baseView.userCreateSectionCollection

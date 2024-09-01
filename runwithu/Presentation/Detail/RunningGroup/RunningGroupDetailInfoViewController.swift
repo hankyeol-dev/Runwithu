@@ -36,8 +36,11 @@ final class RunningGroupDetailInfoViewController: BaseViewController<RunningGrou
    override func bindViewAtDidLoad() {
       super.bindViewAtDidLoad()
       
+      let groupOutButtonTapped = PublishSubject<Void>()
+      
       let input = RunnigGroupDetailInfoViewModel.Input(
-         didLoadInput: didLoadInput
+         didLoadInput: didLoadInput,
+         groupOutButtonTapped: groupOutButtonTapped
       )
       let output = viewModel.transform(for: input)
       
@@ -50,5 +53,26 @@ final class RunningGroupDetailInfoViewController: BaseViewController<RunningGrou
                }
             }
             .disposed(by: disposeBag)
+      
+      output.isGroupOwnerOutput
+         .asDriver(onErrorJustReturn: false)
+         .drive(with: self) { vc, isGroupOwner in
+            if !isGroupOwner {
+               vc.setGroupOutButton("그룹 나가기", color: .red)
+               if let rightButton = vc.navigationItem.rightBarButtonItem {
+                  rightButton.rx.tap
+                     .bind(to: groupOutButtonTapped)
+                     .disposed(by: vc.disposeBag)
+               }
+            }
+         }
+         .disposed(by: disposeBag)
+   }
+   
+   private func setGroupOutButton(_ title: String, color: UIColor) {
+      let groupOutButton = UIBarButtonItem()
+      groupOutButton.title = title
+      groupOutButton.tintColor = color
+      navigationItem.setRightBarButton(groupOutButton, animated: true)
    }
 }

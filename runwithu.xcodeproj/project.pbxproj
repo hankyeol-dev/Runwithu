@@ -48,6 +48,7 @@
 		81876E612C81FA0A00381427 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81876E602C81FA0A00381427 /* ProductDetailView.swift */; };
 		81876E632C81FA2A00381427 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81876E622C81FA2A00381427 /* ProductDetailViewModel.swift */; };
 		81876E652C81FA6F00381427 /* ProducteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81876E642C81FA6F00381427 /* ProducteDetailViewController.swift */; };
+		81876E672C8407CE00381427 /* RunningGroupPostStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81876E662C8407CE00381427 /* RunningGroupPostStack.swift */; };
 		81A3B8EB2C744972009AD659 /* RunningGroupPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */; };
 		81A3B8ED2C745054009AD659 /* StepBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EC2C745054009AD659 /* StepBar.swift */; };
 		81A3B8EF2C74AFB6009AD659 /* RunningGroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */; };
@@ -203,6 +204,7 @@
 		81876E602C81FA0A00381427 /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		81876E622C81FA2A00381427 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 		81876E642C81FA6F00381427 /* ProducteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProducteDetailViewController.swift; sourceTree = "<group>"; };
+		81876E662C8407CE00381427 /* RunningGroupPostStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupPostStack.swift; sourceTree = "<group>"; };
 		81A3B8EA2C744972009AD659 /* RunningGroupPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupPreviewView.swift; sourceTree = "<group>"; };
 		81A3B8EC2C745054009AD659 /* StepBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepBar.swift; sourceTree = "<group>"; };
 		81A3B8EE2C74AFB6009AD659 /* RunningGroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupListViewController.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				8157F1752C7CA8E500661BB6 /* RunnigGroupDetailInfoViewModel.swift */,
 				8157F1712C7CA4EF00661BB6 /* RunningGroupDetailInfoViewController.swift */,
 				8157F1772C7CC10900661BB6 /* RunningGroupEntryCell.swift */,
+				81876E662C8407CE00381427 /* RunningGroupPostStack.swift */,
 			);
 			path = RunningGroup;
 			sourceTree = "<group>";
@@ -1027,6 +1030,7 @@
 				81876E632C81FA2A00381427 /* ProductDetailViewModel.swift in Sources */,
 				81A3B8EB2C744972009AD659 /* RunningGroupPreviewView.swift in Sources */,
 				81A3B9582C7745C6009AD659 /* BaseAlertBuilder.swift in Sources */,
+				81876E672C8407CE00381427 /* RunningGroupPostStack.swift in Sources */,
 				81A3B9842C786E56009AD659 /* BaseScrollViewWithCloseButton.swift in Sources */,
 				811D377A2C73824D0017E17C /* RunningGroupCreateView.swift in Sources */,
 				81E7FF7E2C6F16F400200CF2 /* EpilogueInput.swift in Sources */,

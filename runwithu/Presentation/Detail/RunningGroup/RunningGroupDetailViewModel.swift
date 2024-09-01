@@ -33,20 +33,31 @@ final class RunningGroupDetailViewModel: BaseViewModelProtocol {
       let didLoadOutput: PublishSubject<PostsOutput>
       let validGroupJoinEmitter: PublishSubject<Bool>
       let errorOutput: PublishSubject<NetworkErrors>
+      let epiloguePostsOutput: PublishSubject<[PostsOutput]>
+      let productPostsOutput: PublishSubject<[PostsOutput]>
+      let qnaPostsOutput: PublishSubject<[PostsOutput]>
    }
    
    func transform(for input: Input) -> Output {
       let didLoadOutput = PublishSubject<PostsOutput>()
       let validGroupJoinEmitter = PublishSubject<Bool>()
       let errorOutput = PublishSubject<NetworkErrors>()
+      let epiloguePostsOutput = PublishSubject<[PostsOutput]>()
+      let productPostsOutput = PublishSubject<[PostsOutput]>()
+      let qnaPostsOutput = PublishSubject<[PostsOutput]>()
       
       input.didLoadInput
-         .debug("invoked didLoadInput")
          .subscribe(with: self) { vm, _ in
             Task {
-               await vm.getGroupPost(
+               await vm.getGroupInfo(
                   successEmitter: didLoadOutput,
                   validGroupJoinEmitter: validGroupJoinEmitter,
+                  errorEmitter: errorOutput
+               )
+               await vm.getGroupPosts(
+                  epiloguePostsEmitter: epiloguePostsOutput,
+                  productPostsEmitter: productPostsOutput,
+                  qnaPostsEmitter: qnaPostsOutput,
                   errorEmitter: errorOutput
                )
             }
@@ -56,13 +67,18 @@ final class RunningGroupDetailViewModel: BaseViewModelProtocol {
       return Output(
          didLoadOutput: didLoadOutput,
          validGroupJoinEmitter: validGroupJoinEmitter,
-         errorOutput: errorOutput
+         errorOutput: errorOutput,
+         epiloguePostsOutput: epiloguePostsOutput,
+         productPostsOutput: productPostsOutput,
+         qnaPostsOutput: qnaPostsOutput
       )
    }
+   
+   func getGroup() -> PostsOutput { return groupPostsOutput }
 }
 
 extension RunningGroupDetailViewModel {
-   private func getGroupPost(
+   private func getGroupInfo(
       successEmitter: PublishSubject<PostsOutput>,
       validGroupJoinEmitter: PublishSubject<Bool>,
       errorEmitter: PublishSubject<NetworkErrors>
@@ -90,6 +106,45 @@ extension RunningGroupDetailViewModel {
       }
    }
    
+   private func getGroupPosts(
+      epiloguePostsEmitter: PublishSubject<[PostsOutput]>,
+      productPostsEmitter: PublishSubject<[PostsOutput]>,
+      qnaPostsEmitter: PublishSubject<[PostsOutput]>,
+      errorEmitter: PublishSubject<NetworkErrors>
+   ) async {
+      do {
+         let groupPosts = try await networkManager.request(
+            by: PostEndPoint.getPosts(
+               input: .init(
+                  product_id: ProductIds.runwithu_community_posts_group.rawValue + "_" + groupId,
+                  limit: 100000,
+                  next: nil)),
+            of: GetPostsOutput.self).data
+         
+         let epilogues = filterGroupPost(for: groupPosts, by: .epilogues)
+         let products = filterGroupPost(for: groupPosts, by: .product_epilogues)
+         let qnas = filterGroupPost(for: groupPosts, by: .qnas)
+         
+         epiloguePostsEmitter.onNext(epilogues)
+         productPostsEmitter.onNext(products)
+         qnaPostsEmitter.onNext(qnas)
+         
+      } catch NetworkErrors.needToRefreshRefreshToken {
+         errorEmitter.onNext(.needToLogin)
+      } catch {
+         errorEmitter.onNext(.dataNotFound)
+      }
+   }
+   
+   private func filterGroupPost(for groupPosts: [PostsOutput], by: PostsCommunityType) -> [PostsOutput] {
+      return groupPosts.filter { post in
+         if let communityType = post.content1 {
+            return communityType == by.rawValue
+         }
+         return false
+      }
+   }
+   
    private func validIsJoinedGroup(
       for likes: [String],
       limit: Int,
@@ -99,7 +154,15 @@ extension RunningGroupDetailViewModel {
          let userId = try await networkManager.request(
             by: UserEndPoint.readMyProfile, of: ProfileUserIdOutput.self)
                   
-         return likes.contains(userId.user_id) && ( limit > likes.count )
+         if likes.contains(userId.user_id) && ( limit > likes.count ) {
+            return true
+         }
+         
+         if groupPostsOutput.creator.user_id == userId.user_id {
+            return true
+         }
+         
+         return false
          
       } catch NetworkErrors.needToRefreshRefreshToken {
          errorEmitter.onNext(.needToLogin)
@@ -109,5 +172,5 @@ extension RunningGroupDetailViewModel {
       return false
    }
    
-   func getGroupPost() -> PostsOutput { return groupPostsOutput }
+   
 }
