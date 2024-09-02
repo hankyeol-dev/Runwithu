@@ -31,7 +31,7 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
       
       addSubviews(scrollView)
       scrollView.contentsView.addSubviews(userCreateSection, userJoinedSection, runningGroupSection)
-      userCreateSection.addSubviews(userCreateSectionTitle, userCreateButton, userCreateSectionCollection)
+      userCreateSection.addSubviews(userCreateSectionTitle)
       userJoinedSection.addSubviews(userJoinedTitle)
       runningGroupSection.addSubviews(runningGroupSectionTitle, runningGroupTable)
    }
@@ -90,10 +90,12 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
    
    func bindUserCreateSection(isGroup: Bool) {
       if isGroup {
+         userCreateSection.addSubview(userCreateSectionCollection)
+         userCreateButton.removeFromSuperview()
+         
          userCreateSectionCollection.register(GroupListCollectionCell.self, forCellWithReuseIdentifier: GroupListCollectionCell.id)
          userCreateSectionCollection.delegate = nil
          userCreateSectionCollection.dataSource = nil
-         
          
          userCreateSectionCollection.snp.makeConstraints { make in
             make.top.equalTo(userCreateSectionTitle.snp.bottom)
@@ -102,6 +104,9 @@ final class RunningGroupListView: BaseView, BaseViewProtocol {
             make.bottom.equalTo(userCreateSection.safeAreaLayoutGuide).inset(8)
          }
       } else {
+         userCreateSection.addSubview(userCreateButton)
+         userCreateSectionCollection.removeFromSuperview()
+         
          userCreateButton.snp.makeConstraints { make in
             make.top.equalTo(userCreateSectionTitle.snp.bottom).offset(8)
             make.leading.equalTo(userCreateSection.safeAreaLayoutGuide).inset(24)

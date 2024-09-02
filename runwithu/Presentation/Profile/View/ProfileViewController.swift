@@ -155,17 +155,18 @@ final class ProfileViewController: BaseViewController<ProfileView, ProfileViewMo
                username: userInfo.1
             )
             createInvitationVC.modalPresentationStyle = .fullScreen
-            createInvitationVC.willDisappearHanlder = { [weak self] invitationId in
-               guard let self else { return }
-               let invitation = InvitationDetailViewController(
-                  bv: InvitationDetailView(),
-                  vm: InvitationDetailViewModel(
-                     disposeBag: DisposeBag(),
-                     networkManager: NetworkService.shared,
-                     invitationId: invitationId
-                  ),
-                  db: DisposeBag())
-               self.navigationController?.pushViewController(invitation, animated: true)
+            createInvitationVC.willDisappearHanlder = { invitationId in
+               if !invitationId.isEmpty {
+                  let invitation = InvitationDetailViewController(
+                     bv: InvitationDetailView(),
+                     vm: InvitationDetailViewModel(
+                        disposeBag: DisposeBag(),
+                        networkManager: NetworkService.shared,
+                        invitationId: invitationId
+                     ),
+                     db: DisposeBag())
+                  vc.navigationController?.pushViewController(invitation, animated: true)
+               }
             }
             vc.present(createInvitationVC, animated: true)
          }

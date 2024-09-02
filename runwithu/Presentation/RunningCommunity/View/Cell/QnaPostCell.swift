@@ -16,11 +16,12 @@ final class QnaPostCell: BaseTableViewCell {
    private let titleLabel = BaseLabel(for: "", font: .boldSystemFont(ofSize: 18))
    private let contentLabel = BaseLabel(for: "", font: .systemFont(ofSize: 14))
    private let commentCountLabel = BaseLabel(for: "", font: .systemFont(ofSize: 13), color: .systemGray)
+   private let emptyRect = RectangleView(backColor: .clear, radius: 0)
    
    override func setSubviews() {
       super.setSubviews()
       contentView.addSubview(back)
-      back.addSubviews(categoryView, titleLabel, contentLabel, commentCountLabel)
+      back.addSubviews(categoryView, titleLabel, contentLabel, commentCountLabel, emptyRect)
       categoryView.addSubview(categoryLabel)
    }
    
@@ -54,7 +55,12 @@ final class QnaPostCell: BaseTableViewCell {
          make.top.equalTo(contentLabel.snp.bottom).offset(16)
          make.leading.equalTo(guide).inset(24)
          make.trailing.equalTo(guide).inset(32)
-         make.bottom.equalTo(guide).inset(16)
+         make.height.equalTo(16)
+      }
+      emptyRect.snp.makeConstraints { make in
+         make.top.equalTo(commentCountLabel.snp.bottom).offset(8)
+         make.horizontalEdges.equalTo(guide).inset(16)
+         make.bottom.equalTo(guide).inset(8)
       }
    }
    

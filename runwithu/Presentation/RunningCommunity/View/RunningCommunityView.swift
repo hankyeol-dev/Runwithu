@@ -44,7 +44,6 @@ final class RunningCommunityView: BaseView, BaseViewProtocol {
       super.setUI()
       epiloguePostsTable.backgroundColor = .systemGray6.withAlphaComponent(0.5)
       qnaPostTable.backgroundColor = .systemGray6.withAlphaComponent(0.5)
-      communityWriteButton.layer.zPosition = 100
       qnaPostTable.separatorStyle = .none
       epiloguePostsTable.separatorStyle = .none
    }
@@ -116,7 +115,7 @@ final class RunningCommunityView: BaseView, BaseViewProtocol {
       communityWriteButton.snp.makeConstraints { make in
          make.size.equalTo(56)
          make.trailing.equalTo(safeAreaLayoutGuide).inset(20)
-         make.bottom.equalTo(safeAreaLayoutGuide).inset(120)
+         make.bottom.equalTo(safeAreaLayoutGuide).inset(100)
       }
    }
 }

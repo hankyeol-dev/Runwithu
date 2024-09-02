@@ -20,7 +20,7 @@ final class ProfileView: BaseView, BaseViewProtocol {
    let profileNickname = BaseLabel(for: "", font: .boldSystemFont(ofSize: 18), color: .white)
    let profileFollower = BaseLabel(for: "", font: .systemFont(ofSize: 14, weight: .light), color: .white)
    let profileFollowing = BaseLabel(for: "", font: .systemFont(ofSize: 14, weight: .light), color: .white)
-   let followButton = RoundedButtonView("팔로우", backColor: .clear, baseColor: .white, radius: 4)
+   let followButton = RoundedButtonView("팔로우", backColor: .white, baseColor: .black, radius: 4)
    let logoutButton = UIButton()
    
    let sendRunningInvitationButton = RoundedButtonView(
@@ -166,8 +166,6 @@ final class ProfileView: BaseView, BaseViewProtocol {
       profileHeaderRectangle.layer.borderColor = UIColor.darkGray.cgColor
       profileHeaderRectangle.layer.borderWidth = 1
       followButton.titleLabel?.font = .systemFont(ofSize: 10)
-      followButton.layer.borderColor = UIColor.black.cgColor
-      followButton.layer.borderWidth = 1
       logoutButton.setTitleColor(.systemRed, for: .normal)
       logoutButton.setTitle("로그아웃", for: .normal)
       logoutButton.titleLabel?.font = .systemFont(ofSize: 14)

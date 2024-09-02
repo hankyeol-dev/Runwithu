@@ -44,6 +44,21 @@ final class RunningGroupDetailInfoViewController: BaseViewController<RunningGrou
       )
       let output = viewModel.transform(for: input)
       
+      baseView.groupEntryTable.rx.modelSelected(BaseProfileType.self)
+         .asDriver()
+         .drive(with: self) { vc, profile in
+            let userProfile = ProfileViewController(
+               bv: .init(),
+               vm: .init(
+                  disposeBag: DisposeBag(),
+                  networkManager: NetworkService.shared,
+                  isUserProfile: false,
+                  userId: profile.user_id),
+               db: DisposeBag())
+            vc.navigationController?.pushViewController(userProfile, animated: true)
+         }
+         .disposed(by: disposeBag)
+      
       output.didLoadEntrys
          .bind(to: baseView.groupEntryTable.rx.items(
             cellIdentifier: RunningGroupEntryCell.id,

@@ -127,6 +127,7 @@ final class QnaDetailView: BaseView, BaseViewProtocol {
          make.bottom.equalTo(commentsInputBackView.snp.top).offset(-8)
       }
       contentCommentsTable.delegate = nil
+      contentCommentsTable.dataSource = nil
       contentCommentsTable.register(BaseCommentsView.self, forCellReuseIdentifier: BaseCommentsView.id)
       contentCommentsTable.estimatedRowHeight = 150
       contentCommentsTable.rowHeight = UITableView.automaticDimension

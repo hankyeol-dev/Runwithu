@@ -29,6 +29,7 @@ final class RunningGroupDetailViewModel: BaseViewModelProtocol {
    struct Input {
       let didLoadInput: PublishSubject<Void>
       let groupJoinButtonTapped: PublishSubject<Void>
+      let groupPostWriteButtonTapped: PublishSubject<Void>
    }
    struct Output{
       let didLoadOutput: PublishSubject<PostsOutput>
@@ -37,6 +38,7 @@ final class RunningGroupDetailViewModel: BaseViewModelProtocol {
       let epiloguePostsOutput: PublishSubject<[PostsOutput]>
       let productPostsOutput: PublishSubject<[PostsOutput]>
       let qnaPostsOutput: PublishSubject<[PostsOutput]>
+      let groupPostWriteButtonTapped: PublishSubject<[BottomSheetSelectedItem]>
    }
    
    func transform(for input: Input) -> Output {
@@ -46,6 +48,7 @@ final class RunningGroupDetailViewModel: BaseViewModelProtocol {
       let epiloguePostsOutput = PublishSubject<[PostsOutput]>()
       let productPostsOutput = PublishSubject<[PostsOutput]>()
       let qnaPostsOutput = PublishSubject<[PostsOutput]>()
+      let groupPostWriteButtonTapped = PublishSubject<[BottomSheetSelectedItem]>()
       
       input.didLoadInput
          .subscribe(with: self) { vm, _ in
@@ -76,6 +79,18 @@ final class RunningGroupDetailViewModel: BaseViewModelProtocol {
          }
          .disposed(by: disposeBag)
       
+      input.groupPostWriteButtonTapped
+         .subscribe(with: self) { vm, _ in
+            groupPostWriteButtonTapped.onNext(
+               PostsCommunityType.allCases.map {
+                  .init(
+                     image: $0.byTitleImage,
+                     title: $0.byKoreanTitle,
+                     isSelected: false)
+               }
+            )
+         }
+         .disposed(by: disposeBag)
       
       return Output(
          didLoadOutput: didLoadOutput,
@@ -83,7 +98,8 @@ final class RunningGroupDetailViewModel: BaseViewModelProtocol {
          errorOutput: errorOutput,
          epiloguePostsOutput: epiloguePostsOutput,
          productPostsOutput: productPostsOutput,
-         qnaPostsOutput: qnaPostsOutput
+         qnaPostsOutput: qnaPostsOutput,
+         groupPostWriteButtonTapped: groupPostWriteButtonTapped
       )
    }
    
@@ -156,7 +172,7 @@ extension RunningGroupDetailViewModel {
             return communityType == by.rawValue
          }
          return false
-      }
+      }.prefix(3).map { $0 }
    }
    
    private func validIsJoinedGroup(
@@ -167,7 +183,7 @@ extension RunningGroupDetailViewModel {
       do {
          let userId = try await networkManager.request(
             by: UserEndPoint.readMyProfile, of: ProfileUserIdOutput.self)
-                  
+         
          if likes.contains(userId.user_id) && ( limit > likes.count ) {
             return true
          }

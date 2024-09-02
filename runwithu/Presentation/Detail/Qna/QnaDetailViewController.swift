@@ -61,12 +61,18 @@ final class QnaDetailViewController: BaseViewController<QnaDetailView, QnaDetail
          .disposed(by: disposeBag)
       
       output.commentsEmitter
-         .bind(to: baseView.contentCommentsTable.rx.items(
-            cellIdentifier: BaseCommentsView.id,
-            cellType: BaseCommentsView.self)) { row, item, cell in
-               cell.bindView(for: item)
-            }
-            .disposed(by: disposeBag)
+         .asDriver(onErrorJustReturn: [])
+         .drive(with: self) { vc, comments in
+            vc.baseView.contentCommentsTable.delegate = nil
+            vc.baseView.contentCommentsTable.dataSource = nil
+            Observable.just(comments)
+               .bind(to: vc.baseView.contentCommentsTable.rx.items(
+                  cellIdentifier: BaseCommentsView.id,
+                  cellType: BaseCommentsView.self)) { row, item, cell in
+                     cell.bindView(for: item)
+                  }
+                  .disposed(by: vc.disposeBag)
+         }.disposed(by: disposeBag)
       
       output.errorEmitter
          .asDriver(onErrorJustReturn: .dataNotFound)

@@ -148,6 +148,8 @@ final class BottomSheetViewController: UIViewController {
       bottomSheetCommunitySelectionTable.rowHeight = 60
       bottomSheetCommunitySelectionTable.isScrollEnabled = isScrolled
       bottomSheetCommunitySelectionTable.separatorInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+      bottomSheetCommunitySelectionTable.delegate = nil
+      bottomSheetCommunitySelectionTable.dataSource = nil
       
       behaviorSelectedItems
          .bind(to: bottomSheetCommunitySelectionTable.rx.items(

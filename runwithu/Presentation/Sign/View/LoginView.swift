@@ -34,7 +34,7 @@ final class LoginView: BaseView, BaseViewProtocol {
    }()
    let autoLoginCheckButton = UIButton()
    private let autoLoginCheckImage = UIImageView()
-   private let autoLoginCheck = BaseLabel(for: "자동 로그인", font: .systemFont(ofSize: 12))
+   private let autoLoginCheck = BaseLabel(for: "자동 로그인", font: .systemFont(ofSize: 15))
    
    override func setSubviews() {
       super.setSubviews()

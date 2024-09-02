@@ -68,5 +68,6 @@ final class JoinView: BaseView, BaseViewProtocol {
       emailInput.inputField.rightViewRect(forBounds: CGRect(x: 0, y: 0, width: 80, height: 44))
       emailInput.inputField.rightViewMode = .always
       emailOverlapCheckButton.titleLabel?.font = .systemFont(ofSize: 13)
+      passwordInput.inputField.isSecureTextEntry = true
    }
 }

@@ -48,6 +48,8 @@ final class RunningGroupListViewController: BaseViewController<RunningGroupListV
          .rx.modelSelected(PostsOutput.self)
          .asDriver()
          .drive(with: self) { vc, group in
+            vc.baseView.userJoinedCollection.delegate = nil
+            vc.baseView.userCreateSectionCollection.dataSource = nil
             let detail = RunningGroupDetailViewController(
                bv: .init(),
                vm: .init(disposeBag: DisposeBag(), networkManager: NetworkService.shared, groupId: group.post_id),

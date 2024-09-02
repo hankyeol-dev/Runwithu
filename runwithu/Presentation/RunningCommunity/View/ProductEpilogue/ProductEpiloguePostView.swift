@@ -98,7 +98,7 @@ final class ProductEpiloguePostView: BaseView, BaseViewProtocol {
                
                flex.addItem(self.addPhotoCollection)
                   .width(100%)
-                  .height(80)
+                  .height(100)
                   .marginBottom(12)
             }
       }
@@ -160,7 +160,7 @@ extension ProductEpiloguePostView {
       item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 8)
       
       let groupSize = NSCollectionLayoutSize(
-         widthDimension: .fractionalWidth(0.2), heightDimension: .fractionalHeight(1.0))
+         widthDimension: .fractionalWidth(0.4), heightDimension: .fractionalHeight(1.0))
       let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
       
       let section = NSCollectionLayoutSection(group: group)

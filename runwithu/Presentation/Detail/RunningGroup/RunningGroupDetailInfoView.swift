@@ -98,6 +98,7 @@ final class RunningGroupDetailInfoView: BaseView, BaseViewProtocol {
       groupEntryTable.rowHeight = 60
       groupEntryTable.separatorInset = .init(top: 2, left: 2, bottom: 2, right: 2)
       groupEntryTable.delegate = nil
+      groupEntryTable.dataSource = nil
    }
    
    func bindView(for data: PostsOutput) {

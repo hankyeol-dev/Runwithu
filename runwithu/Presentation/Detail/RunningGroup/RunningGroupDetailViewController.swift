@@ -10,9 +10,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-// TODO: Group Community List
-// TODO: 세부적인 UI 다 다듬어야 함
-
 final class RunningGroupDetailViewController: BaseViewController<RunningGroupDetailView, RunningGroupDetailViewModel> {
    private let didLoadInput = PublishSubject<Void>()
    
@@ -34,10 +31,13 @@ final class RunningGroupDetailViewController: BaseViewController<RunningGroupDet
       super.bindViewAtDidLoad()
       
       let groupJoinButtonTapped = PublishSubject<Void>()
+      let groupPostWriteButtonTapped = PublishSubject<Void>()
+      let bottomSheetItemTapped = PublishSubject<BottomSheetSelectedItem>()
       
       let input = RunningGroupDetailViewModel.Input(
          didLoadInput: didLoadInput,
-         groupJoinButtonTapped: groupJoinButtonTapped
+         groupJoinButtonTapped: groupJoinButtonTapped,
+         groupPostWriteButtonTapped: groupPostWriteButtonTapped
       )
       let output = viewModel.transform(for: input)
 
@@ -70,6 +70,10 @@ final class RunningGroupDetailViewController: BaseViewController<RunningGroupDet
                }
                .displayAlert()
          }
+         .disposed(by: disposeBag)
+      
+      baseView.groupPostWriteButton.rx.tap
+         .bind(to: groupPostWriteButtonTapped)
          .disposed(by: disposeBag)
       
       /// bind Output
@@ -129,6 +133,26 @@ final class RunningGroupDetailViewController: BaseViewController<RunningGroupDet
                   .setActions(by: .darkGray, for: "확인")
                   .displayAlert()
             }
+         }
+         .disposed(by: disposeBag)
+      
+      output.groupPostWriteButtonTapped
+         .bind(with: self) { vc, items in
+            let bottomSheet = BottomSheetViewController(
+               titleText: "그룹 커뮤니티 글 작성",
+               selectedItems: items,
+               isScrolled: false,
+               isMultiSelected: false,
+               disposeBag: DisposeBag()
+            )
+            bottomSheet.displayViewAsFullScreen(as: .coverVertical)
+            bottomSheet.didDisappearHandler = {
+               let item = bottomSheet.getSelectedItems().filter { $0.isSelected }
+               if let first = item.first {
+                  bottomSheetItemTapped.onNext(first)
+               }
+            }
+            vc.present(bottomSheet, animated: true)
          }
          .disposed(by: disposeBag)
    }

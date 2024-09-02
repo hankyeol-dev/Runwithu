@@ -22,13 +22,12 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
    }
    
    override func viewDidLoad() {
-      super.viewDidLoad()
-      
+      super.viewDidLoad()   
+      willAppearInput.onNext(())
    }
    
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
-      willAppearInput.onNext(())
    }
    
    override func bindViewAtDidLoad() {
@@ -107,9 +106,9 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
       
       output.isLoginSuccess
          .bind(with: self) { vc, isSuccess in
-            vc.baseView.displayToast(for: "로그인 성공 :D", isError: false, duration: 1)
+            vc.baseView.displayToast(for: "로그인 성공 :D", isError: false, duration: 1.0)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
                vc.dismissStack(for: MainTabbarController())
             }
          }

@@ -66,7 +66,7 @@ final class RunningEpiloguePostView: BaseView, BaseViewProtocol {
                flex.addItem(self.datePickerTitle)
                flex.addItem(self.datePicker)
                   .height(44)
-                  .width(200)
+                  .width(100%)
                   .marginRight(16)
             }
             .marginBottom(20)
