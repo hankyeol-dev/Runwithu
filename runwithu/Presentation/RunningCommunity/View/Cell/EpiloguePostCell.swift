@@ -14,95 +14,142 @@ import RxGesture
 final class EpiloguePostCell: BaseTableViewCell {
    let disposeBag = DisposeBag()
    
-   private let backView = RectangleView(backColor: .white, radius: 8)
-   private let image = UIImageView()
-   private let titleLabel = BaseLabel(for: "", font: .systemFont(ofSize: 18))
-   private let contentLabel = BaseLabel(for: "", font: .systemFont(ofSize: 16))
+   private let backView = RectangleView(backColor: .white, radius: 0)
+   let user = BaseUserImage(size: 24, borderW: 2, borderColor: .darkGray)
+   private let userInfoStack = UIStackView()
+   private let username = BaseLabel(for: "", font: .systemFont(ofSize: 12, weight: .medium))
+   private let userCreatedAt = BaseLabel(for: "", font: .systemFont(ofSize: 12, weight: .light))
+   
+   private let contentLabel = BaseLabel(for: "", font: .systemFont(ofSize: 13))
    private let divider = RectangleView(backColor: .darkGray.withAlphaComponent(0.5), radius: 0)
-   let user = BaseUserImage(size: 20, borderW: 2, borderColor: .darkGray)
-   private let username = BaseLabel(for: "", font: .systemFont(ofSize: 14))
+   private let postLikeAndComment = BasePostCommentAndLikeView()
    
    override func setSubviews() {
       contentView.addSubview(backView)
-      backView.addSubviews(image, titleLabel, contentLabel, divider, user, username)
    }
    
    override func setLayout() {
       super.setLayout()
       backView.snp.makeConstraints { make in
-         make.edges.equalTo(contentView.safeAreaLayoutGuide).inset(8)
+         make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(4)
+         make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide)
       }
    }
    
    override func setUI() {
       super.setUI()
-      contentView.backgroundColor = .systemGray6.withAlphaComponent(0.6)
-      image.contentMode = .scaleToFill
+      contentView.backgroundColor = .systemGray6.withAlphaComponent(0.8)
       selectionStyle = .none
    }
    
-   func bindView(for post: PostsOutput) {
-      let files = post.files
-      let guide = backView.safeAreaLayoutGuide
-      
-      titleLabel.bindText(post.title)
-      contentLabel.bindText(post.content)
-      
-      if let userImageURL = post.creator.profileImage {
+   func bindView(by epilogues: PostsOutput) {
+      bindCreatorView(creator: epilogues.creator, createdAt: epilogues.createdAt)
+      bindImageCollection(files: epilogues.files)
+      contentLabel.bindText(epilogues.content)
+      postLikeAndComment.bindView(like: epilogues.likes.count, comment: epilogues.comments.count)
+   }
+   
+   private func bindCreatorView(creator: BaseProfileType, createdAt: String) {
+      if let userImageURL = creator.profileImage {
          Task {
             await getImageFromServer(for: user, by: userImageURL)
          }
       } else {
          user.image = .userSelected
       }
-      username.bindText(post.creator.nick)
+      username.bindText(creator.nick)
+      if let dateText = createdAt.split(separator: "T").first {
+         userCreatedAt.bindText(String(dateText))
+      }
       
-      if let file = files.first {
-         bindImageLayout(by: file)
-         image.snp.makeConstraints { make in
-            make.top.equalTo(guide).inset(8)
-            make.horizontalEdges.equalTo(guide).inset(16)
-            make.height.equalTo(200)
+      backView.addSubviews(user, userInfoStack)
+      userInfoStack.addArrangedSubview(username)
+      userInfoStack.addArrangedSubview(userCreatedAt)
+      userInfoStack.axis = .vertical
+      userInfoStack.distribution = .fillEqually
+      userInfoStack.spacing = 4
+      
+      user.snp.makeConstraints { make in
+         make.top.leading.equalTo(backView.safeAreaLayoutGuide).inset(12)
+         make.size.equalTo(24)
+      }
+      userInfoStack.snp.makeConstraints { make in
+         make.top.trailing.equalTo(backView.safeAreaLayoutGuide).inset(12)
+         make.leading.equalTo(user.snp.trailing).offset(12)
+         make.centerY.equalTo(user.snp.centerY)
+      }
+   }
+   
+   private func bindImageCollection(files: [String]) {
+      backView.addSubviews(contentLabel, divider, postLikeAndComment)
+      
+      if !files.isEmpty {
+         let imageCollection = UICollectionView(frame: .zero, collectionViewLayout: createImageCollectionlayout(for: files.count))
+         imageCollection.delegate = nil
+         imageCollection.dataSource = nil
+         imageCollection.register(EpilogueImageCollectionCell.self, forCellWithReuseIdentifier: EpilogueImageCollectionCell.id)
+         backView.addSubview(imageCollection)
+         imageCollection.snp.makeConstraints { make in
+            make.top.equalTo(user.snp.bottom).offset(12)
+            make.horizontalEdges.equalTo(backView.safeAreaLayoutGuide)
+            make.height.equalTo(files.count == 1 ? 240 : files.count == 2 ? 180 : 150)
+         }
+         imageCollection.layer.cornerRadius = 12
+         imageCollection.layer.masksToBounds = true
+         
+         Observable.just(files)
+            .bind(to: imageCollection.rx.items(
+               cellIdentifier: EpilogueImageCollectionCell.id,
+               cellType: EpilogueImageCollectionCell.self)) { row, imageURL, cell in
+                  cell.bindView(for: imageURL)
+               }
+               .disposed(by: disposeBag)
+         
+         contentLabel.snp.makeConstraints { make in
+            make.top.equalTo(imageCollection.snp.bottom).offset(8)
+            make.horizontalEdges.equalTo(backView.safeAreaLayoutGuide).inset(16)
+            make.height.equalTo(20)
+         }
+      } else {
+         contentLabel.snp.makeConstraints { make in
+            make.top.equalTo(user.snp.bottom).offset(12)
+            make.horizontalEdges.equalTo(backView.safeAreaLayoutGuide).inset(16)
+            make.height.equalTo(20)
          }
       }
-      bindBasicLayout()
       
-   }
-   
-   private func bindBasicLayout() {
-      let guide = backView.safeAreaLayoutGuide
-      titleLabel.snp.makeConstraints { make in
-         make.top.equalTo(image.snp.bottom).offset(16)
-         make.horizontalEdges.equalTo(guide).inset(16)
-         make.height.equalTo(22)
-      }
-      contentLabel.snp.makeConstraints { make in
-         make.top.equalTo(titleLabel.snp.bottom).offset(8)
-         make.horizontalEdges.equalTo(guide).inset(16)
-         make.height.equalTo(20)
-      }
       divider.snp.makeConstraints { make in
          make.top.equalTo(contentLabel.snp.bottom).offset(12)
-         make.height.equalTo(0.5)
-         make.horizontalEdges.equalTo(guide).inset(8)
+         make.horizontalEdges.equalTo(backView.safeAreaLayoutGuide).inset(4)
+         make.height.equalTo(1.0)
       }
-      user.snp.makeConstraints { make in
-         make.top.equalTo(divider.snp.bottom).offset(12)
-         make.leading.equalTo(guide).inset(16)
-         make.size.equalTo(20)
+      postLikeAndComment.snp.makeConstraints { make in
+         make.top.equalTo(divider.snp.bottom).offset(8)
+         make.horizontalEdges.equalTo(backView.safeAreaLayoutGuide).inset(16)
+         make.height.equalTo(24)
+         make.bottom.equalTo(backView.safeAreaLayoutGuide).inset(8)
       }
-      username.snp.makeConstraints { make in
-         make.centerY.equalTo(user.snp.centerY)
-         make.leading.equalTo(user.snp.trailing).offset(8)
-         make.trailing.equalTo(guide).inset(16)
-         make.bottom.equalTo(guide).inset(12)
-      }
+      
+      setNeedsLayout()
    }
    
-   private func bindImageLayout(by file: String) {
-      Task {
-         await getImageFromServer(for: image, by: file)
+   private func createImageCollectionlayout(for count: Int) -> UICollectionViewCompositionalLayout {
+      var item: NSCollectionLayoutItem
+      var group: NSCollectionLayoutGroup
+      
+      switch count {
+      case 1:
+         item = .init(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+      case 2:
+         item = .init(layoutSize: .init(widthDimension: .fractionalWidth(1/2), heightDimension: .fractionalHeight(1.0)))
+      default:
+         item = .init(layoutSize: .init(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalHeight(1.0)))
       }
+      item.contentInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 1.0, bottom: 0.0, trailing: 1.0)
+      group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)), subitems: [item])
+      group.contentInsets = NSDirectionalEdgeInsets(top: 8.0, leading: 0.0, bottom: 8.0, trailing: 0.0)
+      
+      let section = NSCollectionLayoutSection(group: group)
+      return UICollectionViewCompositionalLayout(section: section)
    }
-   
 }

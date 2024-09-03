@@ -34,12 +34,14 @@ final class RunningCommunityViewController: BaseViewController<RunningCommunityV
       let writeButtonTapped = PublishSubject<Void>()
       let bottomSheetItemTapped = PublishSubject<BottomSheetSelectedItem>()
       let communityTypeSelected = PublishSubject<Int>()
+      let productEpiloguesTableScrollEnd = PublishSubject<Void>()
       
       let input = RunningCommunityViewModel.Input(
          didLoadInput: didLoadInput,
          writeButtonTapped: writeButtonTapped,
          bottomSheetItemTapped: bottomSheetItemTapped,
-         communityTypeSelected: communityTypeSelected
+         communityTypeSelected: communityTypeSelected,
+         productEpiloguesTableScrollEnd: productEpiloguesTableScrollEnd
       )
       let output = viewModel.transform(for: input)
       
@@ -94,6 +96,21 @@ final class RunningCommunityViewController: BaseViewController<RunningCommunityV
                db: DisposeBag())
             vc.navigationController?.pushViewController(detail, animated: true)
          }
+         .disposed(by: disposeBag)
+      
+      baseView.epiloguePostsTable.rx.contentOffset
+         .flatMap { [weak self] offset in
+            guard let self else { return Observable<Void>.empty() }
+            
+            let height = self.baseView.epiloguePostsTable.frame.height - self.baseView.epiloguePostsTable.contentInset.top - self.baseView.epiloguePostsTable.contentInset.bottom
+            
+            let y = offset.y + self.baseView.epiloguePostsTable.contentInset.top
+            let compare = max(0.0, self.baseView.epiloguePostsTable.contentSize.height - height)
+            
+            return y > compare ? Observable.just(()) : Observable<Void>.empty()
+         }
+         .take(1)
+         .bind(to: productEpiloguesTableScrollEnd)
          .disposed(by: disposeBag)
       
       /// bind output
@@ -153,7 +170,7 @@ final class RunningCommunityViewController: BaseViewController<RunningCommunityV
                   .bind(to: vc.baseView.epiloguePostsTable.rx.items(
                      cellIdentifier: EpiloguePostCell.id, cellType: EpiloguePostCell.self)
                   ) { row, post, cell in
-                     cell.bindView(for: post)                     
+                     cell.bindView(by: post)
                   }
                   .disposed(by: vc.disposeBag)
             }

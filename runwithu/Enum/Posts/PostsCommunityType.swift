@@ -22,7 +22,7 @@ enum PostsCommunityType: String, CaseIterable {
       case .qnas:
          return "러닝 질문 올리기"
       case .open_self_marathons:
-         return "셀프 마라톤 개최 (준비중)"
+         return "나만의 마라톤 개최 (준비중)"
       }
    }
    

@@ -60,8 +60,10 @@ final class ProducteDetailViewController: BaseViewController<ProductDetailView, 
             vc.baseView.imageCollection.dataSource = nil
            
             Observable.just(detail.files)
-               .bind(to: vc.baseView.imageCollection.rx.items(cellIdentifier: EpilogueImageCollectionCell.id, cellType: EpilogueImageCollectionCell.self)) { _, image, cell in
-                  cell.bindView(for: image)
+               .bind(to: vc.baseView.imageCollection.rx.items(
+                  cellIdentifier: EpilogueImageCollectionCell.id,
+                  cellType: EpilogueImageCollectionCell.self)) { _, image, cell in
+                     cell.bindView(for: image)
                }
                .disposed(by: vc.disposeBag)
          }

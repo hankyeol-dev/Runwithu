@@ -15,6 +15,8 @@
 		811D377E2C7390C00017E17C /* RoundedInputViewWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D377D2C7390C00017E17C /* RoundedInputViewWithTitle.swift */; };
 		811D37802C73912D0017E17C /* BaseTextFieldRounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D377F2C73912D0017E17C /* BaseTextFieldRounded.swift */; };
 		811D37822C7404170017E17C /* RoundedTextViewWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37812C7404170017E17C /* RoundedTextViewWithTitle.swift */; };
+		812445CF2C85B3D1001951BB /* DataSourceTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812445CE2C85B3D1001951BB /* DataSourceTestVC.swift */; };
+		812445D12C85E767001951BB /* BasePostCommentAndLikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812445D02C85E767001951BB /* BasePostCommentAndLikeView.swift */; };
 		813548FD2C8033E800F975FB /* ProductPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813548FC2C8033E800F975FB /* ProductPostCell.swift */; };
 		813548FF2C80348D00F975FB /* CapsuledLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813548FE2C80348D00F975FB /* CapsuledLabel.swift */; };
 		813549022C8062D300F975FB /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 813549012C8062D300F975FB /* MCEmojiPicker */; };
@@ -173,6 +175,8 @@
 		811D377D2C7390C00017E17C /* RoundedInputViewWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInputViewWithTitle.swift; sourceTree = "<group>"; };
 		811D377F2C73912D0017E17C /* BaseTextFieldRounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldRounded.swift; sourceTree = "<group>"; };
 		811D37812C7404170017E17C /* RoundedTextViewWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextViewWithTitle.swift; sourceTree = "<group>"; };
+		812445CE2C85B3D1001951BB /* DataSourceTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceTestVC.swift; sourceTree = "<group>"; };
+		812445D02C85E767001951BB /* BasePostCommentAndLikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePostCommentAndLikeView.swift; sourceTree = "<group>"; };
 		813548FC2C8033E800F975FB /* ProductPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPostCell.swift; sourceTree = "<group>"; };
 		813548FE2C80348D00F975FB /* CapsuledLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuledLabel.swift; sourceTree = "<group>"; };
 		813549042C80BDBE00F975FB /* ImageTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTestVC.swift; sourceTree = "<group>"; };
@@ -709,6 +713,7 @@
 				81A3B9092C74E45D009AD659 /* ENV.swift */,
 				81A3B9542C773955009AD659 /* TestViewController.swift */,
 				813549042C80BDBE00F975FB /* ImageTestVC.swift */,
+				812445CE2C85B3D1001951BB /* DataSourceTestVC.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -909,6 +914,7 @@
 				81A3B9A52C7C00A8009AD659 /* BaseScrollView.swift */,
 				8157F1662C7C3A3E00661BB6 /* BaseCommentsView.swift */,
 				8157F1802C7D35C200661BB6 /* BaseUserImage.swift */,
+				812445D02C85E767001951BB /* BasePostCommentAndLikeView.swift */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -1098,6 +1104,7 @@
 				811D37802C73912D0017E17C /* BaseTextFieldRounded.swift in Sources */,
 				81A3B98D2C7B209C009AD659 /* ProductEpiloguePostView.swift in Sources */,
 				811D37782C7382420017E17C /* RunningGroupCreateViewController.swift in Sources */,
+				812445D12C85E767001951BB /* BasePostCommentAndLikeView.swift in Sources */,
 				813549052C80BDBE00F975FB /* ImageTestVC.swift in Sources */,
 				81A3B9942C7B2C69009AD659 /* QnaPostViewController.swift in Sources */,
 				81A3B9162C74EE19009AD659 /* Extension+UIButton.swift in Sources */,
@@ -1109,6 +1116,7 @@
 				81A3B9652C784772009AD659 /* BaseTabBar.swift in Sources */,
 				8157F1672C7C3A3E00661BB6 /* BaseCommentsView.swift in Sources */,
 				81E7FF262C6C6C2700200CF2 /* AppDelegate.swift in Sources */,
+				812445CF2C85B3D1001951BB /* DataSourceTestVC.swift in Sources */,
 				81E7FFA12C6F311E00200CF2 /* LoginViewController.swift in Sources */,
 				8157F1722C7CA4EF00661BB6 /* RunningGroupDetailInfoViewController.swift in Sources */,
 				81E7FF632C6EDF8800200CF2 /* PostEndPoint.swift in Sources */,
@@ -1219,7 +1227,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1276,7 +1284,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

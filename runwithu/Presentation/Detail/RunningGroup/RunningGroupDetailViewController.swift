@@ -42,6 +42,17 @@ final class RunningGroupDetailViewController: BaseViewController<RunningGroupDet
       let output = viewModel.transform(for: input)
 
       /// bind Input
+      baseView.groupProductEpilogue.postTable
+         .rx.modelSelected(PostsOutput.self)
+         .asDriver()
+         .drive(with: self) { vc, post in
+            let detail = ProducteDetailViewController(
+               bv: .init(),
+               vm: .init(disposeBag: DisposeBag(), networkManager: NetworkService.shared, detailPost: post),
+               db: DisposeBag())
+            vc.navigationController?.pushViewController(detail, animated: true)
+         }
+         .disposed(by: disposeBag)
 
       baseView.groupDetailButton.rx.tap
          .bind(with: self) { vc, _ in
@@ -102,6 +113,7 @@ final class RunningGroupDetailViewController: BaseViewController<RunningGroupDet
       output.productPostsOutput
          .asDriver(onErrorJustReturn: [])
          .drive(with: self) { vc, products in
+            dump(products)
             vc.baseView.groupProductEpilogue.bindPostTable(for: products)
          }
          .disposed(by: disposeBag)

@@ -22,14 +22,14 @@ final class EpilogueImageCollectionCell: BaseCollectionViewCell {
    override func setLayout() {
       super.setLayout()
       image.snp.makeConstraints { make in
-         make.edges.equalTo(contentView.safeAreaLayoutGuide).inset(8)
+         make.edges.equalTo(contentView.safeAreaLayoutGuide).inset(4)
       }
    }
    
    override func setUI() {
       super.setUI()
-      image.layer.cornerRadius = 12
-      image.layer.masksToBounds = true
+      contentView.backgroundColor = .systemGray6.withAlphaComponent(0.8)
+      image.layer.cornerRadius = 0
       image.contentMode = .scaleToFill
    }
    

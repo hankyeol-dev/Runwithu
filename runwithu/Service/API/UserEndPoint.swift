@@ -102,10 +102,10 @@ enum UserEndPoint: EndPointProtocol {
          return input.converToJSON()
       case let .updateProfileImage(input):
          if let profile = input.profile {
-            return asMultipartFileData(
+            return asMultipartFileDatas(
                for: input.boundary,
                key: "profile",
-               by: profile,
+               values: [profile],
                filename: "profileImage"
             )
          }

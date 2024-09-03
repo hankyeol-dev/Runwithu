@@ -155,6 +155,8 @@ extension RunningGroupDetailViewModel {
          let products = filterGroupPost(for: groupPosts, by: .product_epilogues)
          let qnas = filterGroupPost(for: groupPosts, by: .qnas)
          
+         dump(products)
+         
          epiloguePostsEmitter.onNext(epilogues)
          productPostsEmitter.onNext(products)
          qnaPostsEmitter.onNext(qnas)
