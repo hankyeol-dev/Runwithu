@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81046BAA2CC1E6EF007EF6EB /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81046BA92CC1E6EF007EF6EB /* BaseViewModel.swift */; };
 		811D37712C737DA70017E17C /* BottomSheetTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37702C737DA70017E17C /* BottomSheetTableCell.swift */; };
 		811D37732C737DCB0017E17C /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37722C737DCB0017E17C /* BaseTableViewCell.swift */; };
 		811D37782C7382420017E17C /* RunningGroupCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D37772C7382420017E17C /* RunningGroupCreateViewController.swift */; };
@@ -167,6 +168,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		81046BA92CC1E6EF007EF6EB /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		811D37702C737DA70017E17C /* BottomSheetTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetTableCell.swift; sourceTree = "<group>"; };
 		811D37722C737DCB0017E17C /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		811D37772C7382420017E17C /* RunningGroupCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGroupCreateViewController.swift; sourceTree = "<group>"; };
@@ -724,6 +726,7 @@
 				81E7FF382C6C738B00200CF2 /* EndPoint.swift */,
 				81E7FF852C6F215E00200CF2 /* PostInputType.swift */,
 				81E7FFB72C70073800200CF2 /* Protocol+BaseView.swift */,
+				81046BA92CC1E6EF007EF6EB /* BaseViewModel.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1127,6 +1130,7 @@
 				81E7FF6B2C6EE7AD00200CF2 /* PostsDTO.swift in Sources */,
 				81E7FF372C6C736100200CF2 /* Network.swift in Sources */,
 				81A3B99C2C7B7A55009AD659 /* BaseCreatorView.swift in Sources */,
+				81046BAA2CC1E6EF007EF6EB /* BaseViewModel.swift in Sources */,
 				81E7FFA42C6F405300200CF2 /* BaseLabel.swift in Sources */,
 				81A3B9822C7866B2009AD659 /* SelfMarathonPostViewModel.swift in Sources */,
 				81E7FF882C6F21AF00200CF2 /* QnaInput.swift in Sources */,
