@@ -3,12 +3,12 @@
 ### 목차
 
 - [프로젝트 소개](#-프로젝트-소개)
-- [프로젝트 구현 스택](#-프로젝트-아키텍처-및-스택) <br />
-- [프로젝트에서 고민한 것](#-프로젝트에서-고민한-것들) <br />
+- [프로젝트 구현 스택](#프로젝트-아키텍처-및-스택) <br />
+- [프로젝트에서 고민한 것](#프로젝트에서-고민한-것들) <br />
   - [1. 커스텀 Router Protocol 적용](#1-Endpoint-프로토콜을-통한-네트워크-통신-Router-패턴-적용)
   - [2. Swift Concurrency를 적용한 네트워크 태스크 관리](#2-swift-concurrency-기반의-비동기-태스크-동시성-관리)
   - [3. JWT 기반의 인증/권한 토큰 관리](#3-앱-접근-및-사용-권한-확보를-위한-jwt-기반의-토큰-관리)
-- [프로젝트에서 구현한 화면 및 기능](#-프로젝트-페이지별-기능) <br />
+- [프로젝트에서 구현한 화면 및 기능](#프로젝트-페이지별-기능) <br />
 
 ## 🏃‍♀️ 프로젝트 소개
 
@@ -30,17 +30,16 @@
 
 > **MVVM 기반 Input-Output 패턴**
 >
-> - ViewModel 내부에 **NestedType으로 Input, Output 구조체를 선언**하여,
->   **View에서 방출되는 이벤트 입력에 따른 ViewModel에서 처리된 데이터 흐름을 구조적으로 관리**하였습니다.
+> - ViewModel에 **NestedType으로 Input, Output 구조체를 선언**하여,**View에서 방출되는 이벤트에 따라 처리된 데이터 흐름을 구조적으로 관리**하였습니다.
 > - [BaseViewModel 프로토콜](https://github.com/hankyeol-dev/Runwithu/blob/main/runwithu/Protocol/BaseViewModel.swift)을 구성하여,
->   해당 프로토콜을 채택한 ViewModel이 **동일한 In-Out 패턴을 구축하고, 프로토콜에서 확장된 메서드를 활용하는 구조**를 만들었습니다.
+>   프로토콜을 채택한 ViewModel이 **동일한 In-Out 패턴을 구축하고, 프로토콜에서 확장된 메서드를 활용하는 구조**를 만들었습니다.
 
 <br />
 
 > **RxSwift**
 >
 > - View에서 방출되는 이벤트를 ViewModel에 전달하고, <br />
->   ViewModel에서 처리된 데이터 흐름을 다시 View에 전달하는 **반응형 비등기 처리를 위해 RxSwift를 활용**했습니다.
+>   ViewModel에서 처리된 데이터 흐름을 다시 View에 전달하는 **반응형 비동기 처리를 위해 RxSwift를 활용**했습니다.
 > - 스크롤에 따른 커서 기반의 페이지네이션을 RxSwift로 구현할 수 있었습니다.
 
 <br />
