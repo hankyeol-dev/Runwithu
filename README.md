@@ -40,27 +40,28 @@
 >
 > - View에서 방출되는 이벤트를 ViewModel에 전달하고, <br />
 >   ViewModel에서 처리된 데이터 흐름을 다시 View에 전달하는 **반응형 비동기 처리를 위해 RxSwift를 활용**했습니다.
-> - 스크롤에 따른 커서 기반의 페이지네이션을 RxSwift로 구현할 수 있었습니다.
 
 <br />
 
 > **Swift Concurrency 기반의 비동기 태스크 및 전역 상태 관리**
 >
-> - async를 통해 **비동기로 처리되어야 하는 태스크를 명확하게 선언**했습니다.
-> - **Task, TaskGroup을 통해 독립적인 비동기 컨텍스트를 생성**하고, 내부에서 **await로 비동기 태스크의 반환값 및 에러를 핸들링 시점을 제어**했습니다.
-> - Token, UserDefaults와 같이 앱 전역적인 환경에서 활용되는 값이 **여러 비동기 태스크에서 Data Race 없이 안정적으로 접근하고, 상태를 업데이트 할 수 있도록 Actor 객체를 활용**했습니다.
+> - **비동기로 처리되어야 하는 태스크를 async로 명확하게 선언**했습니다.
+> - **Task, TaskGroup로 독립적인 비동기 컨텍스트를 생성**하고, **await로 비동기 태스크의 반환값 및 에러를 핸들링 시점을 제어**했습니다.
+> - **여러 비동기 태스크에서 앱 전역적으로 활용되는 값을 Data Race 없이 안정적으로 접근/업데이트 할 수 있도록 Actor를 활용**했습니다.
 
 <br />
 
 > **커스텀 Router 패턴을 적용한 Network 통신**
 >
 > - `Moya`, `Alamofire` 라이브러리의 TargetType, URLRequestConvertible 프로토콜을 참고하여,
->   서버 API의 **엔드포인트마다 필요한 네트워크 통신 객체를 맵핑해주는 커스텀한 [Routing 프로토콜](https://github.com/hankyeol-dev/Runwithu/blob/main/runwithu/Protocol/EndPoint.swift)** 을 구현했습니다.
-> - Routing마다 필요한 [DTO(request, response)](https://github.com/hankyeol-dev/Runwithu/tree/main/runwithu/Model/DTO) 타입 객체를 구조화하였습니다.
+>   서버 API **엔드포인트마다 필요한 네트워크 통신 객체를 맵핑해주는 커스텀한 [Routing 프로토콜](https://github.com/hankyeol-dev/Runwithu/blob/main/runwithu/Protocol/EndPoint.swift)** 을 구현했습니다.
+> - 통신마다 필요한 [DTO(request, response)](https://github.com/hankyeol-dev/Runwithu/tree/main/runwithu/Model/DTO) 타입 객체를 구조화했습니다.
 
 <br />
 
 <img width="100%" alt="스크린샷 2024-10-18 오전 10 55 52" src="https://github.com/user-attachments/assets/1301cd07-3643-41c8-9fe5-d6a04ede7dbe">
+
+> 프로젝트 데이터 및 의존성 구조
 
 <br />
 
@@ -68,16 +69,16 @@
 
 ### 1. Endpoint 프로토콜을 통한 네트워크 통신 Router 패턴 적용
 
-> 관련 코드: [EndpointProtocol](https://github.com/hankyeol-dev/Runwithu/blob/main/runwithu/Protocol/EndPoint.swift), [Endpoint Enums](https://github.com/hankyeol-dev/Runwithu/tree/main/runwithu/Service/API)
+> 관련 코드: [EndpointProtocol](https://github.com/hankyeol-dev/Runwithu/blob/main/runwithu/Protocol/EndPoint.swift), [Endpoint Router Enums](https://github.com/hankyeol-dev/Runwithu/tree/main/runwithu/Service/API)
 
 1️⃣ 고민한 부분
 
-- 서버에서 제공하는 API는 엔드포인트 별로 body/header/http method 등의 네트워크 통신 객체 구성의 명세가 상이했습니다.
-- 네트워크 요청마다 반복적으로 통신 객체를 생성하는 것은 비효율적이라 판단했습니다. 엔드포인트 별로 서로 다른 통신 객체를 맵핑해주는 로직이 필요했습니다.
+- 서버 API는 엔드포인트 별로 body/header/method 등의 네트워크 통신 객체 구성 명세가 상이했습니다.
+  - 요청마다 반복적인 통신 객체를 생성하는 것은 비효율적이라 판단했습니다. 엔드포인트에 따라 필요한 통신 객체를 맵핑해주는 단일 구조가 필요했습니다.
 
 2️⃣ 고민을 풀어낸 방식
 
-- API 엔드포인트마다 **URI 구성(Endpoint, Parameters) 및 HTTP 통신을 위해 필요한 요소(Method, Body, Header)를 하나의 객체에서 연산할 수 있게 명세**하는 [Endpoint](https://github.com/hankyeol-dev/Runwithu/blob/main/runwithu/Protocol/EndPoint.swift) 프로토콜을 구성했습니다. 프로토콜 구성을 위해 `Moya` 라이브러리의 TargetType 프로토콜을 참고하였습니다.
+- 엔드포인트마다 **URI 구성(Endpoint, Parameters) 및 HTTP 통신을 위해 필요한 요소(Method, Body, Header)를 하나의 객체에서 연산하도록 명세**하는 [Endpoint 프로토콜](https://github.com/hankyeol-dev/Runwithu/blob/main/runwithu/Protocol/EndPoint.swift) 을 구성했습니다. 프로토콜 구성을 위해 `Moya` 라이브러리의 `TargetType 프로토콜` 을 참고하였습니다.
 
   ```swift
   protocol EndPointProtocol {
@@ -91,16 +92,14 @@
   }
   ```
 
-- User, Post, Auth 요청을 구분해서 각각 API 엔드포인트 별로 케이스를 구분짓고, Endpoint 프로토콜을 채택하여, 케이스 별로 통신 객체를 계산하는 Routing Enum을 구현했습니다.
+- User, Post, Auth 요청을 구분해서 엔드포인트 별로 케이스를 나누고, Endpoint 프로토콜을 채택하여, **케이스 별로 통신 객체를 맵핑하는 Router Enum**을 구현했습니다.
 
   ```swift
   // 회원가입, 로그인, 이메일 중복 검증 등의 라우팅 처리
   enum UserEndPoint: EndPointProtocol {
       case join(input: JoinInput)
       case login(input: LoginInput)
-
       ...
-
       var body: Data? {
          switch self {
          case let .join(input):
@@ -112,9 +111,9 @@
   }
   ```
 
-  - 엔드포인트 별로 네트워크 요청 객체 생성에 필요한 정보는 **InputType으로 각각 구조화하여 활용**했습니다. InputType 객체를 통해, 라우터 활용 부분에서는 어떤 데이터 필요로 하는지를 컴파일 단계에서 명확히 할 수 있었습니다. InputType 객체가 기본적으로 Encodable 프로토콜을 채택하고 있었기 때문에, Encodable 프로토콜 확장부를 만들어 JSON 형태로 인코딩하는 함수를 구현했습니다.
+  - body, parameter 구성에 필요한 정보는 **InputType으로 구조화**했습니다. Router마다 어떤 데이터가 필요한지를 InputType로 컴파일 단계에서 명확히 할 수 있었습니다. InputType이 Encodable을 채택하게 만들고, Encodable 프로토콜 확장부에서 JSON으로 인코딩하는 함수를 구현해 body 구성에 활용했습니다.
 
-- Endpoint 프로토콜의 확장부에서는 **각 연산 프로퍼티를 조합하여 네트워크 통신에 필요한 URL과 URLRequest 객체를 맵핑하는 메서드를 구현**했습니다. Actor 객체의 프로퍼티로 관리되고 있던 accessToken, refreshToken을 활용하기 위해 async한 메서드로 구성했습니다. 메서드 구현을 위해서 `Alamofire` 라이브러리의 URLRequestConvertible 를 참고했습니다.
+- Endpoint 프로토콜 확장부에서는 **연산 프로퍼티를 조합하여 통신에 필요한 URL과 Request 객체를 맵핑하는 메서드를 구현**했습니다. Actor로 관리하는 토큰(access,refresh)을 활용하기 위해 async 메서드로 구성했습니다. 메서드 구현을 위해 `Alamofire` 라이브러리의 `URLRequestConvertible 프로토콜` 을 참고했습니다.
 
   ```swift
    extension EndPointProtocol {
@@ -147,12 +146,32 @@
    }
   ```
 
-- 네트워크 통신을 위해 활용되는 request 메서드에서는 첫 번째 인자의 타입으로 Endpoint 프로토콜을 받았습니다. **API마다 매번 새롭게 request 메서드를 구성하는 것이 아닌, endpoint별로 유연하게 URLRequest 객체를 만들 수 있도록 메서드를 추상화**했습니다.
+  - 이미지를 포함한 대용량 파일 업로드는 multipart/form-data 형식으로 body에 들어갈 데이터 타입을 정의해줘야 했습니다. 이를 위해 **Endpoint 프로토콜 확장부에서 `asMultipartFileDatas` 라는 메서드를 구현**하였습니다. 메서드 구현을 위해 Alamofire의 upload api 중 `multipart.append` 구현부를 확인했습니다. boundary 라고 하는 고유한 문자열을 통해 multi part로 잘라서 보내는 데이터의 요청 범위를 구분했고, boundary 내에서 파일 이름과 형식을 지정해 업로드를 위한 데이터 그룹을 맵핑했습니다.
+
+  ```swift
+  func asMultipartFileDatas(for boundary: String, key: String, values: [Data], filename: String) -> Data {
+     let crlf = "\r\n"
+     let dataSet = Data()
+
+     values.forEach {
+        dataSet.append("--\(boundary)\(crlf)".data(using: .utf8)!)
+        dataSet.append("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(filename)\"\(crlf)".data(using: .utf8)!)
+        dataSet.append("Content-Type: image/png\(crlf)\(crlf)".data(using: .utf8)!) // 업로드 할 이미지 파일 형식
+        dataSet.append($0)
+        dataSet.append("\(crlf)".data(using: .utf8)!)
+     }
+     dataSet.append("--\(boundary)--\(crlf)".data(using: .utf8)!)
+
+     return dataSet
+  }
+  ```
+
+- 네트워크 통신을 위해 활용되는 request 메서드에서는 첫 번째 인자로 Endpoint 프로토콜을 받았습니다. **endpoint별로 유연하게 URLRequest 객체를 만들 수 있도록 메서드를 추상화** 했습니다.
 
 3️⃣ 아쉬운 점과 개선 방향
 
-- 활용하는 API 엔드포인트 케이스가 늘어날수록 Routing Enum에 추가할 것이 늘어나는 구조라고 판단되었습니다. 이번 프로젝트에서는 기능 구현을 위해 선택적으로 서버의 API를 활용했지만, 프로젝트 기획이 확장되면 유지 보수가 편한 코드로의 전환이 필요할 것 같습니다.
-- Routing 추상화 단계를 엔드포인트 수준이 아닌 요청별로 Routing과 InputType을 합친 하나의 구조체로 가질 수 있도록 변경하면 구조가 명확하면서 유지 보수가 편하지 않을까 하고 고민해볼 수 있었습니다.
+- 활용하는 엔드포인트 케이스가 늘어날수록 Routing Enum에 추가할 것이 늘어나는 구조라고 판단되었습니다. 이번 프로젝트에서는 기능 구현을 위해 선택적으로 서버의 API를 활용했지만, 프로젝트 기획이 확장되면 유지 보수가 편한 코드로 전환이 필요할 것 같습니다.
+- Routing 추상화 단계를 엔드포인트 수준이 아닌, 요청별로 *Routing과 InputType을 합친 하나의 구조체*로 맵핑하면 구조가 명확하면서 유지 보수가 편하지 않을까 하고 고민해볼 수 있었습니다.
 
 <br />
 
@@ -162,16 +181,15 @@
 
 1️⃣ 고민한 부분
 
-- 비동기적으로 동작하는 네트워크 함수의 인자로 탈출 클로저를 받아 내부 로직에서 통신 결과(성공, 실패)를 활용하는 방법을 고려했습니다.
-  - 이전 프로젝트 경험에 비추었을 때, 클로저 구문 안에서만 비동기 태스크 완료 시점을 인식할 수 있어, 요청마다 클로저 구문의 뎁스가 깊어졌습니다.
-  - 또한, 클로저 구문 자체적으로 에러 핸들링 로직을 고려하지 않아도 통신에는 문제가 없어 휴먼 에러가 발생할 수 있다고 판단했습니다.
+- 비동기로 동작하는 네트워크 통신 함수의 인자로 트레일링 탈출 클로저를 받아 내부 로직에서 통신 결과(성공, 실패)를 활용하는 방법을 고려했습니다.
+  - 이전 프로젝트 경험에 비추었을 때, 클로저 구문 안에서만 비동기 태스크의 완료 시점을 인식할 수 있어, 요청마다 클로저 구문의 뎁스가 깊어졌습니다.
+  - 또한, 클로저 구문에서 에러 핸들링 로직을 고려하지 않아도 통신에는 문제가 없어 휴먼 에러가 발생할 수 있다고 판단했습니다.
 
 2️⃣ 고민을 풀어낸 부분
 
-- **별다른 트레일링 클로저 선언없이 비동기 네트워크 통신 결과와 에러를 핸들링 하기 위해서, Swift Concurrency 기반의 `async throw -> returnType` 형태로 네트워크 통신 함수를 구현**했습니다.
+- **트레일링 클로저 없이 비동기 네트워크 통신 결과와 에러를 핸들링 하기 위해 `async throw -> returnType` 형태로 네트워크 통신 함수를 구현**했습니다.
 
-  - 비동기 컨텍스트 안에서 `try await` 키워드로 비동기 태스크 종료 시점에 반환값을 마치 동기적인 시퀀스로 관리할 수 있었습니다.
-  - async로 정의된 함수 역시 내부에서 비동기 컨텍스트를 가지기 때문에, 중복된 클로저 없이 await로 또 다른 비동기 태스크 결과를 활용할 수 있었습니다.
+  - 비동기 컨텍스트 안에서 `try await` 로 태스크 종료 시점을 인지하고 반환값을 동기적인 시퀀스로 활용할 수 있었습니다. async로 정의된 함수도 비동기 컨텍스트를 가지기 때문에, 중복된 클로저 없이 await로 또 다른 비동기 태스크 결과를 활용할 수 있었습니다.
 
   ```swift
    func request<D: Decodable>(by endPoint: EndPointProtocol, of outputType: D.Type) async throws -> D {
@@ -179,6 +197,7 @@
       let (data, response) = try await session.data(for: request)
 
       do {
+         // 비동기 태스크의 결과(성공, 실패 모두) 반환
          return try await handleResponse(data: data, response: response)
       } catch NetworkErrors.needToRefreshAccessToken {
          // access token 갱신 로직
@@ -188,9 +207,9 @@
    }
   ```
 
-- 네트워크 통신 결과를 활용하는 **ViewModel 객체에서는 동기적인 환경에서 async한 함수를 컨트롤해야 했습니다. Swift Concurrency에서 제공하는 Task를 이용해서 의도적으로 비동기 컨텍스트를 생성하고, 그 안에서 네트워크 태스크를 처리하여 View가 구독할 수 있는 Observable로 방출** 할 수 있었습니다.
+- **ViewModel에서는 동기적인 환경에서 async한 통신 함수 결과를 컨트롤해야 했습니다. Swift Concurrency에서 제공하는 Task를 이용해 의도적인 비동기 컨텍스트를 생성하고, 그 안에서 태스크를 처리하여 View가 구독할 수 있는 Observable로 방출** 할 수 있었습니다.
 
-  - request 메서드가 에러를 방출할 수 있는 throw 함수였기 때문에, `do - catch` 구문을 강제적으로 활용하여 비동기 태스크가 종료된 시점에서 명확하게 에러를 통제할 수 있었습니다.
+  - request 메서드가 에러를 방출할 수 있기 때문에 (throw function), `do - catch` 구문을 활용하여 비동기 태스크가 종료된 시점에서 명확하게 에러를 통제할 수 있었습니다.
 
   ```swift
    func transform() {
@@ -224,9 +243,9 @@
    }
   ```
 
-- 유저가 작성한 커뮤니티 글 id가 담긴 배열을 순회하면서 연관된 다른 글을 불러와 필터링하는 로직을 구현해야 했습니다. 반복문을 통해 **동일한 비동기 태스크 컨텍스트에서 여러 번의 독립된 비동기 태스크를 생성해야 했고, 개별 태스크가 모두 종료된 시점에 필터링이 진행**되어야 했습니다.
+- 유저가 작성한 커뮤니티 글 id가 담긴 1. 배열을 순회하면서 2. 연관된 다른 글을 불러와 3. 필터링하는 로직을 구현해야 했습니다. 반복문을 통해 **동일한 비동기 태스크 컨텍스트에서 1.여러 번의 독립된 비동기 태스크를 생성해야 했고, 2.개별 태스크가 모두 종료된 시점에 3.필터링이 진행**되어야 했습니다.
 
-  - **반복적인 비동기 태스크를 처리하기 위해 `withTaskGroup` 메서드를 활용**했습니다. `async let`을 활용하여 반복적인 비동기 태스크를 핸들링 할 수도 있었지만, 반복이 종료된 시점에서 결과를 한 번에 필터링해서 반환하는 것이 더 효율적이었기 때문에 TaskGroup을 활용했습니다. async - await 구문을 활용하지 않았다면, DispatchGroup을 활용하여 개별 비동기 태스크의 종료 시점을 notify 확인하였을 것 같습니다.
+  - **반복적인 비동기 태스크 처리를 위해 1. `withTaskGroup` 메서드를 활용**했습니다. `async let`을 활용하여 핸들링 할 수 있었지만, 반복이 종료된 시점에 2. 결과를 한번에 3. 필터링해서 반환하는 것이 더 효율적이라고 판단하여 TaskGroup을 활용했습니다. async - await 구문을 활용하지 않았다면, DispatchGroup을 활용하여 개별 비동기 태스크의 종료 시점을 notify 확인하였을 것 같습니다.
 
     ```swift
     var postsList: [PostsOutput] = []
