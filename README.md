@@ -1,14 +1,16 @@
 # 함께 달려요 RunwithU
 
-### 목차
+**목차**
 
 - [프로젝트 소개](#-프로젝트-소개)
-- [프로젝트 구현 스택](#-프로젝트-아키텍처-및-스택) <br />
-- [프로젝트에서 고민한 것](#-프로젝트에서-고민한-것들) <br />
+- [프로젝트 구현 스택](#-프로젝트-아키텍처-및-스택)
+- [프로젝트에서 고민한 것](#-프로젝트에서-고민한-것들)
   - [1. 커스텀 Router Protocol 적용](#1-Endpoint-프로토콜을-통한-네트워크-통신-Router-패턴-적용)
   - [2. Swift Concurrency를 적용한 네트워크 태스크 관리](#2-swift-concurrency-기반의-비동기-태스크-동시성-관리)
-  - [3. JWT 기반의 인증/권한 토큰 관리](#3-앱-접근-및-사용-권한-확보를-위한-jwt-기반의-토큰-관리)
-- [프로젝트에서 구현한 화면 및 기능](#프로젝트-페이지별-기능) <br />
+  - [3. Actor 객체를 활용한 JWT 기반의 토큰 관리](#3-Actor-객체를-활용한-JWT-기반-토큰-관리)
+- [프로젝트에서 구현한 화면 및 기능](#-프로젝트-페이지별-기능)
+
+<br />
 
 ## 🏃‍♀️ 프로젝트 소개
 
@@ -28,34 +30,41 @@
 
 ## 🏃‍♀️ 프로젝트 아키텍처 및 스택
 
-> **MVVM 기반 Input-Output 패턴**
->
-> - ViewModel에 **NestedType으로 Input, Output 구조체를 선언**하여,**View에서 방출되는 이벤트에 따라 처리된 데이터 흐름을 구조적으로 관리**하였습니다.
-> - [BaseViewModel 프로토콜](https://github.com/hankyeol-dev/Runwithu/blob/main/runwithu/Protocol/BaseViewModel.swift)을 구성하여,
->   프로토콜을 채택한 ViewModel이 **동일한 In-Out 패턴을 구축하고, 프로토콜에서 확장된 메서드를 활용하는 구조**를 만들었습니다.
+> **UIKit, MVVM in-out 패턴, Swift Concurrency**
+> **RxSwift, PinLayout, Snapkit**
 
 <br />
 
-> **RxSwift**
->
-> - View에서 방출되는 이벤트를 ViewModel에 전달하고, <br />
->   ViewModel에서 처리된 데이터 흐름을 다시 View에 전달하는 **반응형 비동기 처리를 위해 RxSwift를 활용**했습니다.
+**CopositionalLayout을 적용한 리스트 뷰**
+> - UIKit CompositionalLayout을 CollectionView에 적용했습니다. 유저가 작성한 커뮤니티 글과 러닝 그룹 목록을 조회하는 리스트 뷰의 레이아웃을 유연하게 설정할 수 있었습니다.
 
 <br />
 
-> **Swift Concurrency 기반의 비동기 태스크 및 전역 상태 관리**
->
-> - **비동기로 처리되어야 하는 태스크를 async로 명확하게 선언**했습니다.
-> - **Task, TaskGroup로 독립적인 비동기 컨텍스트를 생성**하고, **await로 비동기 태스크의 반환값 및 에러를 핸들링 시점을 제어**했습니다.
-> - **여러 비동기 태스크에서 앱 전역적으로 활용되는 값을 Data Race 없이 안정적으로 접근/업데이트 할 수 있도록 Actor를 활용**했습니다.
+**MVVM 기반 Input-Output 패턴****
+> - [BaseViewModel 프로토콜](https://github.com/hankyeol-dev/Runwithu/blob/main/runwithu/Protocol/BaseViewModel.swift) 을 채택한 ViewModel이 **모두 동일한 In-Out 패턴을 구축하고, 프로토콜에서 확장된 메서드를 활용하는 구조**를 만들었습니다.
+> - ViewModel에 **NestedType으로 Input 구조체를 선언**하여, **View에서 방출되는 이벤트 케이스를 명확하게 구분**할 수 있었습니다.
+> - **transform 메서드로 업데이트된 데이터를, RxSwift의 Single, PublishSubject 기반 데이터 스트림으로 만들어, View가 Output 객체를 통해 구독할 수 있는 구조**를 구현했습니다.
 
 <br />
 
-> **커스텀 Router 패턴을 적용한 Network 통신**
->
-> - `Moya`, `Alamofire` 라이브러리의 TargetType, URLRequestConvertible 프로토콜을 참고하여,
->   서버 API **엔드포인트마다 필요한 네트워크 통신 객체를 맵핑해주는 커스텀한 [Routing 프로토콜](https://github.com/hankyeol-dev/Runwithu/blob/main/runwithu/Protocol/EndPoint.swift)** 을 구현했습니다.
-> - 통신마다 필요한 [DTO(request, response)](https://github.com/hankyeol-dev/Runwithu/tree/main/runwithu/Model/DTO) 타입 객체를 구조화했습니다.
+**RxSwift**
+> - RxCocoa의 RxRelay로 모든 View 이벤트를 ViewModel Input에 방출시켰습니다. 
+> - ViewModel에서 전달된 데이터 스트림을 bind, driver 오퍼레이터로 구독하여 View를 업데이트 했습니다. 
+
+<br />
+
+**Swift Concurrency 기반의 비동기 태스크 및 전역 상태 관리**
+> - URLSession 기반의 네트워크 통신을 async throw 함수로 만들어, **API를 활용 로직이 통신 시점을 제어하고, Output과 Error를 명확하게 핸들링 할 수 있게 구현**했습니다. await로 네트워크 통신 완료 시점을 제어하여 토큰 갱신 로직을 자동으로 처리했습니다.
+> - **Task로 독립적인 비동기 컨텍스트를 생성**하고, **await로 비동기 태스크의 반환값 및 에러를 핸들링 시점을 제어**했습니다. 이미지 URL 배열이 전달되는 경우, TaskGroup, withContinuation을 활용하여 이미지 로딩 통신을 제어했습니다.
+> - **API 호출마다 활용하는 AccessToken을 Data Race 없이 thread-safe하게 접근하고 업데이트 할 수 있도록 Actor를 사용**했습니다. 
+
+<br />
+
+**커스텀 Router 프로토콜을 적용한 API 호출**
+> - `Moya`, `Alamofire` 라이브러리의 TargetType, URLRequestConvertible 프로토콜을 참고하여, API **엔드포인트마다 필요한 URLRequest 객체를 맵핑해주는 커스텀 [Routing 프로토콜](https://github.com/hankyeol-dev/Runwithu/blob/main/runwithu/Protocol/EndPoint.swift)** 을 구현했습니다.
+> - API 호출마다 필요한 [DTO(request, response)](https://github.com/hankyeol-dev/Runwithu/tree/main/runwithu/Model/DTO) 타입 객체를 구조화했습니다. Router에서 엔드포인트가 전달해야 하는 InputType을 명시하고, 통신 결과로 반환받을 OutputType을 구체화 했습니다.
+> - 이미지/파일 업로드를 위해 **multipart/form-data 형식의 httpBody를 맵핑해주는 메서드를 구현**했습니다.
+> - 라우터에서 httpHeader에 갱신된 AccessToken을 반영하는 로직을 적용했습니다. 
 
 <br />
 
@@ -206,6 +215,9 @@
       }
    }
   ```
+ <img width="700" alt="스크린샷 2024-11-01 오전 11 38 20" src="https://github.com/user-attachments/assets/ec2c6caf-537c-49cf-9d46-444ab512b9a4">
+
+<br />
 
 - **ViewModel에서는 동기적인 환경에서 async한 통신 함수 결과를 컨트롤해야 했습니다. Swift Concurrency에서 제공하는 Task를 이용해 의도적인 비동기 컨텍스트를 생성하고, 그 안에서 태스크를 처리하여 View가 구독할 수 있는 Observable로 방출** 할 수 있었습니다.
 
@@ -274,7 +286,7 @@
 
 <br />
 
-### 3. Actor 객체를 활용한 JWT 기반의 인증/권한 토큰 관리
+### 3. Actor 객체를 활용한 JWT 기반 토큰 관리
 
 > 관련 코드: [TokenManager](https://github.com/hankyeol-dev/Runwithu/blob/main/runwithu/Service/Auth/TokenManager.swift), [UserDefaultsManager](https://github.com/hankyeol-dev/Runwithu/blob/main/runwithu/Service/Auth/UserDefaultsManager.swift)
 
