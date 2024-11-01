@@ -30,8 +30,8 @@
 
 ## 🏃‍♀️ 프로젝트 아키텍처 및 스택
 
-> **UIKit, MVVM in-out 패턴, Swift Concurrency**
-> **RxSwift, PinLayout, Snapkit**
+> **UIKit, MVVM in-out 패턴, Swift Concurrency, Keychain**
+> **RxSwift, iamport SDK, PinLayout, Snapkit**
 
 <br />
 
@@ -40,7 +40,7 @@
 
 <br />
 
-**MVVM 기반 Input-Output 패턴****
+**MVVM 기반 Input-Output 패턴**
 > - [BaseViewModel 프로토콜](https://github.com/hankyeol-dev/Runwithu/blob/main/runwithu/Protocol/BaseViewModel.swift) 을 채택한 ViewModel이 **모두 동일한 In-Out 패턴을 구축하고, 프로토콜에서 확장된 메서드를 활용하는 구조**를 만들었습니다.
 > - ViewModel에 **NestedType으로 Input 구조체를 선언**하여, **View에서 방출되는 이벤트 케이스를 명확하게 구분**할 수 있었습니다.
 > - **transform 메서드로 업데이트된 데이터를, RxSwift의 Single, PublishSubject 기반 데이터 스트림으로 만들어, View가 Output 객체를 통해 구독할 수 있는 구조**를 구현했습니다.
